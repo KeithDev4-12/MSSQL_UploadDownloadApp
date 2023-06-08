@@ -1708,7 +1708,7 @@ object UMainForm: TUMainForm
                       Left = 0
                       Top = 0
                       Width = 303
-                      Height = 359
+                      Height = 396
                       Align = alClient
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clWindowText
@@ -1755,6 +1755,7 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
+                      ExplicitHeight = 359
                       object Panel23: TPanel
                         Left = 0
                         Top = 0
@@ -1810,19 +1811,20 @@ object UMainForm: TUMainForm
                         Left = 0
                         Top = 152
                         Width = 303
-                        Height = 207
+                        Height = 244
                         Align = alBottom
                         Anchors = [akLeft, akTop, akRight, akBottom]
                         BevelOuter = bvNone
                         TabOrder = 1
+                        ExplicitHeight = 207
                         DesignSize = (
                           303
-                          207)
+                          244)
                         object scGPPanel8: TscGPPanel
                           Left = 10
                           Top = 0
                           Width = 283
-                          Height = 198
+                          Height = 235
                           Anchors = [akLeft, akTop, akRight, akBottom]
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clWindowText
@@ -1869,17 +1871,19 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
+                          ExplicitHeight = 198
                           DesignSize = (
                             283
-                            198)
+                            235)
                           object Panel26: TPanel
                             Left = 16
                             Top = 11
                             Width = 250
-                            Height = 600
+                            Height = 637
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             BevelOuter = bvNone
                             TabOrder = 0
+                            ExplicitHeight = 600
                             object Label13: TLabel
                               Left = 0
                               Top = 0
@@ -1899,7 +1903,7 @@ object UMainForm: TUMainForm
                             Left = 264
                             Top = 0
                             Width = 19
-                            Height = 198
+                            Height = 235
                             Align = alRight
                             Kind = sbVertical
                             Max = 600
@@ -1907,15 +1911,16 @@ object UMainForm: TUMainForm
                             TabOrder = 1
                             TabStop = False
                             OnChange = scScrollBar1Change
+                            ExplicitHeight = 198
                           end
                         end
                       end
                     end
                     object scGPPanel9: TscGPPanel
                       Left = 0
-                      Top = 376
+                      Top = 413
                       Width = 303
-                      Height = 163
+                      Height = 126
                       Align = alBottom
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clWindowText
@@ -1966,19 +1971,20 @@ object UMainForm: TUMainForm
                         Left = 0
                         Top = 0
                         Width = 303
-                        Height = 163
+                        Height = 126
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
+                        ExplicitHeight = 163
                         DesignSize = (
                           303
-                          163)
+                          126)
                         object Label14: TLabel
                           Left = -1
                           Top = 7
-                          Width = 216
+                          Width = 116
                           Height = 12
-                          Caption = '    Generated  History For This (Selected) Month'
+                          Caption = '    Nothing To Show Here'
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clGrayText
                           Font.Height = -10
@@ -1990,7 +1996,7 @@ object UMainForm: TUMainForm
                           Left = 10
                           Top = 30
                           Width = 283
-                          Height = 124
+                          Height = 87
                           Anchors = [akLeft, akTop, akRight, akBottom]
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clWindowText
@@ -2037,89 +2043,68 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
-                          DesignSize = (
-                            283
-                            124)
-                          object DBGridEh5: TDBGridEh
-                            Left = 9
-                            Top = 9
-                            Width = 265
-                            Height = 105
-                            Anchors = [akLeft, akTop, akBottom]
-                            DataSource = DSGeneratedHistory
-                            DynProps = <>
+                          ExplicitHeight = 124
+                          object SpeedButton27: TSpeedButton
+                            Left = 0
+                            Top = 0
+                            Width = 283
+                            Height = 87
+                            Align = alClient
+                            Caption = 'VISIT OUR WEB PAGE'
+                            Flat = True
                             Font.Charset = DEFAULT_CHARSET
                             Font.Color = clWindowText
-                            Font.Height = -12
+                            Font.Height = -13
                             Font.Name = 'Tahoma'
                             Font.Style = []
-                            HorzScrollBar.VisibleMode = sbNeverShowEh
+                            Glyph.Data = {
+                              46050000424D4605000000000000360000002800000012000000120000000100
+                              2000000000001005000000000000000000000000000000000000000000000000
+                              0000000000000000000000000000000000000000000000000000000000000000
+                              0000000000000000000000000000000000000000000000000000000000000000
+                              0000000000000000000000000000000000000000000000000000000000000000
+                              0000000000200000002000000000000000000000000000000000000000000000
+                              0000000000000000000000000000000000000000000000000000000000000000
+                              00360000008F000000C3000000D7000000A3000000C00000008F000000360000
+                              0000000000000000000000000000000000000000000000000000000000000000
+                              000000000069000000AA000000400000003B0000008F000000000000003B0000
+                              00AB000000AA0000006900000000000000000000000000000000000000000000
+                              00000000000000000069000000B60000000C00000000000000600000008F0000
+                              000000000030000000D00000000C000000B60000006900000000000000000000
+                              0000000000000000000000000036000000AA0000000C0000000C000000550000
+                              009E0000004A0000000000000000000000A30000007A00000068000000CA0000
+                              0036000000000000000000000000000000000000008F00000040000000000000
+                              00A300000079000000300000000000000000000000000000000C000000550000
+                              006000000088000000AA00000000000000000000000000000000000000B50000
+                              000E000000300000009300000000000000000000000000000000000000000000
+                              000000000000000000000000000E000000B50000000000000000000000000000
+                              0020000000A3000000000000004D000000810000000000000000000000000000
+                              000000000030000000550000000C0000000000000000000000A3000000200000
+                              00000000000000000020000000D70000008F000000B500000038000000000000
+                              0000000000000000004A0000009E0000007A000000A300000000000000000000
+                              00A100000016000000000000000000000000000000C30000003B000000040000
+                              0000000000000000000000000000000000930000003B00000000000000930000
+                              003B00000007000000B5000000000000000000000000000000000000008F0000
+                              00400000000000000000000000030000004C00000079000000A3000000000000
+                              00000000004A0000009E000000880000008F0000000000000000000000000000
+                              000000000036000000AA0000000C00000003000000B200000082000000550000
+                              000C0000000000000000000000000000003A000000CA00000065000000000000
+                              000000000000000000000000000000000069000000B600000054000000830000
+                              0000000000000000000000000000000000000000000C000000B6000000690000
+                              0000000000000000000000000000000000000000000000000000000000690000
+                              00CA000000880000000E00000000000000000000000E00000040000000AA0000
+                              0069000000000000000000000000000000000000000000000000000000000000
+                              00000000000000000036000000AA000000B5000000A3000000A3000000B50000
+                              008F000000360000000000000000000000000000000000000000000000000000
+                              0000000000000000000000000000000000000000000000000000000000200000
+                              0020000000000000000000000000000000000000000000000000000000000000
+                              0000000000000000000000000000000000000000000000000000000000000000
+                              0000000000000000000000000000000000000000000000000000000000000000
+                              00000000000000000000}
                             ParentFont = False
-                            TabOrder = 0
-                            VertScrollBar.VisibleMode = sbNeverShowEh
-                            Columns = <
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = '_id'
-                                Footers = <>
-                                Visible = False
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'MeterReaderName'
-                                Footers = <>
-                                Title.Caption = 'Meter Reader Name'
-                                Width = 120
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'DateGenerated'
-                                Footers = <>
-                                Title.Caption = 'Date'
-                                Width = 105
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'UploadedString'
-                                Footers = <>
-                                Title.Caption = 'Status'
-                                Width = 74
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'UploadedStatus'
-                                Footers = <>
-                                Visible = False
-                                Width = 85
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'BillPeriod'
-                                Footers = <>
-                                Visible = False
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'MRNo'
-                                Footers = <>
-                                Visible = False
-                              end>
-                            object RowDetailData: TRowDetailPanelControlEh
-                            end
+                            ExplicitLeft = 5
+                            ExplicitWidth = 402
+                            ExplicitHeight = 29
                           end
                         end
                         object scGPSwitch3: TscGPSwitch
@@ -2150,18 +2135,19 @@ object UMainForm: TUMainForm
                           FrameSolid = False
                           FrameOnSolid = False
                           FrameInside = False
-                          OnChangeState = scGPSwitch2ChangeState
+                          OnChangeState = scGPSwitch3ChangeState
                         end
                       end
                     end
                     object Panel29: TPanel
                       Left = 0
-                      Top = 359
+                      Top = 396
                       Width = 303
                       Height = 17
                       Align = alBottom
                       BevelOuter = bvNone
                       TabOrder = 2
+                      ExplicitTop = 359
                     end
                   end
                   object Panel30: TPanel
@@ -2176,7 +2162,7 @@ object UMainForm: TUMainForm
                       Left = 0
                       Top = 0
                       Width = 423
-                      Height = 359
+                      Height = 225
                       Align = alClient
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clWindowText
@@ -2223,9 +2209,7 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
-                      DesignSize = (
-                        423
-                        359)
+                      ExplicitHeight = 359
                       object Panel31: TPanel
                         Left = 0
                         Top = 0
@@ -2548,7 +2532,7 @@ object UMainForm: TUMainForm
                       end
                       object Panel33: TPanel
                         Left = 0
-                        Top = 322
+                        Top = 188
                         Width = 423
                         Height = 37
                         Align = alBottom
@@ -2556,13 +2540,14 @@ object UMainForm: TUMainForm
                         Color = clWhite
                         ParentBackground = False
                         TabOrder = 2
+                        ExplicitTop = 322
                         object SpeedButton5: TSpeedButton
                           Left = 0
                           Top = 0
                           Width = 423
                           Height = 36
                           Align = alClient
-                          Caption = 'Generate Reading Data'
+                          Caption = 'Download Reading / Fetch Data'
                           Flat = True
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clWindowText
@@ -2630,102 +2615,22 @@ object UMainForm: TUMainForm
                           ExplicitWidth = 519
                         end
                       end
-                      object DBGridEh6: TDBGridEh
-                        Left = 14
-                        Top = 176
-                        Width = 393
-                        Height = 140
-                        Anchors = [akLeft, akTop, akRight, akBottom]
-                        DataSource = DSMeterReaderSchedule
-                        DynProps = <>
-                        Font.Charset = DEFAULT_CHARSET
-                        Font.Color = clWindowText
-                        Font.Height = -12
-                        Font.Name = 'Tahoma'
-                        Font.Style = []
-                        HorzScrollBar.VisibleMode = sbNeverShowEh
-                        ParentFont = False
-                        TabOrder = 3
-                        VertScrollBar.VisibleMode = sbNeverShowEh
-                        Columns = <
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = '_id'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'ZoneCode'
-                            Footers = <>
-                            Title.Caption = 'Zone Code'
-                            Width = 75
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'ZoneName'
-                            Footers = <>
-                            Title.Caption = 'Zone Name'
-                            Width = 200
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'ReadingStartDate'
-                            Footers = <>
-                            Title.Caption = 'Reading Start Date'
-                            Width = 130
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'TotalReadingDays'
-                            Footers = <>
-                            Title.Caption = 'Total Reading Days'
-                            Width = 100
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'BillPeriod'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'MRNo'
-                            Footers = <>
-                            Visible = False
-                          end>
-                        object RowDetailData: TRowDetailPanelControlEh
-                        end
-                      end
                     end
                     object Panel34: TPanel
                       Left = 0
-                      Top = 359
+                      Top = 225
                       Width = 423
                       Height = 17
                       Align = alBottom
                       BevelOuter = bvNone
                       TabOrder = 1
+                      ExplicitTop = 359
                     end
                     object scGPPanel14: TscGPPanel
                       Left = 0
-                      Top = 376
+                      Top = 242
                       Width = 423
-                      Height = 163
+                      Height = 297
                       Align = alBottom
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clWindowText
@@ -2776,19 +2681,22 @@ object UMainForm: TUMainForm
                         Left = 0
                         Top = 0
                         Width = 423
-                        Height = 163
+                        Height = 297
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
+                        ExplicitHeight = 163
                         DesignSize = (
                           423
-                          163)
+                          297)
                         object Label24: TLabel
                           Left = -1
                           Top = 7
-                          Width = 261
+                          Width = 344
                           Height = 12
-                          Caption = '    Push Generated SQL File to Selected Connection (ADB)'
+                          Caption = 
+                            '    Fetch History of SQL Connection Available and Connected Devi' +
+                            'ces (ADB)'
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clGrayText
                           Font.Height = -10
@@ -2800,7 +2708,7 @@ object UMainForm: TUMainForm
                           Left = 10
                           Top = 30
                           Width = 402
-                          Height = 131
+                          Height = 265
                           Anchors = [akLeft, akTop, akRight, akBottom]
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clWindowText
@@ -2847,14 +2755,15 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
+                          ExplicitHeight = 131
                           DesignSize = (
                             402
-                            131)
+                            265)
                           object DBGridEh7: TDBGridEh
                             Left = 9
                             Top = 9
                             Width = 384
-                            Height = 86
+                            Height = 220
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             DataSource = DSVirtualPush
                             DynProps = <>
@@ -2924,7 +2833,7 @@ object UMainForm: TUMainForm
                           end
                           object Panel37: TPanel
                             Left = 0
-                            Top = 101
+                            Top = 235
                             Width = 402
                             Height = 30
                             Align = alBottom
@@ -2932,6 +2841,7 @@ object UMainForm: TUMainForm
                             Color = clWhite
                             ParentBackground = False
                             TabOrder = 1
+                            ExplicitTop = 101
                             object SpeedButton6: TSpeedButton
                               Left = 0
                               Top = 0
@@ -2990,8 +2900,7 @@ object UMainForm: TUMainForm
                                 0000000000000000000000000000000000000000000000000000000000000000
                                 00000000000000000000}
                               ParentFont = False
-                              ExplicitLeft = 152
-                              ExplicitWidth = 250
+                              ExplicitLeft = 5
                             end
                             object Shape6: TShape
                               Left = 0
@@ -3033,7 +2942,7 @@ object UMainForm: TUMainForm
                           FrameSolid = False
                           FrameOnSolid = False
                           FrameInside = False
-                          OnChangeState = scGPSwitch6ChangeState
+                          OnChangeState = scGPSwitch4ChangeState
                         end
                       end
                     end
@@ -6469,8 +6378,8 @@ object UMainForm: TUMainForm
   end
   object DSGeneratedHistory: TDataSource
     DataSet = DMMainModule.fdGeneratedHistory
-    Left = 741
-    Top = 534
+    Left = 749
+    Top = 430
   end
   object ImageList1: TImageList
     ColorDepth = cd32Bit
@@ -10122,8 +10031,8 @@ object UMainForm: TUMainForm
     OnProgress = BMClientsProgress
     OnWriteValue = BMClientsWriteValue
     OnWriteRecord = BMClientsWriteRecord
-    Left = 104
-    Top = 312
+    Left = 112
+    Top = 288
   end
   object BMWaterRates: TFDBatchMove
     Reader = DMMainModule.ReaderWaterRates
@@ -10157,8 +10066,8 @@ object UMainForm: TUMainForm
     OnProgress = BMWaterRatesProgress
     OnWriteValue = BMWaterRatesWriteValue
     OnWriteRecord = BMWaterRatesWriteRecord
-    Left = 208
-    Top = 312
+    Left = 184
+    Top = 280
   end
   object BMMeterReadingSchedule: TFDBatchMove
     Reader = DMMainModule.ReaderMeterReadingSchedule
@@ -10184,8 +10093,8 @@ object UMainForm: TUMainForm
     OnProgress = BMMeterReadingScheduleProgress
     OnWriteValue = BMMeterReadingScheduleWriteValue
     OnWriteRecord = BMMeterReadingScheduleWriteRecord
-    Left = 288
-    Top = 312
+    Left = 328
+    Top = 256
   end
   object BMSettingsDB: TFDBatchMove
     Reader = DMMainModule.ReaderSettingsDB
@@ -10260,7 +10169,7 @@ object UMainForm: TUMainForm
     OnWriteValue = BMSettingsDBWriteValue
     OnWriteRecord = BMSettingsDBWriteRecord
     Left = 408
-    Top = 312
+    Top = 272
   end
   object scGPImageCollection1: TscGPImageCollection
     Images = <

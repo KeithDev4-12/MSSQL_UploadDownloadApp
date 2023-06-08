@@ -783,15 +783,15 @@ Var
  ScalingFactor:Double;
  ImageSize :Integer;
 begin
-  if Screen.Width >= 1960 then begin
+  if Screen.Width >= 1900 then begin
     Exit;
   end;
-  if Screen.Width >= 1360 then begin
+  if Screen.Width >= 1300 then begin
     ImageSize := 24;
     ScalingFactor := Screen.Width / 1960;
     ScaleBy(Round(ScalingFactor * 130),100);
   end;
-  if Screen.Width >= 1240 then begin
+  if Screen.Width >= 1200 then begin
     ImageSize := 20;
   end;
 
@@ -1048,7 +1048,7 @@ end;
 
 procedure TUMainForm.scSplitView1Resize(Sender: TObject);
 begin
-  if scSplitView1.Width > 50 then begin
+  if scSplitView1.Width > 70 then begin
     Panel36.Visible := True;
   end else begin
     Panel36.Visible := False;

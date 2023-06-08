@@ -1755,7 +1755,6 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
-                      ExplicitHeight = 359
                       object Panel23: TPanel
                         Left = 0
                         Top = 0
@@ -1816,7 +1815,6 @@ object UMainForm: TUMainForm
                         Anchors = [akLeft, akTop, akRight, akBottom]
                         BevelOuter = bvNone
                         TabOrder = 1
-                        ExplicitHeight = 207
                         DesignSize = (
                           303
                           244)
@@ -1871,7 +1869,6 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
-                          ExplicitHeight = 198
                           DesignSize = (
                             283
                             235)
@@ -1883,7 +1880,6 @@ object UMainForm: TUMainForm
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             BevelOuter = bvNone
                             TabOrder = 0
-                            ExplicitHeight = 600
                             object Label13: TLabel
                               Left = 0
                               Top = 0
@@ -1911,7 +1907,6 @@ object UMainForm: TUMainForm
                             TabOrder = 1
                             TabStop = False
                             OnChange = scScrollBar1Change
-                            ExplicitHeight = 198
                           end
                         end
                       end
@@ -1975,7 +1970,6 @@ object UMainForm: TUMainForm
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
-                        ExplicitHeight = 163
                         DesignSize = (
                           303
                           126)
@@ -2043,7 +2037,6 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
-                          ExplicitHeight = 124
                           object SpeedButton27: TSpeedButton
                             Left = 0
                             Top = 0
@@ -2147,7 +2140,6 @@ object UMainForm: TUMainForm
                       Align = alBottom
                       BevelOuter = bvNone
                       TabOrder = 2
-                      ExplicitTop = 359
                     end
                   end
                   object Panel30: TPanel
@@ -2209,7 +2201,6 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
-                      ExplicitHeight = 359
                       object Panel31: TPanel
                         Left = 0
                         Top = 0
@@ -2540,7 +2531,6 @@ object UMainForm: TUMainForm
                         Color = clWhite
                         ParentBackground = False
                         TabOrder = 2
-                        ExplicitTop = 322
                         object SpeedButton5: TSpeedButton
                           Left = 0
                           Top = 0
@@ -2624,7 +2614,6 @@ object UMainForm: TUMainForm
                       Align = alBottom
                       BevelOuter = bvNone
                       TabOrder = 1
-                      ExplicitTop = 359
                     end
                     object scGPPanel14: TscGPPanel
                       Left = 0
@@ -2685,7 +2674,6 @@ object UMainForm: TUMainForm
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
-                        ExplicitHeight = 163
                         DesignSize = (
                           423
                           297)
@@ -2755,7 +2743,6 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
-                          ExplicitHeight = 131
                           DesignSize = (
                             402
                             265)
@@ -2841,7 +2828,6 @@ object UMainForm: TUMainForm
                             Color = clWhite
                             ParentBackground = False
                             TabOrder = 1
-                            ExplicitTop = 101
                             object SpeedButton6: TSpeedButton
                               Left = 0
                               Top = 0
@@ -6048,8 +6034,6 @@ object UMainForm: TUMainForm
         GroupIndex = 1
         AllowAllUp = False
         WordWrap = False
-        ExplicitLeft = -6
-        ExplicitTop = 136
       end
       object Panel36: TPanel
         Left = 0
@@ -6060,7 +6044,6 @@ object UMainForm: TUMainForm
         BevelOuter = bvNone
         TabOrder = 7
         Visible = False
-        ExplicitWidth = 250
         object Label23: TLabel
           Left = 64
           Top = 16
@@ -6348,7 +6331,7 @@ object UMainForm: TUMainForm
     Left = 445
     Top = 422
     Data = {
-      0300060003005F69640E000000000000000A0042696C6C506572696F641800FF
+      0400060003005F69640E000000000000000A0042696C6C506572696F641800FF
       7F0000000006004465766963651800FF7F0000000006005374617475731800FF
       7F000000000A00446174655075736865641800FF7F000000000F004D65746572
       5265616465724E616D651800FF7F00000000000000000000}
@@ -6388,7 +6371,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010A00F801380130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010A00F8013C0130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

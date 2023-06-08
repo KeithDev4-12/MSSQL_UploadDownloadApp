@@ -315,6 +315,11 @@ var
   MRNo:Integer;
   IniFile: TIniFile;
 
+  DLeftPanelResize:Integer;
+  DRightPanelResize:Integer;
+  ULeftPanelResize:Integer;
+  URightPanelResize:Integer;
+
 implementation
 
 {$R *.dfm}
@@ -538,6 +543,11 @@ begin
   TStyleManager.SetStyle(scGPComboBox1.Items[scGPComboBox1.ItemIndex].Caption);
   //Change And Save to INI File;
   //TStyleManager.SetStyle(scGPComboBox4.Items[scGPComboBox4.ItemIndex].Caption);
+  DLeftPanelResize := scGPPanel14.Height;
+  DRightPanelResize := scGPPanel9.Height;
+  ULeftPanelResize := scGpPanel1.Height;
+  URightPanelResize := scGPPnlRightBottom.Height;
+
 end;
 
 procedure TUMainForm.FormResize(Sender: TObject);
@@ -704,7 +714,7 @@ begin
     scGPPnlRightBottom.Height := 50;
     scGPPanel4.Visible := False;
   end else begin
-    scGPPnlRightBottom.Height := 163;
+    scGPPnlRightBottom.Height := URightPanelResize;
     scGPPanel4.Visible := True;
   end;
 
@@ -719,15 +729,15 @@ begin
   if scGPSwitch3.State = scswOff then begin
     //scGPPanel1.Align :=
     scGPPanel9.Height := 50;
-    scGPPanel4.Visible := False;
+    scGPPanel11.Visible := False;
   end else begin
-    scGPPanel9.Height := 126;
-    scGPPanel4.Visible := True;
+    scGPPanel9.Height := DRightPanelResize;
+    scGPPanel11.Visible := True;
   end;
 
-  InvalidateRect(Panel12.Handle,nil,True);
-  InvalidateRect(Panel18.Handle,nil,True);
-  InvalidateRect(Panel3.Handle,nil,True);
+  InvalidateRect(Panel23.Handle,nil,True);
+  InvalidateRect(Panel25.Handle,nil,True);
+
 end;
 
 procedure TUMainForm.scGPSwitch4ChangeState(Sender: TObject);
@@ -738,9 +748,11 @@ begin
     scGPPanel14.Height := 50;
     scGPPanel15.Visible := False;
   end else begin
-    scGPPanel14.Height := 297;
+    scGPPanel14.Height := DLeftPanelResize - 20;
     scGPPanel15.Visible := True;
   end;
+
+
 
   InvalidateRect(Panel31.Handle,nil,True);
   InvalidateRect(Panel32.Handle,nil,True);
@@ -755,9 +767,10 @@ begin
     scGPPanel1.Height := 50;
     scGPPanel3.Visible := False;
   end else begin
-    scGPPanel1.Height := 163;
+    scGPPanel1.Height := ULeftPanelResize;
     scGPPanel3.Visible := True;
   end;
+
 
   InvalidateRect(Panel12.Handle,nil,True);
   InvalidateRect(Panel18.Handle,nil,True);
@@ -770,15 +783,15 @@ Var
  ScalingFactor:Double;
  ImageSize :Integer;
 begin
-  if Screen.Width >= 1960 then begin
+  if Screen.Width >= 1900 then begin
     Exit;
   end;
-  if Screen.Width >= 1360 then begin
+  if Screen.Width >= 1300 then begin
     ImageSize := 24;
     ScalingFactor := Screen.Width / 1960;
     ScaleBy(Round(ScalingFactor * 130),100);
   end;
-  if Screen.Width >= 1240 then begin
+  if Screen.Width >= 1200 then begin
     ImageSize := 20;
   end;
 

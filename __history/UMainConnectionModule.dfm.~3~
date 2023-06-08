@@ -1,5 +1,0 @@
-object DMMainConnection: TDMMainConnection
-  OldCreateOrder = False
-  Height = 361
-  Width = 471
-end
