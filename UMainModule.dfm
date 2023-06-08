@@ -170,10 +170,16 @@ object DMMainModule: TDMMainModule
       
         '  JOIN [BillingCollection].[dbo].[Meters] M on C.Mtr_No = M.Mtr_' +
         'No'
-      ' -- WHERE Zone_No = '#39'011'#39
+      ' WHERE '
+      'Zone_No = :AZoneCode'
       '')
     Left = 80
     Top = 8
+    ParamData = <
+      item
+        Name = 'AZONECODE'
+        ParamType = ptInput
+      end>
     object qryMSClientsAcct_No: TStringField
       FieldName = 'Acct_No'
       Origin = 'Acct_No'
@@ -464,9 +470,16 @@ object DMMainModule: TDMMainModule
       '      ,'#39'05/01/2023'#39' AS ReadingStartDate'
       '      ,'#39'1'#39' AS TotalReadingDays'
       '  FROM [BillingCollection].[dbo].[Zones]'
+      'WHERE ZoneID = :AZoneCode'
       'order by ZoneID')
     Left = 448
     Top = 16
+    ParamData = <
+      item
+        Name = 'AZONECODE'
+        ParamType = ptInput
+        Value = Null
+      end>
     object qryMSMeterReadingScheduleZoneCode: TStringField
       FieldName = 'ZoneCode'
       Required = True
@@ -1172,6 +1185,7 @@ object DMMainModule: TDMMainModule
       FieldName = '_id'
       Origin = '_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object tblGeneratedHistoryMRNo: TWideMemoField
       FieldName = 'MRNo'

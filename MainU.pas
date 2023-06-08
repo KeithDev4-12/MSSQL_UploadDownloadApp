@@ -12,7 +12,8 @@ uses
   dxGDIPlusClasses, Vcl.Buttons, DBGridEhGrouping, ToolCtrlsEh,
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   Vcl.OleCtrls, SHDocVw, scWebBrowser, Vcl.DBCtrls, Data.DB, IOUtils, Types,
-  VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove;
+  VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove,IniFiles,Vcl.Themes,
+  Vcl.Menus;
 
 type
   TUMainForm = class(TForm)
@@ -98,47 +99,6 @@ type
     scGPSwitch2: TscGPSwitch;
     scGPSwitch6: TscGPSwitch;
     Label10: TLabel;
-    Panel10: TPanel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Panel13: TPanel;
-    Panel14: TPanel;
-    Panel15: TPanel;
-    Panel17: TPanel;
-    Panel19: TPanel;
-    scGPPanel7: TscGPPanel;
-    Panel23: TPanel;
-    scGPCircledProgressBar1: TscGPCircledProgressBar;
-    Panel25: TPanel;
-    scGPPanel8: TscGPPanel;
-    Panel26: TPanel;
-    Label13: TLabel;
-    scGPPanel9: TscGPPanel;
-    Panel28: TPanel;
-    Label14: TLabel;
-    scGPSwitch7: TscGPSwitch;
-    Panel29: TPanel;
-    Panel30: TPanel;
-    scGPPanel11: TscGPPanel;
-    Panel31: TPanel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Shape1: TShape;
-    SpeedButton4: TSpeedButton;
-    Edit1: TEdit;
-    Panel32: TPanel;
-    Label17: TLabel;
-    Label18: TLabel;
-    scGPComboEdit2: TscGPComboEdit;
-    Panel33: TPanel;
-    SpeedButton5: TSpeedButton;
-    Panel34: TPanel;
-    scGPPanel12: TscGPPanel;
-    Panel37: TPanel;
-    scWebBrowser1: TscWebBrowser;
-    ListBox1: TListBox;
-    Panel35: TPanel;
-    SpeedButton6: TSpeedButton;
     scListGroupPanel2: TscListGroupPanel;
     scLabel1: TscLabel;
     SpeedButton7: TSpeedButton;
@@ -211,6 +171,60 @@ type
     BMWaterRates: TFDBatchMove;
     BMMeterReadingSchedule: TFDBatchMove;
     BMSettingsDB: TFDBatchMove;
+    scGPImageCollection1: TscGPImageCollection;
+    Panel36: TPanel;
+    scGPComboBox1: TscGPComboBox;
+    Label23: TLabel;
+    PMVirtualADB: TPopupMenu;
+    RefreshConnection1: TMenuItem;
+    Panel10: TPanel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Panel13: TPanel;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    Panel17: TPanel;
+    Panel19: TPanel;
+    scGPPanel7: TscGPPanel;
+    Panel23: TPanel;
+    scGPCircledProgressBar1: TscGPCircledProgressBar;
+    Panel25: TPanel;
+    scGPPanel8: TscGPPanel;
+    Panel26: TPanel;
+    Label13: TLabel;
+    scScrollBar2: TscScrollBar;
+    scGPPanel9: TscGPPanel;
+    Panel28: TPanel;
+    Label14: TLabel;
+    scGPPanel11: TscGPPanel;
+    scGPSwitch3: TscGPSwitch;
+    Panel29: TPanel;
+    Panel30: TPanel;
+    scGPPanel12: TscGPPanel;
+    Panel31: TPanel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Shape1: TShape;
+    SpeedButton4: TSpeedButton;
+    Edit1: TEdit;
+    Panel32: TPanel;
+    Label17: TLabel;
+    Label18: TLabel;
+    scGPComboBox2: TscGPComboBox;
+    Panel33: TPanel;
+    SpeedButton5: TSpeedButton;
+    Shape5: TShape;
+    Panel34: TPanel;
+    scGPPanel14: TscGPPanel;
+    Panel35: TPanel;
+    Label24: TLabel;
+    scGPPanel15: TscGPPanel;
+    DBGridEh7: TDBGridEh;
+    Panel37: TPanel;
+    SpeedButton6: TSpeedButton;
+    Shape6: TShape;
+    scGPSwitch4: TscGPSwitch;
+    SpeedButton27: TSpeedButton;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -284,6 +298,13 @@ type
       var AAction: TFDBatchMoveAction);
     procedure BMSettingsDBWriteValue(ASender: TObject;
       AItem: TFDBatchMoveMappingItem; var AValue: Variant);
+    function ReadIniFiles(AFileName:String):String;
+    function WriteIniFile(AFileName:String):String;
+    procedure FormCreate(Sender: TObject);
+    procedure scGPComboBox1Change(Sender: TObject);
+    procedure scSplitView1Resize(Sender: TObject);
+    procedure scGPSwitch4ChangeState(Sender: TObject);
+    procedure scGPSwitch3ChangeState(Sender: TObject);
 
     Private
       FPanelRegion:HRGN;
@@ -292,6 +313,12 @@ type
 var
   UMainForm: TUMainForm;
   MRNo:Integer;
+  IniFile: TIniFile;
+
+  DLeftPanelResize:Integer;
+  DRightPanelResize:Integer;
+  ULeftPanelResize:Integer;
+  URightPanelResize:Integer;
 
 implementation
 
@@ -496,6 +523,33 @@ begin
   end;
 end;
 
+procedure TUMainForm.FormCreate(Sender: TObject);
+Var
+  X : Integer;
+  IniDataValue:String;
+  Item: TscGPListBoxItem;
+begin
+  IniDataValue := ReadIniFiles(ExtractFileDir(ParamStr(0))+'\'+StringReplace(TPath.GetFileName(ExtractFileName(ParamStr(0))),'.exe','.ini',[rfReplaceAll, rfIgnoreCase]));
+
+
+  for X := Low(TStyleManager.StyleNames) to High(TStyleManager.StyleNames) do
+  begin
+    Item := scGPComboBox1.Items.Add;
+    Item.Caption := TStyleManager.StyleNames[X];
+  end;
+  scGPComboBox1.Sort;
+  //scGPComboBox1.InitItemIndex(scGPComboBox1.IndexOfCaption(TStyleManager.ActiveStyle.Name));
+  scGPComboBox1.InitItemIndex(scGPComboBox1.IndexOfCaption(IniDataValue));
+  TStyleManager.SetStyle(scGPComboBox1.Items[scGPComboBox1.ItemIndex].Caption);
+  //Change And Save to INI File;
+  //TStyleManager.SetStyle(scGPComboBox4.Items[scGPComboBox4.ItemIndex].Caption);
+  DLeftPanelResize := scGPPanel14.Height;
+  DRightPanelResize := scGPPanel9.Height;
+  ULeftPanelResize := scGpPanel1.Height;
+  URightPanelResize := scGPPnlRightBottom.Height;
+
+end;
+
 procedure TUMainForm.FormResize(Sender: TObject);
 begin
   Self.Refresh;
@@ -517,6 +571,30 @@ end;
 procedure TUMainForm.MinButtonClick(Sender: TObject);
 begin
   Application.Minimize;
+end;
+
+function TUMainForm.ReadIniFiles(AFileName:string) :String;
+begin
+  if not FileExists(AFileName) then
+  begin
+    // Create the INI file if it does not exist
+    IniFile := TIniFile.Create(AFileName);
+    try
+      // Optionally, you can initialize the file with default values
+      IniFile.WriteString('StyleManager', 'FormStyle', 'Windows');
+    finally
+      IniFile.Free;
+    end;
+  end;
+  // Reading from the INI file
+  IniFile := TIniFile.Create(AFileName);
+  try
+    // Read the value from the specified key in the specified section
+    // You can read additional values using the same pattern
+    Result := IniFile.ReadString('StyleManager', 'FormStyle', 'Windows');
+  finally
+    IniFile.Free;
+  end;
 end;
 
 procedure TUMainForm.scButton10Click(Sender: TObject);
@@ -565,6 +643,12 @@ end;
 procedure TUMainForm.scButton9Click(Sender: TObject);
 begin
   ShellExecute(0, 'open', 'http://www.almdev.com', nil, nil, SW_SHOWNORMAL);
+end;
+
+procedure TUMainForm.scGPComboBox1Change(Sender: TObject);
+begin
+  TStyleManager.SetStyle(scGPComboBox1.Items[scGPComboBox1.ItemIndex].Caption);
+  WriteIniFile(ExtractFileDir(ParamStr(0))+'\'+StringReplace(TPath.GetFileName(ExtractFileName(ParamStr(0))),'.exe','.ini',[rfReplaceAll, rfIgnoreCase]));
 end;
 
 procedure TUMainForm.scGPComboEdit1Change(Sender: TObject);
@@ -630,13 +714,49 @@ begin
     scGPPnlRightBottom.Height := 50;
     scGPPanel4.Visible := False;
   end else begin
-    scGPPnlRightBottom.Height := 163;
+    scGPPnlRightBottom.Height := URightPanelResize;
     scGPPanel4.Visible := True;
   end;
 
   InvalidateRect(Panel12.Handle,nil,True);
   InvalidateRect(Panel18.Handle,nil,True);
   InvalidateRect(Panel3.Handle,nil,True);
+end;
+
+procedure TUMainForm.scGPSwitch3ChangeState(Sender: TObject);
+begin
+  Application.ProcessMessages;
+  if scGPSwitch3.State = scswOff then begin
+    //scGPPanel1.Align :=
+    scGPPanel9.Height := 50;
+    scGPPanel11.Visible := False;
+  end else begin
+    scGPPanel9.Height := DRightPanelResize;
+    scGPPanel11.Visible := True;
+  end;
+
+  InvalidateRect(Panel23.Handle,nil,True);
+  InvalidateRect(Panel25.Handle,nil,True);
+
+end;
+
+procedure TUMainForm.scGPSwitch4ChangeState(Sender: TObject);
+begin
+  Application.ProcessMessages;
+  if scGPSwitch4.State = scswOff then begin
+    //scGPPanel1.Align :=
+    scGPPanel14.Height := 50;
+    scGPPanel15.Visible := False;
+  end else begin
+    scGPPanel14.Height := DLeftPanelResize - 20;
+    scGPPanel15.Visible := True;
+  end;
+
+
+
+  InvalidateRect(Panel31.Handle,nil,True);
+  InvalidateRect(Panel32.Handle,nil,True);
+  InvalidateRect(Panel33.Handle,nil,True);
 end;
 
 procedure TUMainForm.scGPSwitch6ChangeState(Sender: TObject);
@@ -647,9 +767,10 @@ begin
     scGPPanel1.Height := 50;
     scGPPanel3.Visible := False;
   end else begin
-    scGPPanel1.Height := 163;
+    scGPPanel1.Height := ULeftPanelResize;
     scGPPanel3.Visible := True;
   end;
+
 
   InvalidateRect(Panel12.Handle,nil,True);
   InvalidateRect(Panel18.Handle,nil,True);
@@ -687,72 +808,229 @@ procedure TUMainForm.BMClientsProgress(ASender: TObject;
   APhase: TFDBatchMovePhase);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.BMClientsWriteRecord(ASender: TObject;
   var AAction: TFDBatchMoveAction);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
+
 end;
 
 procedure TUMainForm.BMClientsWriteValue(ASender: TObject;
   AItem: TFDBatchMoveMappingItem; var AValue: Variant);
 begin
    scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+   if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.BMMeterReadingScheduleProgress(ASender: TObject;
   APhase: TFDBatchMovePhase);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.BMMeterReadingScheduleWriteRecord(ASender: TObject;
   var AAction: TFDBatchMoveAction);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.BMMeterReadingScheduleWriteValue(ASender: TObject;
   AItem: TFDBatchMoveMappingItem; var AValue: Variant);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.BMSettingsDBProgress(ASender: TObject;
   APhase: TFDBatchMovePhase);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.BMSettingsDBWriteRecord(ASender: TObject;
   var AAction: TFDBatchMoveAction);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.BMSettingsDBWriteValue(ASender: TObject;
   AItem: TFDBatchMoveMappingItem; var AValue: Variant);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.BMWaterRatesProgress(ASender: TObject;
   APhase: TFDBatchMovePhase);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.BMWaterRatesWriteRecord(ASender: TObject;
   var AAction: TFDBatchMoveAction);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.BMWaterRatesWriteValue(ASender: TObject;
   AItem: TFDBatchMoveMappingItem; var AValue: Variant);
 begin
   scGPCircledProgressBar2.Value := scGPCircledProgressBar2.Value + 1;
+  if scGPCircledProgressBar2.Caption = 'Processing.' then begin
+     scGPCircledProgressBar2.Caption := 'Processing..'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing..') then begin
+     scGPCircledProgressBar2.Caption := 'Processing...'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing...') then begin
+     scGPCircledProgressBar2.Caption := 'Processing....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing.....'
+  end else if (scGPCircledProgressBar2.Caption = 'Processing.....') then begin
+     scGPCircledProgressBar2.Caption := 'Processing......'
+  end else begin
+     scGPCircledProgressBar2.Caption := 'Processing.'
+  end;
 end;
 
 procedure TUMainForm.CaptionLabelDblClick(Sender: TObject);
@@ -766,6 +1044,15 @@ end;
 procedure TUMainForm.scScrollBar1Change(Sender: TObject);
 begin
   Panel16.Top := - scScrollBar1.Position;
+end;
+
+procedure TUMainForm.scSplitView1Resize(Sender: TObject);
+begin
+  if scSplitView1.Width > 50 then begin
+    Panel36.Visible := True;
+  end else begin
+    Panel36.Visible := False;
+  end;
 end;
 
 procedure TUMainForm.scSplitView2Resize(Sender: TObject);
@@ -958,7 +1245,9 @@ var
   I:Integer;
 begin
   with DMMainModule do begin
+  //scGPCircledProgressBar2.Active := False;
   I:=0;
+    scGPCircledProgressBar2.Value := 0;
     if not (Length(Edit2.Text)=6)  then begin
       Exit;
     end;
@@ -981,28 +1270,23 @@ begin
     //Insert The Clients From MSSQL
     Label1.Caption := Label1.Caption + #13#10 + 'Generating Records For Clients Table';
 
-    qryMSClients.Close;
-    qryMSClients.Open;
-    qryMSClients.First;
-    qryMSClients.Filtered := False;
     fdMeterReaderSchedule.First;
     while not fdMeterReaderSchedule.EOF do begin
-      if I = 0 then begin
-        qryMSClients.Filter := 'ZoneCode =' + QuotedStr(fdMeterReaderScheduleZoneCode.AsString) ;
-      end else begin
-        qryMSClients.Filter := qryMSClients.Filter + ' OR ZoneCode =' + QuotedStr(fdMeterReaderScheduleZoneCode.AsString);
+      //if I = 0 then begin
+      scGPCircledProgressBar2.Value := 0;
+      qryMSClients.Close;
+      qryMSClients.ParamByName('AZoneCode').AsString :=  fdMeterReaderScheduleZoneCode.AsString;
+      qryMSClients.Open();
+      if not qryMSClients.IsEmpty then begin
+        scGPCircledProgressBar2.MaxValue := qryMSClients.RecordCount;
+        BMClients.Execute;
+        Label1.Caption := Label1.Caption + #13#10 + 'Done Clients For Zone '+ #13#10 + fdMeterReaderScheduleZoneCode.AsString + '-' + fdMeterReaderScheduleZoneName.AsString;
       end;
-      I := I + 1;
       fdMeterReaderSchedule.Next;
     end;
-    scGPCircledProgressBar2.Value := 0;
-    qryMSClients.Filtered := True;
-    qryMSClients.First;
 
-    scGPCircledProgressBar2.MaxValue := qryMSClients.RecordCount;
-    BMClients.Execute;
-    Label1.Caption := Label1.Caption + #13#10 + 'Done Client!!!';
-    Label1.Caption := Label1.Caption + #13#10 + 'Generating Records For Water Rates Table';
+
+    
     qryMSWaterRates.Close;
     qryMSWaterRates.Open;
     qryMSWaterRates.First;
@@ -1014,30 +1298,23 @@ begin
     Label1.Caption := Label1.Caption + #13#10 + 'Done Water Rates!!!';
     Label1.Caption := Label1.Caption + #13#10 + 'Generating Records For Meter Reading Schedule Table';
     //Insert The MeterReaderSchedule
-    qryMSMeterReadingSchedule.Close;
-    qryMSMeterReadingSchedule.Open;
-    qryMSMeterReadingSchedule.First;
-    qryMSMeterReadingSchedule.Filtered := False;
+
     fdMeterReaderSchedule.First;
     while not fdMeterReaderSchedule.EOF do begin
-      if I = 0 then begin
-        qryMSMeterReadingSchedule.Filter := 'ZoneCode =' + QuotedStr(fdMeterReaderScheduleZoneCode.AsString) ;
-      end else begin
-        qryMSMeterReadingSchedule.Filter := qryMSClients.Filter + ' OR ZoneCode =' + QuotedStr(fdMeterReaderScheduleZoneCode.AsString);
+      //if I = 0 then begin
+      scGPCircledProgressBar2.Value := 0;
+      qryMSMeterReadingSchedule.Close;
+      qryMSMeterReadingSchedule.ParamByName('AZoneCode').AsString :=  fdMeterReaderScheduleZoneCode.AsString;
+      qryMSMeterReadingSchedule.Open();
+      if not qryMSMeterReadingSchedule.IsEmpty then begin
+        scGPCircledProgressBar2.MaxValue := qryMSMeterReadingSchedule.RecordCount;
+        BMMeterReadingSchedule.Execute;
+        Label1.Caption := Label1.Caption + #13#10 + 'Done Rading Schedule For Zone '+ #13#10 + fdMeterReaderScheduleZoneCode.AsString + '-' + fdMeterReaderScheduleZoneName.AsString;
       end;
-      I := I + 1;
       fdMeterReaderSchedule.Next;
     end;
 
-    scGPCircledProgressBar2.Value := 0;
-    qryMSMeterReadingSchedule.Filtered := True;
-    qryMSMeterReadingSchedule.First;
-
-    scGPCircledProgressBar2.MaxValue := qryMSMeterReadingSchedule.RecordCount;
-    BMMeterReadingSchedule.Execute;
-    Label1.Caption := Label1.Caption + #13#10 + 'Done Meter Reader Schedule!!!';
-    Label1.Caption := Label1.Caption + #13#10 + 'Generating Records For Settings Table';
-
+   
     tblSettingsDB.Close;
     tblSettingsDB.Open;
     tblSettingsDB.First;
@@ -1082,6 +1359,9 @@ begin
     Label1.Caption := Label1.Caption + #13#10 + 'Finalizing Done,!!';
     Label1.Caption := Label1.Caption + #13#10 + 'You Can Now Push Data File to Android Device!!!';
 
+    scGPCircledProgressBar2.Value := 0;
+    //scGPCircledProgressBar2.Active := False;
+
     With DMMainConnection do begin
       FDConSQL.Connected := False;
       qryMSClients.Refresh;
@@ -1090,7 +1370,17 @@ begin
       qryMSClients.Close;
       qryMSWaterRates.Close;
       qryMSMeterReadingSchedule.Close;
+      MessageDlg('Generating Reading Data Done!!', mtInformation,[mbOK],0);
+      fdGeneratedHistory.Close;
+      fdGeneratedHistory.ParamByName('ABillPeriod').AsString := Trim(Edit2.Text);
+      fdGeneratedHistory.Open;
+      fdGeneratedHistory.First;
 
+      // Select DB Push History
+      fdDBPushed.Close;
+      fdDBPushed.ParamByName('ABillPeriod').AsString := Trim(Edit2.Text);
+      fdDBPushed.Open();
+      fdDBPushed.First;
     end;
 
 
@@ -1167,6 +1457,20 @@ begin
       scGPComboEdit1.Items.Items[I].Caption := tblMeterReaderName.AsString;
       tblMeterReader.Next;
     end;
+  end;
+end;
+
+function TUMainForm.WriteIniFile(AFileName: String): String;
+Var
+  NewValue:String;
+begin
+   IniFile := TIniFile.Create(AFileName);
+  try
+    NewValue :=  scGPComboBox1.Items[scGPComboBox1.ItemIndex].Caption;
+    IniFile.WriteString('StyleManager', 'FormStyle', NewValue);
+    // You can write additional key-value pairs in different sections as needed
+  finally
+    IniFile.Free;
   end;
 end;
 
