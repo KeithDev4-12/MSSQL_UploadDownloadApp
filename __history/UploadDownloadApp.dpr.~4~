@@ -1,0 +1,17 @@
+program UploadDownloadApp;
+
+uses
+  Vcl.Forms,
+  MainU in 'MainU.pas' {UMainForm},
+  Vcl.Themes,
+  Vcl.Styles;
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  ReportMemoryLeaksOnShutDown := True;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TUMainForm, UMainForm);
+  Application.Run;
+end.
