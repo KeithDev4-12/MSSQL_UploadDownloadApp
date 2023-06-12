@@ -12,7 +12,9 @@ uses
   SQLiteFileUtilUnit in 'SQLiteFileUtilUnit.pas',
   U_usb in 'U_usb.pas',
   UploadDownloadUnit in 'UploadDownloadUnit.pas',
-  UMainConnectionModule in 'UMainConnectionModule.pas' {DMMainConnection: TDataModule};
+  UMainConnectionModule in 'UMainConnectionModule.pas' {DMMainConnection: TDataModule},
+  DeviceDialogU in 'DeviceDialogU.pas' {UDeviceDialog},
+  SchedulingDialogU in 'SchedulingDialogU.pas' {USchedulingDialog};
 
 {$R *.res}
 
@@ -23,5 +25,7 @@ begin
   Application.CreateForm(TUMainForm, UMainForm);
   Application.CreateForm(TDMMainModule, DMMainModule);
   Application.CreateForm(TDMMainConnection, DMMainConnection);
+  Application.CreateForm(TUDeviceDialog, UDeviceDialog);
+  Application.CreateForm(TUSchedulingDialog, USchedulingDialog);
   Application.Run;
 end.

@@ -11,8 +11,10 @@ const
   QUERY_ADB_DEVICES = 'adb devices';
   QUERY_ADB_GETPROPERTIES = 'getprop';
   QUERY_ADB_SHELL = 'adb shell ';
-  QUERY_ADB_PATH = 'ls sdcard/Android/data/com.systems.alltech.jws/files/';
-  QUERY_ADB_DEVICE_NAME = ' persist.sys.device_name';
+  QUERY_ADB_CONNECT = 'adb -s ';
+  QUERY_ADB = 'adb ';
+  QUERY_ADB_PATH = 'ls /storage/emulated/0/Android/data/com.alltechsystems.iwd/files/';
+  QUERY_ADB_DEVICE_NAME = ' ro.product.model';
   QUERY_ADB_SERIAL = ' ro.boot.serialno';
 
 
@@ -123,13 +125,16 @@ begin
    Amemo.Text := GetDosOutput(AVarValue);
    Aresult:= Uppercase(Amemo.Strings[0]);
    if Aresult.Contains(UpperCase('more than one device')) then begin
+     Result := Aresult;
      Exit;
+   end else begin
+     Result := Aresult;
    end;
 
   finally
     AMemo.Free;
   end;
-  Result := Aresult
+
 end;
 
 class function TCMDPromtUtil.getWlanIpAddress: String;

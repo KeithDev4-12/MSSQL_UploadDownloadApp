@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.Client, FireDAC.Comp.DataSet, FireDAC.Comp.BatchMove.DataSet,
-  FireDAC.Comp.BatchMove;
+  FireDAC.Comp.BatchMove, MemDS, VirtualTable;
 
 type
   TDMMainModule = class(TDataModule)
@@ -175,14 +175,90 @@ type
     tblGeneratedHistoryBillPeriod: TWideMemoField;
     fdGeneratedHistoryDateGenerated: TWideStringField;
     tblGeneratedHistoryDateGenerated: TWideMemoField;
+    fdDBFetched: TFDQuery;
+    fdDBFetched_id: TFDAutoIncField;
+    fdDBFetchedBillPeriod: TWideStringField;
+    fdDBFetchedDevice: TWideStringField;
+    fdDBFetchedDateFetched: TWideStringField;
+    fdDBFetchedMeterReaderName: TWideStringField;
+    tblDBPushed: TFDTable;
+    tblDBPushed_id: TFDAutoIncField;
+    tblDBPushedBillPeriod: TWideMemoField;
+    tblDBPushedDevice: TWideMemoField;
+    tblDBPushedStatus: TWideMemoField;
+    tblDBPushedDatePushed: TWideMemoField;
+    tblDBPushedMeterReaderName: TWideMemoField;
+    tblDBFetched: TFDTable;
+    fdDBFetchedZoneCodes: TWideStringField;
+    fdDBFetchedRecordCount: TWideStringField;
+    tblDBFetched_id: TFDAutoIncField;
+    tblDBFetchedBillPeriod: TWideMemoField;
+    tblDBFetchedDevice: TWideMemoField;
+    tblDBFetchedMeterReaderName: TWideMemoField;
+    tblDBFetchedDateFetched: TWideMemoField;
+    tblDBFetchedZoneCodes: TWideMemoField;
+    tblDBFetchedRecordCount: TWideMemoField;
+    fdGetTheDetails: TFDQuery;
+    fdGetTheDetailsZoneCode: TWideStringField;
+    fdGetTheDetailsCountData: TWideStringField;
+    VTDeviceListAvailable: TVirtualTable;
+    VTDeviceListAvailableDeviceName: TStringField;
+    VTDeviceListAvailableSerialNumber: TStringField;
+    VTDeviceListAvailableManufacturer: TStringField;
+    VTDeviceListAvailableModel: TStringField;
+    qryWaterRatesUpdate: TFDQuery;
+    qryDetailsMeterReading: TFDQuery;
+    qryDetailsMeterReadingZoneCode: TWideMemoField;
+    qryDetailsMeterReadingCnt_Zone: TLargeintField;
+    qryDetailsMeterReadingMeterReadername: TWideMemoField;
+    qryMSZoneCode: TFDQuery;
+    qryMSZoneCodeZoneCode: TStringField;
+    qryMSZoneCodeZoneName: TStringField;
+    qryMSZoneCodeFCollect: TBooleanField;
+    VTReadingScheduling: TVirtualTable;
+    VTReadingSchedulingZoneCode: TStringField;
+    VTReadingSchedulingZoneName: TStringField;
+    VTReadingSchedulingReadingDate: TStringField;
+    VTReadingScheduleMain: TVirtualTable;
+    VTReadingScheduleMain_id: TVirtualAutoIncField;
+    VTReadingScheduleMainZoneCode: TWideStringField;
+    VTReadingScheduleMainZoneName: TWideStringField;
+    VTReadingScheduleMainReadingStartDate: TWideStringField;
+    VTReadingScheduleMainTotalReadingDays: TWideStringField;
+    VTReadingScheduleMainBillPeriod: TWideStringField;
+    VTReadingScheduleMainMRNo: TIntegerField;
+    VTReadingScheduleMainisPosted: TIntegerField;
+    VTReadingScheduleDeleted: TVirtualTable;
+    VTReadingScheduleDeleted_id: TVirtualAutoIncField;
+    VTReadingScheduleDeletedZoneCode: TWideStringField;
+    VTReadingScheduleDeletedZoneName: TWideStringField;
+    VTReadingScheduleDeletedReadingStartDate: TWideStringField;
+    VTReadingScheduleDeletedTotalReadingDays: TWideStringField;
+    VTReadingScheduleDeletedBillPeriod: TWideStringField;
+    VTReadingScheduleDeletedMRNo: TIntegerField;
+    VTReadingScheduleDeletedisPosted: TIntegerField;
+    tblMeterReaderSchedule: TFDTable;
+    tblMeterReaderSchedule_id: TFDAutoIncField;
+    tblMeterReaderScheduleZoneCode: TWideMemoField;
+    tblMeterReaderScheduleZoneName: TWideMemoField;
+    tblMeterReaderScheduleReadingStartDate: TWideMemoField;
+    tblMeterReaderScheduleTotalReadingDays: TFloatField;
+    tblMeterReaderScheduleBillPeriod: TWideMemoField;
+    tblMeterReaderScheduleMRNo: TIntegerField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     var
       ID,EmpID,Name,MacAddress,HotLine : String;
+      DeviceNameDM,SerialNumberDM,AStatusMultipleDevice:String;
+      ItemIndex:Integer;
+      DragRows: TList;
+      isInsertMode:Boolean
   end;
 
 var
@@ -195,6 +271,20 @@ implementation
 {$R *.dfm}
 
 uses UMainConnectionModule;
+
+procedure TDMMainModule.DataModuleCreate(Sender: TObject);
+begin
+  DragRows := TList.Create;
+end;
+
+procedure TDMMainModule.DataModuleDestroy(Sender: TObject);
+var
+  i: Integer;
+begin
+  for i := 0 to DragRows.Count - 1 do
+    TObject(DragRows[i]).Free; // Free the owned objects
+  DragRows.Free;
+end;
 
 procedure TDMMainModule.dsMeterReaderDataChange(Sender: TObject; Field: TField);
 begin

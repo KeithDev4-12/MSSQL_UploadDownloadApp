@@ -1,0 +1,151 @@
+unit SchedulingDialogU;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls,
+  Vcl.ExtCtrls, scControls, scGPControls, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
+  Vcl.Buttons, scGPExtControls, Data.DB;
+
+type
+  TUSchedulingDialog = class(TForm)
+    scGPPanel21: TscGPPanel;
+    Panel55: TPanel;
+    Label30: TLabel;
+    Label31: TLabel;
+    DateTimePicker1: TDateTimePicker;
+    Panel1: TPanel;
+    Label2: TLabel;
+    DBGridEh6: TDBGridEh;
+    SpeedButton27: TSpeedButton;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
+    scGPComboBox3: TscGPComboBox;
+    DSReadingScheduling: TDataSource;
+    procedure FormShow(Sender: TObject);
+    procedure SpeedButton27Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  USchedulingDialog: TUSchedulingDialog;
+
+implementation
+
+{$R *.dfm}
+
+uses UMainModule;
+
+procedure TUSchedulingDialog.FormShow(Sender: TObject);
+Var I:integer;
+begin
+  with DMMainModule do begin
+    I:=0;
+    tblMeterReader.First;
+
+    scGPComboBox3.Items.Clear;
+    scGPComboBox3.Items.Add;
+    scGPComboBox3.Items.Items[I].Header := True;
+    scGPComboBox3.Items.Items[I].Caption := 'Meter Reader';
+    I := I + 1;
+
+
+    scGPComboBox3.Items.Add;
+    scGPComboBox3.Items.Items[I].Caption := '<ALL METERREADER>';
+    while not tblMeterReader.EOF do begin
+      I := I + 1;
+      scGPComboBox3.Items.Add;
+      scGPComboBox3.Items.Items[I].Caption := tblMeterReaderName.AsString;
+      tblMeterReader.Next;
+    end;
+    //VTReadingScheduling.Close;
+    //VTReadingScheduling.Open;
+    DateTimePicker1.DateTime := Now();
+    scGPComboBox3.ItemIndex := ItemIndex;
+    i:=0;
+
+    DragRows.Clear;
+
+
+  end;
+  scGPComboBox3.ItemIndex := DMMainModule.ItemIndex;
+  //scGPComboBox3.Items[DMMainModule.ItemIndex].Caption;
+end;
+
+procedure TUSchedulingDialog.SpeedButton1Click(Sender: TObject);
+begin
+  VTReadingScheduling.Clear;
+  Self.Close;
+end;
+
+procedure TUSchedulingDialog.SpeedButton27Click(Sender: TObject);
+begin
+  with DMMainModule do begin
+    VTReadingScheduling.First;
+    while not VTReadingScheduling.Eof do begin
+      VTReadingScheduling.Edit;
+      VTReadingSchedulingReadingDate.AsString :=  FormatDateTime('YYYY/MM/DD',DateTimePicker1.DateTime);
+      VTReadingScheduling.Post;
+      VTReadingScheduling.Next;
+    end;
+
+    VTReadingScheduling.First;
+
+      while not VTReadingScheduling.EOF do begin
+        if tblMeterReader.Locate('Name',scGPComboBox3.Items[scGPComboBox3.ItemIndex].Caption,[]) then begin
+          if VTReadingScheduleMain.Locate('ZoneCode',VTReadingSchedulingZoneCode.AsString,[]) then begin
+            VTReadingScheduleMain.Edit;
+          end else begin
+            VTReadingScheduleMain.Append;
+          end;
+
+          VTReadingScheduleMainZoneCode.AsString := VTReadingSchedulingZoneCode.AsString;
+          VTReadingScheduleMainZoneName.AsString := VTReadingSchedulingZoneName.AsString;
+          VTReadingScheduleMainReadingStartDate.AsString := FormatDateTime('YYYY/MM/DD',DateTimePicker1.DateTime);
+          VTReadingScheduleMainMRNo.AsString := tblMeterReader_id.AsString;
+          VTReadingScheduleMainisPosted.AsInteger := 0;
+          VTReadingScheduleMain.Post;
+
+          
+
+          VTReadingScheduling.Next;
+        end else begin
+          if VTReadingScheduleMain.Locate('ZoneCode',VTReadingSchedulingZoneCode.AsString,[]) then begin
+            VTReadingScheduleMain.Edit;
+          end else begin
+            VTReadingScheduleMain.Append;
+          end;
+
+          VTReadingScheduleMainZoneCode.AsString := VTReadingSchedulingZoneCode.AsString;
+          VTReadingScheduleMainZoneName.AsString := VTReadingSchedulingZoneName.AsString;
+          VTReadingScheduleMainReadingStartDate.AsString := FormatDateTime('YYYY/MM/DD',DateTimePicker1.DateTime);
+          VTReadingScheduleMainMRNo.AsString := tblMeterReader_id.AsString;
+          VTReadingScheduleMainisPosted.AsInteger := 0;
+          VTReadingScheduleMain.Post;
+
+
+
+          VTReadingScheduling.Next;
+        end;
+      end;
+      VTReadingScheduleMain.First;
+      while not VTReadingScheduleMain.EOF do begin
+        qryMSZoneCode.Filtered := False;
+
+        qryMSZoneCode.Filter := qryMSZoneCode.Filter + ' AND ZoneCode <> ' + QuotedStr(VTReadingScheduleMainZoneCode.AsString);
+
+        qryMSZoneCode.Filtered := True;
+        VTReadingScheduleMain.Next;
+      end;
+
+      Self.Close;
+  end;
+end;
+
+end.
