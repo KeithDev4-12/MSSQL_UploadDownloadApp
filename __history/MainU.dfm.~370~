@@ -3917,6 +3917,7 @@ object UMainForm: TUMainForm
                         HorzScrollBar.VisibleMode = sbNeverShowEh
                         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
                         ParentFont = False
+                        PopupMenu = PMDeleteReadingSchedule
                         TabOrder = 3
                         VertScrollBar.VisibleMode = sbNeverShowEh
                         OnDragDrop = DBGridEh6DragDrop
@@ -3926,9 +3927,17 @@ object UMainForm: TUMainForm
                             CellButtons = <>
                             DynProps = <>
                             EditButtons = <>
+                            FieldName = '_id'
+                            Footers = <>
+                            Visible = False
+                          end
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
                             FieldName = 'ZoneCode'
                             Footers = <>
-                            Width = 97
+                            Width = 76
                           end
                           item
                             CellButtons = <>
@@ -3936,7 +3945,7 @@ object UMainForm: TUMainForm
                             EditButtons = <>
                             FieldName = 'ZoneName'
                             Footers = <>
-                            Width = 157
+                            Width = 172
                           end
                           item
                             CellButtons = <>
@@ -3944,7 +3953,15 @@ object UMainForm: TUMainForm
                             EditButtons = <>
                             FieldName = 'ReadingStartDate'
                             Footers = <>
-                            Title.Caption = 'Reading Start Date'
+                            Width = 121
+                          end
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = 'TotalReadingDays'
+                            Footers = <>
+                            Visible = False
                           end
                           item
                             CellButtons = <>
@@ -3959,14 +3976,6 @@ object UMainForm: TUMainForm
                             DynProps = <>
                             EditButtons = <>
                             FieldName = 'MRNo'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'TotalReadingDays'
                             Footers = <>
                             Visible = False
                           end
@@ -4068,26 +4077,18 @@ object UMainForm: TUMainForm
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
-                        object scGPProgressBar1: TscGPProgressBar
-                          AlignWithMargins = True
-                          Left = 3
-                          Top = 3
-                          Width = 403
-                          Height = 24
-                          Align = alClient
-                          FluentUIOpaque = False
-                          TabOrder = 0
-                          Vertical = False
-                          AnimationMode = False
-                          Active = True
-                          TransparentBackground = True
-                          FrameAlpha = 30
-                          ProgressAlpha = 200
-                          FrameColor = clBtnText
-                          ProgressColor = clHighlight
-                          MinValue = 0
-                          MaxValue = 100
-                          Value = 50
+                        object Label36: TLabel
+                          Left = 9
+                          Top = 1
+                          Width = 195
+                          Height = 18
+                          Caption = 'IROSIN WATER DISTRICT'
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -15
+                          Font.Name = 'Tahoma'
+                          Font.Style = [fsBold]
+                          ParentFont = False
                         end
                       end
                     end
@@ -28216,7 +28217,6 @@ object UMainForm: TUMainForm
   end
   object DSVTReadingSchedule: TDataSource
     DataSet = DMMainModule.VTReadingScheduleMain
-    OnDataChange = DSVTReadingScheduleDataChange
     Left = 211
     Top = 312
   end
@@ -28231,5 +28231,11 @@ object UMainForm: TUMainForm
       Caption = 'Control + Z (Undelete)'
       OnClick = ControlZ1Click
     end
+  end
+  object Timer1: TTimer
+    Interval = 10
+    OnTimer = Timer1Timer
+    Left = 435
+    Top = 553
   end
 end

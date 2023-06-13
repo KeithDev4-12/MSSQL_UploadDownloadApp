@@ -220,23 +220,9 @@ type
     VTReadingSchedulingZoneName: TStringField;
     VTReadingSchedulingReadingDate: TStringField;
     VTReadingScheduleMain: TVirtualTable;
-    VTReadingScheduleMain_id: TVirtualAutoIncField;
-    VTReadingScheduleMainZoneCode: TWideStringField;
-    VTReadingScheduleMainZoneName: TWideStringField;
-    VTReadingScheduleMainReadingStartDate: TWideStringField;
-    VTReadingScheduleMainTotalReadingDays: TWideStringField;
-    VTReadingScheduleMainBillPeriod: TWideStringField;
-    VTReadingScheduleMainMRNo: TIntegerField;
-    VTReadingScheduleMainisPosted: TIntegerField;
+
     VTReadingScheduleDeleted: TVirtualTable;
-    VTReadingScheduleDeleted_id: TVirtualAutoIncField;
-    VTReadingScheduleDeletedZoneCode: TWideStringField;
-    VTReadingScheduleDeletedZoneName: TWideStringField;
-    VTReadingScheduleDeletedReadingStartDate: TWideStringField;
-    VTReadingScheduleDeletedTotalReadingDays: TWideStringField;
-    VTReadingScheduleDeletedBillPeriod: TWideStringField;
-    VTReadingScheduleDeletedMRNo: TIntegerField;
-    VTReadingScheduleDeletedisPosted: TIntegerField;
+
     tblMeterReaderSchedule: TFDTable;
     tblMeterReaderSchedule_id: TFDAutoIncField;
     tblMeterReaderScheduleZoneCode: TWideMemoField;
@@ -245,6 +231,22 @@ type
     tblMeterReaderScheduleTotalReadingDays: TFloatField;
     tblMeterReaderScheduleBillPeriod: TWideMemoField;
     tblMeterReaderScheduleMRNo: TIntegerField;
+    VTReadingScheduleMain_id: TAutoIncField;
+    VTReadingScheduleMainZoneCode: TWideStringField;
+    VTReadingScheduleMainZoneName: TWideStringField;
+    VTReadingScheduleMainReadingStartDate: TWideStringField;
+    VTReadingScheduleMainTotalReadingDays: TWideStringField;
+    VTReadingScheduleMainBillPeriod: TWideStringField;
+    VTReadingScheduleMainMRNo: TIntegerField;
+    VTReadingScheduleDeleted_id: TAutoIncField;
+    VTReadingScheduleDeletedZoneCode: TWideStringField;
+    VTReadingScheduleDeletedZoneName: TWideStringField;
+    VTReadingScheduleDeletedReadingStartDate: TWideStringField;
+    VTReadingScheduleDeletedTotalReadingDays: TWideStringField;
+    VTReadingScheduleDeletedBillPeriod: TWideStringField;
+    VTReadingScheduleDeletedMRNo: TIntegerField;
+    VTReadingScheduleDeletedisPosted: TIntegerField;
+    VTReadingScheduleMainisPosted: TIntegerField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);

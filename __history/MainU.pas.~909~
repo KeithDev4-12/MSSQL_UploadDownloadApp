@@ -218,13 +218,6 @@ type
     Panel40: TPanel;
     Label25: TLabel;
     Panel42: TPanel;
-    VTFetchHistory_id: TVirtualAutoIncField;
-    VTFetchHistoryBillPeriod: TWideStringField;
-    VTFetchHistoryDevice: TWideStringField;
-    VTFetchHistoryDateFetched: TWideStringField;
-    VTFetchHistoryMeterReaderName: TWideStringField;
-    VTFetchHistoryZoneCodes: TWideStringField;
-    VTFetchHistoryRecordCount: TWideStringField;
     scGPRadioButton3: TscGPRadioButton;
     scGPRadioButton1: TscGPRadioButton;
     Memo2: TMemo;
@@ -285,6 +278,13 @@ type
     ControlZ1: TMenuItem;
     Label36: TLabel;
     Timer1: TTimer;
+    VTFetchHistory_id: TAutoIncField;
+    VTFetchHistoryBillPeriod: TWideStringField;
+    VTFetchHistoryDevice: TWideStringField;
+    VTFetchHistoryDateFetched: TWideStringField;
+    VTFetchHistoryMeterReaderName: TWideStringField;
+    VTFetchHistoryZoneCodes: TWideStringField;
+    VTFetchHistoryRecordCount: TWideStringField;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -384,6 +384,8 @@ type
     procedure RemoveThisReadingSchedule1Click(Sender: TObject);
     procedure ControlZ1Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure DBGridEh6DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
 
 
     Private
@@ -815,12 +817,42 @@ begin
   Accept := (Sender = DBGridEh6) and (Source = DBGridEh5) and (DMMainModule.DragRows.Count > 0);
 end;
 
+procedure TUMainForm.DBGridEh6DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+
+.
+  With DMMainModule do begin
+     if VTReadingScheduleMainis.AsString = '1' then begin
+       if VTPingIpAddressIPAddress.AsString.Equals(Label14.Caption) then begin
+         DBGridEh1.Canvas.Brush.Color:=clGreen;
+         //DBGridEh1.Font.Color := clBlack;
+       end else begin
+         //DBGridEh1.Font.Color := clWhite;
+         DBGridEh1.Canvas.Brush.Color:=$00955913;
+       end;
+     end else if VTPingIpAddressIsStable.AsString = '0' then begin
+       DBGridEh1.Canvas.Brush.Color:=clRed;
+       //DBGridEh1.Font.Color := clWhite;
+     end;
+     DBGridEh1.Canvas.FillRect(Rect);
+     DBGridEh1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
+end;
+
 procedure TUMainForm.Edit15Change(Sender: TObject);
 begin
   with DMMainModule do begin
   //GetTheMRNo From Meter Reader Accounts scGPComboBox4.Items[scGPComboBox4.ItemIndex].Caption
      if scGPComboBox3.ItemIndex = -1 then
       Exit;
+
+     DMMainModule.qryMSZoneCode.Filter := '';
+     DMMainModule.qryMSZoneCode.Filtered := true;
+
+     VTReadingScheduleMain.Clear;
+     VTReadingScheduleDeleted.Clear;
+     VTReadingScheduling.Clear;
 
      if fdMeterReader.Locate('Name',Trim(scGPComboBox3.Items[scGPComboBox3.ItemIndex].Caption),[]) then begin
        MRNo := fdMeterReader_id.AsInteger;
@@ -985,6 +1017,13 @@ begin
     VTReadingScheduleMain.Open;
     VTReadingScheduleMain.First;
     VTReadingScheduleMain.Clear;
+
+    VTReadingScheduleDeleted.Close;
+    VTReadingScheduleDeleted.Open;
+    VTReadingScheduleDeleted.First;
+    VTReadingScheduleDeleted.Clear;
+
+
 
     ItemIndex := 0;
     fdMeterReader.Close;
@@ -1459,6 +1498,13 @@ begin
   with DMMainModule do begin
     if scGPComboBox3.ItemIndex = -1 then
       Exit;
+
+     DMMainModule.qryMSZoneCode.Filter := '';
+     DMMainModule.qryMSZoneCode.Filtered := true;
+
+     VTReadingScheduleMain.Clear;
+     VTReadingScheduleDeleted.Clear;
+     VTReadingScheduling.Clear;
 
      IncVal := 0;
      if fdMeterReader.Locate('Name',Trim(scGPComboBox3.Items[scGPComboBox3.ItemIndex].Caption),[]) then begin
@@ -2138,7 +2184,7 @@ begin
 
         VTReadingScheduleMain.Next;
       end;
-      MessageDlg('Successfully Posted Meter Readiong Schedule!!', mtInformation,[mbOK],0);
+      MessageDlg('Successfully Posted Meter Reading Schedule!!', mtInformation,[mbOK],0);
     end else begin
       Exit;
     end;

@@ -822,6 +822,13 @@ begin
      if scGPComboBox3.ItemIndex = -1 then
       Exit;
 
+     DMMainModule.qryMSZoneCode.Filter := '';
+     DMMainModule.qryMSZoneCode.Filtered := true;
+
+     VTReadingScheduleMain.Clear;
+     VTReadingScheduleDeleted.Clear;
+     VTReadingScheduling.Clear;
+
      if fdMeterReader.Locate('Name',Trim(scGPComboBox3.Items[scGPComboBox3.ItemIndex].Caption),[]) then begin
        MRNo := fdMeterReader_id.AsInteger;
      end else begin
@@ -1466,6 +1473,13 @@ begin
   with DMMainModule do begin
     if scGPComboBox3.ItemIndex = -1 then
       Exit;
+
+     DMMainModule.qryMSZoneCode.Filter := '';
+     DMMainModule.qryMSZoneCode.Filtered := true;
+
+     VTReadingScheduleMain.Clear;
+     VTReadingScheduleDeleted.Clear;
+     VTReadingScheduling.Clear;
 
      IncVal := 0;
      if fdMeterReader.Locate('Name',Trim(scGPComboBox3.Items[scGPComboBox3.ItemIndex].Caption),[]) then begin
@@ -2145,7 +2159,7 @@ begin
 
         VTReadingScheduleMain.Next;
       end;
-      MessageDlg('Successfully Posted Meter Readiong Schedule!!', mtInformation,[mbOK],0);
+      MessageDlg('Successfully Posted Meter Reading Schedule!!', mtInformation,[mbOK],0);
     end else begin
       Exit;
     end;

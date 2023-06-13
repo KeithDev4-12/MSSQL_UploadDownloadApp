@@ -173,6 +173,7 @@ object UMainForm: TUMainForm
             ParentColor = False
             ParentFont = False
             TabOrder = 1
+            Visible = False
             WallpaperIndex = -1
             CustomBackgroundImageIndex = -1
             FullUpdate = False
@@ -3922,6 +3923,7 @@ object UMainForm: TUMainForm
                         VertScrollBar.VisibleMode = sbNeverShowEh
                         OnDragDrop = DBGridEh6DragDrop
                         OnDragOver = DBGridEh6DragOver
+                        OnDrawColumnCell = DBGridEh6DrawColumnCell
                         Columns = <
                           item
                             CellButtons = <>
@@ -7470,7 +7472,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010A00F801540130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010A00F801580130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -28148,12 +28150,12 @@ object UMainForm: TUMainForm
     Left = 445
     Top = 430
     Data = {
-      0400070003005F69640E000000000000000A0042696C6C506572696F641800FF
+      0300070003005F69640E000000000000000A0042696C6C506572696F641800FF
       7F0000000006004465766963651800FF7F000000000B00446174654665746368
       65641800FF7F000000000F004D657465725265616465724E616D651800FF7F00
       00000009005A6F6E65436F6465731800FF7F000000000B005265636F7264436F
       756E741800FF7F00000000000000000000}
-    object VTFetchHistory_id: TVirtualAutoIncField
+    object VTFetchHistory_id: TAutoIncField
       FieldName = '_id'
     end
     object VTFetchHistoryBillPeriod: TWideStringField
@@ -28201,7 +28203,7 @@ object UMainForm: TUMainForm
   object VTReadingData: TVirtualTable
     Left = 125
     Top = 495
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTReadingDataFileName: TStringField
       FieldName = 'FileName'
       Size = 45

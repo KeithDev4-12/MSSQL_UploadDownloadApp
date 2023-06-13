@@ -173,6 +173,7 @@ object UMainForm: TUMainForm
             ParentColor = False
             ParentFont = False
             TabOrder = 1
+            Visible = False
             WallpaperIndex = -1
             CustomBackgroundImageIndex = -1
             FullUpdate = False
@@ -3917,18 +3918,28 @@ object UMainForm: TUMainForm
                         HorzScrollBar.VisibleMode = sbNeverShowEh
                         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
                         ParentFont = False
+                        PopupMenu = PMDeleteReadingSchedule
                         TabOrder = 3
                         VertScrollBar.VisibleMode = sbNeverShowEh
                         OnDragDrop = DBGridEh6DragDrop
                         OnDragOver = DBGridEh6DragOver
+                        OnDrawColumnCell = DBGridEh6DrawColumnCell
                         Columns = <
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = '_id'
+                            Footers = <>
+                            Visible = False
+                          end
                           item
                             CellButtons = <>
                             DynProps = <>
                             EditButtons = <>
                             FieldName = 'ZoneCode'
                             Footers = <>
-                            Width = 97
+                            Width = 76
                           end
                           item
                             CellButtons = <>
@@ -3936,7 +3947,7 @@ object UMainForm: TUMainForm
                             EditButtons = <>
                             FieldName = 'ZoneName'
                             Footers = <>
-                            Width = 157
+                            Width = 172
                           end
                           item
                             CellButtons = <>
@@ -3944,7 +3955,15 @@ object UMainForm: TUMainForm
                             EditButtons = <>
                             FieldName = 'ReadingStartDate'
                             Footers = <>
-                            Title.Caption = 'Reading Start Date'
+                            Width = 121
+                          end
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = 'TotalReadingDays'
+                            Footers = <>
+                            Visible = False
                           end
                           item
                             CellButtons = <>
@@ -3959,14 +3978,6 @@ object UMainForm: TUMainForm
                             DynProps = <>
                             EditButtons = <>
                             FieldName = 'MRNo'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'TotalReadingDays'
                             Footers = <>
                             Visible = False
                           end
@@ -4068,26 +4079,18 @@ object UMainForm: TUMainForm
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
-                        object scGPProgressBar1: TscGPProgressBar
-                          AlignWithMargins = True
-                          Left = 3
-                          Top = 3
-                          Width = 403
-                          Height = 24
-                          Align = alClient
-                          FluentUIOpaque = False
-                          TabOrder = 0
-                          Vertical = False
-                          AnimationMode = False
-                          Active = True
-                          TransparentBackground = True
-                          FrameAlpha = 30
-                          ProgressAlpha = 200
-                          FrameColor = clBtnText
-                          ProgressColor = clHighlight
-                          MinValue = 0
-                          MaxValue = 100
-                          Value = 50
+                        object Label36: TLabel
+                          Left = 9
+                          Top = 1
+                          Width = 195
+                          Height = 18
+                          Caption = 'IROSIN WATER DISTRICT'
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -15
+                          Font.Name = 'Tahoma'
+                          Font.Style = [fsBold]
+                          ParentFont = False
                         end
                       end
                     end
@@ -7469,7 +7472,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010A00F801540130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010A00F801580130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -28147,12 +28150,12 @@ object UMainForm: TUMainForm
     Left = 445
     Top = 430
     Data = {
-      0400070003005F69640E000000000000000A0042696C6C506572696F641800FF
+      0300070003005F69640E000000000000000A0042696C6C506572696F641800FF
       7F0000000006004465766963651800FF7F000000000B00446174654665746368
       65641800FF7F000000000F004D657465725265616465724E616D651800FF7F00
       00000009005A6F6E65436F6465731800FF7F000000000B005265636F7264436F
       756E741800FF7F00000000000000000000}
-    object VTFetchHistory_id: TVirtualAutoIncField
+    object VTFetchHistory_id: TAutoIncField
       FieldName = '_id'
     end
     object VTFetchHistoryBillPeriod: TWideStringField
@@ -28200,7 +28203,7 @@ object UMainForm: TUMainForm
   object VTReadingData: TVirtualTable
     Left = 125
     Top = 495
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTReadingDataFileName: TStringField
       FieldName = 'FileName'
       Size = 45
@@ -28227,7 +28230,14 @@ object UMainForm: TUMainForm
       OnClick = RemoveThisReadingSchedule1Click
     end
     object ControlZ1: TMenuItem
-      Caption = 'Control + Z '
+      Caption = 'Control + Z (Undelete)'
+      OnClick = ControlZ1Click
     end
+  end
+  object Timer1: TTimer
+    Interval = 10
+    OnTimer = Timer1Timer
+    Left = 435
+    Top = 553
   end
 end

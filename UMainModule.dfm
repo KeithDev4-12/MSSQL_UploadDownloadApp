@@ -1410,7 +1410,7 @@ object DMMainModule: TDMMainModule
   object VTDeviceListAvailable: TVirtualTable
     Left = 624
     Top = 472
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTDeviceListAvailableDeviceName: TStringField
       FieldName = 'DeviceName'
       Size = 45
@@ -1502,7 +1502,7 @@ object DMMainModule: TDMMainModule
   object VTReadingScheduling: TVirtualTable
     Left = 896
     Top = 280
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTReadingSchedulingZoneCode: TStringField
       FieldName = 'ZoneCode'
       Size = 45
@@ -1554,12 +1554,12 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 336
     Data = {
-      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
       524E6F0300000000000000000000000000}
-    object VTReadingScheduleMain_id: TVirtualAutoIncField
+    object VTReadingScheduleMain_id: TAutoIncField
       FieldName = '_id'
     end
     object VTReadingScheduleMainZoneCode: TWideStringField
@@ -1627,12 +1627,12 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 400
     Data = {
-      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
       524E6F0300000000000000000000000000}
-    object VTReadingScheduleDeleted_id: TVirtualAutoIncField
+    object VTReadingScheduleDeleted_id: TAutoIncField
       FieldName = '_id'
     end
     object VTReadingScheduleDeletedZoneCode: TWideStringField
@@ -1684,6 +1684,7 @@ object DMMainModule: TDMMainModule
       FieldName = '_id'
       Origin = '_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object tblMeterReaderScheduleZoneCode: TWideMemoField
       FieldName = 'ZoneCode'

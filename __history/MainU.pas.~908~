@@ -218,13 +218,6 @@ type
     Panel40: TPanel;
     Label25: TLabel;
     Panel42: TPanel;
-    VTFetchHistory_id: TVirtualAutoIncField;
-    VTFetchHistoryBillPeriod: TWideStringField;
-    VTFetchHistoryDevice: TWideStringField;
-    VTFetchHistoryDateFetched: TWideStringField;
-    VTFetchHistoryMeterReaderName: TWideStringField;
-    VTFetchHistoryZoneCodes: TWideStringField;
-    VTFetchHistoryRecordCount: TWideStringField;
     scGPRadioButton3: TscGPRadioButton;
     scGPRadioButton1: TscGPRadioButton;
     Memo2: TMemo;
@@ -285,6 +278,13 @@ type
     ControlZ1: TMenuItem;
     Label36: TLabel;
     Timer1: TTimer;
+    VTFetchHistory_id: TAutoIncField;
+    VTFetchHistoryBillPeriod: TWideStringField;
+    VTFetchHistoryDevice: TWideStringField;
+    VTFetchHistoryDateFetched: TWideStringField;
+    VTFetchHistoryMeterReaderName: TWideStringField;
+    VTFetchHistoryZoneCodes: TWideStringField;
+    VTFetchHistoryRecordCount: TWideStringField;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -821,6 +821,13 @@ begin
   //GetTheMRNo From Meter Reader Accounts scGPComboBox4.Items[scGPComboBox4.ItemIndex].Caption
      if scGPComboBox3.ItemIndex = -1 then
       Exit;
+
+     DMMainModule.qryMSZoneCode.Filter := '';
+     DMMainModule.qryMSZoneCode.Filtered := true;
+
+     VTReadingScheduleMain.Clear;
+     VTReadingScheduleDeleted.Clear;
+     VTReadingScheduling.Clear;
 
      if fdMeterReader.Locate('Name',Trim(scGPComboBox3.Items[scGPComboBox3.ItemIndex].Caption),[]) then begin
        MRNo := fdMeterReader_id.AsInteger;
@@ -1467,9 +1474,13 @@ begin
     if scGPComboBox3.ItemIndex = -1 then
       Exit;
 
+     DMMainModule.qryMSZoneCode.Filter := '';
+     DMMainModule.qryMSZoneCode.Filtered := true;
+
      VTReadingScheduleMain.Clear;
      VTReadingScheduleDeleted.Clear;
      VTReadingScheduling.Clear;
+
      IncVal := 0;
      if fdMeterReader.Locate('Name',Trim(scGPComboBox3.Items[scGPComboBox3.ItemIndex].Caption),[]) then begin
        MRNo := fdMeterReader_id.AsInteger;

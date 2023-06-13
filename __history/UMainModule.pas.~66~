@@ -219,6 +219,32 @@ type
     VTReadingSchedulingZoneCode: TStringField;
     VTReadingSchedulingZoneName: TStringField;
     VTReadingSchedulingReadingDate: TStringField;
+    VTReadingScheduleMain: TVirtualTable;
+
+    VTReadingScheduleDeleted: TVirtualTable;
+
+    tblMeterReaderSchedule: TFDTable;
+    tblMeterReaderSchedule_id: TFDAutoIncField;
+    tblMeterReaderScheduleZoneCode: TWideMemoField;
+    tblMeterReaderScheduleZoneName: TWideMemoField;
+    tblMeterReaderScheduleReadingStartDate: TWideMemoField;
+    tblMeterReaderScheduleTotalReadingDays: TFloatField;
+    tblMeterReaderScheduleBillPeriod: TWideMemoField;
+    tblMeterReaderScheduleMRNo: TIntegerField;
+    VTReadingScheduleMain_id: TAutoIncField;
+    VTReadingScheduleMainZoneCode: TWideStringField;
+    VTReadingScheduleMainZoneName: TWideStringField;
+    VTReadingScheduleMainReadingStartDate: TWideStringField;
+    VTReadingScheduleMainTotalReadingDays: TWideStringField;
+    VTReadingScheduleMainBillPeriod: TWideStringField;
+    VTReadingScheduleMainMRNo: TIntegerField;
+    VTReadingScheduleDeleted_id: TAutoIncField;
+    VTReadingScheduleDeletedZoneCode: TWideStringField;
+    VTReadingScheduleDeletedZoneName: TWideStringField;
+    VTReadingScheduleDeletedReadingStartDate: TWideStringField;
+    VTReadingScheduleDeletedTotalReadingDays: TWideStringField;
+    VTReadingScheduleDeletedBillPeriod: TWideStringField;
+    VTReadingScheduleDeletedMRNo: TIntegerField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
@@ -232,6 +258,7 @@ type
       DeviceNameDM,SerialNumberDM,AStatusMultipleDevice:String;
       ItemIndex:Integer;
       DragRows: TList;
+      isInsertMode:Boolean
   end;
 
 var
@@ -254,9 +281,9 @@ procedure TDMMainModule.DataModuleDestroy(Sender: TObject);
 var
   i: Integer;
 begin
-  for i := 0 to DMMainModule.DragRows.Count - 1 do
-    TObject(DMMainModule.DragRows[i]).Free; // Free the owned objects
-  DMMainModule.DragRows.Free;
+  for i := 0 to DragRows.Count - 1 do
+    TObject(DragRows[i]).Free; // Free the owned objects
+  DragRows.Free;
 end;
 
 procedure TDMMainModule.dsMeterReaderDataChange(Sender: TObject; Field: TField);

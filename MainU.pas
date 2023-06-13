@@ -218,13 +218,6 @@ type
     Panel40: TPanel;
     Label25: TLabel;
     Panel42: TPanel;
-    VTFetchHistory_id: TVirtualAutoIncField;
-    VTFetchHistoryBillPeriod: TWideStringField;
-    VTFetchHistoryDevice: TWideStringField;
-    VTFetchHistoryDateFetched: TWideStringField;
-    VTFetchHistoryMeterReaderName: TWideStringField;
-    VTFetchHistoryZoneCodes: TWideStringField;
-    VTFetchHistoryRecordCount: TWideStringField;
     scGPRadioButton3: TscGPRadioButton;
     scGPRadioButton1: TscGPRadioButton;
     Memo2: TMemo;
@@ -285,6 +278,13 @@ type
     ControlZ1: TMenuItem;
     Label36: TLabel;
     Timer1: TTimer;
+    VTFetchHistory_id: TAutoIncField;
+    VTFetchHistoryBillPeriod: TWideStringField;
+    VTFetchHistoryDevice: TWideStringField;
+    VTFetchHistoryDateFetched: TWideStringField;
+    VTFetchHistoryMeterReaderName: TWideStringField;
+    VTFetchHistoryZoneCodes: TWideStringField;
+    VTFetchHistoryRecordCount: TWideStringField;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -384,6 +384,8 @@ type
     procedure RemoveThisReadingSchedule1Click(Sender: TObject);
     procedure ControlZ1Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure DBGridEh6DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
 
 
     Private
@@ -813,6 +815,21 @@ begin
   //Accept := (Sender = DBGridEh6) and (Source = DBGridEh5);
 
   Accept := (Sender = DBGridEh6) and (Source = DBGridEh5) and (DMMainModule.DragRows.Count > 0);
+end;
+
+procedure TUMainForm.DBGridEh6DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+  With DMMainModule do begin
+     if VTReadingScheduleMainisPosted.AsString = '0' then begin
+         DBGridEh1.Canvas.Brush.Color:=clGreen;
+     end else begin
+       DBGridEh1.Canvas.Brush.Color:=clWhite;
+       //DBGridEh1.Font.Color := clWhite;
+     end;
+     DBGridEh1.Canvas.FillRect(Rect);
+     DBGridEh1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
 end;
 
 procedure TUMainForm.Edit15Change(Sender: TObject);
