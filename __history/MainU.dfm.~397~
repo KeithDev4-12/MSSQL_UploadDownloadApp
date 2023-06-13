@@ -21,6 +21,7 @@ object UMainForm: TUMainForm
   StyleElements = [seFont]
   OnActivate = FormActivate
   OnCreate = FormCreate
+  OnMouseDown = FormMouseDown
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
@@ -1994,7 +1995,13 @@ object UMainForm: TUMainForm
                                 EditButtons = <>
                                 FieldName = 'ZoneCode'
                                 Footers = <>
-                                Width = 72
+                                Title.Caption = 'Zn Code'
+                                Title.Font.Charset = DEFAULT_CHARSET
+                                Title.Font.Color = clWindowText
+                                Title.Font.Height = -12
+                                Title.Font.Name = 'Tahoma'
+                                Title.Font.Style = []
+                                Width = 42
                               end
                               item
                                 CellButtons = <>
@@ -2002,7 +2009,16 @@ object UMainForm: TUMainForm
                                 EditButtons = <>
                                 FieldName = 'ZoneName'
                                 Footers = <>
-                                Width = 172
+                                Title.Caption = 'Zone Name'
+                                Width = 126
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'Count'
+                                Footers = <>
+                                Width = 43
                               end
                               item
                                 CellButtons = <>
@@ -2546,21 +2562,36 @@ object UMainForm: TUMainForm
                         Font.Height = -12
                         Font.Name = 'Tahoma'
                         Font.Style = []
+                        FooterRowCount = 1
+                        FooterParams.HorzLines = True
+                        FooterParams.RowLines = 1
                         HorzScrollBar.VisibleMode = sbNeverShowEh
+                        IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
                         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+                        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
                         ParentFont = False
+                        PopupMenu = PMDeleteReadingSchedule
                         TabOrder = 3
                         VertScrollBar.VisibleMode = sbNeverShowEh
                         OnDragDrop = DBGridEh6DragDrop
                         OnDragOver = DBGridEh6DragOver
+                        OnDrawColumnCell = DBGridEh6DrawColumnCell
                         Columns = <
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = '_id'
+                            Footers = <>
+                            Visible = False
+                          end
                           item
                             CellButtons = <>
                             DynProps = <>
                             EditButtons = <>
                             FieldName = 'ZoneCode'
                             Footers = <>
-                            Width = 97
+                            Width = 76
                           end
                           item
                             CellButtons = <>
@@ -2568,7 +2599,7 @@ object UMainForm: TUMainForm
                             EditButtons = <>
                             FieldName = 'ZoneName'
                             Footers = <>
-                            Width = 157
+                            Width = 172
                           end
                           item
                             CellButtons = <>
@@ -2576,7 +2607,15 @@ object UMainForm: TUMainForm
                             EditButtons = <>
                             FieldName = 'ReadingStartDate'
                             Footers = <>
-                            Title.Caption = 'Reading Start Date'
+                            Width = 121
+                          end
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = 'TotalReadingDays'
+                            Footers = <>
+                            Visible = False
                           end
                           item
                             CellButtons = <>
@@ -2591,14 +2630,6 @@ object UMainForm: TUMainForm
                             DynProps = <>
                             EditButtons = <>
                             FieldName = 'MRNo'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'TotalReadingDays'
                             Footers = <>
                             Visible = False
                           end
@@ -2700,26 +2731,26 @@ object UMainForm: TUMainForm
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
-                        object scGPProgressBar1: TscGPProgressBar
-                          AlignWithMargins = True
-                          Left = 3
-                          Top = 3
-                          Width = 403
-                          Height = 24
-                          Align = alClient
-                          FluentUIOpaque = False
-                          TabOrder = 0
-                          Vertical = False
-                          AnimationMode = False
-                          Active = True
-                          TransparentBackground = True
-                          FrameAlpha = 30
-                          ProgressAlpha = 200
-                          FrameColor = clBtnText
-                          ProgressColor = clHighlight
-                          MinValue = 0
-                          MaxValue = 100
-                          Value = 50
+                        object Label36: TLabel
+                          Left = 9
+                          Top = 1
+                          Width = 195
+                          Height = 18
+                          Caption = 'IROSIN WATER DISTRICT'
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -15
+                          Font.Name = 'Tahoma'
+                          Font.Style = [fsBold]
+                          ParentFont = False
+                          Visible = False
+                        end
+                        object PaintBox1: TPaintBox
+                          Left = 6
+                          Top = 4
+                          Width = 395
+                          Height = 20
+                          OnPaint = PaintBox1Paint
                         end
                       end
                     end
@@ -4823,7 +4854,7 @@ object UMainForm: TUMainForm
           end
         end
       end
-      object scSplitView2: TscSplitView
+      object scSplitViewSettings: TscSplitView
         Left = 0
         Top = 0
         Width = 0
@@ -4832,7 +4863,8 @@ object UMainForm: TUMainForm
         Enabled = False
         FluentUIOpaque = False
         TabOrder = 1
-        OnResize = scSplitView2Resize
+        OnResize = scSplitViewSettingsResize
+        OnMouseDown = scSplitViewSettingsMouseDown
         CustomImageIndex = -1
         DragForm = False
         DragTopForm = True
@@ -4852,7 +4884,7 @@ object UMainForm: TUMainForm
         Color = clBtnFace
         StorePaintBuffer = False
         WordWrap = False
-        AnimationStep = 25
+        AnimationStep = 2000
         AnimationType = scsvaLinear
         CompactWidth = 0
         CompactHeight = 20
@@ -4898,48 +4930,16 @@ object UMainForm: TUMainForm
           Caption = 'scPanel3'
           StorePaintBuffer = False
           WordWrap = False
-          object scLabel4: TscLabel
-            AlignWithMargins = True
-            Left = 10
-            Top = 10
-            Width = 484
-            Height = 30
-            Margins.Left = 10
-            Margins.Top = 10
-            Margins.Right = 10
-            Margins.Bottom = 10
-            Align = alTop
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBtnText
-            Font.Height = -19
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-            FluentUIOpaque = False
-            TabOrder = 0
-            DragForm = False
-            DragTopForm = True
-            GlowEffect.Enabled = False
-            GlowEffect.Color = clBtnShadow
-            GlowEffect.AlphaValue = 255
-            GlowEffect.GlowSize = 7
-            GlowEffect.Offset = 0
-            GlowEffect.Intensive = True
-            GlowEffect.StyleColors = True
-            AutoSize = True
-            UseFontColorToStyleColor = False
-            Caption = 'Settings'
-          end
           object scScrollBox1: TscScrollBox
             Left = 0
-            Top = 50
+            Top = 51
             Width = 504
-            Height = 600
+            Height = 599
             HorzScrollBar.Tracking = True
             VertScrollBar.Tracking = True
             Align = alClient
             BorderStyle = bsNone
-            TabOrder = 1
+            TabOrder = 0
             WallpaperIndex = -1
             CustomBackgroundImageIndex = -1
             FullUpdate = False
@@ -4947,10 +4947,12 @@ object UMainForm: TUMainForm
             StorePaintBuffer = False
             MouseWheelSupport = False
             BackgroundStyle = scsbsPanel
+            ExplicitTop = 50
+            ExplicitHeight = 600
             object scListGroupPanel1: TscListGroupPanel
               Left = 0
               Top = 0
-              Width = 504
+              Width = 485
               Height = 260
               Align = alTop
               FluentUIOpaque = False
@@ -4972,6 +4974,7 @@ object UMainForm: TUMainForm
               HeaderMargin = 10
               HeaderAutoColor = True
               TransparentBackground = False
+              ExplicitWidth = 504
               object scGPPanel10: TscGPPanel
                 Left = 219
                 Top = 37
@@ -5439,7 +5442,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel3: TscListGroupPanel
               Left = 0
               Top = 260
-              Width = 504
+              Width = 485
               Height = 278
               Align = alTop
               FluentUIOpaque = False
@@ -5461,6 +5464,7 @@ object UMainForm: TUMainForm
               HeaderMargin = 10
               HeaderAutoColor = True
               TransparentBackground = False
+              ExplicitWidth = 504
               object SpeedButton11: TSpeedButton
                 Left = 428
                 Top = 33
@@ -6457,7 +6461,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel2: TscListGroupPanel
               Left = 0
               Top = 538
-              Width = 504
+              Width = 485
               Height = 62
               Align = alTop
               FluentUIOpaque = False
@@ -6479,11 +6483,12 @@ object UMainForm: TUMainForm
               HeaderMargin = 10
               HeaderAutoColor = True
               TransparentBackground = False
+              ExplicitWidth = 504
               DesignSize = (
-                504
+                485
                 62)
               object SpeedButton7: TSpeedButton
-                Left = 333
+                Left = 314
                 Top = 22
                 Width = 168
                 Height = 39
@@ -6524,6 +6529,115 @@ object UMainForm: TUMainForm
                 AutoSize = True
                 UseFontColorToStyleColor = True
                 Caption = 'ALLTech IT Solution'
+              end
+            end
+          end
+          object pnlSettings: TPanel
+            Left = 0
+            Top = 0
+            Width = 504
+            Height = 51
+            Align = alTop
+            BevelOuter = bvNone
+            TabOrder = 1
+            object SpeedButton28: TSpeedButton
+              Left = 288
+              Top = 160
+              Width = 206
+              Height = 29
+              Caption = 'Activate Software'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -12
+              Font.Name = 'Segoe UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object scLabel4: TscLabel
+              AlignWithMargins = True
+              Left = 10
+              Top = 10
+              Width = 231
+              Height = 31
+              Margins.Left = 10
+              Margins.Top = 10
+              Margins.Right = 10
+              Margins.Bottom = 10
+              Align = alClient
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBtnText
+              Font.Height = -19
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              FluentUIOpaque = False
+              TabOrder = 0
+              DragForm = False
+              DragTopForm = True
+              GlowEffect.Enabled = False
+              GlowEffect.Color = clBtnShadow
+              GlowEffect.AlphaValue = 255
+              GlowEffect.GlowSize = 7
+              GlowEffect.Offset = 0
+              GlowEffect.Intensive = True
+              GlowEffect.StyleColors = True
+              AutoSize = True
+              UseFontColorToStyleColor = False
+              Caption = 'Settings'
+              ExplicitHeight = 25
+            end
+            object pnlActivationStatus: TPanel
+              Left = 251
+              Top = 0
+              Width = 253
+              Height = 51
+              Align = alRight
+              BevelOuter = bvNone
+              TabOrder = 1
+              ExplicitLeft = 440
+              ExplicitTop = 16
+              ExplicitWidth = 185
+              ExplicitHeight = 41
+              object Label38: TLabel
+                AlignWithMargins = True
+                Left = 3
+                Top = 3
+                Width = 240
+                Height = 14
+                Margins.Right = 10
+                Margins.Bottom = 0
+                Align = alTop
+                Alignment = taRightJustify
+                Caption = 'Product Activated Version : 16.2.23.2'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clGrayText
+                Font.Height = -12
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+                ExplicitTop = 5
+                ExplicitWidth = 209
+              end
+              object Label39: TLabel
+                AlignWithMargins = True
+                Left = 3
+                Top = 17
+                Width = 240
+                Height = 14
+                Margins.Top = 0
+                Margins.Right = 10
+                Align = alTop
+                Alignment = taRightJustify
+                Caption = 'Product will Expire In : [06/12/2026]'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clGrayText
+                Font.Height = -12
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+                ExplicitLeft = 0
+                ExplicitTop = 36
+                ExplicitWidth = 203
               end
             end
           end
@@ -7469,7 +7583,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010A00F801540130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010A00F8015C0130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -28152,7 +28266,7 @@ object UMainForm: TUMainForm
       65641800FF7F000000000F004D657465725265616465724E616D651800FF7F00
       00000009005A6F6E65436F6465731800FF7F000000000B005265636F7264436F
       756E741800FF7F00000000000000000000}
-    object VTFetchHistory_id: TVirtualAutoIncField
+    object VTFetchHistory_id: TAutoIncField
       FieldName = '_id'
     end
     object VTFetchHistoryBillPeriod: TWideStringField
@@ -28230,5 +28344,16 @@ object UMainForm: TUMainForm
       Caption = 'Control + Z (Undelete)'
       OnClick = ControlZ1Click
     end
+  end
+  object Timer1: TTimer
+    Interval = 10
+    OnTimer = Timer1Timer
+    Left = 435
+    Top = 553
+  end
+  object ApplicationEvents1: TApplicationEvents
+    OnMessage = ApplicationEvents1Message
+    Left = 523
+    Top = 34
   end
 end

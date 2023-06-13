@@ -247,6 +247,7 @@ type
     VTReadingScheduleDeletedMRNo: TIntegerField;
     VTReadingScheduleDeletedisPosted: TIntegerField;
     VTReadingScheduleMainisPosted: TIntegerField;
+    qryMSZoneCodeCount: TIntegerField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);

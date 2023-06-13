@@ -1475,8 +1475,11 @@ object DMMainModule: TDMMainModule
       'SELECT '
       '       [ZoneID] as ZoneCode'
       '      ,[ZoneName] as ZoneName'
-      '      ,[FieldCollect] as FCollect'
-      '  FROM [BillingCollection].[dbo].[Zones]'
+      '      ,[FieldCollect] as FCollect,'
+      '(SELECT COUNT(c.Zone_no)'
+      '  FROM [BillingCollection].[dbo].[Clients] c '
+      'WHERE c.Zone_no = z.ZoneID) as Count'
+      '  FROM [BillingCollection].[dbo].[Zones] z'
       'ORDER BY ZoneCode')
     Left = 792
     Top = 24
@@ -1497,6 +1500,13 @@ object DMMainModule: TDMMainModule
       FieldName = 'FCollect'
       Origin = 'FieldCollect'
       Required = True
+    end
+    object qryMSZoneCodeCount: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'Count'
+      Origin = 'Count'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
   object VTReadingScheduling: TVirtualTable
@@ -1559,7 +1569,7 @@ object DMMainModule: TDMMainModule
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
       524E6F0300000000000000000000000000}
-    object VTReadingScheduleMain_id: TVirtualAutoIncField
+    object VTReadingScheduleMain_id: TAutoIncField
       FieldName = '_id'
     end
     object VTReadingScheduleMainZoneCode: TWideStringField
@@ -1632,34 +1642,91 @@ object DMMainModule: TDMMainModule
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
       524E6F0300000000000000000000000000}
-    object VirtualAutoIncField1: TVirtualAutoIncField
+    object VTReadingScheduleDeleted_id: TAutoIncField
       FieldName = '_id'
     end
-    object WideStringField1: TWideStringField
+    object VTReadingScheduleDeletedZoneCode: TWideStringField
       FieldName = 'ZoneCode'
       Size = 32767
     end
-    object WideStringField2: TWideStringField
+    object VTReadingScheduleDeletedZoneName: TWideStringField
       FieldName = 'ZoneName'
       Size = 32767
     end
-    object WideStringField3: TWideStringField
+    object VTReadingScheduleDeletedReadingStartDate: TWideStringField
       FieldName = 'ReadingStartDate'
       Size = 32767
     end
-    object WideStringField4: TWideStringField
+    object VTReadingScheduleDeletedTotalReadingDays: TWideStringField
       FieldName = 'TotalReadingDays'
       Size = 32767
     end
-    object WideStringField5: TWideStringField
+    object VTReadingScheduleDeletedBillPeriod: TWideStringField
       FieldName = 'BillPeriod'
       Size = 32767
     end
-    object IntegerField1: TIntegerField
+    object VTReadingScheduleDeletedMRNo: TIntegerField
       FieldName = 'MRNo'
     end
-    object IntegerField2: TIntegerField
+    object VTReadingScheduleDeletedisPosted: TIntegerField
       FieldName = 'isPosted'
+    end
+  end
+  object tblMeterReaderSchedule: TFDTable
+    IndexFieldNames = '_id'
+    Connection = DMMainConnection.FDConSQLMain
+    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.Mode = fmManual
+    FetchOptions.Items = [fiMeta]
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.UpdateChangedFields = False
+    UpdateOptions.LockWait = True
+    UpdateOptions.RefreshMode = rmManual
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    UpdateOptions.UpdateTableName = 'MeterReaderSched'
+    TableName = 'MeterReaderSched'
+    Left = 248
+    Top = 288
+    object tblMeterReaderSchedule_id: TFDAutoIncField
+      FieldName = '_id'
+      Origin = '_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object tblMeterReaderScheduleZoneCode: TWideMemoField
+      FieldName = 'ZoneCode'
+      Origin = 'ZoneCode'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReaderScheduleZoneName: TWideMemoField
+      FieldName = 'ZoneName'
+      Origin = 'ZoneName'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReaderScheduleReadingStartDate: TWideMemoField
+      FieldName = 'ReadingStartDate'
+      Origin = 'ReadingStartDate'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReaderScheduleTotalReadingDays: TFloatField
+      FieldName = 'TotalReadingDays'
+      Origin = 'TotalReadingDays'
+    end
+    object tblMeterReaderScheduleBillPeriod: TWideMemoField
+      FieldName = 'BillPeriod'
+      Origin = 'BillPeriod'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReaderScheduleMRNo: TIntegerField
+      FieldName = 'MRNo'
+      Origin = 'MRNo'
     end
   end
 end

@@ -1410,7 +1410,7 @@ object DMMainModule: TDMMainModule
   object VTDeviceListAvailable: TVirtualTable
     Left = 624
     Top = 472
-    Data = {03000000000000000000}
+    Data = {04000000000000000000}
     object VTDeviceListAvailableDeviceName: TStringField
       FieldName = 'DeviceName'
       Size = 45
@@ -1475,9 +1475,12 @@ object DMMainModule: TDMMainModule
       'SELECT '
       '       [ZoneID] as ZoneCode'
       '      ,[ZoneName] as ZoneName'
-      '      ,[FieldCollect] as FCollect'
-      '  FROM [BillingCollection].[dbo].[Zones]'
-      'ORDER BY ZoneCode')
+      '      ,[FieldCollect] as FCollect,'
+      '(SELECT COUNT(c.Zone_no)'
+      '  FROM [BillingCollection].[dbo].[Clients] c '
+      'WHERE c.Zone_no = z.ZoneID) as Count'
+      '  FROM [BillingCollection].[dbo].[Zones] z'
+      'ORDER BY ZoneCode,Count Desc')
     Left = 792
     Top = 24
     object qryMSZoneCodeZoneCode: TStringField
@@ -1498,11 +1501,18 @@ object DMMainModule: TDMMainModule
       Origin = 'FieldCollect'
       Required = True
     end
+    object qryMSZoneCodeCount: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'Count'
+      Origin = 'Count'
+      ProviderFlags = []
+      ReadOnly = True
+    end
   end
   object VTReadingScheduling: TVirtualTable
     Left = 896
     Top = 280
-    Data = {03000000000000000000}
+    Data = {04000000000000000000}
     object VTReadingSchedulingZoneCode: TStringField
       FieldName = 'ZoneCode'
       Size = 45
@@ -1554,7 +1564,7 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 336
     Data = {
-      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
@@ -1627,7 +1637,7 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 400
     Data = {
-      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D

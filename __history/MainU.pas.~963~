@@ -13,7 +13,8 @@ uses
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   Vcl.OleCtrls, SHDocVw, scWebBrowser, Vcl.DBCtrls, Data.DB, IOUtils, Types,
   VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove,IniFiles,Vcl.Themes,
-  Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl;
+  Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts;
+
 
 type
   TUMainForm = class(TForm)
@@ -39,7 +40,7 @@ type
     scLabel13: TscLabel;
     scLabel14: TscLabel;
     scButton10: TscButton;
-    scSplitView2: TscSplitView;
+    scSplitViewSettings: TscSplitView;
     scPanel3: TscPanel;
     scLabel4: TscLabel;
     scScrollBox1: TscScrollBox;
@@ -218,26 +219,14 @@ type
     Panel40: TPanel;
     Label25: TLabel;
     Panel42: TPanel;
-    VTFetchHistory_id: TVirtualAutoIncField;
-    VTFetchHistoryBillPeriod: TWideStringField;
-    VTFetchHistoryDevice: TWideStringField;
-    VTFetchHistoryDateFetched: TWideStringField;
-    VTFetchHistoryMeterReaderName: TWideStringField;
-    VTFetchHistoryZoneCodes: TWideStringField;
-    VTFetchHistoryRecordCount: TWideStringField;
     scGPRadioButton3: TscGPRadioButton;
     scGPRadioButton1: TscGPRadioButton;
     Memo2: TMemo;
     UsbRemovalTimer: TTimer;
     UsbArrivalTimer: TTimer;
     DriveComboBox1: TDriveComboBox;
-    scGPPanel11: TscGPPanel;
-    scGPSizeBox1: TscGPSizeBox;
-    scLabel15: TscLabel;
     Panel41: TPanel;
     Panel43: TPanel;
-    scLabel16: TscLabel;
-    scLabel18: TscLabel;
     VTReadingData: TVirtualTable;
     VTReadingDataFileName: TStringField;
     VTReadingDataDateExported: TStringField;
@@ -285,6 +274,24 @@ type
     ControlZ1: TMenuItem;
     Label36: TLabel;
     Timer1: TTimer;
+    VTFetchHistory_id: TAutoIncField;
+    VTFetchHistoryBillPeriod: TWideStringField;
+    VTFetchHistoryDevice: TWideStringField;
+    VTFetchHistoryDateFetched: TWideStringField;
+    VTFetchHistoryMeterReaderName: TWideStringField;
+    VTFetchHistoryZoneCodes: TWideStringField;
+    VTFetchHistoryRecordCount: TWideStringField;
+    PaintBox1: TPaintBox;
+    scGPPanel11: TscGPPanel;
+    scGPSizeBox1: TscGPSizeBox;
+    scLabel15: TscLabel;
+    scLabel16: TscLabel;
+    scLabel18: TscLabel;
+    SpeedButton28: TSpeedButton;
+    pnlActivationStatus: TPanel;
+    Label38: TLabel;
+    Label39: TLabel;
+    pnlSettings: TPanel;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -336,7 +343,7 @@ type
     procedure scGPComboEdit1Change(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
     procedure scScrollBar1Change(Sender: TObject);
-    procedure scSplitView2Resize(Sender: TObject);
+    procedure scSplitViewSettingsResize(Sender: TObject);
     procedure BMClientsWriteRecord(ASender: TObject;
       var AAction: TFDBatchMoveAction);
     procedure BMClientsWriteValue(ASender: TObject;
@@ -384,6 +391,11 @@ type
     procedure RemoveThisReadingSchedule1Click(Sender: TObject);
     procedure ControlZ1Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure DBGridEh6DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure PaintBox1Paint(Sender: TObject);
+    procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
 
 
     Private
@@ -401,6 +413,8 @@ type
       function GetDosOutput(CommandLine: string; Work: string = 'C:\Platform-tools\'): String;
   end;
 
+
+
 var
   UMainForm: TUMainForm;
   MRNo:Integer;
@@ -415,6 +429,7 @@ var
   FlashDriveEnum : Integer;
   IncVal:Integer;
   DeviceADB,StatusADB,SerialNumberADB:String;
+
 
 implementation
 
@@ -568,7 +583,8 @@ function TUMainForm.isADBPushFileToTablet: Boolean;
 Var
   SourceDBFile,MeterReaderFolderName:String;
 Const
-  TABLET_DEFAULT_UPLOAD_LOCATION = '/storage/emulated/0/Android/data/com.alltechsystems.iwd/files/';
+  //TABLET_DEFAULT_UPLOAD_LOCATION = '/storage/emulated/0/Android/data/com.alltechsystems.iwd/files/';
+  TABLET_DEFAULT_UPLOAD_LOCATION = '/sdcard/Android/data/com.alltechsystems.iwd/files/';
   ROOT_FOLDER_NAME = 'iwd_lwua/';
   //READING_FOLDER_NAME = 'reading';
   //BACKUP_FOLDER_NAME = 'reading_backup';
@@ -583,7 +599,7 @@ begin
     MessageDlg('File Cannot be Found Please generate Again!',mtInformation,[mbClose],0);
     Exit;
   end else begin
-    Memo2.Text := TCMDPromtUtil.GetDosOutput('adb push "' + SourceDBFile + '" "'+TABLET_DEFAULT_UPLOAD_LOCATION + ROOT_FOLDER_NAME +'"');
+    Memo2.Text := TCMDPromtUtil.GetDosOutput('adb push "' + SourceDBFile + '" "'+TABLET_DEFAULT_UPLOAD_LOCATION + SQLITE_FILE_NAME + '"');
       if ContainsText(Memo2.Text,'error') then begin
        Memo2.Text := ReplaceText(Memo2.Text,'error:','|');
        Result := False;
@@ -815,11 +831,27 @@ begin
   Accept := (Sender = DBGridEh6) and (Source = DBGridEh5) and (DMMainModule.DragRows.Count > 0);
 end;
 
+procedure TUMainForm.DBGridEh6DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+  With DMMainModule do begin
+     if VTReadingScheduleMainisPosted.AsString = '0' then begin
+         DBGridEh6.Canvas.Brush.Color:=clHighlight;
+         DBGridEh6.Canvas.Font.Color := clWhite;
+     end else begin
+       DBGridEh6.Canvas.Brush.Color:=clWhite;
+       DBGridEh6.Canvas.Font.Color := clBlack;
+       //DBGridEh6.Font.Color := clWhite;
+     end;
+     DBGridEh6.Canvas.FillRect(Rect);
+     DBGridEh6.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
+end;
+
 procedure TUMainForm.Edit15Change(Sender: TObject);
 begin
   with DMMainModule do begin
-  //GetTheMRNo From Meter Reader Accounts scGPComboBox4.Items[scGPComboBox4.ItemIndex].Caption
-     if scGPComboBox3.ItemIndex = -1 then
+    if scGPComboBox3.ItemIndex = -1 then
       Exit;
 
      DMMainModule.qryMSZoneCode.Filter := '';
@@ -829,16 +861,18 @@ begin
      VTReadingScheduleDeleted.Clear;
      VTReadingScheduling.Clear;
 
+     IncVal := 0;
      if fdMeterReader.Locate('Name',Trim(scGPComboBox3.Items[scGPComboBox3.ItemIndex].Caption),[]) then begin
        MRNo := fdMeterReader_id.AsInteger;
-     end else begin
-       MRNo := -234234;
-     end;
+       ID := IntToStr(MRNo);
 
+     end else begin
+       MRNo := 0;
+       ID := IntToStr(MRNo);
+     end;
      ItemIndex := scGPComboBox3.ItemIndex;
      VTReadingScheduleMain.Filtered := False;
-
-    if (Length(scGPComboBox3.Items[scGPComboBox3.ItemIndex].Caption)>0) AND (Length(Edit15.text)=6) then begin
+     if (Length(scGPComboBox3.Items[scGPComboBox3.ItemIndex].Caption)>0) AND (Length(Edit15.text)=6) then begin
       //Look for Schedule if has existing Schedule Ask the User if he wants to show it or not
       fdMeterReaderSchedule.Close;
       fdMeterReaderSchedule.Open;
@@ -855,7 +889,8 @@ begin
         fdMeterReaderSchedule.First;
       end;
 
-      if not VTReadingScheduleMain.isEmpty then begin
+      if not fdMeterReaderSchedule.isEmpty then begin
+        isInsertMode := False;
         DBGridEh5.Enabled := True;
         while not fdMeterReaderSchedule.EOF do begin
           VTReadingScheduleMain.Append;
@@ -865,6 +900,7 @@ begin
           VTReadingScheduleMainTotalReadingDays.AsString := fdMeterReaderScheduleTotalReadingDays.AsString;
           VTReadingScheduleMainBillPeriod.AsString := fdMeterReaderScheduleBillPeriod.AsString;
           VTReadingScheduleMainMRNo.AsInteger := fdMeterReaderScheduleMRNo.AsInteger;
+          VTReadingScheduleMainisPosted.AsInteger := 1;
           VTReadingScheduleMain.Post;
 
           qryMSZoneCode.Filtered := False;
@@ -876,16 +912,22 @@ begin
           end;
           qryMSZoneCode.Filtered := True;
 
+
           fdMeterReaderSchedule.Next;
         end;
+        qryMSZoneCode.First;
       end else begin
         DBGridEh5.Enabled := True;
+        isInsertMode := True;
       end;
 
 
 
 
     end;
+
+
+
   end;
 end;
 
@@ -1076,7 +1118,15 @@ Var
   IniDataValue:String;
   Item: TscGPListBoxItem;
 begin
-
+  
+  //if activated show pnlActivationStatus
+  //if not activated hide pnlActivationStatus
+  //and show SpeedButton28.Top := 8;
+  pnlActivationStatus.Visible := True;
+  //if not activated
+  SpeedButton28.Top := 8;
+  // if activated
+  SpeedButton28.Top := -30;
   IniDataValue := ReadIniFiles(ExtractFileDir(ParamStr(0))+'\'+StringReplace(TPath.GetFileName(ExtractFileName(ParamStr(0))),'.exe','.ini',[rfReplaceAll, rfIgnoreCase]));
 
 
@@ -1100,6 +1150,18 @@ begin
   FCompUSB.OnUSBArrival := USBArrival;
   FCompUSB.OnUSBRemove := USBRemoval;
 
+  
+
+end;
+
+procedure TUMainForm.FormMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if (Button = mbLeft) and (not PtInRect(scSplitViewSettings.ClientRect, scSplitViewSettings.ScreenToClient(Point(X, Y)))) then
+  begin
+    // Outside click detected, perform your action here
+    ShowMessage('Outside click detected!');
+  end;
 end;
 
 procedure TUMainForm.USBArrival(Sender: TObject);
@@ -1158,6 +1220,8 @@ end;
 
 procedure TUMainForm.FormShow(Sender: TObject);
 begin
+   //Check Activation Key
+
    Application.ProcessMessages;
 end;
 
@@ -1265,6 +1329,17 @@ begin
   Application.Minimize;
 end;
 
+procedure TUMainForm.PaintBox1Paint(Sender: TObject);
+var
+  LabelRect: TRect;
+begin
+  LabelRect := PaintBox1.ClientRect;
+  PaintBox1.Canvas.Brush.Style := bsClear;
+  PaintBox1.Canvas.Font := Label36.Font;
+  DrawText(PaintBox1.Canvas.Handle, PChar(Label36.Caption), -1, LabelRect, DT_CENTER or DT_VCENTER or DT_SINGLELINE);
+
+end;
+
 procedure TUMainForm.Panel36Click(Sender: TObject);
 begin
   scButton6Click(Sender);
@@ -1296,7 +1371,7 @@ begin
     //TDataUploader.Upload(Application.Handle,
     //  LDestDir + '\',
     //  LDestDir + '\' + SQLITE_DB_FILENAME + SQLITE_DB_EXT);
-   Memo2.Text := TCMDPromtUtil.GetDosOutput('adb push "'+LDestDir + '\' + SQLITE_DB_FILENAME + SQLITE_DB_EXT+'" "'+TABLET_DEFAULT_UPLOAD_LOCATION+'"');
+   Memo2.Text := TCMDPromtUtil.GetDosOutput('adb push "'+LDestDir + '\' + SQLITE_DB_FILENAME + SQLITE_DB_EXT+'" "'+TABLET_DEFAULT_UPLOAD_LOCATION + SQLITE_DB_FILENAME + SQLITE_DB_EXT + '"');
    Label1.Caption := Label1.Caption + #13#10 + 'PUSHING SQLite File!';
    //Memo1.Lines.Add('PUSHING SQLite File!');
    if ContainsText(Memo2.Text,'error') then begin
@@ -1385,8 +1460,8 @@ procedure TUMainForm.scButton4Click(Sender: TObject);
 begin
   //scButton6Click(Sender);
 
-  scSplitView2.Opened := not scSplitView2.Opened;
-  scSplitView2.Visible := True;
+  scSplitViewSettings.Opened := not scSplitViewSettings.Opened;
+  scSplitViewSettings.Visible := True;
   InvalidateRect(Panel39.Handle,nil,True);
   InvalidateRect(Panel38.Handle,nil,True);
 end;
@@ -1407,9 +1482,9 @@ begin
   if scSplitView1.DisplayMode = scsvmDocked then
     scStyledForm1.SetRedraw(True);
 
-  if scSplitView2.Opened then begin
-    scSplitView2.Visible := False;
-    scSplitView2.Opened := False;
+  if scSplitViewSettings.Opened then begin
+    scSplitViewSettings.Visible := False;
+    scSplitViewSettings.Opened := False;
   end;
 end;
 
@@ -1935,7 +2010,7 @@ begin
   end;
 end;
 
-procedure TUMainForm.scSplitView2Resize(Sender: TObject);
+procedure TUMainForm.scSplitViewSettingsResize(Sender: TObject);
 begin
   InvalidateRect(Panel38.Handle,nil,True);
   InvalidateRect(Panel39.Handle,nil,True);
@@ -2176,7 +2251,9 @@ var
   SourceDBFile,MeterReaderFolderName:String;
   label ReCheck;
 Const
-  TABLET_DEFAULT_UPLOAD_LOCATION = '/storage/emulated/0/Android/data/com.alltechsystems.iwd/files/';
+  TABLET_DEFAULT_UPLOAD_LOCATION = '/sdcard/Android/data/com.alltechsystems.iwd/files/';
+
+  //TABLET_DEFAULT_UPLOAD_LOCATION = '/storage/emulated/0/Android/data/com.alltechsystems.iwd/files/';
   ROOT_FOLDER_NAME = 'iwd_lwua/';
   //READING_FOLDER_NAME = 'reading';
   //BACKUP_FOLDER_NAME = 'reading_backup';
@@ -2668,11 +2745,17 @@ begin
 end;
 
 procedure TUMainForm.Timer1Timer(Sender: TObject);
-begin
-   Label36.Left := Label36.Left - 1; // Adjust the increment value as needed
 
-  if Label36.Left + Label36.Width < 0 then
-    Label36.Left := ClientWidth; // Reset the position when the label goes offscreen
+begin
+  PaintBox1.Left :=PaintBox1.Left - 1;
+  if PaintBox1.Left + PaintBox1.Width < 0 then
+    PaintBox1.Left := ClientWidth;
+
+  //Label36.Left := Label36.Left - 1; // Adjust the increment value as needed
+  PaintBox1.Invalidate
+  //if Label36.Left + Label36.Width < 0 then
+  //  Label36.Left := ClientWidth; // Reset the position when the label goes offscreen
+  //InvalidateRect(PaintBox1.Handle,nil,True);
 end;
 
 function TUMainForm.WriteIniFile(AFileName: String): String;
@@ -2688,5 +2771,7 @@ begin
     IniFile.Free;
   end;
 end;
+
+
 
 end.
