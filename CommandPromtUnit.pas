@@ -13,7 +13,7 @@ const
   QUERY_ADB_SHELL = 'adb shell ';
   QUERY_ADB_CONNECT = 'adb -s ';
   QUERY_ADB = 'adb ';
-  QUERY_ADB_PATH = 'ls /storage/emulated/0/Android/data/com.alltechsystems.iwd/files/';
+  QUERY_ADB_PATH = 'ls -t /storage/emulated/0/Android/data/com.alltechsystems.iwd/files/';
   QUERY_ADB_DEVICE_NAME = ' ro.product.model';
   QUERY_ADB_SERIAL = ' ro.boot.serialno';
 

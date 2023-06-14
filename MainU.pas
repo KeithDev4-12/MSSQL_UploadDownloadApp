@@ -292,6 +292,16 @@ type
     Label38: TLabel;
     Label39: TLabel;
     pnlSettings: TPanel;
+    BMMeterReading: TFDBatchMove;
+    Label37: TLabel;
+    Label40: TLabel;
+    Panel51: TPanel;
+    Shape8: TShape;
+    Shape9: TShape;
+    PMMeterReader: TPopupMenu;
+    DeleteMeterReader1: TMenuItem;
+    RefreshRecords1: TMenuItem;
+    N1: TMenuItem;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -398,6 +408,10 @@ type
       Shift: TShiftState; X, Y: Integer);
       procedure CreateRegistryData(AName:String);
       function CheckRegistryKey(AName:String):String;
+    procedure DBGridEh7DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure DeleteMeterReader1Click(Sender: TObject);
+    procedure RefreshRecords1Click(Sender: TObject);
 
 
     Private
@@ -430,7 +444,7 @@ var
   DriveFromCombobox:String;
   FlashDriveEnum : Integer;
   IncVal:Integer;
-  DeviceADB,StatusADB,SerialNumberADB:String;
+  DeviceADB,ADeviceFound,StatusADB,SerialNumberADB:String;
 
 
 implementation
@@ -639,7 +653,7 @@ begin
     MessageDlg('File Cannot be Found Please generate Again!',mtInformation,[mbClose],0);
     Exit;
   end else begin
-    Memo2.Text := TCMDPromtUtil.GetDosOutput('adb push "' + SourceDBFile + '" "'+TABLET_DEFAULT_UPLOAD_LOCATION + SQLITE_FILE_NAME + '"');
+    Memo2.Text := TCMDPromtUtil.GetDosOutput('adb push "' + SourceDBFile + '" "'+TABLET_DEFAULT_UPLOAD_LOCATION + ROOT_FOLDER_NAME + SQLITE_FILE_NAME + '"');
       if ContainsText(Memo2.Text,'error') then begin
        Memo2.Text := ReplaceText(Memo2.Text,'error:','|');
        Result := False;
@@ -913,6 +927,78 @@ begin
      end;
      DBGridEh6.Canvas.FillRect(Rect);
      DBGridEh6.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
+end;
+
+procedure TUMainForm.DBGridEh7DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+   With DMMainModule do begin
+     if tblDBFetchedDevice.Value = ADeviceFound then begin
+         DBGridEh7.Canvas.Brush.Color:=clHighlight;
+         DBGridEh7.Canvas.Font.Color := clWhite;
+     end else begin
+       DBGridEh7.Canvas.Brush.Color:=clWhite;
+       DBGridEh7.Canvas.Font.Color := clBlack;
+       //DBGridEh6.Font.Color := clWhite;
+     end;
+     DBGridEh7.Canvas.FillRect(Rect);
+     DBGridEh7.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
+end;
+
+procedure TUMainForm.DeleteMeterReader1Click(Sender: TObject);
+Var
+ I:Integer;
+begin
+  I:=0;
+  with DMMainModule do begin
+    if tblMeterReader.Locate('_id',fdMeterReader_id.AsString,[]) then begin
+      tblMeterReader.Delete;
+    end;
+    fdMeterReader.Close;
+    fdMeterReader.Open;
+    fdMeterReader.First;
+
+    tblMeterReader.Close;
+    tblMeterReader.Open;
+    tblMeterReader.First;
+
+    tblMeterReader.First;
+    scGPComboEdit1.Items.Clear;
+    scGPComboEdit1.Items.Add;
+    scGPComboEdit1.Items.Items[I].Header := True;
+    scGPComboEdit1.Items.Items[I].Caption := 'Meter Reader';
+
+    scGPComboBox2.Items.Clear;
+    scGPComboBox2.Items.Add;
+    scGPComboBox2.Items.Items[I].Header := True;
+    scGPComboBox2.Items.Items[I].Caption := 'Meter Reader';
+
+    scGPComboBox3.Items.Clear;
+    scGPComboBox3.Items.Add;
+    scGPComboBox3.Items.Items[I].Header := True;
+    scGPComboBox3.Items.Items[I].Caption := 'Meter Reader';
+    I := I + 1;
+
+    scGPComboEdit1.Items.Add;
+    scGPComboEdit1.Items.Items[I].Caption := '<ALL METERREADER>';
+    scGPComboBox3.Items.Add;
+    scGPComboBox3.Items.Items[I].Caption := '<ALL METERREADER>';
+    //scGPComboBox2.Items.Add;
+    //scGPComboBox2.Items.Items[I].Caption := '<ALL METERREADER>';
+    while not tblMeterReader.EOF do begin
+      I := I + 1;
+      scGPComboEdit1.Items.Add;
+      scGPComboBox2.Items.Add;
+      scGPComboBox3.Items.Add;
+      //scGPComboEdit1.Items.Items[I].Header := True;
+      scGPComboEdit1.Items.Items[I].Caption := tblMeterReaderName.AsString;
+      scGPComboBox2.Items.Items[I-1].Caption := tblMeterReaderName.AsString;
+      scGPComboBox3.Items.Items[I].Caption := tblMeterReaderName.AsString;
+      tblMeterReader.Next;
+    end;
+
   end;
 end;
 
@@ -1262,7 +1348,7 @@ begin
     FlashDriveEnum := 2;
     break;
   end;
-
+  ShowMessage('USB ARRIVED');
   DriveList.Free;
 
 end;
@@ -1485,6 +1571,58 @@ begin
    //textcase calls the buildlist procedure that updates the list of drives
   DriveComboBox1.TextCase := DriveComboBox1.TextCase;
   DriveComboBox1.Drive := aDriveName;
+end;
+
+procedure TUMainForm.RefreshRecords1Click(Sender: TObject);
+Var
+ I:Integer;
+begin
+  I:=0;
+  with DMMainModule do begin
+
+    fdMeterReader.Close;
+    fdMeterReader.Open;
+    fdMeterReader.First;
+
+    tblMeterReader.Close;
+    tblMeterReader.Open;
+    tblMeterReader.First;
+
+    scGPComboEdit1.Items.Clear;
+    scGPComboEdit1.Items.Add;
+    scGPComboEdit1.Items.Items[I].Header := True;
+    scGPComboEdit1.Items.Items[I].Caption := 'Meter Reader';
+
+    scGPComboBox2.Items.Clear;
+    scGPComboBox2.Items.Add;
+    scGPComboBox2.Items.Items[I].Header := True;
+    scGPComboBox2.Items.Items[I].Caption := 'Meter Reader';
+
+    scGPComboBox3.Items.Clear;
+    scGPComboBox3.Items.Add;
+    scGPComboBox3.Items.Items[I].Header := True;
+    scGPComboBox3.Items.Items[I].Caption := 'Meter Reader';
+    I := I + 1;
+
+    scGPComboEdit1.Items.Add;
+    scGPComboEdit1.Items.Items[I].Caption := '<ALL METERREADER>';
+    scGPComboBox3.Items.Add;
+    scGPComboBox3.Items.Items[I].Caption := '<ALL METERREADER>';
+    //scGPComboBox2.Items.Add;
+    //scGPComboBox2.Items.Items[I].Caption := '<ALL METERREADER>';
+    while not tblMeterReader.EOF do begin
+      I := I + 1;
+      scGPComboEdit1.Items.Add;
+      scGPComboBox2.Items.Add;
+      scGPComboBox3.Items.Add;
+      //scGPComboEdit1.Items.Items[I].Header := True;
+      scGPComboEdit1.Items.Items[I].Caption := tblMeterReaderName.AsString;
+      scGPComboBox2.Items.Items[I-1].Caption := tblMeterReaderName.AsString;
+      scGPComboBox3.Items.Items[I].Caption := tblMeterReaderName.AsString;
+      tblMeterReader.Next;
+    end;
+
+  end;
 end;
 
 procedure TUMainForm.RemoveThisReadingSchedule1Click(Sender: TObject);
@@ -2634,7 +2772,7 @@ const
   //BACKUP_FOLDER_NAME = 'reading_backup';
   SQLITE_FILE_NAME = 'iwd_lwua.db';
 begin
-  TEMP_FOLDER := 'D:\TEMP';//TPath.GetTempPath();
+  TEMP_FOLDER := TPath.GetTempPath();
   MeterReaderName := scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption;
   if Length(MeterReaderName) = 0 then begin
     MessageDlg('Please Select MeterReader!',mtInformation,[mbClose],0);
@@ -2692,7 +2830,7 @@ begin
   VTReadingData.IndexFieldNames := 'DateExported DESC';
   VTReadingData.First;
   // ADB PUSH To TEMP PROCESS START
-  Memo2.Text := TCMDPromtUtil.GetDosOutput('adb shell pull "' + TABLET_DEFAULT_UPLOAD_LOCATION + ROOT_FOLDER_NAME + 'reading/' + VTReadingDataFileName.AsString + '" "'+ TEMP_FOLDER +'"');
+  Memo2.Text := TCMDPromtUtil.GetDosOutput('adb pull "' + TABLET_DEFAULT_UPLOAD_LOCATION + ROOT_FOLDER_NAME + 'reading/' + VTReadingDataFileName.AsString + '" "'+ TEMP_FOLDER  + VTReadingDataFileName.AsString +'"');
   if ContainsText(Memo2.Text,'error') then begin
     Memo2.Text := ReplaceText(Memo2.Text,'error:','|');
     MessageDlg('Error on Fetching Data From Android Device!',mtError,[mbClose],0);
@@ -2705,27 +2843,36 @@ begin
     FDConSQL.Connected := False;
     FDConSQL.Params.Database := TEMP_FOLDER + VTReadingDataFileName.AsString;
     FDConSQL.Connected := True;
+
+    if not FDConSQL.Connected then begin
+      Exit;
+    end;
+
     with DMMainModule do begin
       qryDetailsMeterReading.Close;
       qryDetailsMeterReading.Open;
       qryDetailsMeterReading.First;
       if UpperCase(scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption).Contains(UpperCase(qryDetailsMeterReadingMeterReadername.AsString)) then begin
         // process the posting of data if selected and tablet are compatible
-        showmessage('Compatible');
+        // save to dbfetched
       end else begin
         // if not compatible selection and tablet ask the user if he or she wants to override the process
-        showmessage('Not Compatible');
+        if MessageDlg('Selected Meter Reader And Device Are not Compatible!!' +
+        #13#10 + 'But you can Override this By Pressing [Okay]'+
+        #13#10 + 'and to cancel Override pulling Press [Cancel]'+
+        #13#10 + '{Note: Overriding Will be getting the DB File and Post it!}',mtWarning,[mbOK,mbCancel],0) = mrOk then begin
+          // get the data and post it to mssql
+          // save to dbfetched
+
+        end else begin
+          Exit;
+        end;
+
+
       end;
     end;
 
   end;
-
-
-  //Memo2.Text :=  TCMDPromtUtil.GetResultQuery(CommandPromtUnit.QUERY_ADB + QUERY_ADB_PATH + ROOT_FOLDER_NAME + 'reading/');
-
-  //if TFile.Exists(TEMP_FOLDER+'') then
-
-
 
 end;
 
