@@ -13,7 +13,7 @@ uses
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   Vcl.OleCtrls, SHDocVw, scWebBrowser, Vcl.DBCtrls, Data.DB, IOUtils, Types,
   VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove,IniFiles,Vcl.Themes,
-  Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts;
+  Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts,Registry;
 
 
 type
@@ -384,18 +384,20 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure DBGridEh6DragOver(Sender, Source: TObject; X, Y: Integer;
       State: TDragState; var Accept: Boolean);
-    procedure DBGridEh6DragDrop(Sender, Source: TObject; X, Y: Integer);
-    procedure DBGridEh5SelectionChanged(Sender: TObject);
-    procedure scGPComboBox3Change(Sender: TObject);
-    procedure SpeedButton27Click(Sender: TObject);
-    procedure RemoveThisReadingSchedule1Click(Sender: TObject);
-    procedure ControlZ1Click(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
-    procedure DBGridEh6DrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
-    procedure PaintBox1Paint(Sender: TObject);
-    procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
+      procedure DBGridEh6DragDrop(Sender, Source: TObject; X, Y: Integer);
+      procedure DBGridEh5SelectionChanged(Sender: TObject);
+      procedure scGPComboBox3Change(Sender: TObject);
+      procedure SpeedButton27Click(Sender: TObject);
+      procedure RemoveThisReadingSchedule1Click(Sender: TObject);
+      procedure ControlZ1Click(Sender: TObject);
+      procedure Timer1Timer(Sender: TObject);
+      procedure DBGridEh6DrawColumnCell(Sender: TObject; const Rect: TRect;
+        DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+      procedure PaintBox1Paint(Sender: TObject);
+      procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+      procedure CreateRegistryData(AName:String);
+      function CheckRegistryKey(AName:String):String;
 
 
     Private
@@ -579,6 +581,44 @@ begin
   end;
 end;
 
+function TUMainForm.CheckRegistryKey(AName: String): String;
+var
+  Reg: TRegistry;
+  Value: string;
+begin
+  Reg := TRegistry.Create;
+  try
+    Reg.RootKey := HKEY_CURRENT_USER;
+
+    // Check if the key exists
+    if Reg.KeyExists('Software\UploadAndDownloadSoftware') then
+    begin
+      // Open the existing key
+      if Reg.OpenKey('Software\UploadAndDownloadSoftware', False) then
+      begin
+        try
+          // Read the value
+          if Reg.ValueExists(AName) then
+            Value := Reg.ReadString(AName)
+          else
+            CreateRegistryData(AName);
+
+          // Use the retrieved value
+          //ShowMessage('Value: ' + Value);
+        finally
+          Reg.CloseKey;
+        end;
+      end
+      else
+        ShowMessage('Failed to open registry key!');
+    end
+    else
+      CreateRegistryData(AName);
+  finally
+    Reg.Free;
+  end;
+end;
+
 function TUMainForm.isADBPushFileToTablet: Boolean;
 Var
   SourceDBFile,MeterReaderFolderName:String;
@@ -713,6 +753,34 @@ begin
   begin
     // Copy each subdirectory recursively to the destination directory
     CopyFolder(Files[I], TPath.Combine(DestDir, TPath.GetFileName(Files[I])));
+  end;
+end;
+
+procedure TUMainForm.CreateRegistryData(AName: String);
+var
+  Reg: TRegistry;
+  ADateNow:TDateTime;
+begin
+  try
+    Reg := TRegistry.Create;
+    Reg.RootKey := HKEY_CURRENT_USER;
+    ADateNow:=Now();
+    // Open or create the desired key
+    if Reg.OpenKey('Software\UploadAndDownloadSoftware', True) then
+    begin
+      try
+        // Set a string value
+        //Reg.WriteString('ActivationKey', 'Hello, World!');
+        //Reg.WriteString('ListActivation', 'Hello, World!');
+        Reg.WriteString(AName, 'R8ZRG-WG94J-R2CLX-2T10M-T79|'+FormatDateTime('MM/DD/YYYY',ADateNow)+'|5');
+      finally
+        Reg.CloseKey;
+      end;
+    end
+    else
+      ShowMessage('Failed to create registry key!');
+  finally
+    Reg.Free;
   end;
 end;
 
@@ -1117,8 +1185,9 @@ Var
   X : Integer;
   IniDataValue:String;
   Item: TscGPListBoxItem;
+  LatestKey:String;
 begin
-  
+   LatestKey := CheckRegistryKey();
   //if activated show pnlActivationStatus
   //if not activated hide pnlActivationStatus
   //and show SpeedButton28.Top := 8;
@@ -2599,7 +2668,7 @@ begin
   VTReadingData.Open;
   VTReadingData.First;
 
-  if ContainsText(Memo2.Text,'') then begin
+  if not ContainsText(Memo2.Text,'No such file') then begin
     for X := 0 to Memo2.Lines.Count - 1 do
     begin
       AMonth := SplitString(Memo2.Lines[X],'-')[2];
@@ -2612,6 +2681,8 @@ begin
       VTReadingData.Post;
     end;
   end else begin
+    MessageDlg('Please Export Reading Data File in [Mobile Application]!' + #13#10+
+    'in order for the application to get the Reading Data!',mtInformation,[mbClose],0);
     Exit;
   end;
 

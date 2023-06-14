@@ -408,11 +408,6 @@ object UMainForm: TUMainForm
                                 FieldName = 'ZoneCode'
                                 Footers = <>
                                 Title.Caption = 'Zn Code'
-                                Title.Font.Charset = DEFAULT_CHARSET
-                                Title.Font.Color = clWindowText
-                                Title.Font.Height = -12
-                                Title.Font.Name = 'Tahoma'
-                                Title.Font.Style = []
                                 Width = 42
                               end
                               item
@@ -4858,10 +4853,9 @@ object UMainForm: TUMainForm
       object scSplitViewSettings: TscSplitView
         Left = 0
         Top = 0
-        Width = 0
+        Width = 505
         Height = 650
         Anchors = [akLeft, akTop, akBottom]
-        Enabled = False
         FluentUIOpaque = False
         TabOrder = 1
         OnResize = scSplitViewSettingsResize
@@ -4889,7 +4883,7 @@ object UMainForm: TUMainForm
         CompactWidth = 0
         CompactHeight = 20
         GripSize = 0
-        Opened = False
+        Opened = True
         OpenedWidth = 505
         OpenedHeight = 50
         OpenedMinWidth = 0
@@ -4947,12 +4941,10 @@ object UMainForm: TUMainForm
             StorePaintBuffer = False
             MouseWheelSupport = False
             BackgroundStyle = scsbsPanel
-            ExplicitTop = 50
-            ExplicitHeight = 600
             object scListGroupPanel1: TscListGroupPanel
               Left = 0
               Top = 0
-              Width = 485
+              Width = 487
               Height = 260
               Align = alTop
               FluentUIOpaque = False
@@ -4974,7 +4966,6 @@ object UMainForm: TUMainForm
               HeaderMargin = 10
               HeaderAutoColor = True
               TransparentBackground = False
-              ExplicitWidth = 504
               object scGPPanel10: TscGPPanel
                 Left = 219
                 Top = 37
@@ -5442,7 +5433,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel3: TscListGroupPanel
               Left = 0
               Top = 260
-              Width = 485
+              Width = 487
               Height = 278
               Align = alTop
               FluentUIOpaque = False
@@ -5464,7 +5455,6 @@ object UMainForm: TUMainForm
               HeaderMargin = 10
               HeaderAutoColor = True
               TransparentBackground = False
-              ExplicitWidth = 504
               object SpeedButton11: TSpeedButton
                 Left = 428
                 Top = 33
@@ -6461,7 +6451,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel2: TscListGroupPanel
               Left = 0
               Top = 538
-              Width = 485
+              Width = 487
               Height = 62
               Align = alTop
               FluentUIOpaque = False
@@ -6483,12 +6473,11 @@ object UMainForm: TUMainForm
               HeaderMargin = 10
               HeaderAutoColor = True
               TransparentBackground = False
-              ExplicitWidth = 504
               DesignSize = (
-                485
+                487
                 62)
               object SpeedButton7: TSpeedButton
-                Left = 314
+                Left = 316
                 Top = 22
                 Width = 168
                 Height = 39
@@ -6584,7 +6573,6 @@ object UMainForm: TUMainForm
               AutoSize = True
               UseFontColorToStyleColor = False
               Caption = 'Settings'
-              ExplicitHeight = 25
             end
             object pnlActivationStatus: TPanel
               Left = 251
@@ -6594,10 +6582,6 @@ object UMainForm: TUMainForm
               Align = alRight
               BevelOuter = bvNone
               TabOrder = 1
-              ExplicitLeft = 440
-              ExplicitTop = 16
-              ExplicitWidth = 185
-              ExplicitHeight = 41
               object Label38: TLabel
                 AlignWithMargins = True
                 Left = 3
@@ -6615,7 +6599,7 @@ object UMainForm: TUMainForm
                 Font.Name = 'Tahoma'
                 Font.Style = []
                 ParentFont = False
-                ExplicitTop = 5
+                ExplicitLeft = 34
                 ExplicitWidth = 209
               end
               object Label39: TLabel
@@ -6635,8 +6619,7 @@ object UMainForm: TUMainForm
                 Font.Name = 'Tahoma'
                 Font.Style = []
                 ParentFont = False
-                ExplicitLeft = 0
-                ExplicitTop = 36
+                ExplicitLeft = 40
                 ExplicitWidth = 203
               end
             end
@@ -7583,7 +7566,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010A00F8015C0130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010A00F801600130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -28261,7 +28244,7 @@ object UMainForm: TUMainForm
     Left = 445
     Top = 430
     Data = {
-      0400070003005F69640E000000000000000A0042696C6C506572696F641800FF
+      0300070003005F69640E000000000000000A0042696C6C506572696F641800FF
       7F0000000006004465766963651800FF7F000000000B00446174654665746368
       65641800FF7F000000000F004D657465725265616465724E616D651800FF7F00
       00000009005A6F6E65436F6465731800FF7F000000000B005265636F7264436F
@@ -28314,7 +28297,7 @@ object UMainForm: TUMainForm
   object VTReadingData: TVirtualTable
     Left = 125
     Top = 495
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTReadingDataFileName: TStringField
       FieldName = 'FileName'
       Size = 45
