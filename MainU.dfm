@@ -2832,6 +2832,17 @@ object UMainForm: TUMainForm
                               ParentFont = False
                               ExplicitWidth = 3
                             end
+                            object DBGridEh8: TDBGridEh
+                              Left = 27
+                              Top = 62
+                              Width = 300
+                              Height = 120
+                              DataSource = DataSource1
+                              DynProps = <>
+                              TabOrder = 0
+                              object RowDetailData: TRowDetailPanelControlEh
+                              end
+                            end
                           end
                           object scScrollBar2: TscScrollBar
                             Left = 264
@@ -3489,8 +3500,7 @@ object UMainForm: TUMainForm
                             00000000000000000000}
                           ParentFont = False
                           OnClick = SpeedButton5Click
-                          ExplicitWidth = 169
-                          ExplicitHeight = 49
+                          ExplicitTop = 3
                         end
                         object Shape5: TShape
                           Left = 0
@@ -4021,11 +4031,12 @@ object UMainForm: TUMainForm
                 end
               end
               object DriveComboBox1: TDriveComboBox
-                Left = 435
+                Left = 444
                 Top = 7
-                Width = 190
+                Width = 60
                 Height = 19
                 TabOrder = 1
+                Visible = False
               end
               object scGPPanel11: TscGPPanel
                 Left = 0
@@ -4911,9 +4922,10 @@ object UMainForm: TUMainForm
       object scSplitViewSettings: TscSplitView
         Left = 0
         Top = 0
-        Width = 505
+        Width = 0
         Height = 650
         Anchors = [akLeft, akTop, akBottom]
+        Enabled = False
         FluentUIOpaque = False
         TabOrder = 1
         OnResize = scSplitViewSettingsResize
@@ -4941,7 +4953,7 @@ object UMainForm: TUMainForm
         CompactWidth = 0
         CompactHeight = 20
         GripSize = 0
-        Opened = True
+        Opened = False
         OpenedWidth = 505
         OpenedHeight = 50
         OpenedMinWidth = 0
@@ -5002,7 +5014,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel1: TscListGroupPanel
               Left = 0
               Top = 0
-              Width = 485
+              Width = 487
               Height = 260
               Align = alTop
               FluentUIOpaque = False
@@ -5492,7 +5504,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel3: TscListGroupPanel
               Left = 0
               Top = 260
-              Width = 485
+              Width = 487
               Height = 278
               Align = alTop
               FluentUIOpaque = False
@@ -6510,7 +6522,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel2: TscListGroupPanel
               Left = 0
               Top = 538
-              Width = 485
+              Width = 487
               Height = 62
               Align = alTop
               FluentUIOpaque = False
@@ -6533,10 +6545,10 @@ object UMainForm: TUMainForm
               HeaderAutoColor = True
               TransparentBackground = False
               DesignSize = (
-                485
+                487
                 62)
               object SpeedButton7: TSpeedButton
-                Left = 314
+                Left = 316
                 Top = 22
                 Width = 168
                 Height = 39
@@ -6671,7 +6683,7 @@ object UMainForm: TUMainForm
                 Margins.Right = 10
                 Align = alTop
                 Alignment = taRightJustify
-                Caption = 'Product will Expire In : [06/12/2026]'
+                Caption = 'Product will Expire In : [06/12/2***]'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clGrayText
                 Font.Height = -12
@@ -7625,7 +7637,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010A00F801640130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010A00F801700130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -28303,7 +28315,7 @@ object UMainForm: TUMainForm
     Left = 445
     Top = 430
     Data = {
-      0400070003005F69640E000000000000000A0042696C6C506572696F641800FF
+      0300070003005F69640E000000000000000A0042696C6C506572696F641800FF
       7F0000000006004465766963651800FF7F000000000B00446174654665746368
       65641800FF7F000000000F004D657465725265616465724E616D651800FF7F00
       00000009005A6F6E65436F6465731800FF7F000000000B005265636F7264436F
@@ -28356,7 +28368,7 @@ object UMainForm: TUMainForm
   object VTReadingData: TVirtualTable
     Left = 125
     Top = 495
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTReadingDataFileName: TStringField
       FieldName = 'FileName'
       Size = 45
@@ -28394,8 +28406,6 @@ object UMainForm: TUMainForm
     Top = 553
   end
   object BMMeterReading: TFDBatchMove
-    Reader = DMMainModule.ReaderMeterReading
-    Writer = DMMainModule.WriterMeterReading
     Mode = dmAppendUpdate
     Mappings = <
       item
@@ -28411,11 +28421,11 @@ object UMainForm: TUMainForm
         DestinationFieldName = 'Mtr_No'
       end
       item
-        SourceFieldName = 'PrevMeterReadingDate'
+        SourceFieldName = 'PreviousReadingDate'
         DestinationFieldName = 'PrevMR_Date'
       end
       item
-        SourceFieldName = 'PresMeterReadingDate'
+        SourceFieldName = 'PresentReadingDate'
         DestinationFieldName = 'MR_Date'
       end
       item
@@ -28455,17 +28465,18 @@ object UMainForm: TUMainForm
         DestinationFieldName = 'Emp_ID'
       end
       item
-        SourceFieldName = 'PresMeterReadingDate'
+        SourceFieldName = 'Time_stamp'
         DestinationFieldName = 'Time_stamp'
+      end
+      item
+        SourceFieldName = 'User_ID'
+        DestinationFieldName = 'User_ID'
       end
       item
         SourceFieldName = 'midentity'
         DestinationFieldName = 'midentity'
       end>
     LogFileName = 'Data.log'
-    OnProgress = BMMeterReadingScheduleProgress
-    OnWriteValue = BMMeterReadingScheduleWriteValue
-    OnWriteRecord = BMMeterReadingScheduleWriteRecord
     Left = 560
     Top = 144
   end
@@ -28483,5 +28494,10 @@ object UMainForm: TUMainForm
       Caption = 'Refresh Records'
       OnClick = RefreshRecords1Click
     end
+  end
+  object DataSource1: TDataSource
+    DataSet = DMMainModule.tblMeterReading
+    Left = 646
+    Top = 371
   end
 end

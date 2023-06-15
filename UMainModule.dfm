@@ -1410,7 +1410,7 @@ object DMMainModule: TDMMainModule
   object VTDeviceListAvailable: TVirtualTable
     Left = 624
     Top = 472
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTDeviceListAvailableDeviceName: TStringField
       FieldName = 'DeviceName'
       Size = 45
@@ -1438,11 +1438,16 @@ object DMMainModule: TDMMainModule
   object qryDetailsMeterReading: TFDQuery
     Connection = DMMainConnection.FDConSQL
     SQL.Strings = (
-      'select '
-      'ZONECODE,'
-      'COUNT(ZONECODE) as Cnt_Zone,'
-      '(SELECT MRName FROM SETTINGS) as MeterReadername'
-      ' from MeterReading'
+      'select  '
+      '  ZONECODE,'
+      '  COUNT(ZONECODE) as Cnt_Zone,'
+      '(SELECT'
+      '     MRName '
+      '     FROM '
+      '   SETTINGS ,'
+      '   MeterReaderSched WHERE MRNo = MRNo limit 1'
+      '  ) as MeterReadername'
+      ' from MeterReading '
       ' ORDER By ZONECODE')
     Left = 656
     Top = 216
@@ -1512,7 +1517,7 @@ object DMMainModule: TDMMainModule
   object VTReadingScheduling: TVirtualTable
     Left = 896
     Top = 280
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTReadingSchedulingZoneCode: TStringField
       FieldName = 'ZoneCode'
       Size = 45
@@ -1564,7 +1569,7 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 336
     Data = {
-      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
@@ -1637,7 +1642,7 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 400
     Data = {
-      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
@@ -1727,208 +1732,6 @@ object DMMainModule: TDMMainModule
     object tblMeterReaderScheduleMRNo: TIntegerField
       FieldName = 'MRNo'
       Origin = 'MRNo'
-    end
-  end
-  object ReaderMeterReading: TFDBatchMoveDataSetReader
-    DataSet = tblSQLiteMeterReading
-    Left = 832
-    Top = 112
-  end
-  object WriterMeterReading: TFDBatchMoveDataSetWriter
-    DataSet = tblSQLMeterReading
-    Left = 832
-    Top = 185
-  end
-  object tblSQLiteMeterReading: TFDTable
-    IndexFieldNames = '_id'
-    Connection = DMMainConnection.FDConSQL
-    FetchOptions.AssignedValues = [evMode, evItems]
-    FetchOptions.Mode = fmManual
-    FetchOptions.Items = [fiMeta]
-    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
-    UpdateOptions.UpdateChangedFields = False
-    UpdateOptions.LockWait = True
-    UpdateOptions.RefreshMode = rmManual
-    UpdateOptions.FetchGeneratorsPoint = gpNone
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.CheckReadOnly = False
-    UpdateOptions.CheckUpdatable = False
-    UpdateOptions.UpdateTableName = 'MeterReading'
-    TableName = 'MeterReading'
-    Left = 928
-    Top = 112
-    object tblSQLiteMeterReading_id: TFDAutoIncField
-      FieldName = '_id'
-      Origin = '_id'
-      ProviderFlags = [pfInWhere, pfInKey]
-    end
-    object tblSQLiteMeterReadingMR_Sys_No: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'MR_Sys_No'
-      Size = 99
-      Calculated = True
-    end
-    object tblSQLiteMeterReadingMRNo: TIntegerField
-      FieldName = 'MRNo'
-      Origin = 'MRNo'
-      Required = True
-    end
-    object tblSQLiteMeterReadingBillPeriod: TWideMemoField
-      FieldName = 'BillPeriod'
-      Origin = 'BillPeriod'
-      Required = True
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingAccountNo: TWideMemoField
-      FieldName = 'AccountNo'
-      Origin = 'AccountNo'
-      Required = True
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingZoneCode: TWideMemoField
-      FieldName = 'ZoneCode'
-      Origin = 'ZoneCode'
-      Required = True
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingMeterSerial: TWideMemoField
-      FieldName = 'MeterSerial'
-      Origin = 'MeterSerial'
-      Required = True
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingPresentReading: TIntegerField
-      FieldName = 'PresentReading'
-      Origin = 'PresentReading'
-      Required = True
-    end
-    object tblSQLiteMeterReadingPreviousReading: TIntegerField
-      FieldName = 'PreviousReading'
-      Origin = 'PreviousReading'
-      Required = True
-    end
-    object tblSQLiteMeterReadingConsumption: TIntegerField
-      FieldName = 'Consumption'
-      Origin = 'Consumption'
-      Required = True
-    end
-    object tblSQLiteMeterReadingPresentReadingDate: TWideMemoField
-      FieldName = 'PresentReadingDate'
-      Origin = 'PresentReadingDate'
-      Required = True
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingPresentReadingTime: TWideMemoField
-      FieldName = 'PresentReadingTime'
-      Origin = 'PresentReadingTime'
-      Required = True
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingPreviousReadingDate: TWideMemoField
-      FieldName = 'PreviousReadingDate'
-      Origin = 'PreviousReadingDate'
-      Required = True
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingNumOfTries: TIntegerField
-      FieldName = 'NumOfTries'
-      Origin = 'NumOfTries'
-      Required = True
-    end
-    object tblSQLiteMeterReadingNumOfPrintedSOA: TIntegerField
-      FieldName = 'NumOfPrintedSOA'
-      Origin = 'NumOfPrintedSOA'
-      Required = True
-    end
-    object tblSQLiteMeterReadingNumOfSentSMS: TIntegerField
-      FieldName = 'NumOfSentSMS'
-      Origin = 'NumOfSentSMS'
-      Required = True
-    end
-    object tblSQLiteMeterReadingReadingRemarks: TWideMemoField
-      FieldName = 'ReadingRemarks'
-      Origin = 'ReadingRemarks'
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingMeterFindings: TWideMemoField
-      FieldName = 'MeterFindings'
-      Origin = 'MeterFindings'
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingCurrentBillAmount: TFloatField
-      FieldName = 'CurrentBillAmount'
-      Origin = 'CurrentBillAmount'
-    end
-    object tblSQLiteMeterReadingTotalAmountDue: TFloatField
-      FieldName = 'TotalAmountDue'
-      Origin = 'TotalAmountDue'
-    end
-    object tblSQLiteMeterReadingPenalty: TFloatField
-      FieldName = 'Penalty'
-      Origin = 'Penalty'
-    end
-    object tblSQLiteMeterReadingPaymentDueDate: TWideMemoField
-      FieldName = 'PaymentDueDate'
-      Origin = 'PaymentDueDate'
-      Required = True
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingDiscoDueDate: TWideMemoField
-      FieldName = 'DiscoDueDate'
-      Origin = 'DiscoDueDate'
-      Required = True
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingFirstReadingDate: TWideMemoField
-      FieldName = 'FirstReadingDate'
-      Origin = 'FirstReadingDate'
-      Required = True
-      BlobType = ftWideMemo
-    end
-    object tblSQLiteMeterReadingSeniorDiscountAmount: TFloatField
-      FieldName = 'SeniorDiscountAmount'
-      Origin = 'SeniorDiscountAmount'
-    end
-    object tblSQLiteMeterReadingPrevMeterReadingDate: TDateTimeField
-      FieldKind = fkCalculated
-      FieldName = 'PrevMeterReadingDate'
-      Calculated = True
-    end
-    object tblSQLiteMeterReadingPresMeterReadingDate: TDateTimeField
-      FieldKind = fkCalculated
-      FieldName = 'PresMeterReadingDate'
-      Calculated = True
-    end
-    object tblSQLiteMeterReadingRdg_adj: TCurrencyField
-      FieldKind = fkCalculated
-      FieldName = 'Rdg_adj'
-      Calculated = True
-    end
-    object tblSQLiteMeterReadingChngMtr_adj: TCurrencyField
-      FieldKind = fkCalculated
-      FieldName = 'ChngMtr_adj'
-      Calculated = True
-    end
-    object tblSQLiteMeterReadingChngMtr_Cons: TCurrencyField
-      FieldKind = fkCalculated
-      FieldName = 'ChngMtr_Cons'
-      Calculated = True
-    end
-    object tblSQLiteMeterReadingMR_Status: TIntegerField
-      FieldKind = fkCalculated
-      FieldName = 'MR_Status'
-      Calculated = True
-    end
-    object tblSQLiteMeterReadingEmp_ID: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'Emp_ID'
-      Size = 45
-      Calculated = True
-    end
-    object tblSQLiteMeterReadingmidentity: TIntegerField
-      FieldKind = fkCalculated
-      FieldName = 'midentity'
-      Calculated = True
     end
   end
   object tblSQLMeterReading: TFDTable
@@ -2049,6 +1852,203 @@ object DMMainModule: TDMMainModule
     object tblSQLMeterReadingmidentity: TFDAutoIncField
       FieldName = 'midentity'
       Origin = 'midentity'
+      ReadOnly = True
+    end
+  end
+  object tblMeterReading: TFDTable
+    Active = True
+    IndexFieldNames = '_id'
+    Connection = DMMainConnection.FDConSQL
+    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.Mode = fmManual
+    FetchOptions.Items = [fiMeta]
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.UpdateChangedFields = False
+    UpdateOptions.LockWait = True
+    UpdateOptions.RefreshMode = rmManual
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    UpdateOptions.UpdateTableName = 'MeterReading'
+    TableName = 'MeterReading'
+    Left = 928
+    Top = 128
+    object tblMeterReading_id: TFDAutoIncField
+      FieldName = '_id'
+      Origin = '_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object tblMeterReadingMRNo: TIntegerField
+      FieldName = 'MRNo'
+      Origin = 'MRNo'
+      Required = True
+    end
+    object tblMeterReadingBillPeriod: TWideMemoField
+      FieldName = 'BillPeriod'
+      Origin = 'BillPeriod'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingAccountNo: TWideMemoField
+      FieldName = 'AccountNo'
+      Origin = 'AccountNo'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingZoneCode: TWideMemoField
+      FieldName = 'ZoneCode'
+      Origin = 'ZoneCode'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingMeterSerial: TWideMemoField
+      FieldName = 'MeterSerial'
+      Origin = 'MeterSerial'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingPresentReading: TIntegerField
+      FieldName = 'PresentReading'
+      Origin = 'PresentReading'
+      Required = True
+    end
+    object tblMeterReadingPreviousReading: TIntegerField
+      FieldName = 'PreviousReading'
+      Origin = 'PreviousReading'
+      Required = True
+    end
+    object tblMeterReadingConsumption: TIntegerField
+      FieldName = 'Consumption'
+      Origin = 'Consumption'
+      Required = True
+    end
+    object tblMeterReadingPresentReadingDate: TWideMemoField
+      FieldName = 'PresentReadingDate'
+      Origin = 'PresentReadingDate'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingPresentReadingTime: TWideMemoField
+      FieldName = 'PresentReadingTime'
+      Origin = 'PresentReadingTime'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingPreviousReadingDate: TWideMemoField
+      FieldName = 'PreviousReadingDate'
+      Origin = 'PreviousReadingDate'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingNumOfTries: TIntegerField
+      FieldName = 'NumOfTries'
+      Origin = 'NumOfTries'
+      Required = True
+    end
+    object tblMeterReadingNumOfPrintedSOA: TIntegerField
+      FieldName = 'NumOfPrintedSOA'
+      Origin = 'NumOfPrintedSOA'
+      Required = True
+    end
+    object tblMeterReadingNumOfSentSMS: TIntegerField
+      FieldName = 'NumOfSentSMS'
+      Origin = 'NumOfSentSMS'
+      Required = True
+    end
+    object tblMeterReadingReadingRemarks: TWideMemoField
+      FieldName = 'ReadingRemarks'
+      Origin = 'ReadingRemarks'
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingMeterFindings: TWideMemoField
+      FieldName = 'MeterFindings'
+      Origin = 'MeterFindings'
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingCurrentBillAmount: TFloatField
+      FieldName = 'CurrentBillAmount'
+      Origin = 'CurrentBillAmount'
+    end
+    object tblMeterReadingTotalAmountDue: TFloatField
+      FieldName = 'TotalAmountDue'
+      Origin = 'TotalAmountDue'
+    end
+    object tblMeterReadingPenalty: TFloatField
+      FieldName = 'Penalty'
+      Origin = 'Penalty'
+    end
+    object tblMeterReadingPaymentDueDate: TWideMemoField
+      FieldName = 'PaymentDueDate'
+      Origin = 'PaymentDueDate'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingDiscoDueDate: TWideMemoField
+      FieldName = 'DiscoDueDate'
+      Origin = 'DiscoDueDate'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingFirstReadingDate: TWideMemoField
+      FieldName = 'FirstReadingDate'
+      Origin = 'FirstReadingDate'
+      Required = True
+      BlobType = ftWideMemo
+    end
+    object tblMeterReadingSeniorDiscountAmount: TFloatField
+      FieldName = 'SeniorDiscountAmount'
+      Origin = 'SeniorDiscountAmount'
+    end
+  end
+  object qryMeterReading: TFDQuery
+    Connection = DMMainConnection.FDConMSSQL
+    SQL.Strings = (
+      '/****** Script for SelectTopNRows command from SSMS  ******/'
+      'SELECT TOP 1 '
+      '  MR_Sys_no,'
+      '  midentity'
+      '  FROM [BillingCollection].[dbo].[Mtr_Reading]'
+      '  ORDER BY CAST(MR_SYS_NO as Integer) DESC'
+      ' ')
+    Left = 936
+    Top = 72
+    object qryMeterReadingMR_Sys_no: TStringField
+      FieldName = 'MR_Sys_no'
+      Origin = 'MR_Sys_no'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 18
+    end
+    object qryMeterReadingmidentity: TFDAutoIncField
+      FieldName = 'midentity'
+      Origin = 'midentity'
+      ReadOnly = True
+    end
+  end
+  object FDQuery1: TFDQuery
+    Connection = DMMainConnection.FDConMSSQL
+    SQL.Strings = (
+      '/****** Script for SelectTopNRows command from SSMS  ******/'
+      'SELECT TOP 1 '
+      '  MR_Sys_no,'
+      '  midentity'
+      '  FROM [BillingCollection].[dbo].[Mtr_Reading]'
+      '  ORDER BY CAST(MR_SYS_NO as Integer) DESC'
+      ' ')
+    Left = 824
+    Top = 104
+    object StringField1: TStringField
+      FieldName = 'MR_Sys_no'
+      Origin = 'MR_Sys_no'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 18
+    end
+    object FDAutoIncField1: TFDAutoIncField
+      FieldName = 'midentity'
+      Origin = 'midentity'
+      ReadOnly = True
     end
   end
 end

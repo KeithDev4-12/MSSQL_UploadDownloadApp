@@ -248,9 +248,6 @@ type
     VTReadingScheduleDeletedisPosted: TIntegerField;
     VTReadingScheduleMainisPosted: TIntegerField;
     qryMSZoneCodeCount: TIntegerField;
-    ReaderMeterReading: TFDBatchMoveDataSetReader;
-    WriterMeterReading: TFDBatchMoveDataSetWriter;
-    tblSQLiteMeterReading: TFDTable;
     tblSQLMeterReading: TFDTable;
     tblSQLMeterReadingMR_Sys_No: TStringField;
     tblSQLMeterReadingAcct_No: TStringField;
@@ -269,43 +266,42 @@ type
     tblSQLMeterReadingTime_stamp: TSQLTimeStampField;
     tblSQLMeterReadingUser_ID: TStringField;
     tblSQLMeterReadingmidentity: TFDAutoIncField;
-    tblSQLiteMeterReading_id: TFDAutoIncField;
-    tblSQLiteMeterReadingMRNo: TIntegerField;
-    tblSQLiteMeterReadingBillPeriod: TWideMemoField;
-    tblSQLiteMeterReadingAccountNo: TWideMemoField;
-    tblSQLiteMeterReadingZoneCode: TWideMemoField;
-    tblSQLiteMeterReadingMeterSerial: TWideMemoField;
-    tblSQLiteMeterReadingPresentReading: TIntegerField;
-    tblSQLiteMeterReadingPreviousReading: TIntegerField;
-    tblSQLiteMeterReadingConsumption: TIntegerField;
-    tblSQLiteMeterReadingPresentReadingDate: TWideMemoField;
-    tblSQLiteMeterReadingPresentReadingTime: TWideMemoField;
-    tblSQLiteMeterReadingPreviousReadingDate: TWideMemoField;
-    tblSQLiteMeterReadingNumOfTries: TIntegerField;
-    tblSQLiteMeterReadingNumOfPrintedSOA: TIntegerField;
-    tblSQLiteMeterReadingNumOfSentSMS: TIntegerField;
-    tblSQLiteMeterReadingReadingRemarks: TWideMemoField;
-    tblSQLiteMeterReadingMeterFindings: TWideMemoField;
-    tblSQLiteMeterReadingCurrentBillAmount: TFloatField;
-    tblSQLiteMeterReadingTotalAmountDue: TFloatField;
-    tblSQLiteMeterReadingPenalty: TFloatField;
-    tblSQLiteMeterReadingPaymentDueDate: TWideMemoField;
-    tblSQLiteMeterReadingDiscoDueDate: TWideMemoField;
-    tblSQLiteMeterReadingFirstReadingDate: TWideMemoField;
-    tblSQLiteMeterReadingSeniorDiscountAmount: TFloatField;
-    tblSQLiteMeterReadingMR_Sys_No: TStringField;
-    tblSQLiteMeterReadingPrevMeterReadingDate: TDateTimeField;
-    tblSQLiteMeterReadingPresMeterReadingDate: TDateTimeField;
-    tblSQLiteMeterReadingRdg_adj: TCurrencyField;
-    tblSQLiteMeterReadingChngMtr_adj: TCurrencyField;
-    tblSQLiteMeterReadingChngMtr_Cons: TCurrencyField;
-    tblSQLiteMeterReadingMR_Status: TIntegerField;
-    tblSQLiteMeterReadingEmp_ID: TStringField;
-    tblSQLiteMeterReadingmidentity: TIntegerField;
+    tblMeterReading: TFDTable;
+    tblMeterReading_id: TFDAutoIncField;
+    tblMeterReadingMRNo: TIntegerField;
+    tblMeterReadingBillPeriod: TWideMemoField;
+    tblMeterReadingAccountNo: TWideMemoField;
+    tblMeterReadingZoneCode: TWideMemoField;
+    tblMeterReadingMeterSerial: TWideMemoField;
+    tblMeterReadingPresentReading: TIntegerField;
+    tblMeterReadingPreviousReading: TIntegerField;
+    tblMeterReadingConsumption: TIntegerField;
+    tblMeterReadingPresentReadingDate: TWideMemoField;
+    tblMeterReadingPresentReadingTime: TWideMemoField;
+    tblMeterReadingPreviousReadingDate: TWideMemoField;
+    tblMeterReadingNumOfTries: TIntegerField;
+    tblMeterReadingNumOfPrintedSOA: TIntegerField;
+    tblMeterReadingNumOfSentSMS: TIntegerField;
+    tblMeterReadingReadingRemarks: TWideMemoField;
+    tblMeterReadingMeterFindings: TWideMemoField;
+    tblMeterReadingCurrentBillAmount: TFloatField;
+    tblMeterReadingTotalAmountDue: TFloatField;
+    tblMeterReadingPenalty: TFloatField;
+    tblMeterReadingPaymentDueDate: TWideMemoField;
+    tblMeterReadingDiscoDueDate: TWideMemoField;
+    tblMeterReadingFirstReadingDate: TWideMemoField;
+    tblMeterReadingSeniorDiscountAmount: TFloatField;
+    qryMeterReading: TFDQuery;
+    qryMeterReadingMR_Sys_no: TStringField;
+    qryMeterReadingmidentity: TFDAutoIncField;
+    FDQuery1: TFDQuery;
+    StringField1: TStringField;
+    FDAutoIncField1: TFDAutoIncField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+    procedure tblSQLiteMeterReadingCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -361,6 +357,12 @@ begin
   end;
 
 
+end;
+
+procedure TDMMainModule.tblSQLiteMeterReadingCalcFields(DataSet: TDataSet);
+begin
+  //
+  //tblSQLiteMeterReadingMR_Sys_No.AsString :=
 end;
 
 end.

@@ -302,6 +302,8 @@ type
     DeleteMeterReader1: TMenuItem;
     RefreshRecords1: TMenuItem;
     N1: TMenuItem;
+    DBGridEh8: TDBGridEh;
+    DataSource1: TDataSource;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -412,7 +414,8 @@ type
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
     procedure DeleteMeterReader1Click(Sender: TObject);
     procedure RefreshRecords1Click(Sender: TObject);
-
+       function isLessThan2Days(AVal:TDateTime):Boolean;
+       function isPostedToMSSQL(AMR_Sys_No,AMidentity:Integer):Boolean;
 
     Private
       FPanelRegion:HRGN;
@@ -424,6 +427,7 @@ type
     Public
       procedure CheckAndroid(AFilterOut:String);
       function isAvailableDevice():Boolean;
+      function getAvaialbeDevice():String;
       function isMultipleDevice():Boolean;
       function isADBPushFileToTablet():Boolean;
       function GetDosOutput(CommandLine: string; Work: string = 'C:\Platform-tools\'): String;
@@ -677,6 +681,12 @@ begin
   end;
 end;
 
+function TUMainForm.isLessThan2Days(AVal: TDateTime): Boolean;
+begin
+  //
+  result := true;
+end;
+
 function TUMainForm.isMultipleDevice: Boolean;
 var
   AReturnVal : String;
@@ -686,6 +696,65 @@ begin
     result := True;
   end else begin
     result := False;
+  end;
+end;
+
+function TUMainForm.isPostedToMSSQL(AMR_Sys_No, AMidentity: Integer): Boolean;
+Var
+  MR_Sys_No_First:Integer;
+begin
+  with DMMainModule do begin
+    try
+
+
+      tblMeterReading.Close;
+      tblMeterReading.Open;
+      tblMeterReading.First;
+      MR_Sys_No_First := AMR_Sys_No;
+      while not tblMeterReading.EOF do begin
+        if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([tblMeterReadingAccountNo.AsString,tblMeterReadingPreviousReading.AsString]),[]) then begin
+          //Update
+          tblSQLMeterReading.Edit;
+          tblSQLMeterReadingMR_Sys_No.AsString := tblSQLMeterReadingMR_Sys_No.AsString;
+
+        end else begin
+          //insert
+          tblSQLMeterReading.Append;
+          AMR_Sys_No := AMR_Sys_No + 1;
+          AMidentity := AMidentity + 1;
+          tblSQLMeterReadingMR_Sys_No.AsInteger := AMR_Sys_No ;
+          tblSQLMeterReadingmidentity.AsInteger := AMidentity ;
+
+
+        end;
+        tblSQLMeterReadingAcct_No.AsString := tblMeterReadingAccountNo.Value;
+        tblSQLMeterReadingMtr_No.AsString := tblMeterReadingMeterSerial.Value;
+        showmessage(tblMeterReadingPreviousReadingDate.Value);
+        tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(tblMeterReadingPreviousReadingDate.Value);
+        tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(tblMeterReadingPresentReadingDate.AsString);
+        tblSQLMeterReadingPrev_Rdg.AsCurrency := tblMeterReadingPreviousReading.AsCurrency;
+        tblSQLMeterReadingCur_Rdg.AsCurrency := tblMeterReadingPresentReading.AsCurrency;
+        tblSQLMeterReadingCur_Consumption.AsCurrency := tblMeterReadingConsumption.AsCurrency;
+        tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
+        tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
+        tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
+        tblSQLMeterReadingMR_Status.AsString := '1' ;
+        tblSQLMeterReadingRemarks.AsString := tblMeterReadingReadingRemarks.AsString;
+        tblSQLMeterReadingEmp_ID.AsString := tblMeterReadingMRNo.AsString ;
+        tblSQLMeterReadingTime_stamp .AsDateTime := VarToDateTime(tblMeterReadingFirstReadingDate.AsString + tblMeterReadingPresentReadingTime.AsString);
+        tblSQLMeterReadingUser_ID.AsString := '0';
+        tblSQLMeterReading.Post;
+        tblMeterReading.Next;
+      end;
+
+      if MR_Sys_No_First = (AMR_Sys_No-tblMeterReading.RecordCount) then begin
+        result := true;
+      end else begin
+        result := false;
+      end;
+    finally
+      tblSQLMeterReading.Cancel;
+    end;
   end;
 end;
 
@@ -934,7 +1003,10 @@ procedure TUMainForm.DBGridEh7DrawColumnCell(Sender: TObject; const Rect: TRect;
   DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
 begin
    With DMMainModule do begin
-     if tblDBFetchedDevice.Value = ADeviceFound then begin
+     if fdDBFetchedDevice.AsString = ADeviceFound then begin
+         DBGridEh7.Canvas.Brush.Color:=$0077DD77;
+         DBGridEh7.Canvas.Font.Color := clBlack;
+     end else if isLessThan2Days(StrToDateTime(fdDBFetchedDateFetched.AsString)) then begin
          DBGridEh7.Canvas.Brush.Color:=clHighlight;
          DBGridEh7.Canvas.Font.Color := clWhite;
      end else begin
@@ -1179,6 +1251,11 @@ Var
 begin
   AdjustScaling();
   with DMMainModule do begin
+
+    tblSQLMeterReading.Close;
+    tblSQLMeterReading.Open;
+    tblSQLMeterReading.First;
+
     VTReadingScheduling.Close;
     VTReadingScheduling.Open;
     VTReadingScheduling.First;
@@ -1348,7 +1425,8 @@ begin
     FlashDriveEnum := 2;
     break;
   end;
-  ShowMessage('USB ARRIVED');
+  //ShowMessage('USB ARRIVED');
+  ADeviceFound := getAvaialbeDevice;
   DriveList.Free;
 
 end;
@@ -1368,6 +1446,9 @@ begin
   scLabel15.Caption := 'NO CONNECTED DEVICE';
 
   DriveFromCombobox := DriveLetter[1];
+
+  ADeviceFound := getAvaialbeDevice();
+
   FlashDriveEnum := 3;
 end;
 
@@ -1382,6 +1463,22 @@ begin
 
    Application.ProcessMessages;
 end;
+
+function TUMainForm.getAvaialbeDevice: String;
+ var
+  AReturnVal : String;
+
+begin
+  Memo2.Lines.Clear;
+  DeviceADB := TCMDPromtUtil.GetResultQuery(CommandPromtUnit.QUERY_ADB_SHELL+CommandPromtUnit.QUERY_ADB_GETPROPERTIES+CommandPromtUnit.QUERY_ADB_DEVICE_NAME);
+  SerialNumberADB := TCMDPromtUtil.GetResultQuery(CommandPromtUnit.QUERY_ADB_SHELL+CommandPromtUnit.QUERY_ADB_GETPROPERTIES+CommandPromtUnit.QUERY_ADB_SERIAL);
+  if not DeviceADB.Contains(UpperCase('more than one device')) then begin
+    result := DeviceADB;
+  end else begin
+    result := 'Not Available';
+  end;
+end;
+
 
 procedure TUMainForm.GetDeviceStatus(ADeviceADB, AStatusADB: String);
 begin
@@ -2764,15 +2861,24 @@ Var
   DateExported : String;
   TEMP_FOLDER :String;
   AMonth,ADay,AYear:String;
+  MR_Sys_No,midentity:Integer;
+  ZoneCodes,ZoneCount:String;
 const
   //
+
   TABLET_DEFAULT_UPLOAD_LOCATION = 'sdcard/Android/data/com.alltechsystems.iwd/files/';
   ROOT_FOLDER_NAME = 'iwd_lwua/';
   //READING_FOLDER_NAME = 'reading';
   //BACKUP_FOLDER_NAME = 'reading_backup';
   SQLITE_FILE_NAME = 'iwd_lwua.db';
 begin
-  TEMP_FOLDER := TPath.GetTempPath();
+
+  if ADeviceFound.Contains('Not Available') then begin
+    Exit;
+  end;
+
+  TEMP_FOLDER := 'D:\IWD_READ_AND_BILL\lwua_download\';
+  //TEMP_FOLDER := //TPath.GetTempPath();
   MeterReaderName := scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption;
   if Length(MeterReaderName) = 0 then begin
     MessageDlg('Please Select MeterReader!',mtInformation,[mbClose],0);
@@ -2800,7 +2906,8 @@ begin
     Exit;
   end;
 
-
+  ZoneCodes := '';
+  ZoneCount := '';
   //Get the File To TempFolder Then if it matched the Data that we are looking for
   // then we should copy it from tempfolder to the rightful folder
   //need to adb ls command all available record to get the latest record base on date exporting
@@ -2852,9 +2959,43 @@ begin
       qryDetailsMeterReading.Close;
       qryDetailsMeterReading.Open;
       qryDetailsMeterReading.First;
+
+      while not qryDetailsMeterReading.EOF do begin
+        ZoneCodes := ZoneCodes + '|' + qryDetailsMeterReadingZoneCode.AsString;
+        ZoneCount := ZoneCodes + '|' + qryDetailsMeterReadingCnt_Zone.AsString;
+        qryDetailsMeterReading.Next;
+      end;
+
+      qryDetailsMeterReading.First;
+
+      qryMeterReading.Close;
+      qryMeterReading.Open;
+      qryMeterReading.First ;
+      MR_Sys_No := qryMeterReadingMR_Sys_no.AsInteger; //Get From MSSQL
+      midentity := qryMeterReadingmidentity.AsInteger; //Get From MSSQL
+
       if UpperCase(scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption).Contains(UpperCase(qryDetailsMeterReadingMeterReadername.AsString)) then begin
         // process the posting of data if selected and tablet are compatible
         // save to dbfetched
+        if isPostedToMSSQL(MR_Sys_No,midentity) then begin
+           // post dbfetched!!!
+           if tblDBFetched.Locate('BillPeriod;DateFetched;MeterReaderName',VarArrayOf([trim(Edit1.Text),FormatDateTime('MM/DD/YYYY',Now()),scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption]),[]) then begin
+              tblDBFetched.Edit;
+           end else begin
+              tblDBFetched.Append;
+           end;
+           tblDBFetchedBillPeriod.AsString := Trim(Edit1.Text);
+           tblDBFetchedDevice.AsString := ADeviceFound;
+           tblDBFetchedMeterReaderName.AsString := scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption;
+           tblDBFetchedDateFetched.AsString := FormatDateTime('DD/MM/YYYY',Now());
+           tblDBFetchedZoneCodes.AsString := RightStr(ZoneCodes,Length(ZoneCodes)-1);
+           tblDBFetchedRecordCount.AsString := RightStr(ZoneCount,Length(ZoneCount)-1);
+           tblDBFetched.Post;
+        end else begin
+           // Not Posted!
+           MessageDlg('Downloading Data to MSSQL Interrupted!!  ' + #13#10 +
+           'Please Continue it Again Later!',mtError,[mbOK],0);
+        end;
       end else begin
         // if not compatible selection and tablet ask the user if he or she wants to override the process
         if MessageDlg('Selected Meter Reader And Device Are not Compatible!!' +
@@ -2863,9 +3004,31 @@ begin
         #13#10 + '{Note: Overriding Will be getting the DB File and Post it!}',mtWarning,[mbOK,mbCancel],0) = mrOk then begin
           // get the data and post it to mssql
           // save to dbfetched
-
+          if isPostedToMSSQL(MR_Sys_No,midentity) then begin
+            // post dbfetched!!!
+             if tblDBFetched.Locate('BillPeriod;DateFetched;MeterReaderName',VarArrayOf([trim(Edit1.Text),FormatDateTime('MM/DD/YYYY',Now()),scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption]),[]) then begin
+                tblDBFetched.Edit;
+             end else begin
+                tblDBFetched.Append;
+             end;
+             tblDBFetchedBillPeriod.AsString := Trim(Edit1.Text);
+             tblDBFetchedDevice.AsString := ADeviceFound;
+             tblDBFetchedMeterReaderName.AsString := scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption;
+             tblDBFetchedDateFetched.AsString := FormatDateTime('DD/MM/YYYY',Now());
+             tblDBFetchedZoneCodes.AsString := RightStr(ZoneCodes,Length(ZoneCodes)-1);
+             tblDBFetchedRecordCount.AsString := RightStr(ZoneCount,Length(ZoneCount)-1);
+             tblDBFetched.Post;
+          end else begin
+            MessageDlg('Downloading Data to MSSQL Interrupted!!  ' + #13#10 +
+           'Please Continue it Again Later!',mtError,[mbOK],0);
+          end;
         end else begin
-          Exit;
+          //Disconnect First Before Deleting the File
+          FDConSQL.Connected := False;
+          if not FDConSQL.Connected then begin
+            DeleteFile(TEMP_FOLDER + VTReadingDataFileName.AsString);
+          end;
+
         end;
 
 
