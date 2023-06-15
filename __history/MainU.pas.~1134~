@@ -13,7 +13,7 @@ uses
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   Vcl.OleCtrls, SHDocVw, scWebBrowser, Vcl.DBCtrls, Data.DB, IOUtils, Types,
   VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove,IniFiles,Vcl.Themes,
-  Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts,Registry;
+  Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts,Registry,DateUtils;
 
 
 type
@@ -302,6 +302,8 @@ type
     DeleteMeterReader1: TMenuItem;
     RefreshRecords1: TMenuItem;
     N1: TMenuItem;
+    DBGridEh8: TDBGridEh;
+    DataSource1: TDataSource;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -680,9 +682,28 @@ begin
 end;
 
 function TUMainForm.isLessThan2Days(AVal: TDateTime): Boolean;
+var
+  StartDate, EndDate: TDateTime;
+  DaysDiff: Integer;
+  ADay,AMonth,AYear:WORD;
 begin
-  //
-  result := true;
+
+  DecodeDate(AVal, AYear, AMonth, ADay);
+
+  StartDate := EncodeDate(2022, 1, 1); // Replace with your start date
+  EndDate := Now; // Replace with your end date
+
+  DaysDiff := DaysBetween(EndDate, StartDate);
+
+  ShowMessage('The difference in days is: ' + IntToStr(DaysDiff));
+  if DaysDiff<= 2 then begin
+    result := true;
+  end else begin
+    result := false;
+  end;
+
+
+
 end;
 
 function TUMainForm.isMultipleDevice: Boolean;
@@ -702,52 +723,63 @@ Var
   MR_Sys_No_First:Integer;
 begin
   with DMMainModule do begin
-
-    tblMeterReading.Close;
-    tblMeterReading.Open;
-    tblMeterReading.First;
-    MR_Sys_No_First := AMR_Sys_No;
-    while not tblMeterReading.EOF do begin
-      if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([tblMeterReadingAccountNo.AsString,tblMeterReadingPreviousReading.AsString]),[]) then begin
-        //Update
-        tblSQLMeterReading.Edit;
-        tblSQLMeterReadingMR_Sys_No.AsString := tblSQLMeterReadingMR_Sys_No.AsString;
-
-      end else begin
-        //insert
-        tblSQLMeterReading.Append;
-        AMR_Sys_No := AMR_Sys_No + 1;
-        AMidentity := AMidentity + 1;
-        tblSQLMeterReadingMR_Sys_No.AsInteger := AMR_Sys_No ;
-        tblSQLMeterReadingmidentity.AsInteger := AMidentity ;
+    try
 
 
+      qryPostingMeterReading.Close;
+      qryPostingMeterReading.Open;
+      qryPostingMeterReading.First;
+      MR_Sys_No_First := AMR_Sys_No;
+      while not qryPostingMeterReading.EOF do begin
+        if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+          //Update
+          tblSQLMeterReading.Edit;
+          AMR_Sys_No := AMR_Sys_No + 1;
+          AMidentity := AMidentity + 1;
+          tblSQLMeterReadingMR_Sys_No.AsString := tblSQLMeterReadingMR_Sys_No.AsString;
+          tblSQLMeterReadingmidentity.AsInteger := tblSQLMeterReadingmidentity.AsInteger ;
+        end else begin
+          //insert
+          tblSQLMeterReading.Append;
+          AMR_Sys_No := AMR_Sys_No + 1;
+          AMidentity := AMidentity + 1;
+          tblSQLMeterReadingMR_Sys_No.AsInteger := AMR_Sys_No ;
+          tblSQLMeterReadingmidentity.AsInteger := AMidentity ;
+
+        end;
+        tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
+        tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
+        showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
+        tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
+        tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+        tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
+        tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
+        tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
+        tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
+        tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
+        tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
+        tblSQLMeterReadingMR_Status.AsString := '1' ;
+        tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
+        tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
+        tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
+        if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
+          tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+        end else begin
+          tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+        end;
+        tblSQLMeterReading.Post;
+        qryPostingMeterReading.Next;
       end;
-      tblSQLMeterReadingAcct_No.AsString := tblMeterReadingAccountNo.Value;
-      tblSQLMeterReadingMtr_No.AsString := tblMeterReadingMeterSerial.Value;
-      tblSQLMeterReadingPrevMR_Date.AsDateTime := tblMeterReadingPreviousReadingDate.Value;
-      tblSQLMeterReadingMR_Date.AsDateTime := tblMeterReadingPresentReadingDate.Value;
-      tblSQLMeterReadingPrev_Rdg.AsCurrency := tblMeterReadingPreviousReading.AsInteger;
-      tblSQLMeterReadingCur_Rdg.AsCurrency := tblMeterReadingPresentReading.AsInteger;
-      tblSQLMeterReadingCur_Consumption.AsCurrency := tblMeterReadingConsumption.AsInteger;
-      tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
-      tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
-      tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
-      tblSQLMeterReadingMR_Status.AsString := 1 ;
-      tblSQLMeterReadingRemarks.AsString := tblMeterReadingReadingRemarks.Value;
-      tblSQLMeterReadingEmp_ID.AsString := 0 ;
-      tblSQLMeterReadingTime_stamp .AsDateTime := tblMeterReadingFirstReadingDate.Value + tblMeterReadingPresentReadingTime.Value;
-      tblSQLMeterReadingUser_ID.AsString := tblMeterReadingMRNo.AsInteger;
-      tblSQLMeterReading.Post;
-      tblMeterReading.Next;
-    end;
 
-    if MR_Sys_No_First = (AMR_Sys_No-tblMeterReading.RecordCount) then begin
-      result := true;
-    end else begin
-      result := false;
-    end;
+      if MR_Sys_No_First = (AMR_Sys_No-qryPostingMeterReading.RecordCount) then begin
+        result := true;
+      end else begin
+        result := false;
+      end;
+    finally
+      tblSQLMeterReading.Cancel;
 
+    end;
   end;
 end;
 
@@ -994,8 +1026,13 @@ end;
 
 procedure TUMainForm.DBGridEh7DrawColumnCell(Sender: TObject; const Rect: TRect;
   DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+       var
+  Field: TWideMemoField;
+  DisplayValue: string;
 begin
    With DMMainModule do begin
+
+
      if fdDBFetchedDevice.AsString = ADeviceFound then begin
          DBGridEh7.Canvas.Brush.Color:=$0077DD77;
          DBGridEh7.Canvas.Font.Color := clBlack;
@@ -1009,6 +1046,9 @@ begin
      end;
      DBGridEh7.Canvas.FillRect(Rect);
      DBGridEh7.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+
+
   end;
 end;
 
@@ -1244,6 +1284,10 @@ Var
 begin
   AdjustScaling();
   with DMMainModule do begin
+    tblDBFetched.Close;
+    tblDBFetched.Open;
+    tblDBFetched.First;
+
 
     tblSQLMeterReading.Close;
     tblSQLMeterReading.Open;
@@ -2987,7 +3031,7 @@ begin
         end else begin
            // Not Posted!
            MessageDlg('Downloading Data to MSSQL Interrupted!!  ' + #13#10 +
-           'Please Continue it Again Later!',mtError,[mbOK]);
+           'Please Continue it Again Later!',mtError,[mbOK],0);
         end;
       end else begin
         // if not compatible selection and tablet ask the user if he or she wants to override the process
@@ -3013,7 +3057,7 @@ begin
              tblDBFetched.Post;
           end else begin
             MessageDlg('Downloading Data to MSSQL Interrupted!!  ' + #13#10 +
-           'Please Continue it Again Later!',mtError,[mbOK]);
+           'Please Continue it Again Later!',mtError,[mbOK],0);
           end;
         end else begin
           //Disconnect First Before Deleting the File

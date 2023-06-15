@@ -16,6 +16,8 @@ object DMMainConnection: TDMMainConnection
     Params.Strings = (
       'Database=BillingCollection'
       'OSAuthent=Yes'
+      'Server=BITSNBYTES\SQLEXPRESS'
+      'User_Name='
       'ConnectionDef=MSSQL_IWD')
     Connected = True
     Left = 96
@@ -23,7 +25,9 @@ object DMMainConnection: TDMMainConnection
   end
   object FDConSQLMain: TFDConnection
     Params.Strings = (
-      'Database=D:\Documents\GitHub\MSSQL_UploadDownloadApp\iwd_main.db'
+      
+        'Database=C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownload' +
+        'App\iwd_main.db'
       'ConnectionDef=SQLITE_IWD_MAIN')
     Left = 88
     Top = 176

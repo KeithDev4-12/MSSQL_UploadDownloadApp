@@ -2833,8 +2833,8 @@ object UMainForm: TUMainForm
                               ExplicitWidth = 3
                             end
                             object DBGridEh8: TDBGridEh
-                              Left = 27
-                              Top = 62
+                              Left = 21
+                              Top = 52
                               Width = 300
                               Height = 120
                               DataSource = DataSource1
@@ -5014,7 +5014,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel1: TscListGroupPanel
               Left = 0
               Top = 0
-              Width = 487
+              Width = 485
               Height = 260
               Align = alTop
               FluentUIOpaque = False
@@ -5504,7 +5504,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel3: TscListGroupPanel
               Left = 0
               Top = 260
-              Width = 487
+              Width = 485
               Height = 278
               Align = alTop
               FluentUIOpaque = False
@@ -6522,7 +6522,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel2: TscListGroupPanel
               Left = 0
               Top = 538
-              Width = 487
+              Width = 485
               Height = 62
               Align = alTop
               FluentUIOpaque = False
@@ -6545,10 +6545,10 @@ object UMainForm: TUMainForm
               HeaderAutoColor = True
               TransparentBackground = False
               DesignSize = (
-                487
+                485
                 62)
               object SpeedButton7: TSpeedButton
-                Left = 316
+                Left = 314
                 Top = 22
                 Width = 168
                 Height = 39
@@ -7637,7 +7637,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010A00F801700130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010A00F801740130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -28271,7 +28271,7 @@ object UMainForm: TUMainForm
     end
   end
   object DSVirtualFetch: TDataSource
-    DataSet = DMMainModule.tblDBFetched
+    DataSet = DMMainModule.fdDBFetched
     Left = 381
     Top = 430
   end
@@ -28315,7 +28315,7 @@ object UMainForm: TUMainForm
     Left = 445
     Top = 430
     Data = {
-      0300070003005F69640E000000000000000A0042696C6C506572696F641800FF
+      0400070003005F69640E000000000000000A0042696C6C506572696F641800FF
       7F0000000006004465766963651800FF7F000000000B00446174654665746368
       65641800FF7F000000000F004D657465725265616465724E616D651800FF7F00
       00000009005A6F6E65436F6465731800FF7F000000000B005265636F7264436F
@@ -28368,7 +28368,7 @@ object UMainForm: TUMainForm
   object VTReadingData: TVirtualTable
     Left = 125
     Top = 495
-    Data = {03000000000000000000}
+    Data = {04000000000000000000}
     object VTReadingDataFileName: TStringField
       FieldName = 'FileName'
       Size = 45
@@ -28496,7 +28496,6 @@ object UMainForm: TUMainForm
     end
   end
   object DataSource1: TDataSource
-    DataSet = DMMainModule.tblMeterReading
     Left = 646
     Top = 371
   end
