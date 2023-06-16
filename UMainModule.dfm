@@ -2,7 +2,7 @@ object DMMainModule: TDMMainModule
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 548
+  Height = 549
   Width = 1031
   object ReaderClients: TFDBatchMoveDataSetReader
     DataSet = qryMSClients
@@ -152,7 +152,7 @@ object DMMainModule: TDMMainModule
       #9#9'[BILLINGCOLLECTION].[dbo].[Mtr_Reading] MR'
       #9#9'where MR.Acct_No = C.Acct_No'
       #9#9'order by MR.MR_Date desc) AS PrevReading'
-      #9'  ,(SELECT top 1 MR.[MR_Date] FROM '
+      #9'  ,(SELECT top 1 CONVERT(varchar,MR.[MR_Date], 101) FROM '
       #9#9'[BILLINGCOLLECTION].[dbo].[Mtr_Reading] MR'
       #9#9'where MR.Acct_No = C.Acct_No'
       #9#9'order by MR.MR_Date desc) AS PrevReadingDate'
@@ -180,7 +180,9 @@ object DMMainModule: TDMMainModule
     ParamData = <
       item
         Name = 'AZONECODE'
+        DataType = ftWideString
         ParamType = ptInput
+        Value = '051'
       end>
     object qryMSClientsAcct_No: TStringField
       FieldName = 'Acct_No'
@@ -260,13 +262,6 @@ object DMMainModule: TDMMainModule
       Precision = 18
       Size = 0
     end
-    object qryMSClientsPrevReadingDate: TSQLTimeStampField
-      AutoGenerateValue = arDefault
-      FieldName = 'PrevReadingDate'
-      Origin = 'PrevReadingDate'
-      ProviderFlags = []
-      ReadOnly = True
-    end
     object qryMSClientsAverageCons: TFMTBCDField
       AutoGenerateValue = arDefault
       FieldName = 'AverageCons'
@@ -291,6 +286,14 @@ object DMMainModule: TDMMainModule
       FieldName = 'PenaltyExempt'
       Origin = 'C_PenExempt'
       Required = True
+    end
+    object qryMSClientsPrevReadingDate: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'PrevReadingDate'
+      Origin = 'PrevReadingDate'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 30
     end
   end
   object tblWaterRates: TFDTable
@@ -1410,7 +1413,7 @@ object DMMainModule: TDMMainModule
   object VTDeviceListAvailable: TVirtualTable
     Left = 624
     Top = 472
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTDeviceListAvailableDeviceName: TStringField
       FieldName = 'DeviceName'
       Size = 45
@@ -1517,7 +1520,7 @@ object DMMainModule: TDMMainModule
   object VTReadingScheduling: TVirtualTable
     Left = 896
     Top = 280
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTReadingSchedulingZoneCode: TStringField
       FieldName = 'ZoneCode'
       Size = 45
@@ -1569,7 +1572,7 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 336
     Data = {
-      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
@@ -1642,7 +1645,7 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 400
     Data = {
-      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
@@ -1852,7 +1855,6 @@ object DMMainModule: TDMMainModule
     object tblSQLMeterReadingmidentity: TFDAutoIncField
       FieldName = 'midentity'
       Origin = 'midentity'
-      ReadOnly = True
     end
   end
   object qryMeterReading: TFDQuery
@@ -1891,9 +1893,9 @@ object DMMainModule: TDMMainModule
       'PresentReading,'
       'PreviousReading,'
       'Consumption,'
-      'CAST(PresentReadingDate as VarChar) As PresentReadingDate, '
+      '(CAST(PresentReadingDate as VarChar)) As PresentReadingDate, '
       'CAST(PresentReadingTime as VarChar) As PresentReadingTime, '
-      'CAST(PreviousReadingDate as VarChar) As PreviousReadingDate, '
+      '(CAST(PreviousReadingDate as VarChar)) As PreviousReadingDate, '
       'NumOfTries,'
       'NumOfPrintedSOA,'
       'NumOfSentSMS,'

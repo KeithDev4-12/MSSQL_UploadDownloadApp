@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, scControls, scModernControls,
   Vcl.StdCtrls, scExtControls, scStyledForm, scStyleManager, Vcl.ImgList,
-  Vcl.Imaging.jpeg, Vcl.ExtCtrls, scImageCollection, ShellApi, Vcl.Mask,
+  Vcl.Imaging.jpeg, Vcl.ExtCtrls, scImageCollection, ShellApi, Vcl.Mask,SqlTimSt,
   scAdvancedControls, scHint, scDrawUtils, scGPImages,
   scGPControls, scGPExtControls, System.ImageList, Vcl.ComCtrls,
   dxGDIPlusClasses, Vcl.Buttons, DBGridEhGrouping, ToolCtrlsEh,
@@ -302,8 +302,6 @@ type
     DeleteMeterReader1: TMenuItem;
     RefreshRecords1: TMenuItem;
     N1: TMenuItem;
-    DBGridEh8: TDBGridEh;
-    DataSource1: TDataSource;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -416,6 +414,7 @@ type
     procedure RefreshRecords1Click(Sender: TObject);
        function isLessThan2Days(AVal:TDateTime):Boolean;
        function isPostedToMSSQL(AMR_Sys_No,AMidentity:Integer):Boolean;
+       function GetDateTimeFromSQLite(AVal:String):String;
 
     Private
       FPanelRegion:HRGN;
@@ -721,10 +720,11 @@ end;
 function TUMainForm.isPostedToMSSQL(AMR_Sys_No, AMidentity: Integer): Boolean;
 Var
   MR_Sys_No_First:Integer;
+  ADateTimeNew:String;
 begin
   with DMMainModule do begin
     try
-
+      ADateTimeNew := '';
 
       qryPostingMeterReading.Close;
       qryPostingMeterReading.Open;
@@ -750,8 +750,14 @@ begin
         tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
         tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
         //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
-        tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
-        tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+        //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+
+        tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+        tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
+
+        //tblSQLMeterReadingPrevMR_Date.AsDateTime := qryPostingMeterReadingPreviousReadingDate.AsDateTime;
+        //tblSQLMeterReadingMR_Date.AsDateTime := qryPostingMeterReadingPresentReadingDate.AsDateTime;
+        //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
         tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
         tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
         tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
@@ -761,7 +767,9 @@ begin
         tblSQLMeterReadingMR_Status.AsString := '1' ;
         tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
         tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
-        tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
+        tblSQLMeterReadingTime_stamp.AsDateTime := Now();
+        //ShowMessage(DateTimeToStr(Now()));
+        //tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
         if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
           tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
         end else begin
@@ -1245,6 +1253,9 @@ begin
      if scGPComboEdit1.ItemIndex = -1 then
       Exit;
 
+     if True then
+
+
      if fdMeterReader.Locate('Name',Trim(scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption),[]) then begin
        MRNo := fdMeterReader_id.AsInteger;
      end else begin
@@ -1516,6 +1527,16 @@ begin
   end;
 end;
 
+
+function TUMainForm.GetDateTimeFromSQLite(AVal: String): String;
+Var
+  AMonth,ADay,AYear:String;
+begin
+  AMonth :=  SplitString(AVal,'/')[0]; // Month
+  ADay := SplitString(AVal,'/')[1]; // Day
+  AYear := SplitString(AVal,'/')[2]; // Year
+  result :=  ADay + '/' +  AMonth + '/' + AYear + ' 00:00:00'  ;
+end;
 
 procedure TUMainForm.GetDeviceStatus(ADeviceADB, AStatusADB: String);
 begin
@@ -2133,7 +2154,9 @@ begin
   end else begin
      scGPCircledProgressBar2.Caption := 'Processing.'
   end;
-
+  {with DMMainModule do begin
+    tblClientsPrevReadingDate.AsString := FormatDateTime('MM/DD/YYYY',qryMSClientsPrevReadingDate.AsDateTime)
+  end;}
 end;
 
 procedure TUMainForm.BMClientsWriteValue(ASender: TObject;
@@ -2153,6 +2176,9 @@ begin
   end else begin
      scGPCircledProgressBar2.Caption := 'Processing.'
   end;
+  {with DMMainModule do begin
+    tblClientsPrevReadingDate.AsString := FormatDateTime('MM/DD/YYYY',qryMSClientsPrevReadingDate.AsDateTime)
+  end;}
 end;
 
 procedure TUMainForm.BMMeterReadingScheduleProgress(ASender: TObject;
@@ -2352,6 +2378,8 @@ begin
   end else begin
     Panel36.Visible := False;
   end;
+
+  InvalidateRect(scSplitView1.Handle,nil,True);
 end;
 
 procedure TUMainForm.scSplitViewSettingsResize(Sender: TObject);
@@ -2538,8 +2566,21 @@ begin
 end;
 
 procedure TUMainForm.SpeedButton27Click(Sender: TObject);
+Var
+  ABillm:String;
 begin
   with DMMainModule do begin
+  if Length(Edit15.Text) <> 6 then begin
+    MessageDlg('Please Put Billmonth the Correct Way! [YYYYMM]',mtError,[mbClose],0);
+    Exit;
+  end else begin
+    ABillm := Edit15.Text;
+    if  strToInt(ABillm.Substring(4,2)) > 12 then begin
+      MessageDlg('Please Put Billmonth the Correct Way! [YYYYMM]',mtError,[mbClose],0);
+      Exit;
+    end;
+  end;
+
     if MessageDlg('Are you Sure you Want to post this Record?' + #13#10 +
     'Press [Yes] to Continue Posting' + #13#10 +
     'Press [No] to Cancel Posting!', mtWarning,[mbYes,mbNo],0) = mrYes then begin
@@ -2593,6 +2634,7 @@ var
   LForm: TForm;
   MultipleDeviceSelectedOptionResult: String;
   SourceDBFile,MeterReaderFolderName:String;
+  ABillm:String;
   label ReCheck;
 Const
   TABLET_DEFAULT_UPLOAD_LOCATION = '/sdcard/Android/data/com.alltechsystems.iwd/files/';
@@ -2613,6 +2655,17 @@ begin
     end;
     if not (Length(scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption)>0)  then begin
       Exit;
+    end;
+
+    if Length(Edit2.Text) <> 6 then begin
+      MessageDlg('Please Put Billmonth the Correct Way! [YYYYMM]',mtError,[mbClose],0);
+      Exit;
+    end else begin
+      ABillm := Edit2.Text;
+      if  strToInt(ABillm.Substring(4,2)) > 12 then begin
+        MessageDlg('Please Put Billmonth the Correct Way! [YYYYMM]',mtError,[mbClose],0);
+        Exit;
+      end;
     end;
     //if scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption.Contains('METERREADER') then begin
     //  MeterReaderFolder := StringReplace(IntToStr(MRNo) + '-' + scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption,' ','_',[rfReplaceAll, rfIgnoreCase]);
@@ -2929,12 +2982,12 @@ begin
   Label13.Caption := '';
 
   if Length(Edit1.Text) <> 6 then begin
-    MessageDlg('Please Put Billmonth the Correct Way!',mtInformation,[mbClose],0);
+    MessageDlg('Please Put Billmonth the Correct Way! [YYYYMM]',mtError,[mbClose],0);
     Exit;
   end else begin
     ABillm := Edit1.Text;
-    if  strToInt(ABillm.Substring(0,2)) > 12 then begin
-      MessageDlg('Please Put Billmonth the Correct Way!',mtInformation,[mbClose],0);
+    if  strToInt(ABillm.Substring(4,2)) > 12 then begin
+      MessageDlg('Please Put Billmonth the Correct Way! [YYYYMM]',mtError,[mbClose],0);
       Exit;
     end;
   end;
