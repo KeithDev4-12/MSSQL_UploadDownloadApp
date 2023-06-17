@@ -225,8 +225,6 @@ type
     UsbRemovalTimer: TTimer;
     UsbArrivalTimer: TTimer;
     DriveComboBox1: TDriveComboBox;
-    Panel41: TPanel;
-    Panel43: TPanel;
     VTReadingData: TVirtualTable;
     VTReadingDataFileName: TStringField;
     VTReadingDataDateExported: TStringField;
@@ -282,15 +280,10 @@ type
     VTFetchHistoryZoneCodes: TWideStringField;
     VTFetchHistoryRecordCount: TWideStringField;
     PaintBox1: TPaintBox;
-    scGPPanel11: TscGPPanel;
-    scGPSizeBox1: TscGPSizeBox;
-    scLabel15: TscLabel;
-    scLabel16: TscLabel;
-    scLabel18: TscLabel;
     SpeedButton28: TSpeedButton;
     pnlActivationStatus: TPanel;
-    Label38: TLabel;
-    Label39: TLabel;
+    lblProductVersion: TLabel;
+    lblExpireDate: TLabel;
     pnlSettings: TPanel;
     BMMeterReading: TFDBatchMove;
     Label37: TLabel;
@@ -302,6 +295,11 @@ type
     DeleteMeterReader1: TMenuItem;
     RefreshRecords1: TMenuItem;
     N1: TMenuItem;
+    PMZoneDelete: TPopupMenu;
+    RemoveFromThisSchedule1: TMenuItem;
+    Timer2: TTimer;
+    N2: TMenuItem;
+    ContinueTransferringSQLFile1: TMenuItem;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -341,6 +339,7 @@ type
     procedure SpeedButton7Click(Sender: TObject);
     procedure CopyFolder(const SourceDir, DestDir: string);
     procedure CopyFile(const SourceFile, DestinationPath: string);
+    function IsNumericChar(const Key: Char; const ACombobox1:TscGpComboBox): Boolean;
 
     procedure SpeedButton19Click(Sender: TObject);
     procedure SpeedButton20Click(Sender: TObject);
@@ -381,6 +380,7 @@ type
     procedure scGPComboBox1Change(Sender: TObject);
     procedure scSplitView1Resize(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
+
     procedure scGPComboBox2Change(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure pushSQLiteDBToTablet(const LPathTo,LPathFrom,AFileName,AMeterReaderName,ABillMonth,ASettingsDownload:String);
@@ -415,6 +415,27 @@ type
        function isLessThan2Days(AVal:TDateTime):Boolean;
        function isPostedToMSSQL(AMR_Sys_No,AMidentity:Integer):Boolean;
        function GetDateTimeFromSQLite(AVal:String):String;
+    procedure Edit15KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure RemoveFromThisSchedule1Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure GetBillMonthNow(const AEdit:TEdit;const AComboBox:TscGPComboBox);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure Timer2Timer(Sender: TObject);
+    procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure scGPSizeBox1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure scGPSizeBox1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure RefreshConnection1Click(Sender: TObject);
+    procedure ContinueTransferringSQLFile1Click(Sender: TObject);
+      protected
+    procedure WMNCHitTest(var Msg: TWMNCHitTest); message WM_NCHITTEST;
+
+
 
     Private
       FPanelRegion:HRGN;
@@ -423,6 +444,7 @@ type
        procedure USBRemoval(Sender: TObject);
        procedure GetDriveLetters(AList: TStrings);
        procedure RefreshDriveComboBox(const aDriveName: char);
+       function IsMouseButtonDown(Button: Word): Boolean;
     Public
       procedure CheckAndroid(AFilterOut:String);
       function isAvailableDevice():Boolean;
@@ -430,11 +452,13 @@ type
       function isMultipleDevice():Boolean;
       function isADBPushFileToTablet():Boolean;
       function GetDosOutput(CommandLine: string; Work: string = 'C:\Platform-tools\'): String;
+
   end;
 
 
 
 var
+
   UMainForm: TUMainForm;
   MRNo:Integer;
   IniFile: TIniFile;
@@ -448,6 +472,8 @@ var
   FlashDriveEnum : Integer;
   IncVal:Integer;
   DeviceADB,ADeviceFound,StatusADB,SerialNumberADB:String;
+  isMouseDown:Boolean;
+  AWidth,AHeight:Integer;
 
 
 implementation
@@ -455,7 +481,7 @@ implementation
 {$R *.dfm}
 
 
-Uses UMainModule,UMainConnectionModule,DeviceDialogU,SchedulingDialogU;
+Uses UMainModule,UMainConnectionModule,DeviceDialogU, SchedulingDialogU, USplashScreen;
 
 procedure TUMainForm.CaptionLabelMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
@@ -705,6 +731,11 @@ begin
 
 end;
 
+function TUMainForm.IsMouseButtonDown(Button: Word): Boolean;
+begin
+  Result := (GetAsyncKeyState(Button) and $8000) <> 0;
+end;
+
 function TUMainForm.isMultipleDevice: Boolean;
 var
   AReturnVal : String;
@@ -794,6 +825,126 @@ end;
 procedure TUMainForm.CloseButtonClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TUMainForm.ContinueTransferringSQLFile1Click(Sender: TObject);
+Var
+  AMeterReaderName:String;
+label ReCheck;
+begin
+   with DMMainModule do begin
+    ReCheck:
+    if fdDBPushedDevice.AsString.Contains('NO DEVICES') then begin
+      ADeviceFound := getAvaialbeDevice;
+      AMeterReaderName := fdDBPushedMeterReaderName.AsString;
+      if isMultipleDevice() then begin
+        Label1.Caption := Label1.Caption + #13#10 + 'Multiple Device Have Found';
+        Label1.Caption := Label1.Caption + #13#10 + 'Please Connect Only One Device!';
+        Label1.Caption := Label1.Caption + #13#10 + 'and Try Again! Thank You.';
+        //RUN Form to Select Device to Connect or Send Data
+        if MessageDlg('Multiple Device are Found Connected to Computer' + #13#10 +
+        'Please Remove One And Click [Retry] to continue pushing of SQL File to Tablet' + #13#10 +
+        'Press [Cancel] to Cancel Transaction!', mtInformation,[mbRetry,mbCancel],0) = mrRetry then begin
+           Label1.Caption := Label1.Caption + #13#10 + 'Checking Again for Device!!';
+           goto ReCheck;
+        end else begin
+           Label1.Caption := Label1.Caption + #13#10 + 'Generated SQL File Are Cancelled or Deleted!';
+           tblGeneratedHistory.Delete;
+        end;
+        Application.ProcessMessages;
+
+        // basta may something didi na code dati
+      end else begin
+        //Since it is only has One Connection then this will be execute process
+        Application.ProcessMessages;
+        if isAvailableDevice then begin
+          // Select DB Push History
+          Label1.Caption := Label1.Caption + #13#10 + 'Checking Availability to Push DB File!';
+          tblDBPushed.Close;
+          tblDBPushed.Open;
+          tblDBPushed.First;
+          Application.ProcessMessages;
+          if not tblDBPushed.Locate('BillPeriod;DatePushed',VarArrayOf([Trim(Edit2.Text),FormatDateTime('MM/DD/YYYY',Now())]),[]) then begin
+            tblDBPushed.Append;
+            tblDBPushedBillPeriod.AsString := Trim(Edit2.Text);
+            tblDBPushedDevice.AsString := DeviceADB;
+            tblDBPushedStatus.AsString := 'Not Yet Pushed';
+            tblDBPushedDatePushed.AsString := FormatDateTime('MM/DD/YYYY',Now());
+            tblDBPushedMeterReaderName.AsString := AMeterReaderName;
+            tblDBPushed.Post;
+            Application.ProcessMessages;
+            // Process the Sending of Data Using ADB PUSH FILE
+            if isADBPushFileToTablet() then begin
+            Label1.Caption := Label1.Caption + #13#10 + 'SQL File Successfully Pushed to';
+            Label1.Caption := Label1.Caption + #13#10 + 'Connected Device : ['+ DeviceADB + ']';
+            Label1.Caption := Label1.Caption + #13#10 + 'With SerialNumber : ['+ SerialNumberADB + ']';
+              MessageDlg('Generating Reading Data Done!!', mtInformation,[mbOK],0);
+              MessageDlg('File Pushed Successfully ' + #13#10 + '['+ Trim(SplitString(Memo2.Text,':')[2])+']',mtInformation,[mbOK],0);
+              tblDBPushed.Last;
+              tblDBPushed.Edit;
+              tblDBPushedStatus.AsString := 'Already Pushed';
+              tblDBPushed.Post;
+            end else begin
+              Label1.Caption := Label1.Caption + #13#10 + 'An Error has occured while transferring Data';
+              MessageDlg('An Error has occured while transferring Data'+ #13#10+'Error occured : '+SplitString(Memo2.Text,'|')[1],mtError,[mbOK],0);
+            end;
+          end else begin
+          Application.ProcessMessages;
+            Label1.Caption := Label1.Caption + #13#10 + 'Data has History Process!';
+            Label1.Caption := Label1.Caption + #13#10 + 'This may Overwrite the data!';
+            if MessageDlg('Data Are Already Inserted!' + #13#10 + 'Do you want to Overwrite the Data? Press [YES] to Continue'+ #13#10 + 'Press [No] to Cancel Overwriting Process!',mtInformation,[mbyes,mbNo],0) = mrYes then begin
+              tblDBPushed.Edit;
+              tblDBPushedBillPeriod.AsString := Trim(Edit2.Text);
+              tblDBPushedDevice.AsString := DeviceADB;
+              tblDBPushedStatus.AsString := 'Not Yet Pushed';
+              tblDBPushedDatePushed.AsString := FormatDateTime('MM/DD/YYYY',Now());
+              tblDBPushedMeterReaderName.AsString := AMeterReaderName;
+              tblDBPushed.Post;
+              Application.ProcessMessages;
+              // Process the Sending of Data Using ADB PUSH FILE
+              if isADBPushFileToTablet() then begin
+                Label1.Caption := Label1.Caption + #13#10 + 'SQL File Successfully Pushed to';
+                Label1.Caption := Label1.Caption + #13#10 + 'Connected Device : ['+ DeviceADB + ']';
+                Label1.Caption := Label1.Caption + #13#10 + 'With SerialNumber : ['+ SerialNumberADB + ']';
+                MessageDlg('Generating Reading Data Done!!', mtInformation,[mbOK],0);
+                MessageDlg('File Pushed Successfully ' + #13#10 + '['+ Trim(SplitString(Memo2.Text,':')[2])+']',mtInformation,[mbOK],0);
+                tblDBPushed.Edit;
+                tblDBPushedStatus.AsString := 'Already Pushed';
+                tblDBPushed.Post;
+                Application.ProcessMessages;
+              end else begin
+                Label1.Caption := Label1.Caption + #13#10 + 'An Error has occured while transferring Data';
+                MessageDlg('An Error has occured while transferring Data'+ #13#10+'Error occured : '+SplitString(Memo2.Text,'|')[1],mtError,[mbOK],0);
+              end;
+            end else begin
+              tblGeneratedHistory.Last;
+              tblGeneratedHistory.Edit;
+              tblGeneratedHistoryUploadedStatus.AsInteger := 0;
+              tblGeneratedHistory.Post;
+              Application.ProcessMessages;
+            end;
+          end;
+          fdDBPushed.Close;
+          fdDBPushed.ParamByName('ABillPeriod').AsString := Trim(Edit2.Text);
+          fdDBPushed.Open();
+          fdDBPushed.First;
+          Application.ProcessMessages;
+        end;
+      end;
+    end else begin
+      if fdDBPushedStatus.AsString.Contains('Already Pushed') then begin
+        if messageDlg('This generated Data Is Already Pushed to A Device!'+
+         #13#10 +
+         'Want to continue Press [Yes]!'+
+         'To Cancel Transaction Press [No]',mtInformation,[mbYes,mbNo],0) = mrYes then begin
+          ADeviceFound := getAvaialbeDevice;
+
+
+        end;
+      end;
+    end;
+
+  end;
 end;
 
 procedure TUMainForm.ControlZ1Click(Sender: TObject);
@@ -1198,10 +1349,20 @@ begin
   end;
 end;
 
+procedure TUMainForm.Edit15KeyPress(Sender: TObject; var Key: Char);
+begin
+  if not IsNumericChar(Key,scGPComboBox3) then
+    Key := #0;
+end;
+
 procedure TUMainForm.Edit1Change(Sender: TObject);
 begin
   with DMMainModule do begin
   //GetTheMRNo From Meter Reader Accounts scGPComboBox4.Items[scGPComboBox4.ItemIndex].Caption
+     if Length(Edit1.text) > 6 then begin
+       raise Exception.Create('Bill Month Not Supported');
+     end;
+
      if scGPComboBox2.ItemIndex = -1 then
       Exit;
 
@@ -1210,6 +1371,8 @@ begin
      end else begin
        MRNo := -234234;
      end;
+
+
     if (Length(scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption)>0) AND (Length(Edit1.text)=6) then begin
       //
       //Detect USB CONNECTION for ANDROID DEVICE
@@ -1242,6 +1405,12 @@ begin
 
     end;
   end;
+end;
+
+procedure TUMainForm.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if not IsNumericChar(Key,scGPComboBox2) then
+    Key := #0;
 end;
 
 procedure TUMainForm.Edit2Change(Sender: TObject);
@@ -1289,11 +1458,44 @@ begin
 
 end;
 
+procedure TUMainForm.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+  if not IsNumericChar(Key,scGPComboEdit1) then
+    Key := #0;
+end;
+
+function TUMainForm.IsNumericChar(const Key: Char; const ACombobox1:TscGpComboBox): Boolean;
+begin
+  if Key in ['0'..'9', #9, #13, #8] then begin
+     Result := True  ;
+  end else begin
+     Result := False;
+  end;
+
+  if (Key = #13) or (Key  = #9) then begin
+     Result := True  ;
+     ACombobox1.SetFocus;
+     ACombobox1.DropDown;
+  end;
+
+
+
+   // Allow digits, Tab, Enter, and backspace
+end;
+
 procedure TUMainForm.FormActivate(Sender: TObject);
 Var
   I:Integer;
+
 begin
+
+  lblProductVersion.Caption := 'Product Activated Version : 1.4.23.2';
+  lblExpireDate.Caption := 'Product will Expire In : [06/12/2***]';
+
+  DoubleBuffered := True;
+
   AdjustScaling();
+
   with DMMainModule do begin
     tblDBFetched.Close;
     tblDBFetched.Open;
@@ -1437,13 +1639,25 @@ begin
 
 end;
 
+procedure TUMainForm.FormMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if (Button = mbLeft) then
+  begin
+    isMouseDown := True;
+    // Outside click detected, perform your action here
+
+  end;
+end;
+
 procedure TUMainForm.FormMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  if (Button = mbLeft) and (not PtInRect(scSplitViewSettings.ClientRect, scSplitViewSettings.ScreenToClient(Point(X, Y)))) then
+  if (Button = mbLeft) then
   begin
+    isMouseDown := false;
     // Outside click detected, perform your action here
-    ShowMessage('Outside click detected!');
+
   end;
 end;
 
@@ -1467,8 +1681,8 @@ begin
   begin
     DriveName := DriveList.strings[i];
     RefreshDriveComboBox(DriveName[1]); //DriveName[1] to convert string to char and get the first character
-    scLabel15.Caption := '<USB IS CONNECTED> ('+ UPPERCASE(DriveName[1]) +')';
-    scLabel15.Caption := UPPERCASE(DriveName[1]) +':/sdcard/Android/data/com.alltechsystems.iwd/files/iwd_lwua/reading/';
+    //scLabel15.Caption := '<USB IS CONNECTED> ('+ UPPERCASE(DriveName[1]) +')';
+    //scLabel15.Caption := UPPERCASE(DriveName[1]) +':/sdcard/Android/data/com.alltechsystems.iwd/files/iwd_lwua/reading/';
     DriveFromCombobox := DriveName[1];
     FlashDriveEnum := 2;
     break;
@@ -1490,8 +1704,8 @@ begin
   UsbRemovalTimer.Enabled := False;
   DriveLetter := ExtractFileDrive(Application.ExeName);
   RefreshDriveComboBox(DriveLetter[1]);
-  scLabel15.Caption := '<USB IS DISCONNECTED>';
-  scLabel15.Caption := 'NO CONNECTED DEVICE';
+  //scLabel15.Caption := '<USB IS DISCONNECTED>';
+  //scLabel15.Caption := 'NO CONNECTED DEVICE';
 
   DriveFromCombobox := DriveLetter[1];
 
@@ -1502,13 +1716,72 @@ end;
 
 procedure TUMainForm.FormResize(Sender: TObject);
 begin
-  Self.Refresh;
+  //if not IsMouseButtonDown(VK_LBUTTON) then begin
+
+    BorderPanel.Hide;
+
+    Timer2.Enabled := True;
+    Sleep(200);
+
+    if (Self.Width >= (Screen.Width-100)) AND (Self.Height >= (Screen.Height-100)) then begin
+      scSplitView1.Animation := False;
+      scSplitView1.Open;
+      scSplitView1.DisplayMode := scsvmDocked;
+      Panel19.Width := Round(Self.Width*0.40);
+      Panel48.Width := Round(Self.Width*0.40);
+      Panel21.Width := Round(Self.Width*0.40);
+      scGPPanel14.Height := Round(Self.Height*0.55);
+      scSplitViewSettings.OpenedWidth := Round(Self.Width*0.50);
+    end else begin
+      scSplitView1.Close;
+      scSplitView1.DisplayMode := scsvmOverlay;
+      scSplitView1.Animation := True;
+      Panel19.Width := Round(Self.Width*0.40); //303;
+      Panel48.Width := Round(Self.Width*0.40); //303;
+      Panel21.Width := Round(Self.Width*0.40); //303;
+      scGPPanel14.Height := Round(Self.Height*0.50); //297;
+      scSplitViewSettings.OpenedWidth := Round(Self.Width*0.80);
+    end;
+
+    scGPCircledProgressBar1.Left := (Panel23.Width Div 2) - (scGPCircledProgressBar1.Width Div 2);
+    scGPCircledProgressBar2.Left := (Panel23.Width Div 2) - (scGPCircledProgressBar1.Width Div 2);
+
+    InvalidateRect(Panel12.Handle,nil,True);
+    InvalidateRect(Panel18.Handle,nil,True);
+    InvalidateRect(Panel3.Handle,nil,True);
+    InvalidateRect(scSplitView1.Handle,nil,True);
+    InvalidateRect(Panel39.Handle,nil,True);
+    InvalidateRect(Panel38.Handle,nil,True);
+
+    InvalidateRect(Panel6.Handle,nil,True);
+    InvalidateRect(Panel27.Handle,nil,True);
+    InvalidateRect(Panel35.Handle,nil,True);
+    InvalidateRect(Panel28.Handle,nil,True);
+
+    InvalidateRect(Panel31.Handle,nil,True);
+    InvalidateRect(Panel32.Handle,nil,True);
+    InvalidateRect(Panel33.Handle,nil,True);
+
+    InvalidateRect(Panel55.Handle,nil,True);
+    InvalidateRect(Panel49.Handle,nil,True);
+    InvalidateRect(Panel50.Handle,nil,True);
+    InvalidateRect(Panel56.Handle,nil,True);
+    InvalidateRect(scGPPanel20.Handle,nil,True);
+    InvalidateRect(scGPPanel21.Handle,nil,True);
+
+    InvalidateRect(pnlSettings.Handle,nil,True);
+    InvalidateRect(scListGroupPanel1.Handle,nil,True);
+    InvalidateRect(scListGroupPanel3.Handle,nil,True);
+    InvalidateRect(scListGroupPanel2.Handle,nil,True);
+  //end;
+
+  //BorderPanel.Visible := True;
 end;
 
 procedure TUMainForm.FormShow(Sender: TObject);
 begin
    //Check Activation Key
-
+   
    Application.ProcessMessages;
 end;
 
@@ -1527,6 +1800,27 @@ begin
   end;
 end;
 
+
+procedure TUMainForm.GetBillMonthNow(const AEdit:TEdit;const AComboBox:TscGPComboBox);
+Var
+  AYear,AMonth,ADay,ABillMonth,ADateString :String;
+begin
+  ADateString :=  FormatDateTime('YYYYMM-DD',Now());
+  ADay := SplitString( ADateString,'-')[1];
+  AMonth := RightStr(SplitString( ADateString,'-')[0],2);
+  if StrToInt(ADay) >= 10 then begin
+    ABillMonth := SplitString( ADateString,'-')[0];
+  end else begin
+    if StrToInt(AMonth) = 1 then begin
+      ABillMonth := SplitString( ADateString,'-')[0].Substring(0,4)+'12' ;
+    end else begin
+      ABillMonth := SplitString( ADateString,'-')[0].Substring(0,4)+IntToStr(StrToInt(AMonth)-1) ;
+    end;
+  end;
+  AEdit.Text := ABillMonth;
+  AComboBox.SetFocus;
+  AComboBox.DropDown;
+end;
 
 function TUMainForm.GetDateTimeFromSQLite(AVal: String): String;
 Var
@@ -1631,16 +1925,35 @@ end;
 
 procedure TUMainForm.MaxButtonClick(Sender: TObject);
 begin
-  if scStyledForm1.IsDWMClientMaximized then
-    scStyledForm1.DWMClientRestore
-  else
+  Self.AutoSize := False;
+  BackgroundPanel.Hide;
+  if scStyledForm1.IsDWMClientMaximized then begin
+    
+    //scStyledForm1.DWMClientMaximize;
+    Self.Width := AWidth;
+    Self.Height := AHeight;
+    scStyledForm1.DWMClientRestore;
+
+    BackgroundPanel.Show;
+
+  end else begin
+
     scStyledForm1.DWMClientMaximize;
+
+    BackgroundPanel.Show;
+  end;
+
+
 end;
 
 procedure TUMainForm.MinButtonClick(Sender: TObject);
 begin
+  Self.AutoSize := False;
+  //BackgroundPanel.Hide;
   Application.Minimize;
 end;
+
+
 
 procedure TUMainForm.PaintBox1Paint(Sender: TObject);
 var
@@ -1721,6 +2034,16 @@ begin
   end;
 end;
 
+procedure TUMainForm.RefreshConnection1Click(Sender: TObject);
+begin
+  with DMMainModule do begin
+    //if fdDBPushedDevice.AsString.Contains('') then begin
+     ADeviceFound := getAvaialbeDevice;
+    //end;
+
+  end;
+end;
+
 procedure TUMainForm.RefreshDriveComboBox(const aDriveName: char);
 begin
    //textcase calls the buildlist procedure that updates the list of drives
@@ -1780,6 +2103,43 @@ begin
   end;
 end;
 
+procedure TUMainForm.RemoveFromThisSchedule1Click(Sender: TObject);
+begin
+  with DMMainModule do begin
+    if VTReadingScheduleMainisPosted.AsInteger = 0 then begin
+      VTReadingScheduleMain.Delete;
+      if not isInsertMode then begin
+        VTReadingScheduleMain.First;
+        while not VTReadingScheduleMain.EOF do begin
+          qryMSZoneCode.Filtered := False;
+
+          qryMSZoneCode.Filter := qryMSZoneCode.Filter + ' AND ZoneCode <> ' + QuotedStr(VTReadingScheduleMainZoneCode.AsString);
+
+          qryMSZoneCode.Filtered := True;
+          VTReadingScheduleMain.Next;
+        end;
+      end else begin
+      incVal :=0;
+        VTReadingScheduleMain.First;
+        while not VTReadingScheduleMain.EOF do begin
+          qryMSZoneCode.Filtered := False;
+          if incVal = 0 then begin
+            qryMSZoneCode.Filter := 'ZoneCode <> ' + QuotedStr(VTReadingScheduleMainZoneCode.AsString);
+            incVal := 1;
+          end else begin
+            qryMSZoneCode.Filter := qryMSZoneCode.Filter + ' AND ZoneCode <> ' + QuotedStr(VTReadingScheduleMainZoneCode.AsString);
+          end;
+          qryMSZoneCode.Filtered := True;
+          VTReadingScheduleMain.Next;
+        end;
+      end;
+    end else begin
+      MessageDlg('You Cannot Delete Posted Schedule.' +
+       #13#10 + 'Always be cautious before posting!',mtWarning,[mbClose],0);
+    end;
+  end;
+end;
+
 procedure TUMainForm.RemoveThisReadingSchedule1Click(Sender: TObject);
 begin
   //Removing Reading  Schedule in Schedule
@@ -1812,12 +2172,14 @@ end;
 procedure TUMainForm.scButton2Click(Sender: TObject);
 begin
   scPageViewer1.PageIndex := 0;
+  Edit2.Clear;
   //scButton6Click(Sender);
 end;
 
 procedure TUMainForm.scButton3Click(Sender: TObject);
 begin
   scPageViewer1.PageIndex := 1;
+  Edit1.Clear;
   //scButton6Click(Sender);
 end;
 
@@ -1834,6 +2196,7 @@ end;
 procedure TUMainForm.scButton5Click(Sender: TObject);
 begin
   scPageViewer1.PageIndex := 2;
+  Edit15.Clear;
   //scButton6Click(Sender);
 end;
 
@@ -2042,6 +2405,18 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TUMainForm.scGPSizeBox1MouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := True;
+end;
+
+procedure TUMainForm.scGPSizeBox1MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  isMouseDown := False;
 end;
 
 procedure TUMainForm.scGPSwitch1ChangeState(Sender: TObject);
@@ -2432,7 +2807,7 @@ procedure TUMainForm.scStyledForm1DWMClientRestore(Sender: TObject);
 begin
   MaxButton.GlyphOptions.Kind := scgpbgkMaximize;
 
-  BorderPanel.Sizeable := True;
+  BorderPanel.Sizeable := false;
 end;
 
 procedure TUMainForm.SpeedButton10Click(Sender: TObject);
@@ -2479,6 +2854,11 @@ begin
       fdSettings.Edit;
     end;
   end;
+end;
+
+procedure TUMainForm.SpeedButton1Click(Sender: TObject);
+begin
+  GetBillMonthNow(Edit2,scGPComboEdit1);
 end;
 
 procedure TUMainForm.SpeedButton20Click(Sender: TObject);
@@ -3236,6 +3616,27 @@ begin
   //InvalidateRect(PaintBox1.Handle,nil,True);
 end;
 
+procedure TUMainForm.Timer2Timer(Sender: TObject);
+begin
+  //
+  BorderPanel.Visible := True;
+  BorderPanel.DoubleBuffered := True;
+
+
+  //InvalidateRect(BorderPanel,nil,True);
+  
+  Timer2.Enabled := False;
+  Self.AutoSize := True;
+  //SHowMessage(IntToStr(Panel10.Left) + '|' + IntToStr(Panel10.Top) + '|' +BoolToStr(Panel10.Visible))
+end;
+
+procedure TUMainForm.WMNCHitTest(var Msg: TWMNCHitTest);
+begin
+  inherited;
+  if BorderStyle = bsNone then
+    Msg.Result := HTCLIENT;
+end;
+
 function TUMainForm.WriteIniFile(AFileName: String): String;
 Var
   NewValue:String;
@@ -3251,5 +3652,15 @@ begin
 end;
 
 
+
+procedure TUMainForm.SpeedButton4Click(Sender: TObject);
+begin
+  GetBillMonthNow(Edit1,scGPComboBox2);
+end;
+
+procedure TUMainForm.SpeedButton3Click(Sender: TObject);
+begin
+  GetBillMonthNow(Edit15,scGPComboBox3);
+end;
 
 end.

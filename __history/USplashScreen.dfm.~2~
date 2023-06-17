@@ -1,0 +1,20 @@
+object SpashScreenU: TSpashScreenU
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'SpashScreenU'
+  ClientHeight = 502
+  ClientWidth = 521
+  Color = clGreen
+  TransparentColor = True
+  TransparentColorValue = clGreen
+  DoubleBuffered = True
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 106
+  TextHeight = 14
+end

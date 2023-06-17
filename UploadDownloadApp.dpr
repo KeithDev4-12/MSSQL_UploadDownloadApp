@@ -2,6 +2,8 @@ program UploadDownloadApp;
 
 
 
+
+
 uses
   Vcl.Forms,
   MainU in 'MainU.pas' {UMainForm},
@@ -19,9 +21,16 @@ uses
 {$R *.res}
 
 begin
+
+
+
+
+
   Application.Initialize;
   ReportMemoryLeaksOnShutDown := True;
   Application.MainFormOnTaskbar := True;
+  Application.ProcessMessages;
+
   Application.CreateForm(TUMainForm, UMainForm);
   Application.CreateForm(TDMMainModule, DMMainModule);
   Application.CreateForm(TDMMainConnection, DMMainConnection);
