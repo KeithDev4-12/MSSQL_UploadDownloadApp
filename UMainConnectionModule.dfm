@@ -4,7 +4,11 @@ object DMMainConnection: TDMMainConnection
   Width = 225
   object FDConSQL: TFDConnection
     Params.Strings = (
+      
+        'Database=C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownload' +
+        'App\iwd_lwua.db'
       'ConnectionDef=SQLITE_IWD_MOBILE')
+    Connected = True
     Left = 96
     Top = 40
   end
@@ -15,6 +19,7 @@ object DMMainConnection: TDMMainConnection
       'Server=BITSNBYTES\SQLEXPRESS'
       'User_Name='
       'ConnectionDef=MSSQL_IWD')
+    Connected = True
     Left = 96
     Top = 96
   end

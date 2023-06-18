@@ -1,12 +1,14 @@
 object UMainForm: TUMainForm
   Left = 0
   Top = 0
-  AutoSize = True
   BorderIcons = []
   BorderStyle = bsNone
+  Caption = 'UploadDownloadSoftware'
   ClientHeight = 652
   ClientWidth = 830
   Color = clBtnFace
+  TransparentColor = True
+  TransparentColorValue = clYellow
   Constraints.MinHeight = 400
   Constraints.MinWidth = 400
   DoubleBuffered = True
@@ -191,9 +193,6 @@ object UMainForm: TUMainForm
               Align = alClient
               BevelOuter = bvNone
               TabOrder = 0
-              DesignSize = (
-                778
-                617)
               object Label26: TLabel
                 Left = 0
                 Top = 7
@@ -222,905 +221,365 @@ object UMainForm: TUMainForm
                 Font.Style = []
                 ParentFont = False
               end
-              object Panel44: TPanel
-                Left = 16
-                Top = 62
-                Width = 744
+              object Panel45: TPanel
+                AlignWithMargins = True
+                Left = 18
+                Top = 60
+                Width = 742
                 Height = 539
-                Anchors = [akLeft, akTop, akRight, akBottom]
+                Margins.Left = 18
+                Margins.Top = 60
+                Margins.Right = 18
+                Margins.Bottom = 18
+                Align = alClient
                 BevelOuter = bvNone
                 TabOrder = 0
-                object Panel45: TPanel
-                  Left = 0
+                object Panel46: TPanel
+                  Left = 421
                   Top = 0
-                  Width = 744
+                  Width = 18
                   Height = 539
-                  Align = alClient
+                  Align = alRight
                   BevelOuter = bvNone
                   TabOrder = 0
-                  object Panel46: TPanel
-                    Left = 423
+                  object Panel47: TPanel
+                    Left = 0
                     Top = 0
                     Width = 18
                     Height = 539
                     Align = alRight
                     BevelOuter = bvNone
                     TabOrder = 0
-                    object Panel47: TPanel
-                      Left = 0
-                      Top = 0
-                      Width = 18
-                      Height = 539
-                      Align = alRight
-                      BevelOuter = bvNone
-                      TabOrder = 0
-                    end
                   end
-                  object Panel48: TPanel
-                    Left = 441
+                end
+                object Panel48: TPanel
+                  Left = 439
+                  Top = 0
+                  Width = 303
+                  Height = 539
+                  Align = alRight
+                  BevelOuter = bvNone
+                  TabOrder = 1
+                  object scGPPanel16: TscGPPanel
+                    Left = 0
                     Top = 0
                     Width = 303
                     Height = 539
-                    Align = alRight
-                    BevelOuter = bvNone
-                    TabOrder = 1
-                    object scGPPanel16: TscGPPanel
+                    Align = alClient
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -11
+                    Font.Name = 'Tahoma'
+                    Font.Style = []
+                    ParentFont = False
+                    FluentUIOpaque = False
+                    TabOrder = 0
+                    BlurBackground = False
+                    BlurBackgroundAmount = 5
+                    BackgroundStyle = gppbsColor
+                    ContentMarginLeft = 0
+                    ContentMarginRight = 0
+                    ContentMarginTop = 0
+                    ContentMarginBottom = 0
+                    CustomImageIndex = -1
+                    DragForm = False
+                    DragTopForm = True
+                    DrawTextMode = scdtmGDI
+                    FillGradientAngle = 255
+                    FillGradientBeginAlpha = 255
+                    FillGradientEndAlpha = 255
+                    FillGradientBeginColorOffset = 25
+                    FillGradientEndColorOffset = 25
+                    FrameWidth = 0
+                    FillColor = clHighlightText
+                    FillColorAlpha = 255
+                    FillColor2 = clNone
+                    FrameColor = clBtnShadow
+                    FrameColorAlpha = 10
+                    FrameRadius = 15
+                    ShowCaption = True
+                    CaptionGlowEffect.Enabled = False
+                    CaptionGlowEffect.Color = clHighlight
+                    CaptionGlowEffect.AlphaValue = 255
+                    CaptionGlowEffect.GlowSize = 7
+                    CaptionGlowEffect.Offset = 0
+                    CaptionGlowEffect.Intensive = True
+                    CaptionGlowEffect.StyleColors = True
+                    Color = clBtnHighlight
+                    TransparentBackground = True
+                    StorePaintBuffer = True
+                    Sizeable = False
+                    WallpaperIndex = -1
+                    WordWrap = False
+                    object Panel50: TPanel
+                      Left = 0
+                      Top = 55
+                      Width = 303
+                      Height = 484
+                      Align = alClient
+                      BevelOuter = bvNone
+                      TabOrder = 0
+                      DesignSize = (
+                        303
+                        484)
+                      object scGPPanel17: TscGPPanel
+                        Left = 10
+                        Top = 0
+                        Width = 283
+                        Height = 475
+                        Anchors = [akLeft, akTop, akRight, akBottom]
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clWindowText
+                        Font.Height = -11
+                        Font.Name = 'Tahoma'
+                        Font.Style = []
+                        ParentFont = False
+                        FluentUIOpaque = False
+                        TabOrder = 0
+                        BlurBackground = False
+                        BlurBackgroundAmount = 5
+                        BackgroundStyle = gppbsColor
+                        ContentMarginLeft = 0
+                        ContentMarginRight = 0
+                        ContentMarginTop = 0
+                        ContentMarginBottom = 0
+                        CustomImageIndex = -1
+                        DragForm = False
+                        DragTopForm = True
+                        DrawTextMode = scdtmGDI
+                        FillGradientAngle = 255
+                        FillGradientBeginAlpha = 255
+                        FillGradientEndAlpha = 255
+                        FillGradientBeginColorOffset = 25
+                        FillGradientEndColorOffset = 25
+                        FrameWidth = 0
+                        FillColor = 9787667
+                        FillColorAlpha = 255
+                        FillColor2 = 9787667
+                        FrameColor = clBtnShadow
+                        FrameColorAlpha = 10
+                        FrameRadius = 15
+                        ShowCaption = True
+                        CaptionGlowEffect.Enabled = False
+                        CaptionGlowEffect.Color = clHighlight
+                        CaptionGlowEffect.AlphaValue = 255
+                        CaptionGlowEffect.GlowSize = 7
+                        CaptionGlowEffect.Offset = 0
+                        CaptionGlowEffect.Intensive = True
+                        CaptionGlowEffect.StyleColors = True
+                        Color = clBtnHighlight
+                        TransparentBackground = True
+                        StorePaintBuffer = True
+                        Sizeable = False
+                        WallpaperIndex = -1
+                        WordWrap = False
+                        object DBGridEh5: TDBGridEh
+                          AlignWithMargins = True
+                          Left = 8
+                          Top = 8
+                          Width = 267
+                          Height = 459
+                          Margins.Left = 8
+                          Margins.Top = 8
+                          Margins.Right = 8
+                          Margins.Bottom = 8
+                          Align = alClient
+                          DataSource = DSZoneAddress
+                          DynProps = <>
+                          Enabled = False
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -12
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          IndicatorOptions = [gioShowRowIndicatorEh, gioShowRowselCheckboxesEh]
+                          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+                          ParentFont = False
+                          TabOrder = 0
+                          OnMouseDown = DBGridEh5MouseDown
+                          OnSelectionChanged = DBGridEh5SelectionChanged
+                          Columns = <
+                            item
+                              CellButtons = <>
+                              DynProps = <>
+                              EditButtons = <>
+                              FieldName = 'ZoneCode'
+                              Footers = <>
+                              Title.Caption = 'Zn Code'
+                              Width = 42
+                            end
+                            item
+                              CellButtons = <>
+                              DynProps = <>
+                              EditButtons = <>
+                              FieldName = 'ZoneName'
+                              Footers = <>
+                              Title.Caption = 'Zone Name'
+                              Width = 126
+                            end
+                            item
+                              CellButtons = <>
+                              DynProps = <>
+                              EditButtons = <>
+                              FieldName = 'Count'
+                              Footers = <>
+                              Width = 43
+                            end
+                            item
+                              CellButtons = <>
+                              DynProps = <>
+                              EditButtons = <>
+                              FieldName = 'FCollect'
+                              Footers = <>
+                              Visible = False
+                            end>
+                          object RowDetailData: TRowDetailPanelControlEh
+                          end
+                        end
+                      end
+                    end
+                    object Panel49: TPanel
                       Left = 0
                       Top = 0
                       Width = 303
-                      Height = 539
-                      Align = alClient
-                      Font.Charset = DEFAULT_CHARSET
-                      Font.Color = clWindowText
-                      Font.Height = -11
-                      Font.Name = 'Tahoma'
-                      Font.Style = []
-                      ParentFont = False
-                      FluentUIOpaque = False
-                      TabOrder = 0
-                      BlurBackground = False
-                      BlurBackgroundAmount = 5
-                      BackgroundStyle = gppbsColor
-                      ContentMarginLeft = 0
-                      ContentMarginRight = 0
-                      ContentMarginTop = 0
-                      ContentMarginBottom = 0
-                      CustomImageIndex = -1
-                      DragForm = False
-                      DragTopForm = True
-                      DrawTextMode = scdtmGDI
-                      FillGradientAngle = 255
-                      FillGradientBeginAlpha = 255
-                      FillGradientEndAlpha = 255
-                      FillGradientBeginColorOffset = 25
-                      FillGradientEndColorOffset = 25
-                      FrameWidth = 0
-                      FillColor = clHighlightText
-                      FillColorAlpha = 255
-                      FillColor2 = clNone
-                      FrameColor = clBtnShadow
-                      FrameColorAlpha = 10
-                      FrameRadius = 15
-                      ShowCaption = True
-                      CaptionGlowEffect.Enabled = False
-                      CaptionGlowEffect.Color = clHighlight
-                      CaptionGlowEffect.AlphaValue = 255
-                      CaptionGlowEffect.GlowSize = 7
-                      CaptionGlowEffect.Offset = 0
-                      CaptionGlowEffect.Intensive = True
-                      CaptionGlowEffect.StyleColors = True
-                      Color = clBtnHighlight
-                      TransparentBackground = True
-                      StorePaintBuffer = True
-                      Sizeable = False
-                      WallpaperIndex = -1
-                      WordWrap = False
-                      object Panel50: TPanel
+                      Height = 55
+                      Align = alTop
+                      BevelOuter = bvNone
+                      TabOrder = 1
+                      object Label29: TLabel
                         Left = 0
-                        Top = 55
-                        Width = 303
-                        Height = 484
-                        Align = alClient
-                        BevelOuter = bvNone
-                        TabOrder = 0
-                        DesignSize = (
-                          303
-                          484)
-                        object scGPPanel17: TscGPPanel
-                          Left = 10
-                          Top = 0
-                          Width = 283
-                          Height = 475
-                          Anchors = [akLeft, akTop, akRight, akBottom]
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -11
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                          FluentUIOpaque = False
-                          TabOrder = 0
-                          BlurBackground = False
-                          BlurBackgroundAmount = 5
-                          BackgroundStyle = gppbsColor
-                          ContentMarginLeft = 0
-                          ContentMarginRight = 0
-                          ContentMarginTop = 0
-                          ContentMarginBottom = 0
-                          CustomImageIndex = -1
-                          DragForm = False
-                          DragTopForm = True
-                          DrawTextMode = scdtmGDI
-                          FillGradientAngle = 255
-                          FillGradientBeginAlpha = 255
-                          FillGradientEndAlpha = 255
-                          FillGradientBeginColorOffset = 25
-                          FillGradientEndColorOffset = 25
-                          FrameWidth = 0
-                          FillColor = 9787667
-                          FillColorAlpha = 255
-                          FillColor2 = 9787667
-                          FrameColor = clBtnShadow
-                          FrameColorAlpha = 10
-                          FrameRadius = 15
-                          ShowCaption = True
-                          CaptionGlowEffect.Enabled = False
-                          CaptionGlowEffect.Color = clHighlight
-                          CaptionGlowEffect.AlphaValue = 255
-                          CaptionGlowEffect.GlowSize = 7
-                          CaptionGlowEffect.Offset = 0
-                          CaptionGlowEffect.Intensive = True
-                          CaptionGlowEffect.StyleColors = True
-                          Color = clBtnHighlight
-                          TransparentBackground = True
-                          StorePaintBuffer = True
-                          Sizeable = False
-                          WallpaperIndex = -1
-                          WordWrap = False
-                          object DBGridEh5: TDBGridEh
-                            AlignWithMargins = True
-                            Left = 8
-                            Top = 8
-                            Width = 267
-                            Height = 459
-                            Margins.Left = 8
-                            Margins.Top = 8
-                            Margins.Right = 8
-                            Margins.Bottom = 8
-                            Align = alClient
-                            DataSource = DSZoneAddress
-                            DynProps = <>
-                            Enabled = False
-                            Font.Charset = DEFAULT_CHARSET
-                            Font.Color = clWindowText
-                            Font.Height = -12
-                            Font.Name = 'Tahoma'
-                            Font.Style = []
-                            IndicatorOptions = [gioShowRowIndicatorEh, gioShowRowselCheckboxesEh]
-                            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-                            ParentFont = False
-                            TabOrder = 0
-                            OnMouseDown = DBGridEh5MouseDown
-                            OnSelectionChanged = DBGridEh5SelectionChanged
-                            Columns = <
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'ZoneCode'
-                                Footers = <>
-                                Title.Caption = 'Zn Code'
-                                Width = 42
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'ZoneName'
-                                Footers = <>
-                                Title.Caption = 'Zone Name'
-                                Width = 126
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'Count'
-                                Footers = <>
-                                Width = 43
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'FCollect'
-                                Footers = <>
-                                Visible = False
-                              end>
-                            object RowDetailData: TRowDetailPanelControlEh
-                            end
-                          end
-                        end
+                        Top = 6
+                        Width = 139
+                        Height = 22
+                        Caption = '  ZONE ADDRESS'
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clWindowText
+                        Font.Height = -18
+                        Font.Name = 'Tahoma'
+                        Font.Style = []
+                        ParentFont = False
                       end
-                      object Panel49: TPanel
-                        Left = 0
-                        Top = 0
-                        Width = 303
-                        Height = 55
-                        Align = alTop
-                        BevelOuter = bvNone
-                        TabOrder = 1
-                        object Label29: TLabel
-                          Left = 0
-                          Top = 6
-                          Width = 139
-                          Height = 22
-                          Caption = '  ZONE ADDRESS'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -18
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object Label35: TLabel
-                          Left = -4
-                          Top = 27
-                          Width = 258
-                          Height = 12
-                          Caption = '     Select Zone to Assign to Meter Reader You can Drag'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clGrayText
-                          Font.Height = -10
-                          Font.Name = 'Segoe UI'
-                          Font.Style = [fsBold]
-                          ParentFont = False
-                        end
-                        object Label28: TLabel
-                          Left = -4
-                          Top = 38
-                          Width = 288
-                          Height = 12
-                          Caption = '     And Drop Selected Zone From Zone Grid to Schedule Grid.'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clGrayText
-                          Font.Height = -10
-                          Font.Name = 'Segoe UI'
-                          Font.Style = [fsBold]
-                          ParentFont = False
-                        end
+                      object Label35: TLabel
+                        Left = -4
+                        Top = 27
+                        Width = 258
+                        Height = 12
+                        Caption = '     Select Zone to Assign to Meter Reader You can Drag'
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clGrayText
+                        Font.Height = -10
+                        Font.Name = 'Segoe UI'
+                        Font.Style = [fsBold]
+                        ParentFont = False
+                      end
+                      object Label28: TLabel
+                        Left = -4
+                        Top = 38
+                        Width = 288
+                        Height = 12
+                        Caption = '     And Drop Selected Zone From Zone Grid to Schedule Grid.'
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clGrayText
+                        Font.Height = -10
+                        Font.Name = 'Segoe UI'
+                        Font.Style = [fsBold]
+                        ParentFont = False
                       end
                     end
                   end
-                  object Panel54: TPanel
+                end
+                object Panel54: TPanel
+                  Left = 0
+                  Top = 0
+                  Width = 421
+                  Height = 539
+                  Align = alClient
+                  BevelOuter = bvNone
+                  TabOrder = 2
+                  object scGPPanel20: TscGPPanel
                     Left = 0
                     Top = 0
-                    Width = 423
-                    Height = 539
+                    Width = 421
+                    Height = 470
                     Align = alClient
-                    BevelOuter = bvNone
-                    TabOrder = 2
-                    object scGPPanel20: TscGPPanel
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -11
+                    Font.Name = 'Tahoma'
+                    Font.Style = []
+                    ParentFont = False
+                    FluentUIOpaque = False
+                    TabOrder = 0
+                    BlurBackground = False
+                    BlurBackgroundAmount = 5
+                    BackgroundStyle = gppbsColor
+                    ContentMarginLeft = 0
+                    ContentMarginRight = 0
+                    ContentMarginTop = 0
+                    ContentMarginBottom = 0
+                    CustomImageIndex = -1
+                    DragForm = False
+                    DragTopForm = True
+                    DrawTextMode = scdtmGDI
+                    FillGradientAngle = 255
+                    FillGradientBeginAlpha = 255
+                    FillGradientEndAlpha = 255
+                    FillGradientBeginColorOffset = 25
+                    FillGradientEndColorOffset = 25
+                    FrameWidth = 0
+                    FillColor = clHighlightText
+                    FillColorAlpha = 255
+                    FillColor2 = clNone
+                    FrameColor = clBtnShadow
+                    FrameColorAlpha = 10
+                    FrameRadius = 15
+                    ShowCaption = True
+                    CaptionGlowEffect.Enabled = False
+                    CaptionGlowEffect.Color = clHighlight
+                    CaptionGlowEffect.AlphaValue = 255
+                    CaptionGlowEffect.GlowSize = 7
+                    CaptionGlowEffect.Offset = 0
+                    CaptionGlowEffect.Intensive = True
+                    CaptionGlowEffect.StyleColors = True
+                    Color = clBtnHighlight
+                    TransparentBackground = True
+                    StorePaintBuffer = True
+                    Sizeable = False
+                    WallpaperIndex = -1
+                    WordWrap = False
+                    DesignSize = (
+                      421
+                      470)
+                    object Panel55: TPanel
                       Left = 0
                       Top = 0
-                      Width = 423
-                      Height = 470
-                      Align = alClient
-                      Font.Charset = DEFAULT_CHARSET
-                      Font.Color = clWindowText
-                      Font.Height = -11
-                      Font.Name = 'Tahoma'
-                      Font.Style = []
-                      ParentFont = False
-                      FluentUIOpaque = False
+                      Width = 421
+                      Height = 84
+                      Align = alTop
+                      BevelOuter = bvNone
                       TabOrder = 0
-                      BlurBackground = False
-                      BlurBackgroundAmount = 5
-                      BackgroundStyle = gppbsColor
-                      ContentMarginLeft = 0
-                      ContentMarginRight = 0
-                      ContentMarginTop = 0
-                      ContentMarginBottom = 0
-                      CustomImageIndex = -1
-                      DragForm = False
-                      DragTopForm = True
-                      DrawTextMode = scdtmGDI
-                      FillGradientAngle = 255
-                      FillGradientBeginAlpha = 255
-                      FillGradientEndAlpha = 255
-                      FillGradientBeginColorOffset = 25
-                      FillGradientEndColorOffset = 25
-                      FrameWidth = 0
-                      FillColor = clHighlightText
-                      FillColorAlpha = 255
-                      FillColor2 = clNone
-                      FrameColor = clBtnShadow
-                      FrameColorAlpha = 10
-                      FrameRadius = 15
-                      ShowCaption = True
-                      CaptionGlowEffect.Enabled = False
-                      CaptionGlowEffect.Color = clHighlight
-                      CaptionGlowEffect.AlphaValue = 255
-                      CaptionGlowEffect.GlowSize = 7
-                      CaptionGlowEffect.Offset = 0
-                      CaptionGlowEffect.Intensive = True
-                      CaptionGlowEffect.StyleColors = True
-                      Color = clBtnHighlight
-                      TransparentBackground = True
-                      StorePaintBuffer = True
-                      Sizeable = False
-                      WallpaperIndex = -1
-                      WordWrap = False
                       DesignSize = (
-                        423
-                        470)
-                      object Panel55: TPanel
+                        421
+                        84)
+                      object Label30: TLabel
                         Left = 0
-                        Top = 0
-                        Width = 423
-                        Height = 84
-                        Align = alTop
-                        BevelOuter = bvNone
-                        TabOrder = 0
-                        DesignSize = (
-                          423
-                          84)
-                        object Label30: TLabel
-                          Left = 0
-                          Top = 6
-                          Width = 110
-                          Height = 22
-                          Caption = '  BILLMONTH'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -18
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object Label31: TLabel
-                          Left = 0
-                          Top = 27
-                          Width = 103
-                          Height = 13
-                          Caption = '     Input Billing Month'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clGrayText
-                          Font.Height = -11
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object Shape3: TShape
-                          Left = 14
-                          Top = 79
-                          Width = 393
-                          Height = 1
-                          Anchors = [akLeft, akTop, akRight]
-                          Pen.Color = cl3DDkShadow
-                        end
-                        object SpeedButton3: TSpeedButton
-                          Left = 377
-                          Top = 48
-                          Width = 30
-                          Height = 28
-                          Anchors = [akTop, akRight]
-                          Flat = True
-                          Glyph.Data = {
-                            36040000424D3604000000000000360000002800000010000000100000000100
-                            2000000000000004000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000B8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF}
-                          OnClick = SpeedButton3Click
-                        end
-                        object Edit15: TEdit
-                          Left = 14
-                          Top = 42
-                          Width = 357
-                          Height = 31
-                          Alignment = taCenter
-                          Anchors = [akLeft, akTop, akRight]
-                          AutoSize = False
-                          BorderStyle = bsNone
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clInfoText
-                          Font.Height = -19
-                          Font.Name = 'Segoe UI'
-                          Font.Style = [fsBold]
-                          ParentFont = False
-                          ParentShowHint = False
-                          ShowHint = True
-                          TabOrder = 0
-                          TextHint = '(YYYYMM) | BILLMONTH NOW'
-                          OnChange = Edit15Change
-                          OnKeyPress = Edit15KeyPress
-                        end
-                      end
-                      object Panel56: TPanel
-                        Left = 0
-                        Top = 84
-                        Width = 423
-                        Height = 91
-                        Align = alTop
-                        BevelOuter = bvNone
-                        TabOrder = 1
-                        DesignSize = (
-                          423
-                          91)
-                        object Label32: TLabel
-                          Left = 0
-                          Top = 1
-                          Width = 139
-                          Height = 22
-                          Caption = '  METER READER'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -18
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object Label33: TLabel
-                          Left = 0
-                          Top = 22
-                          Width = 255
-                          Height = 13
-                          Caption = '     Select Meter Reader That Already have Schedule!'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clGrayText
-                          Font.Height = -11
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object scGPComboBox3: TscGPComboBox
-                          Left = 14
-                          Top = 40
-                          Width = 393
-                          Height = 45
-                          Anchors = [akLeft, akTop, akRight]
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -19
-                          Font.Name = 'Segoe UI'
-                          Font.Style = [fsBold]
-                          ParentFont = False
-                          FluentUIOpaque = False
-                          TabOrder = 0
-                          ContentMargin = 0
-                          AutoComplete = True
-                          Animation = True
-                          CheckedListMode = False
-                          CheckedListWrap = True
-                          DetailPosition = scgplbdBottom
-                          DetailWordWrap = False
-                          DrawTextMode = scdtmGDI
-                          Items = <
-                            item
-                              Header = True
-                              Enabled = True
-                              Caption = 'Meter Reader'
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end
-                            item
-                              Header = False
-                              Enabled = True
-                              Caption = 'Meter Reader #1'
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end
-                            item
-                              Header = False
-                              Enabled = True
-                              Caption = 'Meter Reader #2'
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end
-                            item
-                              Header = False
-                              Enabled = True
-                              Caption = 'Meter Reader #3'
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end
-                            item
-                              Header = False
-                              Enabled = True
-                              Caption = 'Meter Reader #4'
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end
-                            item
-                              Header = False
-                              Enabled = True
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end>
-                          ItemIndex = -1
-                          ItemTextAlignment = taCenter
-                          ItemWordWrap = True
-                          ItemShowEllipsis = False
-                          DropDownCount = 7
-                          Options.NormalColor = clBtnFace
-                          Options.HotColor = clBtnFace
-                          Options.PressedColor = clBtnShadow
-                          Options.FocusedColor = clBtnFace
-                          Options.DisabledColor = clBtnFace
-                          Options.NormalColorAlpha = 255
-                          Options.HotColorAlpha = 255
-                          Options.PressedColorAlpha = 255
-                          Options.FocusedColorAlpha = 255
-                          Options.DisabledColorAlpha = 255
-                          Options.FrameNormalColor = clBtnShadow
-                          Options.FrameHotColor = clHighlight
-                          Options.FramePressedColor = clHighlight
-                          Options.FrameFocusedColor = clHighlight
-                          Options.FrameDisabledColor = clBtnShadow
-                          Options.FrameWidth = 1
-                          Options.FrameNormalColorAlpha = 255
-                          Options.FrameHotColorAlpha = 255
-                          Options.FramePressedColorAlpha = 255
-                          Options.FrameFocusedColorAlpha = 255
-                          Options.FrameDisabledColorAlpha = 255
-                          Options.FontNormalColor = clBtnText
-                          Options.FontHotColor = clBtnText
-                          Options.FontPressedColor = clBtnText
-                          Options.FontFocusedColor = clBtnText
-                          Options.FontDisabledColor = clBtnShadow
-                          Options.ShapeFillGradientAngle = 90
-                          Options.ShapeFillGradientPressedAngle = -90
-                          Options.ShapeCornerRadius = 10
-                          Options.ShapeStyle = scgpcssRect
-                          Options.ScaleFrameWidth = False
-                          Options.ArrowSize = 9
-                          Options.ArrowAreaWidth = 0
-                          Options.StyleColors = True
-                          ShowItemImage = True
-                          ShowItemText = True
-                          ShowItemDetail = False
-                          ListBoxHeaderFont.Charset = DEFAULT_CHARSET
-                          ListBoxHeaderFont.Color = clWindowText
-                          ListBoxHeaderFont.Height = -11
-                          ListBoxHeaderFont.Name = 'Tahoma'
-                          ListBoxHeaderFont.Style = [fsBold]
-                          ListBoxHeaderOptions.Color = clBtnFace
-                          ListBoxHeaderOptions.ColorAlpha = 220
-                          ListBoxHeaderOptions.FillStyle = scgpsfColor
-                          ListBoxHeaderOptions.GradientAngle = 90
-                          ListBoxHeaderOptions.Margin = 5
-                          DetailFont.Charset = DEFAULT_CHARSET
-                          DetailFont.Color = clWindowText
-                          DetailFont.Height = -11
-                          DetailFont.Name = 'Tahoma'
-                          DetailFont.Style = []
-                          ListBoxLineColor = clWindowText
-                          ListBoxWidth = 0
-                          ListBoxHeight = 0
-                          ListBoxShowItemDetails = False
-                          ListBoxShowLines = True
-                          ListBoxItemHeight = 30
-                          ListBoxHeaderHeight = 20
-                          ListBoxItemSpacing = 5
-                          ListBoxItemMargin = 5
-                          ListBoxItemTextAlignment = taLeftJustify
-                          ListBoxIndentMargin = 10
-                          ListBoxScrollBarOptions.BorderWidth = 0
-                          ListBoxScrollBarOptions.FillColor = clBtnFace
-                          ListBoxScrollBarOptions.FillColorAlpha = 100
-                          ListBoxScrollBarOptions.ThumbColor = clWindowText
-                          ListBoxScrollBarOptions.ThumbColorAlpha = 50
-                          ListBoxScrollBarOptions.ThumbColorHotAlpha = 100
-                          ListBoxScrollBarOptions.ThumbColorPressedAlpha = 150
-                          ListBoxScrollBarOptions.ThumbRounded = False
-                          ListBoxScrollBarOptions.Position = scgpsbDefault
-                          ListBoxScrollBarOptions.Size = 11
-                          ListBoxOptions.FillColor = clWindow
-                          ListBoxOptions.FillColor2 = clWindow
-                          ListBoxOptions.FillColorAlpha = 255
-                          ListBoxOptions.FillColor2Alpha = 255
-                          ListBoxOptions.FillGradientAngle = 90
-                          ListBoxOptions.FrameColor = clBtnShadow
-                          ListBoxOptions.FrameColorAlpha = 255
-                          ListBoxOptions.FrameWidth = 2
-                          ListBoxOptions.FrameScaleWidth = False
-                          MouseWheelSupport = True
-                          OnChange = scGPComboBox3Change
-                        end
-                      end
-                      object Panel57: TPanel
-                        Left = 0
-                        Top = 433
-                        Width = 423
-                        Height = 37
-                        Align = alBottom
-                        BevelOuter = bvNone
-                        Color = clWhite
-                        ParentBackground = False
-                        TabOrder = 2
-                        object SpeedButton27: TSpeedButton
-                          Left = 0
-                          Top = 0
-                          Width = 423
-                          Height = 36
-                          Align = alClient
-                          Caption = 'Save Reading Schedule'
-                          Flat = True
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -13
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          Glyph.Data = {
-                            46050000424D4605000000000000360000002800000012000000120000000100
-                            2000000000001005000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0000000000200000003000000010000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0040000000BF000000FF000000FF000000FF000000EF000000BF000000500000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            00000000008F000000FF000000FF000000FF000000FF000000FF000000FF0000
-                            00FF000000FF0000008F00000010000000000000000000000000000000000000
-                            0000000000000000009F000000FF000000FF000000FF000000FF000000FF0000
-                            00FF000000FF000000FF000000FF000000FF0000008F00000000000000000000
-                            0000000000000000000000000030000000FF000000FF000000FF000000FF0000
-                            00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-                            004000000000000000000000000000000000000000AF000000FF000000FF0000
-                            00FF000000FF0000008F00000080000000EF000000FF000000FF000000FF0000
-                            00FF000000FF000000BF00000000000000000000000000000010000000FF0000
-                            00FF000000FF000000FF00000080000000000000000000000060000000EF0000
-                            00FF000000FF000000FF000000FF000000FF0000002000000000000000000000
-                            0010000000FF000000FF000000FF000000AF0000000000000010000000400000
-                            000000000060000000EF000000FF000000FF000000FF000000FF000000200000
-                            00000000000000000020000000FF000000FF000000FF000000AF000000500000
-                            00CF000000EF000000500000000000000060000000EF000000FF000000FF0000
-                            00FF00000030000000000000000000000000000000EF000000FF000000FF0000
-                            00FF000000FF000000FF000000FF000000EF0000005000000000000000800000
-                            00FF000000FF000000FF00000010000000000000000000000000000000AF0000
-                            00FF000000FF000000FF000000FF000000FF000000FF000000FF000000EF0000
-                            0080000000BF000000FF000000FF000000AF0000000000000000000000000000
-                            000000000040000000FF000000FF000000FF000000FF000000FF000000FF0000
-                            00FF000000FF000000FF000000FF000000FF000000FF00000040000000000000
-                            000000000000000000000000000000000080000000FF000000FF000000FF0000
-                            00FF000000FF000000FF000000FF000000FF000000FF000000FF0000009F0000
-                            00000000000000000000000000000000000000000000000000000000008F0000
-                            00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-                            008F000000000000000000000000000000000000000000000000000000000000
-                            00000000000000000040000000BF000000EF000000FF000000FF000000FF0000
-                            00AF000000300000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000010000000200000
-                            0020000000000000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            00000000000000000000}
-                          ParentFont = False
-                          OnClick = SpeedButton27Click
-                          ExplicitWidth = 169
-                          ExplicitHeight = 49
-                        end
-                        object Shape7: TShape
-                          Left = 0
-                          Top = 36
-                          Width = 423
-                          Height = 1
-                          Align = alBottom
-                          Pen.Color = cl3DDkShadow
-                          ExplicitLeft = 14
-                          ExplicitTop = 29
-                          ExplicitWidth = 519
-                        end
-                      end
-                      object DBGridEh6: TDBGridEh
-                        Left = 14
-                        Top = 176
-                        Width = 393
-                        Height = 251
-                        Anchors = [akLeft, akTop, akRight, akBottom]
-                        DataSource = DSVTReadingSchedule
-                        DynProps = <>
+                        Top = 6
+                        Width = 110
+                        Height = 22
+                        Caption = '  BILLMONTH'
                         Font.Charset = DEFAULT_CHARSET
                         Font.Color = clWindowText
-                        Font.Height = -12
+                        Font.Height = -18
                         Font.Name = 'Tahoma'
                         Font.Style = []
-                        FooterRowCount = 1
-                        FooterParams.HorzLines = True
-                        FooterParams.RowLines = 1
-                        HorzScrollBar.VisibleMode = sbNeverShowEh
-                        IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
-                        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-                        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
                         ParentFont = False
-                        PopupMenu = PMDeleteReadingSchedule
-                        TabOrder = 3
-                        OnDragDrop = DBGridEh6DragDrop
-                        OnDragOver = DBGridEh6DragOver
-                        OnDrawColumnCell = DBGridEh6DrawColumnCell
-                        Columns = <
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = '_id'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'ZoneCode'
-                            Footers = <>
-                            Width = 76
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'ZoneName'
-                            Footers = <>
-                            Width = 172
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'ReadingStartDate'
-                            Footers = <>
-                            Width = 121
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'TotalReadingDays'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'BillPeriod'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'MRNo'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'isPosted'
-                            Footers = <>
-                            Visible = False
-                          end>
-                        object RowDetailData: TRowDetailPanelControlEh
-                        end
                       end
-                    end
-                    object Panel58: TPanel
-                      Left = 0
-                      Top = 470
-                      Width = 423
-                      Height = 17
-                      Align = alBottom
-                      BevelOuter = bvNone
-                      TabOrder = 1
-                    end
-                    object scGPPanel21: TscGPPanel
-                      Left = 0
-                      Top = 487
-                      Width = 423
-                      Height = 52
-                      Align = alBottom
-                      Font.Charset = DEFAULT_CHARSET
-                      Font.Color = clWindowText
-                      Font.Height = -11
-                      Font.Name = 'Tahoma'
-                      Font.Style = []
-                      ParentFont = False
-                      FluentUIOpaque = False
-                      TabOrder = 2
-                      BlurBackground = False
-                      BlurBackgroundAmount = 5
-                      BackgroundStyle = gppbsColor
-                      ContentMarginLeft = 0
-                      ContentMarginRight = 0
-                      ContentMarginTop = 0
-                      ContentMarginBottom = 0
-                      CustomImageIndex = -1
-                      DragForm = False
-                      DragTopForm = True
-                      DrawTextMode = scdtmGDI
-                      FillGradientAngle = 255
-                      FillGradientBeginAlpha = 255
-                      FillGradientEndAlpha = 255
-                      FillGradientBeginColorOffset = 25
-                      FillGradientEndColorOffset = 25
-                      FrameWidth = 0
-                      FillColor = clHighlightText
-                      FillColorAlpha = 255
-                      FillColor2 = clNone
-                      FrameColor = clBtnShadow
-                      FrameColorAlpha = 10
-                      FrameRadius = 15
-                      ShowCaption = True
-                      CaptionGlowEffect.Enabled = False
-                      CaptionGlowEffect.Color = clHighlight
-                      CaptionGlowEffect.AlphaValue = 255
-                      CaptionGlowEffect.GlowSize = 7
-                      CaptionGlowEffect.Offset = 0
-                      CaptionGlowEffect.Intensive = True
-                      CaptionGlowEffect.StyleColors = True
-                      Color = clBtnHighlight
-                      TransparentBackground = True
-                      StorePaintBuffer = True
-                      Sizeable = False
-                      WallpaperIndex = -1
-                      WordWrap = False
-                      object Label34: TLabel
+                      object Label31: TLabel
                         Left = 0
-                        Top = 0
-                        Width = 145
+                        Top = 27
+                        Width = 103
                         Height = 13
-                        Caption = '     PROGRESSBAR STATUS!!!!'
+                        Caption = '     Input Billing Month'
                         Font.Charset = DEFAULT_CHARSET
                         Font.Color = clGrayText
                         Font.Height = -11
@@ -1128,40 +587,578 @@ object UMainForm: TUMainForm
                         Font.Style = []
                         ParentFont = False
                       end
-                      object Panel59: TPanel
-                        AlignWithMargins = True
-                        Left = 7
-                        Top = 15
-                        Width = 409
-                        Height = 30
-                        Margins.Left = 7
-                        Margins.Top = 15
-                        Margins.Right = 7
-                        Margins.Bottom = 7
-                        Align = alClient
-                        BevelOuter = bvNone
+                      object Shape3: TShape
+                        Left = 14
+                        Top = 79
+                        Width = 391
+                        Height = 1
+                        Anchors = [akLeft, akTop, akRight]
+                        Pen.Color = cl3DDkShadow
+                        ExplicitWidth = 393
+                      end
+                      object SpeedButton3: TSpeedButton
+                        Left = 375
+                        Top = 48
+                        Width = 30
+                        Height = 28
+                        Anchors = [akTop, akRight]
+                        Flat = True
+                        Glyph.Data = {
+                          36040000424D3604000000000000360000002800000010000000100000000100
+                          2000000000000004000000000000000000000000000000000000000000000000
+                          0000000000000000000000000000000000000000000000000000000000000000
+                          0000000000000000000000000000000000000000000000000000B8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
+                          000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                          4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
+                          000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                          4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
+                          000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                          4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
+                          000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                          4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
+                          000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                          4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
+                          000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                          4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
+                          000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                          4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
+                          000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                          4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                          4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF}
+                        OnClick = SpeedButton3Click
+                        ExplicitLeft = 377
+                      end
+                      object Edit15: TEdit
+                        Left = 14
+                        Top = 42
+                        Width = 355
+                        Height = 31
+                        Alignment = taCenter
+                        Anchors = [akLeft, akTop, akRight]
+                        AutoSize = False
+                        BorderStyle = bsNone
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clInfoText
+                        Font.Height = -19
+                        Font.Name = 'Segoe UI'
+                        Font.Style = [fsBold]
+                        ParentFont = False
+                        ParentShowHint = False
+                        ShowHint = True
                         TabOrder = 0
-                        object Label36: TLabel
-                          Left = 9
-                          Top = 1
-                          Width = 195
-                          Height = 18
-                          Caption = 'IROSIN WATER DISTRICT'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -15
-                          Font.Name = 'Tahoma'
-                          Font.Style = [fsBold]
-                          ParentFont = False
+                        TextHint = '(YYYYMM) | BILLMONTH NOW'
+                        OnChange = Edit15Change
+                        OnKeyPress = Edit15KeyPress
+                      end
+                    end
+                    object Panel56: TPanel
+                      Left = 0
+                      Top = 84
+                      Width = 421
+                      Height = 91
+                      Align = alTop
+                      BevelOuter = bvNone
+                      TabOrder = 1
+                      DesignSize = (
+                        421
+                        91)
+                      object Label32: TLabel
+                        Left = 0
+                        Top = 1
+                        Width = 139
+                        Height = 22
+                        Caption = '  METER READER'
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clWindowText
+                        Font.Height = -18
+                        Font.Name = 'Tahoma'
+                        Font.Style = []
+                        ParentFont = False
+                      end
+                      object Label33: TLabel
+                        Left = 0
+                        Top = 22
+                        Width = 255
+                        Height = 13
+                        Caption = '     Select Meter Reader That Already have Schedule!'
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clGrayText
+                        Font.Height = -11
+                        Font.Name = 'Tahoma'
+                        Font.Style = []
+                        ParentFont = False
+                      end
+                      object scGPComboBox3: TscGPComboBox
+                        Left = 14
+                        Top = 40
+                        Width = 391
+                        Height = 45
+                        Anchors = [akLeft, akTop, akRight]
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clWindowText
+                        Font.Height = -19
+                        Font.Name = 'Segoe UI'
+                        Font.Style = [fsBold]
+                        ParentFont = False
+                        FluentUIOpaque = False
+                        TabOrder = 0
+                        ContentMargin = 0
+                        AutoComplete = True
+                        Animation = True
+                        CheckedListMode = False
+                        CheckedListWrap = True
+                        DetailPosition = scgplbdBottom
+                        DetailWordWrap = False
+                        DrawTextMode = scdtmGDI
+                        Items = <
+                          item
+                            Header = True
+                            Enabled = True
+                            Caption = 'Meter Reader'
+                            CustomColor = clNone
+                            CustomColorAlpha = 255
+                            CustomTextColor = clNone
+                            CustomDetailTextColor = clNone
+                            Checked = False
+                          end
+                          item
+                            Header = False
+                            Enabled = True
+                            Caption = 'Meter Reader #1'
+                            CustomColor = clNone
+                            CustomColorAlpha = 255
+                            CustomTextColor = clNone
+                            CustomDetailTextColor = clNone
+                            Checked = False
+                          end
+                          item
+                            Header = False
+                            Enabled = True
+                            Caption = 'Meter Reader #2'
+                            CustomColor = clNone
+                            CustomColorAlpha = 255
+                            CustomTextColor = clNone
+                            CustomDetailTextColor = clNone
+                            Checked = False
+                          end
+                          item
+                            Header = False
+                            Enabled = True
+                            Caption = 'Meter Reader #3'
+                            CustomColor = clNone
+                            CustomColorAlpha = 255
+                            CustomTextColor = clNone
+                            CustomDetailTextColor = clNone
+                            Checked = False
+                          end
+                          item
+                            Header = False
+                            Enabled = True
+                            Caption = 'Meter Reader #4'
+                            CustomColor = clNone
+                            CustomColorAlpha = 255
+                            CustomTextColor = clNone
+                            CustomDetailTextColor = clNone
+                            Checked = False
+                          end
+                          item
+                            Header = False
+                            Enabled = True
+                            CustomColor = clNone
+                            CustomColorAlpha = 255
+                            CustomTextColor = clNone
+                            CustomDetailTextColor = clNone
+                            Checked = False
+                          end>
+                        ItemIndex = -1
+                        ItemTextAlignment = taCenter
+                        ItemWordWrap = True
+                        ItemShowEllipsis = False
+                        DropDownCount = 7
+                        Options.NormalColor = clBtnFace
+                        Options.HotColor = clBtnFace
+                        Options.PressedColor = clBtnShadow
+                        Options.FocusedColor = clBtnFace
+                        Options.DisabledColor = clBtnFace
+                        Options.NormalColorAlpha = 255
+                        Options.HotColorAlpha = 255
+                        Options.PressedColorAlpha = 255
+                        Options.FocusedColorAlpha = 255
+                        Options.DisabledColorAlpha = 255
+                        Options.FrameNormalColor = clBtnShadow
+                        Options.FrameHotColor = clHighlight
+                        Options.FramePressedColor = clHighlight
+                        Options.FrameFocusedColor = clHighlight
+                        Options.FrameDisabledColor = clBtnShadow
+                        Options.FrameWidth = 1
+                        Options.FrameNormalColorAlpha = 255
+                        Options.FrameHotColorAlpha = 255
+                        Options.FramePressedColorAlpha = 255
+                        Options.FrameFocusedColorAlpha = 255
+                        Options.FrameDisabledColorAlpha = 255
+                        Options.FontNormalColor = clBtnText
+                        Options.FontHotColor = clBtnText
+                        Options.FontPressedColor = clBtnText
+                        Options.FontFocusedColor = clBtnText
+                        Options.FontDisabledColor = clBtnShadow
+                        Options.ShapeFillGradientAngle = 90
+                        Options.ShapeFillGradientPressedAngle = -90
+                        Options.ShapeCornerRadius = 10
+                        Options.ShapeStyle = scgpcssRect
+                        Options.ScaleFrameWidth = False
+                        Options.ArrowSize = 9
+                        Options.ArrowAreaWidth = 0
+                        Options.StyleColors = True
+                        ShowItemImage = True
+                        ShowItemText = True
+                        ShowItemDetail = False
+                        ListBoxHeaderFont.Charset = DEFAULT_CHARSET
+                        ListBoxHeaderFont.Color = clWindowText
+                        ListBoxHeaderFont.Height = -11
+                        ListBoxHeaderFont.Name = 'Tahoma'
+                        ListBoxHeaderFont.Style = [fsBold]
+                        ListBoxHeaderOptions.Color = clBtnFace
+                        ListBoxHeaderOptions.ColorAlpha = 220
+                        ListBoxHeaderOptions.FillStyle = scgpsfColor
+                        ListBoxHeaderOptions.GradientAngle = 90
+                        ListBoxHeaderOptions.Margin = 5
+                        DetailFont.Charset = DEFAULT_CHARSET
+                        DetailFont.Color = clWindowText
+                        DetailFont.Height = -11
+                        DetailFont.Name = 'Tahoma'
+                        DetailFont.Style = []
+                        ListBoxLineColor = clWindowText
+                        ListBoxWidth = 0
+                        ListBoxHeight = 0
+                        ListBoxShowItemDetails = False
+                        ListBoxShowLines = True
+                        ListBoxItemHeight = 30
+                        ListBoxHeaderHeight = 20
+                        ListBoxItemSpacing = 5
+                        ListBoxItemMargin = 5
+                        ListBoxItemTextAlignment = taLeftJustify
+                        ListBoxIndentMargin = 10
+                        ListBoxScrollBarOptions.BorderWidth = 0
+                        ListBoxScrollBarOptions.FillColor = clBtnFace
+                        ListBoxScrollBarOptions.FillColorAlpha = 100
+                        ListBoxScrollBarOptions.ThumbColor = clWindowText
+                        ListBoxScrollBarOptions.ThumbColorAlpha = 50
+                        ListBoxScrollBarOptions.ThumbColorHotAlpha = 100
+                        ListBoxScrollBarOptions.ThumbColorPressedAlpha = 150
+                        ListBoxScrollBarOptions.ThumbRounded = False
+                        ListBoxScrollBarOptions.Position = scgpsbDefault
+                        ListBoxScrollBarOptions.Size = 11
+                        ListBoxOptions.FillColor = clWindow
+                        ListBoxOptions.FillColor2 = clWindow
+                        ListBoxOptions.FillColorAlpha = 255
+                        ListBoxOptions.FillColor2Alpha = 255
+                        ListBoxOptions.FillGradientAngle = 90
+                        ListBoxOptions.FrameColor = clBtnShadow
+                        ListBoxOptions.FrameColorAlpha = 255
+                        ListBoxOptions.FrameWidth = 2
+                        ListBoxOptions.FrameScaleWidth = False
+                        MouseWheelSupport = True
+                        OnChange = scGPComboBox3Change
+                      end
+                    end
+                    object Panel57: TPanel
+                      Left = 0
+                      Top = 433
+                      Width = 421
+                      Height = 37
+                      Align = alBottom
+                      BevelOuter = bvNone
+                      Color = clWhite
+                      ParentBackground = False
+                      TabOrder = 2
+                      object SpeedButton27: TSpeedButton
+                        Left = 0
+                        Top = 0
+                        Width = 421
+                        Height = 36
+                        Align = alClient
+                        Caption = 'Save Reading Schedule'
+                        Flat = True
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clWindowText
+                        Font.Height = -13
+                        Font.Name = 'Tahoma'
+                        Font.Style = []
+                        Glyph.Data = {
+                          46050000424D4605000000000000360000002800000012000000120000000100
+                          2000000000001005000000000000000000000000000000000000000000000000
+                          0000000000000000000000000000000000000000000000000000000000000000
+                          0000000000000000000000000000000000000000000000000000000000000000
+                          0000000000000000000000000000000000000000000000000000000000000000
+                          0000000000200000003000000010000000000000000000000000000000000000
+                          0000000000000000000000000000000000000000000000000000000000000000
+                          0040000000BF000000FF000000FF000000FF000000EF000000BF000000500000
+                          0000000000000000000000000000000000000000000000000000000000000000
+                          00000000008F000000FF000000FF000000FF000000FF000000FF000000FF0000
+                          00FF000000FF0000008F00000010000000000000000000000000000000000000
+                          0000000000000000009F000000FF000000FF000000FF000000FF000000FF0000
+                          00FF000000FF000000FF000000FF000000FF0000008F00000000000000000000
+                          0000000000000000000000000030000000FF000000FF000000FF000000FF0000
+                          00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                          004000000000000000000000000000000000000000AF000000FF000000FF0000
+                          00FF000000FF0000008F00000080000000EF000000FF000000FF000000FF0000
+                          00FF000000FF000000BF00000000000000000000000000000010000000FF0000
+                          00FF000000FF000000FF00000080000000000000000000000060000000EF0000
+                          00FF000000FF000000FF000000FF000000FF0000002000000000000000000000
+                          0010000000FF000000FF000000FF000000AF0000000000000010000000400000
+                          000000000060000000EF000000FF000000FF000000FF000000FF000000200000
+                          00000000000000000020000000FF000000FF000000FF000000AF000000500000
+                          00CF000000EF000000500000000000000060000000EF000000FF000000FF0000
+                          00FF00000030000000000000000000000000000000EF000000FF000000FF0000
+                          00FF000000FF000000FF000000FF000000EF0000005000000000000000800000
+                          00FF000000FF000000FF00000010000000000000000000000000000000AF0000
+                          00FF000000FF000000FF000000FF000000FF000000FF000000FF000000EF0000
+                          0080000000BF000000FF000000FF000000AF0000000000000000000000000000
+                          000000000040000000FF000000FF000000FF000000FF000000FF000000FF0000
+                          00FF000000FF000000FF000000FF000000FF000000FF00000040000000000000
+                          000000000000000000000000000000000080000000FF000000FF000000FF0000
+                          00FF000000FF000000FF000000FF000000FF000000FF000000FF0000009F0000
+                          00000000000000000000000000000000000000000000000000000000008F0000
+                          00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                          008F000000000000000000000000000000000000000000000000000000000000
+                          00000000000000000040000000BF000000EF000000FF000000FF000000FF0000
+                          00AF000000300000000000000000000000000000000000000000000000000000
+                          0000000000000000000000000000000000000000000000000010000000200000
+                          0020000000000000000000000000000000000000000000000000000000000000
+                          0000000000000000000000000000000000000000000000000000000000000000
+                          0000000000000000000000000000000000000000000000000000000000000000
+                          00000000000000000000}
+                        ParentFont = False
+                        OnClick = SpeedButton27Click
+                        ExplicitWidth = 169
+                        ExplicitHeight = 49
+                      end
+                      object Shape7: TShape
+                        Left = 0
+                        Top = 36
+                        Width = 421
+                        Height = 1
+                        Align = alBottom
+                        Pen.Color = cl3DDkShadow
+                        ExplicitLeft = 14
+                        ExplicitTop = 29
+                        ExplicitWidth = 519
+                      end
+                    end
+                    object DBGridEh6: TDBGridEh
+                      Left = 14
+                      Top = 176
+                      Width = 391
+                      Height = 252
+                      Anchors = [akLeft, akTop, akRight, akBottom]
+                      DataSource = DSVTReadingSchedule
+                      DynProps = <>
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clWindowText
+                      Font.Height = -12
+                      Font.Name = 'Tahoma'
+                      Font.Style = []
+                      FooterRowCount = 1
+                      FooterParams.HorzLines = True
+                      FooterParams.RowLines = 1
+                      HorzScrollBar.VisibleMode = sbNeverShowEh
+                      IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
+                      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+                      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
+                      ParentFont = False
+                      PopupMenu = PMDeleteReadingSchedule
+                      TabOrder = 3
+                      OnDragDrop = DBGridEh6DragDrop
+                      OnDragOver = DBGridEh6DragOver
+                      OnDrawColumnCell = DBGridEh6DrawColumnCell
+                      Columns = <
+                        item
+                          CellButtons = <>
+                          DynProps = <>
+                          EditButtons = <>
+                          FieldName = '_id'
+                          Footers = <>
                           Visible = False
                         end
-                        object PaintBox1: TPaintBox
-                          Left = 6
-                          Top = 4
-                          Width = 395
-                          Height = 20
-                          OnPaint = PaintBox1Paint
+                        item
+                          CellButtons = <>
+                          DynProps = <>
+                          EditButtons = <>
+                          FieldName = 'ZoneCode'
+                          Footers = <>
+                          Width = 76
                         end
+                        item
+                          CellButtons = <>
+                          DynProps = <>
+                          EditButtons = <>
+                          FieldName = 'ZoneName'
+                          Footers = <>
+                          Width = 172
+                        end
+                        item
+                          CellButtons = <>
+                          DynProps = <>
+                          EditButtons = <>
+                          FieldName = 'ReadingStartDate'
+                          Footers = <>
+                          Width = 121
+                        end
+                        item
+                          CellButtons = <>
+                          DynProps = <>
+                          EditButtons = <>
+                          FieldName = 'TotalReadingDays'
+                          Footers = <>
+                          Visible = False
+                        end
+                        item
+                          CellButtons = <>
+                          DynProps = <>
+                          EditButtons = <>
+                          FieldName = 'BillPeriod'
+                          Footers = <>
+                          Visible = False
+                        end
+                        item
+                          CellButtons = <>
+                          DynProps = <>
+                          EditButtons = <>
+                          FieldName = 'MRNo'
+                          Footers = <>
+                          Visible = False
+                        end
+                        item
+                          CellButtons = <>
+                          DynProps = <>
+                          EditButtons = <>
+                          FieldName = 'isPosted'
+                          Footers = <>
+                          Visible = False
+                        end>
+                      object RowDetailData: TRowDetailPanelControlEh
+                      end
+                    end
+                  end
+                  object Panel58: TPanel
+                    Left = 0
+                    Top = 470
+                    Width = 421
+                    Height = 17
+                    Align = alBottom
+                    BevelOuter = bvNone
+                    TabOrder = 1
+                  end
+                  object scGPPanel21: TscGPPanel
+                    Left = 0
+                    Top = 487
+                    Width = 421
+                    Height = 52
+                    Align = alBottom
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -11
+                    Font.Name = 'Tahoma'
+                    Font.Style = []
+                    ParentFont = False
+                    FluentUIOpaque = False
+                    TabOrder = 2
+                    BlurBackground = False
+                    BlurBackgroundAmount = 5
+                    BackgroundStyle = gppbsColor
+                    ContentMarginLeft = 0
+                    ContentMarginRight = 0
+                    ContentMarginTop = 0
+                    ContentMarginBottom = 0
+                    CustomImageIndex = -1
+                    DragForm = False
+                    DragTopForm = True
+                    DrawTextMode = scdtmGDI
+                    FillGradientAngle = 255
+                    FillGradientBeginAlpha = 255
+                    FillGradientEndAlpha = 255
+                    FillGradientBeginColorOffset = 25
+                    FillGradientEndColorOffset = 25
+                    FrameWidth = 0
+                    FillColor = clHighlightText
+                    FillColorAlpha = 255
+                    FillColor2 = clNone
+                    FrameColor = clBtnShadow
+                    FrameColorAlpha = 10
+                    FrameRadius = 15
+                    ShowCaption = True
+                    CaptionGlowEffect.Enabled = False
+                    CaptionGlowEffect.Color = clHighlight
+                    CaptionGlowEffect.AlphaValue = 255
+                    CaptionGlowEffect.GlowSize = 7
+                    CaptionGlowEffect.Offset = 0
+                    CaptionGlowEffect.Intensive = True
+                    CaptionGlowEffect.StyleColors = True
+                    Color = clBtnHighlight
+                    TransparentBackground = True
+                    StorePaintBuffer = True
+                    Sizeable = False
+                    WallpaperIndex = -1
+                    WordWrap = False
+                    object Label34: TLabel
+                      Left = 0
+                      Top = 0
+                      Width = 145
+                      Height = 13
+                      Caption = '     PROGRESSBAR STATUS!!!!'
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clGrayText
+                      Font.Height = -11
+                      Font.Name = 'Tahoma'
+                      Font.Style = []
+                      ParentFont = False
+                    end
+                    object Panel59: TPanel
+                      AlignWithMargins = True
+                      Left = 7
+                      Top = 15
+                      Width = 407
+                      Height = 30
+                      Margins.Left = 7
+                      Margins.Top = 15
+                      Margins.Right = 7
+                      Margins.Bottom = 7
+                      Align = alClient
+                      BevelOuter = bvNone
+                      TabOrder = 0
+                      object Label36: TLabel
+                        Left = 9
+                        Top = 1
+                        Width = 195
+                        Height = 18
+                        Caption = 'IROSIN WATER DISTRICT'
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clWindowText
+                        Font.Height = -15
+                        Font.Name = 'Tahoma'
+                        Font.Style = [fsBold]
+                        ParentFont = False
+                        Visible = False
+                      end
+                      object PaintBox1: TPaintBox
+                        Left = 6
+                        Top = 4
+                        Width = 395
+                        Height = 20
+                        OnPaint = PaintBox1Paint
                       end
                     end
                   end
@@ -1204,9 +1201,6 @@ object UMainForm: TUMainForm
               Align = alClient
               BevelOuter = bvNone
               TabOrder = 0
-              DesignSize = (
-                778
-                617)
               object Label11: TLabel
                 Left = 0
                 Top = 7
@@ -1236,41 +1230,37 @@ object UMainForm: TUMainForm
                 ParentFont = False
               end
               object Panel13: TPanel
-                Left = 16
-                Top = 62
-                Width = 744
+                AlignWithMargins = True
+                Left = 18
+                Top = 60
+                Width = 742
                 Height = 539
-                Anchors = [akLeft, akTop, akRight, akBottom]
+                Margins.Left = 18
+                Margins.Top = 60
+                Margins.Right = 18
+                Margins.Bottom = 18
+                Align = alClient
                 BevelOuter = bvNone
                 TabOrder = 0
                 object Panel14: TPanel
                   Left = 0
                   Top = 0
-                  Width = 744
+                  Width = 742
                   Height = 539
                   Align = alClient
                   BevelOuter = bvNone
                   TabOrder = 0
                   object Panel15: TPanel
-                    Left = 423
+                    Left = 421
                     Top = 0
                     Width = 18
                     Height = 539
                     Align = alRight
                     BevelOuter = bvNone
                     TabOrder = 0
-                    object Panel17: TPanel
-                      Left = 0
-                      Top = 0
-                      Width = 18
-                      Height = 539
-                      Align = alRight
-                      BevelOuter = bvNone
-                      TabOrder = 0
-                    end
                   end
                   object Panel19: TPanel
-                    Left = 441
+                    Left = 439
                     Top = 0
                     Width = 303
                     Height = 539
@@ -1328,7 +1318,6 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
-                      ExplicitHeight = 379
                       object Panel23: TPanel
                         Left = 0
                         Top = 0
@@ -1337,7 +1326,6 @@ object UMainForm: TUMainForm
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
-                        ExplicitTop = 5
                         object scGPCircledProgressBar1: TscGPCircledProgressBar
                           Left = 79
                           Top = 10
@@ -1390,7 +1378,6 @@ object UMainForm: TUMainForm
                         Anchors = [akLeft, akTop, akRight, akBottom]
                         BevelOuter = bvNone
                         TabOrder = 1
-                        ExplicitHeight = 227
                         DesignSize = (
                           303
                           244)
@@ -1445,7 +1432,6 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
-                          ExplicitHeight = 218
                           DesignSize = (
                             283
                             235)
@@ -1457,7 +1443,6 @@ object UMainForm: TUMainForm
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             BevelOuter = bvNone
                             TabOrder = 0
-                            ExplicitHeight = 620
                             object Label13: TLabel
                               Left = 0
                               Top = 0
@@ -1485,7 +1470,6 @@ object UMainForm: TUMainForm
                             TabOrder = 1
                             TabStop = False
                             OnChange = scScrollBar1Change
-                            ExplicitHeight = 218
                           end
                         end
                       end
@@ -1541,7 +1525,6 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
-                      ExplicitTop = 396
                       object Panel28: TPanel
                         Left = 0
                         Top = 0
@@ -1672,13 +1655,12 @@ object UMainForm: TUMainForm
                       Align = alBottom
                       BevelOuter = bvNone
                       TabOrder = 2
-                      ExplicitTop = 379
                     end
                   end
                   object Panel30: TPanel
                     Left = 0
                     Top = 0
-                    Width = 423
+                    Width = 421
                     Height = 539
                     Align = alClient
                     BevelOuter = bvNone
@@ -1686,7 +1668,7 @@ object UMainForm: TUMainForm
                     object scGPPanel12: TscGPPanel
                       Left = 0
                       Top = 0
-                      Width = 423
+                      Width = 421
                       Height = 225
                       Align = alClient
                       Font.Charset = DEFAULT_CHARSET
@@ -1734,17 +1716,16 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
-                      ExplicitHeight = 208
                       object Panel31: TPanel
                         Left = 0
                         Top = 0
-                        Width = 423
+                        Width = 421
                         Height = 84
                         Align = alTop
                         BevelOuter = bvNone
                         TabOrder = 0
                         DesignSize = (
-                          423
+                          421
                           84)
                         object Label15: TLabel
                           Left = 0
@@ -1775,13 +1756,14 @@ object UMainForm: TUMainForm
                         object Shape1: TShape
                           Left = 14
                           Top = 79
-                          Width = 393
+                          Width = 391
                           Height = 1
                           Anchors = [akLeft, akTop, akRight]
                           Pen.Color = cl3DDkShadow
+                          ExplicitWidth = 393
                         end
                         object SpeedButton4: TSpeedButton
-                          Left = 377
+                          Left = 375
                           Top = 48
                           Width = 30
                           Height = 28
@@ -1823,11 +1805,12 @@ object UMainForm: TUMainForm
                             4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
                             4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF}
                           OnClick = SpeedButton4Click
+                          ExplicitLeft = 377
                         end
                         object Edit1: TEdit
                           Left = 14
                           Top = 42
-                          Width = 357
+                          Width = 355
                           Height = 31
                           Alignment = taCenter
                           Anchors = [akLeft, akTop, akRight]
@@ -1850,13 +1833,13 @@ object UMainForm: TUMainForm
                       object Panel32: TPanel
                         Left = 0
                         Top = 84
-                        Width = 423
+                        Width = 421
                         Height = 91
                         Align = alTop
                         BevelOuter = bvNone
                         TabOrder = 1
                         DesignSize = (
-                          423
+                          421
                           91)
                         object Label17: TLabel
                           Left = 0
@@ -1887,7 +1870,7 @@ object UMainForm: TUMainForm
                         object scGPComboBox2: TscGPComboBox
                           Left = 14
                           Top = 40
-                          Width = 393
+                          Width = 391
                           Height = 45
                           Anchors = [akLeft, akTop, akRight]
                           Font.Charset = DEFAULT_CHARSET
@@ -2060,18 +2043,17 @@ object UMainForm: TUMainForm
                       object Panel33: TPanel
                         Left = 0
                         Top = 188
-                        Width = 423
+                        Width = 421
                         Height = 37
                         Align = alBottom
                         BevelOuter = bvNone
                         Color = clWhite
                         ParentBackground = False
                         TabOrder = 2
-                        ExplicitTop = 171
                         object SpeedButton5: TSpeedButton
                           Left = 0
                           Top = 0
-                          Width = 423
+                          Width = 421
                           Height = 36
                           Align = alClient
                           Caption = 'Download Reading / Fetch Data'
@@ -2129,11 +2111,12 @@ object UMainForm: TUMainForm
                           OnClick = SpeedButton5Click
                           ExplicitLeft = -6
                           ExplicitTop = -5
+                          ExplicitWidth = 423
                         end
                         object Shape5: TShape
                           Left = 0
                           Top = 36
-                          Width = 423
+                          Width = 421
                           Height = 1
                           Align = alBottom
                           Pen.Color = cl3DDkShadow
@@ -2146,17 +2129,16 @@ object UMainForm: TUMainForm
                     object Panel34: TPanel
                       Left = 0
                       Top = 225
-                      Width = 423
+                      Width = 421
                       Height = 17
                       Align = alBottom
                       BevelOuter = bvNone
                       TabOrder = 1
-                      ExplicitTop = 208
                     end
                     object scGPPanel14: TscGPPanel
                       Left = 0
                       Top = 242
-                      Width = 423
+                      Width = 421
                       Height = 297
                       Align = alBottom
                       Font.Charset = DEFAULT_CHARSET
@@ -2204,17 +2186,16 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
-                      ExplicitTop = 225
                       object Panel35: TPanel
                         Left = 0
                         Top = 0
-                        Width = 423
+                        Width = 421
                         Height = 297
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
                         DesignSize = (
-                          423
+                          421
                           297)
                         object Label24: TLabel
                           Left = -1
@@ -2234,7 +2215,7 @@ object UMainForm: TUMainForm
                         object scGPPanel15: TscGPPanel
                           Left = 10
                           Top = 30
-                          Width = 402
+                          Width = 400
                           Height = 264
                           Anchors = [akLeft, akTop, akRight, akBottom]
                           Font.Charset = DEFAULT_CHARSET
@@ -2283,12 +2264,12 @@ object UMainForm: TUMainForm
                           WallpaperIndex = -1
                           WordWrap = False
                           DesignSize = (
-                            402
+                            400
                             264)
                           object DBGridEh7: TDBGridEh
                             Left = 9
                             Top = 24
-                            Width = 384
+                            Width = 382
                             Height = 202
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             DataSource = DSVirtualFetch
@@ -2371,7 +2352,7 @@ object UMainForm: TUMainForm
                           object Panel37: TPanel
                             Left = 0
                             Top = 234
-                            Width = 402
+                            Width = 400
                             Height = 30
                             Align = alBottom
                             BevelOuter = bvNone
@@ -2381,7 +2362,7 @@ object UMainForm: TUMainForm
                             object Shape6: TShape
                               Left = 0
                               Top = 29
-                              Width = 402
+                              Width = 400
                               Height = 1
                               Align = alBottom
                               Pen.Color = cl3DDkShadow
@@ -2391,7 +2372,7 @@ object UMainForm: TUMainForm
                             object SpeedButton6: TSpeedButton
                               Left = 0
                               Top = 0
-                              Width = 402
+                              Width = 400
                               Height = 29
                               Align = alClient
                               Caption = 'Refresh Record'
@@ -2447,6 +2428,7 @@ object UMainForm: TUMainForm
                                 00000000000000000000}
                               ParentFont = False
                               ExplicitTop = 1
+                              ExplicitWidth = 402
                             end
                           end
                           object scGPRadioButton3: TscGPRadioButton
@@ -2695,9 +2677,6 @@ object UMainForm: TUMainForm
               Align = alClient
               BevelOuter = bvNone
               TabOrder = 0
-              DesignSize = (
-                778
-                617)
               object Label3: TLabel
                 Left = 0
                 Top = 7
@@ -2726,42 +2705,46 @@ object UMainForm: TUMainForm
                 Font.Style = []
                 ParentFont = False
               end
+              object lblNarrator: TLabel
+                Left = 619
+                Top = 19
+                Width = 24
+                Height = 13
+                Caption = 'Start'
+                Visible = False
+              end
               object Panel8: TPanel
-                Left = 16
-                Top = 62
-                Width = 744
+                AlignWithMargins = True
+                Left = 18
+                Top = 60
+                Width = 742
                 Height = 539
-                Anchors = [akLeft, akTop, akRight, akBottom]
+                Margins.Left = 18
+                Margins.Top = 60
+                Margins.Right = 18
+                Margins.Bottom = 18
+                Align = alClient
                 BevelOuter = bvNone
                 TabOrder = 0
                 object Panel11: TPanel
                   Left = 0
                   Top = 0
-                  Width = 744
+                  Width = 742
                   Height = 539
                   Align = alClient
                   BevelOuter = bvNone
                   TabOrder = 0
                   object Panel4: TPanel
-                    Left = 423
+                    Left = 421
                     Top = 0
                     Width = 18
                     Height = 539
                     Align = alRight
                     BevelOuter = bvNone
                     TabOrder = 0
-                    object Panel22: TPanel
-                      Left = 0
-                      Top = 0
-                      Width = 18
-                      Height = 539
-                      Align = alRight
-                      BevelOuter = bvNone
-                      TabOrder = 0
-                    end
                   end
                   object Panel21: TPanel
-                    Left = 441
+                    Left = 439
                     Top = 0
                     Width = 303
                     Height = 539
@@ -3230,7 +3213,7 @@ object UMainForm: TUMainForm
                   object Panel2: TPanel
                     Left = 0
                     Top = 0
-                    Width = 423
+                    Width = 421
                     Height = 539
                     Align = alClient
                     BevelOuter = bvNone
@@ -3238,7 +3221,7 @@ object UMainForm: TUMainForm
                     object scGPPanel5: TscGPPanel
                       Left = 0
                       Top = 0
-                      Width = 423
+                      Width = 421
                       Height = 359
                       Align = alClient
                       Font.Charset = DEFAULT_CHARSET
@@ -3287,18 +3270,18 @@ object UMainForm: TUMainForm
                       WallpaperIndex = -1
                       WordWrap = False
                       DesignSize = (
-                        423
+                        421
                         359)
                       object Panel12: TPanel
                         Left = 0
                         Top = 0
-                        Width = 423
+                        Width = 421
                         Height = 84
                         Align = alTop
                         BevelOuter = bvNone
                         TabOrder = 0
                         DesignSize = (
-                          423
+                          421
                           84)
                         object Label2: TLabel
                           Left = 0
@@ -3329,13 +3312,14 @@ object UMainForm: TUMainForm
                         object Shape4: TShape
                           Left = 14
                           Top = 79
-                          Width = 393
+                          Width = 391
                           Height = 1
                           Anchors = [akLeft, akTop, akRight]
                           Pen.Color = cl3DDkShadow
+                          ExplicitWidth = 393
                         end
                         object SpeedButton1: TSpeedButton
-                          Left = 377
+                          Left = 375
                           Top = 48
                           Width = 30
                           Height = 28
@@ -3377,11 +3361,24 @@ object UMainForm: TUMainForm
                             4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
                             4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF}
                           OnClick = SpeedButton1Click
+                          ExplicitLeft = 377
+                        end
+                        object Shape10: TShape
+                          Left = 3
+                          Top = 2
+                          Width = 414
+                          Height = 78
+                          Anchors = [akLeft, akTop, akRight, akBottom]
+                          Brush.Style = bsClear
+                          Pen.Color = 9787667
+                          Pen.Width = 3
+                          Visible = False
+                          ExplicitWidth = 427
                         end
                         object Edit2: TEdit
                           Left = 14
                           Top = 42
-                          Width = 357
+                          Width = 355
                           Height = 31
                           Alignment = taCenter
                           Anchors = [akLeft, akTop, akRight]
@@ -3404,13 +3401,13 @@ object UMainForm: TUMainForm
                       object Panel18: TPanel
                         Left = 0
                         Top = 84
-                        Width = 423
+                        Width = 421
                         Height = 91
                         Align = alTop
                         BevelOuter = bvNone
                         TabOrder = 1
                         DesignSize = (
-                          423
+                          421
                           91)
                         object Label6: TLabel
                           Left = 0
@@ -3438,10 +3435,22 @@ object UMainForm: TUMainForm
                           Font.Style = []
                           ParentFont = False
                         end
+                        object Shape11: TShape
+                          Left = 3
+                          Top = 0
+                          Width = 414
+                          Height = 91
+                          Anchors = [akLeft, akTop, akRight, akBottom]
+                          Brush.Style = bsClear
+                          Pen.Color = 9787667
+                          Pen.Width = 3
+                          Visible = False
+                          ExplicitWidth = 427
+                        end
                         object scGPComboEdit1: TscGPComboBox
                           Left = 14
                           Top = 40
-                          Width = 393
+                          Width = 391
                           Height = 45
                           Anchors = [akLeft, akTop, akRight]
                           Font.Charset = DEFAULT_CHARSET
@@ -3614,7 +3623,7 @@ object UMainForm: TUMainForm
                       object Panel20: TPanel
                         Left = 0
                         Top = 322
-                        Width = 423
+                        Width = 421
                         Height = 37
                         Align = alBottom
                         BevelOuter = bvNone
@@ -3624,7 +3633,7 @@ object UMainForm: TUMainForm
                         object SpeedButton2: TSpeedButton
                           Left = 0
                           Top = 0
-                          Width = 423
+                          Width = 421
                           Height = 36
                           Align = alClient
                           Caption = 'Generate Reading Data'
@@ -3686,7 +3695,7 @@ object UMainForm: TUMainForm
                         object Shape2: TShape
                           Left = 0
                           Top = 36
-                          Width = 423
+                          Width = 421
                           Height = 1
                           Align = alBottom
                           Pen.Color = cl3DDkShadow
@@ -3698,7 +3707,7 @@ object UMainForm: TUMainForm
                       object DBGridEh1: TDBGridEh
                         Left = 14
                         Top = 176
-                        Width = 393
+                        Width = 391
                         Height = 140
                         Anchors = [akLeft, akTop, akRight, akBottom]
                         DataSource = DSMeterReaderSchedule
@@ -3781,7 +3790,7 @@ object UMainForm: TUMainForm
                     object Panel7: TPanel
                       Left = 0
                       Top = 359
-                      Width = 423
+                      Width = 421
                       Height = 17
                       Align = alBottom
                       BevelOuter = bvNone
@@ -3790,7 +3799,7 @@ object UMainForm: TUMainForm
                     object scGPPanel1: TscGPPanel
                       Left = 0
                       Top = 376
-                      Width = 423
+                      Width = 421
                       Height = 163
                       Align = alBottom
                       Font.Charset = DEFAULT_CHARSET
@@ -3842,7 +3851,7 @@ object UMainForm: TUMainForm
                         AlignWithMargins = True
                         Left = 0
                         Top = 0
-                        Width = 423
+                        Width = 421
                         Height = 156
                         Margins.Left = 0
                         Margins.Top = 0
@@ -3852,7 +3861,7 @@ object UMainForm: TUMainForm
                         BevelOuter = bvNone
                         TabOrder = 0
                         DesignSize = (
-                          423
+                          421
                           156)
                         object Label9: TLabel
                           Left = -1
@@ -3870,7 +3879,7 @@ object UMainForm: TUMainForm
                         object scGPPanel3: TscGPPanel
                           Left = 10
                           Top = 30
-                          Width = 402
+                          Width = 400
                           Height = 124
                           Anchors = [akLeft, akTop, akRight, akBottom]
                           Font.Charset = DEFAULT_CHARSET
@@ -3919,12 +3928,12 @@ object UMainForm: TUMainForm
                           WallpaperIndex = -1
                           WordWrap = False
                           DesignSize = (
-                            402
+                            400
                             124)
                           object DBGridEh2: TDBGridEh
                             Left = 9
                             Top = 9
-                            Width = 384
+                            Width = 382
                             Height = 105
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             DataSource = DSDBPushed
@@ -3995,7 +4004,7 @@ object UMainForm: TUMainForm
                           end
                         end
                         object scGPSwitch6: TscGPSwitch
-                          Left = 366
+                          Left = 364
                           Top = 4
                           Width = 42
                           Height = 20
@@ -4880,7 +4889,7 @@ object UMainForm: TUMainForm
               object scGPPanel10: TscGPPanel
                 Left = 219
                 Top = 37
-                Width = 275
+                Width = 253
                 Height = 215
                 Anchors = [akLeft, akTop, akRight]
                 Font.Charset = DEFAULT_CHARSET
@@ -4929,12 +4938,12 @@ object UMainForm: TUMainForm
                 WallpaperIndex = -1
                 WordWrap = False
                 DesignSize = (
-                  275
+                  253
                   215)
                 object DBGridEh3: TDBGridEh
                   Left = 17
                   Top = 20
-                  Width = 252
+                  Width = 230
                   Height = 163
                   Anchors = [akLeft, akTop, akRight]
                   DataSource = DMMainModule.dsMeterReader
@@ -5019,7 +5028,7 @@ object UMainForm: TUMainForm
                 object Panel39: TPanel
                   Left = 0
                   Top = 189
-                  Width = 275
+                  Width = 253
                   Height = 26
                   Align = alBottom
                   BevelOuter = bvNone
@@ -5027,7 +5036,7 @@ object UMainForm: TUMainForm
                   object SpeedButton10: TSpeedButton
                     Left = 0
                     Top = 0
-                    Width = 275
+                    Width = 253
                     Height = 26
                     Align = alClient
                     Caption = 'Edit Meter Reader'
@@ -5376,7 +5385,7 @@ object UMainForm: TUMainForm
                 485
                 278)
               object SpeedButton11: TSpeedButton
-                Left = 428
+                Left = 402
                 Top = 33
                 Width = 70
                 Height = 26
@@ -5419,9 +5428,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton11Click
+                ExplicitLeft = 421
               end
               object SpeedButton12: TSpeedButton
-                Left = 428
+                Left = 402
                 Top = 64
                 Width = 70
                 Height = 26
@@ -5464,9 +5474,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton11Click
+                ExplicitLeft = 421
               end
               object SpeedButton13: TSpeedButton
-                Left = 428
+                Left = 402
                 Top = 95
                 Width = 70
                 Height = 26
@@ -5509,9 +5520,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton11Click
+                ExplicitLeft = 421
               end
               object SpeedButton14: TSpeedButton
-                Left = 428
+                Left = 402
                 Top = 125
                 Width = 70
                 Height = 26
@@ -5554,9 +5566,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton11Click
+                ExplicitLeft = 421
               end
               object SpeedButton15: TSpeedButton
-                Left = 428
+                Left = 402
                 Top = 156
                 Width = 70
                 Height = 26
@@ -5599,9 +5612,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton11Click
+                ExplicitLeft = 421
               end
               object SpeedButton16: TSpeedButton
-                Left = 428
+                Left = 402
                 Top = 188
                 Width = 70
                 Height = 26
@@ -5644,9 +5658,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton11Click
+                ExplicitLeft = 421
               end
               object SpeedButton17: TSpeedButton
-                Left = 428
+                Left = 402
                 Top = 218
                 Width = 70
                 Height = 26
@@ -5689,9 +5704,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton11Click
+                ExplicitLeft = 421
               end
               object SpeedButton18: TSpeedButton
-                Left = 428
+                Left = 402
                 Top = 250
                 Width = 70
                 Height = 26
@@ -5734,9 +5750,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton11Click
+                ExplicitLeft = 421
               end
               object SpeedButton19: TSpeedButton
-                Left = 404
+                Left = 378
                 Top = 33
                 Width = 23
                 Height = 26
@@ -5778,9 +5795,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton19Click
+                ExplicitLeft = 397
               end
               object SpeedButton20: TSpeedButton
-                Left = 404
+                Left = 378
                 Top = 64
                 Width = 23
                 Height = 26
@@ -5822,9 +5840,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton20Click
+                ExplicitLeft = 397
               end
               object SpeedButton21: TSpeedButton
-                Left = 404
+                Left = 378
                 Top = 95
                 Width = 23
                 Height = 26
@@ -5866,9 +5885,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton21Click
+                ExplicitLeft = 397
               end
               object SpeedButton22: TSpeedButton
-                Left = 404
+                Left = 378
                 Top = 125
                 Width = 23
                 Height = 26
@@ -5910,9 +5930,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton22Click
+                ExplicitLeft = 397
               end
               object SpeedButton23: TSpeedButton
-                Left = 404
+                Left = 378
                 Top = 156
                 Width = 23
                 Height = 26
@@ -5954,9 +5975,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton23Click
+                ExplicitLeft = 397
               end
               object SpeedButton24: TSpeedButton
-                Left = 404
+                Left = 378
                 Top = 188
                 Width = 23
                 Height = 26
@@ -5998,9 +6020,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton24Click
+                ExplicitLeft = 397
               end
               object SpeedButton25: TSpeedButton
-                Left = 404
+                Left = 378
                 Top = 218
                 Width = 23
                 Height = 26
@@ -6042,9 +6065,10 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton25Click
+                ExplicitLeft = 397
               end
               object SpeedButton26: TSpeedButton
-                Left = 404
+                Left = 378
                 Top = 250
                 Width = 23
                 Height = 26
@@ -6086,6 +6110,7 @@ object UMainForm: TUMainForm
                   0000000000000000000000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
                 OnClick = SpeedButton26Click
+                ExplicitLeft = 397
               end
               object scLabel12: TscLabel
                 Left = 19
@@ -6250,7 +6275,7 @@ object UMainForm: TUMainForm
               object Edit7: TEdit
                 Left = 147
                 Top = 35
-                Width = 245
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6268,7 +6293,7 @@ object UMainForm: TUMainForm
               object Edit8: TEdit
                 Left = 147
                 Top = 66
-                Width = 245
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6286,7 +6311,7 @@ object UMainForm: TUMainForm
               object Edit9: TEdit
                 Left = 147
                 Top = 97
-                Width = 245
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6304,7 +6329,7 @@ object UMainForm: TUMainForm
               object Edit10: TEdit
                 Left = 147
                 Top = 128
-                Width = 245
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6322,7 +6347,7 @@ object UMainForm: TUMainForm
               object Edit11: TEdit
                 Left = 147
                 Top = 159
-                Width = 245
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6340,7 +6365,7 @@ object UMainForm: TUMainForm
               object Edit12: TEdit
                 Left = 147
                 Top = 190
-                Width = 245
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6358,7 +6383,7 @@ object UMainForm: TUMainForm
               object Edit13: TEdit
                 Left = 147
                 Top = 221
-                Width = 245
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6376,7 +6401,7 @@ object UMainForm: TUMainForm
               object Edit14: TEdit
                 Left = 147
                 Top = 251
-                Width = 245
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -7238,10 +7263,10 @@ object UMainForm: TUMainForm
       end
       object Panel36: TPanel
         Left = 0
-        Top = 477
+        Top = 517
         Width = 50
         Height = 93
-        Align = alBottom
+        Align = alTop
         BevelOuter = bvNone
         TabOrder = 7
         Visible = False
@@ -7376,6 +7401,197 @@ object UMainForm: TUMainForm
           OnChange = scGPComboBox1Change
         end
       end
+      object scButton7: TscButton
+        Left = 0
+        Top = 170
+        Width = 50
+        Height = 40
+        Align = alTop
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        FluentUIOpaque = False
+        TabOrder = 8
+        Visible = False
+        OnClick = scButton7Click
+        Animation = True
+        Caption = 'Ease of Access'
+        CanFocused = False
+        CustomDropDown = False
+        Margin = 0
+        Spacing = 10
+        Layout = blGlyphLeft
+        Images = scGPVirtualImageList1
+        ImageIndex = 10
+        ImageMargin = 50
+        TransparentBackground = False
+        ColorOptions.NormalColor = 9787667
+        ColorOptions.HotColor = 7488782
+        ColorOptions.PressedColor = 5912332
+        ColorOptions.FocusedColor = 657930
+        ColorOptions.DisabledColor = 657930
+        ColorOptions.FrameNormalColor = clNone
+        ColorOptions.FrameHotColor = clNone
+        ColorOptions.FramePressedColor = clNone
+        ColorOptions.FrameFocusedColor = clNone
+        ColorOptions.FrameDisabledColor = clBtnShadow
+        ColorOptions.FrameWidth = 0
+        ColorOptions.FontNormalColor = clWhite
+        ColorOptions.FontHotColor = clWhite
+        ColorOptions.FontPressedColor = clWhite
+        ColorOptions.FontFocusedColor = clWhite
+        ColorOptions.FontDisabledColor = clGray
+        ColorOptions.TitleFontNormalColor = clBtnText
+        ColorOptions.TitleFontHotColor = clBtnText
+        ColorOptions.TitleFontPressedColor = clBtnText
+        ColorOptions.TitleFontFocusedColor = clBtnText
+        ColorOptions.TitleFontDisabledColor = clBtnShadow
+        ColorOptions.StyleColors = True
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = [fsBold]
+        ToggleMode = False
+        HotImageIndex = -1
+        FocusedImageIndex = -1
+        PressedImageIndex = -1
+        StyleKind = scbsColorButton
+        UseGalleryMenuImage = False
+        UseGalleryMenuCaption = False
+        CustomImageNormalIndex = -1
+        CustomImageHotIndex = -1
+        CustomImagePressedIndex = -1
+        CustomImageDisabledIndex = -1
+        CustomImageFocusedIndex = -1
+        ScaleMarginAndSpacing = False
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        UseFontColorToStyleColor = False
+        RepeatClick = False
+        RepeatClickInterval = 100
+        GlowEffect.Enabled = False
+        GlowEffect.Color = clHighlight
+        GlowEffect.AlphaValue = 255
+        GlowEffect.GlowSize = 7
+        GlowEffect.Offset = 0
+        GlowEffect.Intensive = True
+        GlowEffect.StyleColors = True
+        GlowEffect.HotColor = clNone
+        GlowEffect.PressedColor = clNone
+        GlowEffect.FocusedColor = clNone
+        GlowEffect.PressedGlowSize = 7
+        GlowEffect.PressedAlphaValue = 255
+        GlowEffect.States = [scsHot, scsPressed, scsFocused]
+        ImageGlow = True
+        ShowGalleryMenuFromTop = False
+        ShowGalleryMenuFromRight = False
+        ShowMenuArrow = True
+        SplitButton = False
+        ShowFocusRect = True
+        Down = False
+        GroupIndex = 1
+        AllowAllUp = True
+        WordWrap = False
+      end
+      object scButton8: TscButton
+        Left = 0
+        Top = 210
+        Width = 50
+        Height = 307
+        Align = alTop
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        FluentUIOpaque = False
+        TabOrder = 9
+        Visible = False
+        OnClick = scButton7Click
+        Animation = True
+        CanFocused = False
+        CustomDropDown = False
+        Margin = 0
+        Spacing = 10
+        Layout = blGlyphLeft
+        Images = scGPVirtualImageList1
+        ImageIndex = -1
+        ImageMargin = 50
+        TransparentBackground = False
+        ColorOptions.NormalColor = 9787667
+        ColorOptions.HotColor = 7488782
+        ColorOptions.PressedColor = 5912332
+        ColorOptions.FocusedColor = 657930
+        ColorOptions.DisabledColor = 657930
+        ColorOptions.FrameNormalColor = clNone
+        ColorOptions.FrameHotColor = clNone
+        ColorOptions.FramePressedColor = clNone
+        ColorOptions.FrameFocusedColor = clNone
+        ColorOptions.FrameDisabledColor = clBtnShadow
+        ColorOptions.FrameWidth = 0
+        ColorOptions.FontNormalColor = clWhite
+        ColorOptions.FontHotColor = clWhite
+        ColorOptions.FontPressedColor = clWhite
+        ColorOptions.FontFocusedColor = clWhite
+        ColorOptions.FontDisabledColor = clGray
+        ColorOptions.TitleFontNormalColor = clBtnText
+        ColorOptions.TitleFontHotColor = clBtnText
+        ColorOptions.TitleFontPressedColor = clBtnText
+        ColorOptions.TitleFontFocusedColor = clBtnText
+        ColorOptions.TitleFontDisabledColor = clBtnShadow
+        ColorOptions.StyleColors = True
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = [fsBold]
+        ToggleMode = False
+        HotImageIndex = -1
+        FocusedImageIndex = -1
+        PressedImageIndex = -1
+        StyleKind = scbsColorButton
+        UseGalleryMenuImage = False
+        UseGalleryMenuCaption = False
+        CustomImageNormalIndex = -1
+        CustomImageHotIndex = -1
+        CustomImagePressedIndex = -1
+        CustomImageDisabledIndex = -1
+        CustomImageFocusedIndex = -1
+        ScaleMarginAndSpacing = False
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        UseFontColorToStyleColor = False
+        RepeatClick = False
+        RepeatClickInterval = 100
+        GlowEffect.Enabled = False
+        GlowEffect.Color = clHighlight
+        GlowEffect.AlphaValue = 255
+        GlowEffect.GlowSize = 7
+        GlowEffect.Offset = 0
+        GlowEffect.Intensive = True
+        GlowEffect.StyleColors = True
+        GlowEffect.HotColor = clNone
+        GlowEffect.PressedColor = clNone
+        GlowEffect.FocusedColor = clNone
+        GlowEffect.PressedGlowSize = 7
+        GlowEffect.PressedAlphaValue = 255
+        GlowEffect.States = [scsHot, scsPressed, scsFocused]
+        ImageGlow = True
+        ShowGalleryMenuFromTop = False
+        ShowGalleryMenuFromRight = False
+        ShowMenuArrow = True
+        SplitButton = False
+        ShowFocusRect = True
+        Down = False
+        GroupIndex = 1
+        AllowAllUp = True
+        WordWrap = False
+      end
     end
   end
   object scStyleManager1: TscStyleManager
@@ -7471,10 +7687,10 @@ object UMainForm: TUMainForm
     OnDWMClientMaximize = scStyledForm1DWMClientMaximize
     OnDWMClientRestore = scStyledForm1DWMClientRestore
     Left = 8
-    Top = 224
+    Top = 456
   end
   object scGPVirtualImageList1: TscGPVirtualImageList
-    ColorDepth = cdDefault
+    ColorDepth = cd16Bit
     DirectDraw = True
     PixelOffsetMode = scgppomDefault
     InterpolationMode = scgppimDefault
@@ -7509,7 +7725,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010A00F801880130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010B00F801B00130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7622,7 +7838,7 @@ object UMainForm: TUMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000004040420090909300909093009090930010101100000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7645,9 +7861,9 @@ object UMainForm: TUMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000313131707878
+      78AFC3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0E0
+      E0EF787878AF4040408004040420000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7669,9 +7885,9 @@ object UMainForm: TUMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000090909306363639FFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFE0E0E0EF8F8F8FBF0909093000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7693,9 +7909,9 @@ object UMainForm: TUMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000040404206363639FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8FBF090909300000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7717,10 +7933,10 @@ object UMainForm: TUMainForm
       0110000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000024242460FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0E0E0EF3131
+      3170000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7740,11 +7956,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5050
       508F010101100000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000005050
+      508FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFF8F8F8FBF6363639F5050508F5050508F6363639FA8A8A8CFE0E0
+      E0EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF5050508F0101011000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7764,11 +7980,11 @@ object UMainForm: TUMainForm
       011040404080C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFF5050508F0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000006363639FFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF787878AF1919
+      1950000000000000000000000000000000000000000000000000000000000101
+      0110101010405050508FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFF6363639F01010110000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7788,11 +8004,11 @@ object UMainForm: TUMainForm
       000000000000010101105050508FE0E0E0EFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFF3131317000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000006363639FFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5050508F0000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000001010110A8A8A8CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFF5050508F000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7812,11 +8028,11 @@ object UMainForm: TUMainForm
       000000000000000000000000000010101040E0E0E0EFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFE0E0E0EF09090930000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000019191950FFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5050
+      508F000000000000000000000000000000000000000000000000000000000101
+      0110A8A8A8CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFF313131700000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7836,11 +8052,11 @@ object UMainForm: TUMainForm
       00000000000000000000000000000000000009090930E0E0E0EFFFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFF787878AF000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000001010110FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF5050508F000000000000000000000000000000000000000001010110A8A8
+      A8CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFE0E0E0EF0909093000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7860,11 +8076,11 @@ object UMainForm: TUMainForm
       0000000000000000000000000000000000000000000019191950FFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000787878AFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFF6363639F404040806363639F6363639F40404080A8A8A8CFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF787878AF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7884,11 +8100,11 @@ object UMainForm: TUMainForm
       8FBF0404042000000000000000000000000000000000000000006363639FFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF787878AF0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000004040420FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF10101040000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7908,11 +8124,11 @@ object UMainForm: TUMainForm
       FFFFE0E0E0EF090909300000000000000000000000000000000004040420E0E0
       E0EFFFFFFFFFFFFFFFFFFFFFFFFFE0E0E0EF0101011000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006363639FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF787878AF000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7932,11 +8148,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFC3C3C3DF01010110000000000000000000000000000000007878
       78AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1919195000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000001010110FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC3C3
+      C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF8F8F8FBFE0E0E0EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF040404200000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7956,11 +8172,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFF40404080000000000000000000000000000000002424
       2460FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5050508F00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000024242460FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8FBF0404
+      0420C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F
+      8FBF00000000787878AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF404040800000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7980,11 +8196,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFA8A8A8CF000000000000000000000000000000000909
       0930FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF787878AF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000005050508FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF242424600000
+      000004040420C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFC3C3C3DF40404080101010400909093031313170A8A8A8CFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8FBF0000
+      00000000000019191950FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF787878AF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8004,11 +8220,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF040404200000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF010101100000
+      00000000000004040420C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF8F8F8FBF0000000000000000000000000000000000000000010101106363
+      639FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8FBF000000000000
+      00000000000001010110E0E0E0EFFFFFFFFFFFFFFFFFFFFFFFFFC3C3C3DF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8028,12 +8244,12 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0E0E0EF000000000000
+      0000000000000000000019191950FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0E0
+      E0EF000000000000000000000000000000000000000000000000000000000101
+      0110A8A8A8CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF19191950000000000000
+      000000000000000000008F8F8FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0404
+      0420000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8052,12 +8268,12 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000001010110FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF787878AF000000000000
+      0000000000000000000040404080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3131
+      3170000000000000000000000000000000000000000000000000000000000000
+      000031313170FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5050508F000000000000
+      00000000000000000000787878AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0404
+      0420000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8076,12 +8292,12 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000004040420FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6363639F000000000000
+      000000000000000000005050508FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1010
+      1040000000000000000000000000000000000000000000000000000000000000
+      000009090930FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6363639F000000000000
+      000000000000000000005050508FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0909
+      0930000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8100,12 +8316,12 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000004040420FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6363639F000000000000
+      000000000000000000005050508FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1919
+      1950000000000000000000000000000000000000000000000000000000000000
+      000010101040FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6363639F000000000000
+      000000000000000000005050508FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0909
+      0930000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8124,12 +8340,12 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000004040420FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8FBF000000000000
+      0000000000000000000031313170FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4040
+      4080000000000000000000000000000000000000000000000000000000000000
+      000031313170FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF40404080000000000000
+      000000000000000000006363639FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0909
+      0930000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8148,12 +8364,12 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF000000000000
+      000000000000010101108F8F8FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0E0
+      E0EF010101100000000000000000000000000000000000000000000000000101
+      0110C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5050508F000000000000
+      00000000000000000000A8A8A8CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0101
+      0110000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8172,11 +8388,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF040404200000
+      000001010110A8A8A8CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFA8A8A8CF0101011000000000000000000000000000000000000000008F8F
+      8FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5050508F0000
+      00000000000001010110FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0E0E0EF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8196,11 +8412,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000006363639FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF191919500101
+      0110A8A8A8CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFE0E0E0EF40404080101010401919195031313170C3C3C3DFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5050
+      508F0000000019191950FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF787878AF0000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8220,11 +8436,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000019191950FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8FBFA8A8
+      A8CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF5050508F6363639FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF313131700000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8244,11 +8460,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF101010400000000000000000000000000000
       0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000001010110E0E0E0EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF040404200000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8268,11 +8484,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF090909300000000000000000000000000000
       0000C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006363639FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6363639F000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8292,11 +8508,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFFFFFFFFF040404200000000000000000000000000000
       00005050508FFFFFFFFFFFFFFFFFFFFFFFFF1919195000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000009090930FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF09090930000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8316,11 +8532,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFFE0E0E0EF000000000000000000000000000000000000
       000000000000191919505050508F242424600000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000005050508FFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF8F8F8FBF10101040313131705050508F5050508F4040408019191950C3C3
+      C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF787878AF00000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8340,11 +8556,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFF787878AF000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000001010110E0E0E0EFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F
+      8FBF000000000000000000000000000000000000000000000000000000000404
+      0420C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFE0E0E0EF0404042000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8364,11 +8580,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFFFFFFFFF31313170000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000024242460FFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8FBF0000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000004040420C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFF191919500000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8388,11 +8604,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFFE0E0E0EF00000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000031313170FFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8CF000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000004040420C3C3C3DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFF5050508F000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8412,11 +8628,11 @@ object UMainForm: TUMainForm
       FFFFFFFFFFFF2424246000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000006363639FFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8FBF2424
+      2460010101100000000000000000000000000000000000000000000000000000
+      0000191919506363639FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFF8F8F8FBF00000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8436,11 +8652,11 @@ object UMainForm: TUMainForm
       FFFF8F8F8FBF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000004040
+      4080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFA8A8A8CF787878AF6363639F6363639F8F8F8FBFC3C3C3DFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF404040800000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8461,10 +8677,10 @@ object UMainForm: TUMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000010101040E0E0E0EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2424
+      2460000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8485,9 +8701,9 @@ object UMainForm: TUMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000010101105050508FE0E0E0EFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6363639F040404200000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8509,9 +8725,9 @@ object UMainForm: TUMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000101010405050508FE0E0E0EFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFF6363639F0404042000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8533,9 +8749,9 @@ object UMainForm: TUMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000001010110191919506363
+      639FA8A8A8CFE0E0E0EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC3C3
+      C3DF6363639F2424246000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -8558,7 +8774,7 @@ object UMainForm: TUMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000101011001010110040404200404042004040420000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -28132,8 +28348,8 @@ object UMainForm: TUMainForm
         PixelOffsetModeHighQuality = True
         InterpolationModeHighQuality = True
       end>
-    Left = 616
-    Top = 24
+    Left = 592
+    Top = 208
   end
   object PMVirtualADB: TPopupMenu
     Left = 421
@@ -28237,13 +28453,13 @@ object UMainForm: TUMainForm
   end
   object UsbRemovalTimer: TTimer
     OnTimer = UsbRemovalTimerTimer
-    Left = 760
-    Top = 40
+    Left = 768
+    Top = 176
   end
   object UsbArrivalTimer: TTimer
     OnTimer = UsbArrivalTimerTimer
     Left = 688
-    Top = 40
+    Top = 160
   end
   object VTReadingData: TVirtualTable
     Left = 125
@@ -28389,5 +28605,12 @@ object UMainForm: TUMainForm
     OnTimer = Timer2Timer
     Left = 756
     Top = 112
+  end
+  object NarratorMode: TTimer
+    Enabled = False
+    Interval = 10000
+    OnTimer = NarratorModeTimer
+    Left = 595
+    Top = 50
   end
 end

@@ -13,7 +13,8 @@ uses
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh,
   Vcl.OleCtrls, SHDocVw, scWebBrowser, Vcl.DBCtrls, Data.DB, IOUtils, Types,
   VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove,IniFiles,Vcl.Themes,
-  Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts,Registry,DateUtils;
+  Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts,Registry,DateUtils,
+  DemoGuideForm2;
 
 
 type
@@ -66,7 +67,6 @@ type
     scGPPanel6: TscGPPanel;
     Panel16: TPanel;
     Label1: TLabel;
-    Panel22: TPanel;
     scGPPnlRightBottom: TscGPPanel;
     Panel27: TPanel;
     scGPPanel4: TscGPPanel;
@@ -174,7 +174,6 @@ type
     Panel13: TPanel;
     Panel14: TPanel;
     Panel15: TPanel;
-    Panel17: TPanel;
     Panel19: TPanel;
     scGPPanel7: TscGPPanel;
     Panel23: TPanel;
@@ -232,7 +231,6 @@ type
     Panel9: TPanel;
     Label26: TLabel;
     Label27: TLabel;
-    Panel44: TPanel;
     Panel45: TPanel;
     Panel46: TPanel;
     Panel47: TPanel;
@@ -300,6 +298,12 @@ type
     Timer2: TTimer;
     N2: TMenuItem;
     ContinueTransferringSQLFile1: TMenuItem;
+    scButton7: TscButton;
+    scButton8: TscButton;
+    NarratorMode: TTimer;
+    lblNarrator: TLabel;
+    Shape10: TShape;
+    Shape11: TShape;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -432,6 +436,8 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure RefreshConnection1Click(Sender: TObject);
     procedure ContinueTransferringSQLFile1Click(Sender: TObject);
+    procedure scButton7Click(Sender: TObject);
+    procedure NarratorModeTimer(Sender: TObject);
       protected
     procedure WMNCHitTest(var Msg: TWMNCHitTest); message WM_NCHITTEST;
 
@@ -459,6 +465,7 @@ type
 
 var
 
+  TargetForm: TForm;
   UMainForm: TUMainForm;
   MRNo:Integer;
   IniFile: TIniFile;
@@ -783,11 +790,11 @@ begin
         //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
         //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
 
-        tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
-        tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
+        //tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+        //tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
 
-        //tblSQLMeterReadingPrevMR_Date.AsDateTime := qryPostingMeterReadingPreviousReadingDate.AsDateTime;
-        //tblSQLMeterReadingMR_Date.AsDateTime := qryPostingMeterReadingPresentReadingDate.AsDateTime;
+        tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
+        tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
         //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
         tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
         tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
@@ -932,16 +939,111 @@ begin
         end;
       end;
     end else begin
-      if fdDBPushedStatus.AsString.Contains('Already Pushed') then begin
+
         if messageDlg('This generated Data Is Already Pushed to A Device!'+
          #13#10 +
          'Want to continue Press [Yes]!'+
          'To Cancel Transaction Press [No]',mtInformation,[mbYes,mbNo],0) = mrYes then begin
           ADeviceFound := getAvaialbeDevice;
+          ADeviceFound := getAvaialbeDevice;
+            AMeterReaderName := fdDBPushedMeterReaderName.AsString;
+            if isMultipleDevice() then begin
+              Label1.Caption := Label1.Caption + #13#10 + 'Multiple Device Have Found';
+              Label1.Caption := Label1.Caption + #13#10 + 'Please Connect Only One Device!';
+              Label1.Caption := Label1.Caption + #13#10 + 'and Try Again! Thank You.';
+              //RUN Form to Select Device to Connect or Send Data
+              if MessageDlg('Multiple Device are Found Connected to Computer' + #13#10 +
+              'Please Remove One And Click [Retry] to continue pushing of SQL File to Tablet' + #13#10 +
+              'Press [Cancel] to Cancel Transaction!', mtInformation,[mbRetry,mbCancel],0) = mrRetry then begin
+                 Label1.Caption := Label1.Caption + #13#10 + 'Checking Again for Device!!';
+                 goto ReCheck;
+              end else begin
+                 Label1.Caption := Label1.Caption + #13#10 + 'Generated SQL File Are Cancelled or Deleted!';
+                 tblGeneratedHistory.Delete;
+              end;
+              Application.ProcessMessages;
 
+              // basta may something didi na code dati
+            end else begin
+              //Since it is only has One Connection then this will be execute process
+              Application.ProcessMessages;
+              if isAvailableDevice then begin
+                // Select DB Push History
+                Label1.Caption := Label1.Caption + #13#10 + 'Checking Availability to Push DB File!';
+                tblDBPushed.Close;
+                tblDBPushed.Open;
+                tblDBPushed.First;
+                Application.ProcessMessages;
+                if not tblDBPushed.Locate('BillPeriod;DatePushed',VarArrayOf([Trim(Edit2.Text),FormatDateTime('MM/DD/YYYY',Now())]),[]) then begin
+                  tblDBPushed.Append;
+                  tblDBPushedBillPeriod.AsString := Trim(Edit2.Text);
+                  tblDBPushedDevice.AsString := DeviceADB;
+                  tblDBPushedStatus.AsString := 'Not Yet Pushed';
+                  tblDBPushedDatePushed.AsString := FormatDateTime('MM/DD/YYYY',Now());
+                  tblDBPushedMeterReaderName.AsString := AMeterReaderName;
+                  tblDBPushed.Post;
+                  Application.ProcessMessages;
+                  // Process the Sending of Data Using ADB PUSH FILE
+                  if isADBPushFileToTablet() then begin
+                  Label1.Caption := Label1.Caption + #13#10 + 'SQL File Successfully Pushed to';
+                  Label1.Caption := Label1.Caption + #13#10 + 'Connected Device : ['+ DeviceADB + ']';
+                  Label1.Caption := Label1.Caption + #13#10 + 'With SerialNumber : ['+ SerialNumberADB + ']';
+                    MessageDlg('Generating Reading Data Done!!', mtInformation,[mbOK],0);
+                    MessageDlg('File Pushed Successfully ' + #13#10 + '['+ Trim(SplitString(Memo2.Text,':')[2])+']',mtInformation,[mbOK],0);
+                    tblDBPushed.Last;
+                    tblDBPushed.Edit;
+                    tblDBPushedStatus.AsString := 'Already Pushed';
+                    tblDBPushed.Post;
+                  end else begin
+                    Label1.Caption := Label1.Caption + #13#10 + 'An Error has occured while transferring Data';
+                    MessageDlg('An Error has occured while transferring Data'+ #13#10+'Error occured : '+SplitString(Memo2.Text,'|')[1],mtError,[mbOK],0);
+                  end;
+                end else begin
+                Application.ProcessMessages;
+                  Label1.Caption := Label1.Caption + #13#10 + 'Data has History Process!';
+                  Label1.Caption := Label1.Caption + #13#10 + 'This may Overwrite the data!';
+                  if MessageDlg('Data Are Already Inserted!' + #13#10 + 'Do you want to Overwrite the Data? Press [YES] to Continue'+ #13#10 + 'Press [No] to Cancel Overwriting Process!',mtInformation,[mbyes,mbNo],0) = mrYes then begin
+                    tblDBPushed.Edit;
+                    tblDBPushedBillPeriod.AsString := Trim(Edit2.Text);
+                    tblDBPushedDevice.AsString := DeviceADB;
+                    tblDBPushedStatus.AsString := 'Not Yet Pushed';
+                    tblDBPushedDatePushed.AsString := FormatDateTime('MM/DD/YYYY',Now());
+                    tblDBPushedMeterReaderName.AsString := AMeterReaderName;
+                    tblDBPushed.Post;
+                    Application.ProcessMessages;
+                    // Process the Sending of Data Using ADB PUSH FILE
+                    if isADBPushFileToTablet() then begin
+                      Label1.Caption := Label1.Caption + #13#10 + 'SQL File Successfully Pushed to';
+                      Label1.Caption := Label1.Caption + #13#10 + 'Connected Device : ['+ DeviceADB + ']';
+                      Label1.Caption := Label1.Caption + #13#10 + 'With SerialNumber : ['+ SerialNumberADB + ']';
+                      MessageDlg('Generating Reading Data Done!!', mtInformation,[mbOK],0);
+                      MessageDlg('File Pushed Successfully ' + #13#10 + '['+ Trim(SplitString(Memo2.Text,':')[2])+']',mtInformation,[mbOK],0);
+                      tblDBPushed.Edit;
+                      tblDBPushedStatus.AsString := 'Already Pushed';
+                      tblDBPushed.Post;
+                      Application.ProcessMessages;
+                    end else begin
+                      Label1.Caption := Label1.Caption + #13#10 + 'An Error has occured while transferring Data';
+                      MessageDlg('An Error has occured while transferring Data'+ #13#10+'Error occured : '+SplitString(Memo2.Text,'|')[1],mtError,[mbOK],0);
+                    end;
+                  end else begin
+                    tblGeneratedHistory.Last;
+                    tblGeneratedHistory.Edit;
+                    tblGeneratedHistoryUploadedStatus.AsInteger := 0;
+                    tblGeneratedHistory.Post;
+                    Application.ProcessMessages;
+                  end;
+                end;
+                fdDBPushed.Close;
+                fdDBPushed.ParamByName('ABillPeriod').AsString := Trim(Edit2.Text);
+                fdDBPushed.Open();
+                fdDBPushed.First;
+                Application.ProcessMessages;
+              end;
+            end;
 
         end;
-      end;
+
     end;
 
   end;
@@ -1599,10 +1701,12 @@ Var
   IniDataValue:String;
   Item: TscGPListBoxItem;
   LatestKey:String;
+  TitleText: array[0..255] of Char;
+  TitleLength: Integer;
 begin
   LatestKey := CheckRegistryKey('ActivationKey');
-
-
+   TitleLength := GetWindowText(Application.Handle,TitleText,Length(TitleText));
+  ShowMessage(intToStr(Length(TitleText)));
 
   //if activated show pnlActivationStatus
   //if not activated hide pnlActivationStatus
@@ -1955,6 +2059,22 @@ end;
 
 
 
+procedure TUMainForm.NarratorModeTimer(Sender: TObject);
+begin
+  if ContainsText(lblNarrator.Caption,'Start') then begin
+    Shape10.Visible := False;
+    Shape11.Visible := True;
+    lblNarrator.Caption := 'MeterReader'
+  end else if ContainsText(lblNarrator.Caption,'MeterReader') then begin
+    Shape11.Visible := False;
+    //Shape11.Visible := True;
+    lblNarrator.Caption := 'ListMeterReader';
+  end;
+
+
+
+end;
+
 procedure TUMainForm.PaintBox1Paint(Sender: TObject);
 var
   LabelRect: TRect;
@@ -2197,6 +2317,7 @@ procedure TUMainForm.scButton5Click(Sender: TObject);
 begin
   scPageViewer1.PageIndex := 2;
   Edit15.Clear;
+
   //scButton6Click(Sender);
 end;
 
@@ -2214,6 +2335,42 @@ begin
     scSplitViewSettings.Visible := False;
     scSplitViewSettings.Opened := False;
   end;
+end;
+
+procedure TUMainForm.scButton7Click(Sender: TObject);
+Var
+  isEnabled:Boolean;
+  AppHandle: HWND;
+begin
+
+  scPageViewer1.PageIndex := 3;
+  if scButton7.Down then begin
+    isEnabled := False;
+    CaptionLabel.Caption := 'Irosin Water District | Uploader && Downloader Software [GUIDE MODE {EASE OF ACCESS}]';
+    scButton8.Height := Self.Height - (scButton1.Height*7);
+  end else begin
+    isEnabled := True;
+    CaptionLabel.Caption := 'Irosin Water District | Uploader && Downloader Software';
+    scButton8.Height := Self.Height  - ((scButton1.Height*7) + Panel36.Height);
+  end;
+  scButton1.Enabled := isEnabled;
+  scButton2.Enabled := isEnabled;
+  scButton3.Enabled := isEnabled;
+  scButton4.Enabled := isEnabled;
+  scButton5.Enabled := isEnabled;
+  scButton6.Enabled := isEnabled;
+  scButton8.Enabled := isEnabled;
+  scButton8.Visible := not isEnabled;
+  panel36.Visible := scSplitView1.Opened AND isEnabled;
+  scSplitView1.Opened := False;
+
+  NarratorMode.Enabled :=True;
+
+  Shape10.Visible := True;
+
+
+  //scSplitView1.Enabled := isEnabled;
+
 end;
 
 procedure TUMainForm.scButton9Click(Sender: TObject);
@@ -2551,6 +2708,20 @@ begin
   end else begin
      scGPCircledProgressBar2.Caption := 'Processing.'
   end;
+  // insert here the arrears data by concessionaire accountnumber
+  with DMMainModule do begin
+    qryMSClientArrears.Close;
+    qryMSClientArrears.ParamByName('AAccountNumber').AsString := tblClientsAccountNo.AsString;
+    qryMSClientArrears.Open;
+    qryMSClientArrears.First;
+    while not qryMSClientArrears.EOF do begin
+
+      qryMSClientArrears.Next;
+    end;
+
+
+  end;
+
   {with DMMainModule do begin
     tblClientsPrevReadingDate.AsString := FormatDateTime('MM/DD/YYYY',qryMSClientsPrevReadingDate.AsDateTime)
   end;}

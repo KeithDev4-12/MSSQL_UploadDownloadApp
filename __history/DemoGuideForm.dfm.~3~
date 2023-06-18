@@ -1,0 +1,32 @@
+object UGuideDemo: TUGuideDemo
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'UGuideDemo'
+  ClientHeight = 338
+  ClientWidth = 393
+  Color = clBlack
+  TransparentColor = True
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  DesignSize = (
+    393
+    338)
+  PixelsPerInch = 106
+  TextHeight = 14
+  object Shape1: TShape
+    Left = 8
+    Top = 8
+    Width = 377
+    Height = 129
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    Brush.Color = clBlack
+    Pen.Color = clHighlight
+    Pen.Width = 3
+    ExplicitWidth = 680
+  end
+end

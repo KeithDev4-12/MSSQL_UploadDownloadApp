@@ -294,6 +294,16 @@ type
     qryPostingMeterReadingDiscoDueDate: TWideStringField;
     qryPostingMeterReadingFirstReadingDate: TWideStringField;
     qryPostingMeterReadingSeniorDiscountAmount: TFloatField;
+    qryMSClientArrears: TFDQuery;
+    tblClientArrears: TFDTable;
+    qryMSClientArrearsAcct_No: TStringField;
+    qryMSClientArrearsref_code: TStringField;
+    qryMSClientArrearsDescription: TStringField;
+    qryMSClientArrearsTotaArrears: TCurrencyField;
+    tblClientArrears_id: TFDAutoIncField;
+    tblClientArrearsAccountNo: TWideMemoField;
+    tblClientArrearsRefCode: TWideMemoField;
+    tblClientArrearsArrearAmount: TFloatField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
