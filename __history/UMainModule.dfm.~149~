@@ -773,6 +773,8 @@ object DMMainModule: TDMMainModule
       Origin = '_id'
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
+      AutoIncrementSeed = 1
+      AutoIncrementStep = 1
     end
     object tblSettingsIWDAddress: TWideMemoField
       FieldName = 'IWDAddress'
@@ -1413,7 +1415,7 @@ object DMMainModule: TDMMainModule
   object VTDeviceListAvailable: TVirtualTable
     Left = 624
     Top = 472
-    Data = {03000000000000000000}
+    Data = {04000000000000000000}
     object VTDeviceListAvailableDeviceName: TStringField
       FieldName = 'DeviceName'
       Size = 45
@@ -1488,9 +1490,12 @@ object DMMainModule: TDMMainModule
       '  FROM [BillingCollection].[dbo].[Clients] c '
       'WHERE c.Zone_no = z.ZoneID) as Count'
       '  FROM [BillingCollection].[dbo].[Zones] z'
+      'Where (SELECT COUNT(c.Zone_no)'
+      '  FROM [BillingCollection].[dbo].[Clients] c '
+      'WHERE c.Zone_no = z.ZoneID) <> 0'
       'ORDER BY ZoneCode,Count Desc')
-    Left = 792
-    Top = 24
+    Left = 736
+    Top = 504
     object qryMSZoneCodeZoneCode: TStringField
       FieldName = 'ZoneCode'
       Origin = 'ZoneID'
@@ -1520,7 +1525,7 @@ object DMMainModule: TDMMainModule
   object VTReadingScheduling: TVirtualTable
     Left = 896
     Top = 280
-    Data = {03000000000000000000}
+    Data = {04000000000000000000}
     object VTReadingSchedulingZoneCode: TStringField
       FieldName = 'ZoneCode'
       Size = 45
@@ -1572,7 +1577,7 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 336
     Data = {
-      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
@@ -1645,7 +1650,7 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 400
     Data = {
-      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
@@ -1855,6 +1860,7 @@ object DMMainModule: TDMMainModule
     object tblSQLMeterReadingmidentity: TFDAutoIncField
       FieldName = 'midentity'
       Origin = 'midentity'
+      ReadOnly = True
     end
   end
   object qryMeterReading: TFDQuery
@@ -1864,8 +1870,8 @@ object DMMainModule: TDMMainModule
       '      ,[midentity]'
       '  FROM [Mtr_Reading]'
       '  ORDER BY [midentity] DESC')
-    Left = 936
-    Top = 72
+    Left = 816
+    Top = 496
     object qryMeterReadingMR_Sys_no: TStringField
       FieldName = 'MR_Sys_no'
       Origin = 'MR_Sys_no'
@@ -1893,9 +1899,9 @@ object DMMainModule: TDMMainModule
       'PresentReading,'
       'PreviousReading,'
       'Consumption,'
-      'CAST(PresentReadingDate as datetime) As PresentReadingDate, '
+      '(CAST(PresentReadingDate as VarChar)) As PresentReadingDate, '
       'CAST(PresentReadingTime as VarChar) As PresentReadingTime, '
-      'CAST(PreviousReadingDate as datetime) As PreviousReadingDate, '
+      '(CAST(PreviousReadingDate as VarChar)) As PreviousReadingDate, '
       'NumOfTries,'
       'NumOfPrintedSOA,'
       'NumOfSentSMS,'
@@ -1910,12 +1916,13 @@ object DMMainModule: TDMMainModule
       'SeniorDiscountAmount'
       ' FROM MeterReading'
       ' ')
-    Left = 824
-    Top = 104
+    Left = 904
+    Top = 488
     object qryPostingMeterReading_id: TFDAutoIncField
       FieldName = '_id'
       Origin = '_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryPostingMeterReadingMRNo: TIntegerField
       FieldName = 'MRNo'
@@ -1969,12 +1976,13 @@ object DMMainModule: TDMMainModule
       Origin = 'Consumption'
       Required = True
     end
-    object qryPostingMeterReadingPresentReadingDate: TLargeintField
+    object qryPostingMeterReadingPresentReadingDate: TWideStringField
       AutoGenerateValue = arDefault
       FieldName = 'PresentReadingDate'
       Origin = 'PresentReadingDate'
       ProviderFlags = []
       ReadOnly = True
+      Size = 32767
     end
     object qryPostingMeterReadingPresentReadingTime: TWideStringField
       AutoGenerateValue = arDefault
@@ -1984,12 +1992,13 @@ object DMMainModule: TDMMainModule
       ReadOnly = True
       Size = 32767
     end
-    object qryPostingMeterReadingPreviousReadingDate: TLargeintField
+    object qryPostingMeterReadingPreviousReadingDate: TWideStringField
       AutoGenerateValue = arDefault
       FieldName = 'PreviousReadingDate'
       Origin = 'PreviousReadingDate'
       ProviderFlags = []
       ReadOnly = True
+      Size = 32767
     end
     object qryPostingMeterReadingNumOfTries: TIntegerField
       FieldName = 'NumOfTries'
@@ -2061,6 +2070,108 @@ object DMMainModule: TDMMainModule
     object qryPostingMeterReadingSeniorDiscountAmount: TFloatField
       FieldName = 'SeniorDiscountAmount'
       Origin = 'SeniorDiscountAmount'
+    end
+  end
+  object qryMSClientArrears: TFDQuery
+    Connection = DMMainConnection.FDConMSSQL
+    FetchOptions.AssignedValues = [evMode, evItems, evRowsetSize, evCache, evUnidirectional, evAutoFetchAll]
+    FetchOptions.Unidirectional = True
+    FetchOptions.RowsetSize = 100
+    FetchOptions.Items = [fiBlobs, fiDetails]
+    FetchOptions.Cache = []
+    SQL.Strings = (
+      'SELECT '
+      'L.[Acct_No],'
+      'L.ref_code,'
+      'WF.Description,'
+      'ISNULL(SUM(L.[amount]),0) as TotaArrears'
+      'FROM '
+      '[BILLINGCOLLECTION].[dbo].[Ledgers] L , '
+      '[NewBillingCollection].[dbo].[WReferences] WF'
+      'WHERE '
+      'L.Acct_no = :AAccountNumber'
+      'AND'
+      'L.REF_CODE = WF.REF_CODE '
+      'GROUP BY L.[Acct_No],L.REF_CODE,WF.Description'
+      'ORDER By L.[Acct_No],ABS(ISNULL(SUM(L.[amount]),0)) Desc'
+      #9#9)
+    Left = 832
+    Top = 24
+    ParamData = <
+      item
+        Name = 'AACCOUNTNUMBER'
+        DataType = ftWideString
+        ParamType = ptInput
+        Value = '0'
+      end>
+    object qryMSClientArrearsAcct_No: TStringField
+      FieldName = 'Acct_No'
+      Origin = 'Acct_No'
+      Required = True
+      Size = 10
+    end
+    object qryMSClientArrearsref_code: TStringField
+      FieldName = 'ref_code'
+      Origin = 'ref_code'
+      Required = True
+      FixedChar = True
+      Size = 2
+    end
+    object qryMSClientArrearsDescription: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'Description'
+      Origin = 'Description'
+      ProviderFlags = []
+      ReadOnly = True
+      FixedChar = True
+      Size = 30
+    end
+    object qryMSClientArrearsTotaArrears: TCurrencyField
+      AutoGenerateValue = arDefault
+      FieldName = 'TotaArrears'
+      Origin = 'TotaArrears'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+  end
+  object tblClientArrears: TFDTable
+    IndexFieldNames = '_id'
+    Connection = DMMainConnection.FDConSQL
+    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.Mode = fmManual
+    FetchOptions.Items = [fiMeta]
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.UpdateChangedFields = False
+    UpdateOptions.LockWait = True
+    UpdateOptions.RefreshMode = rmManual
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    UpdateOptions.UpdateTableName = 'ClientArrears'
+    TableName = 'ClientArrears'
+    Left = 832
+    Top = 88
+    object tblClientArrears_id: TFDAutoIncField
+      FieldName = '_id'
+      Origin = '_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      AutoIncrementSeed = 1
+      AutoIncrementStep = 1
+    end
+    object tblClientArrearsAccountNo: TWideMemoField
+      FieldName = 'AccountNo'
+      Origin = 'AccountNo'
+      BlobType = ftWideMemo
+    end
+    object tblClientArrearsRefCode: TWideMemoField
+      FieldName = 'RefCode'
+      Origin = 'RefCode'
+      BlobType = ftWideMemo
+    end
+    object tblClientArrearsArrearAmount: TFloatField
+      FieldName = 'ArrearAmount'
+      Origin = 'ArrearAmount'
     end
   end
 end

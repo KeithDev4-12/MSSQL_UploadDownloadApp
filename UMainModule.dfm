@@ -2,7 +2,7 @@ object DMMainModule: TDMMainModule
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 549
+  Height = 581
   Width = 1031
   object ReaderClients: TFDBatchMoveDataSetReader
     DataSet = qryMSClients
@@ -2093,7 +2093,11 @@ object DMMainModule: TDMMainModule
       'AND'
       'L.REF_CODE = WF.REF_CODE '
       'GROUP BY L.[Acct_No],L.REF_CODE,WF.Description'
-      'ORDER By L.[Acct_No],ABS(ISNULL(SUM(L.[amount]),0)) Desc'
+      
+        'ORDER By L.[Acct_No],Case when ISNULL(SUM(L.[amount]),0)>0 then ' +
+        '1 else 0 end'
+      ',ISNULL(SUM(L.[amount]),0) desc'
+      '-- ABS(ISNULL(SUM(L.[amount]),0)) Desc'
       #9#9)
     Left = 832
     Top = 24
@@ -2156,6 +2160,7 @@ object DMMainModule: TDMMainModule
       FieldName = '_id'
       Origin = '_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
       AutoIncrementSeed = 1
       AutoIncrementStep = 1
     end

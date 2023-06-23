@@ -2709,7 +2709,18 @@ begin
      scGPCircledProgressBar2.Caption := 'Processing.'
   end;
   // insert here the arrears data by concessionaire accountnumber
+  with DMMainModule do begin
+    qryMSClientArrears.Close;
+    qryMSClientArrears.ParamByName('AAccountNumber').AsString := tblClientsAccountNo.AsString;
+    qryMSClientArrears.Open;
+    qryMSClientArrears.First;
+    while not qryMSClientArrears.EOF do begin
 
+      qryMSClientArrears.Next;
+    end;
+
+
+  end;
 
   {with DMMainModule do begin
     tblClientsPrevReadingDate.AsString := FormatDateTime('MM/DD/YYYY',qryMSClientsPrevReadingDate.AsDateTime)
@@ -3243,6 +3254,23 @@ begin
         Label1.Caption := Label1.Caption + #13#10 + 'Done Clients For Zone '+ #13#10 + fdMeterReaderScheduleZoneCode.AsString + '-' + fdMeterReaderScheduleZoneName.AsString;
       end;
       fdMeterReaderSchedule.Next;
+    end;
+
+    //insert here about the Client Arrears
+    tblClients.Close;
+    tblClients.Open;
+    tblClients.First;
+    while not tblClients.EOF do begin
+
+      qryMSClientArrears.Close;
+      qryMSClientArrears.ParamByName('AAccountNumber').AsString := tblClientsAccountNo.AsString;
+      qryMSClientArrears.Open;
+      qryMSClientArrears.First;
+      while not qryMSClientArrears.eof do begin
+        qryMSClientArrears.Next;
+      end;
+
+      tblClients.Next;
     end;
 
 

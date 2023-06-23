@@ -2709,7 +2709,7 @@ begin
      scGPCircledProgressBar2.Caption := 'Processing.'
   end;
   // insert here the arrears data by concessionaire accountnumber
-  with DMMainModule do begin
+ { with DMMainModule do begin
     qryMSClientArrears.Close;
     qryMSClientArrears.ParamByName('AAccountNumber').AsString := tblClientsAccountNo.AsString;
     qryMSClientArrears.Open;
@@ -2721,7 +2721,7 @@ begin
 
 
   end;
-
+       }
   {with DMMainModule do begin
     tblClientsPrevReadingDate.AsString := FormatDateTime('MM/DD/YYYY',qryMSClientsPrevReadingDate.AsDateTime)
   end;}
@@ -3186,6 +3186,7 @@ var
   MultipleDeviceSelectedOptionResult: String;
   SourceDBFile,MeterReaderFolderName:String;
   ABillm:String;
+  AmountToLess:Currency;
   label ReCheck;
 Const
   TABLET_DEFAULT_UPLOAD_LOCATION = '/sdcard/Android/data/com.alltechsystems.iwd/files/';
@@ -3200,6 +3201,7 @@ begin
   with DMMainModule do begin
   //scGPCircledProgressBar2.Active := False;
   I:=0;
+
     scGPCircledProgressBar2.Value := 0;
     if not (Length(Edit2.Text)=6)  then begin
       Exit;
@@ -3254,6 +3256,47 @@ begin
         Label1.Caption := Label1.Caption + #13#10 + 'Done Clients For Zone '+ #13#10 + fdMeterReaderScheduleZoneCode.AsString + '-' + fdMeterReaderScheduleZoneName.AsString;
       end;
       fdMeterReaderSchedule.Next;
+    end;
+
+    //insert here about the Client Arrears
+    tblClientArrears.Close;
+    tblClientArrears.Open;
+    tblClientArrears.First;
+    tblClients.Close;
+    tblClients.Open;
+    tblClients.First;
+    while not tblClients.EOF do begin
+    showmessage(tblClientsAccountNo.AsString);
+      AmountToLess :=0;
+      qryMSClientArrears.Close;
+      qryMSClientArrears.ParamByName('AAccountNumber').AsString := tblClientsAccountNo.AsString;
+      qryMSClientArrears.Open;
+      qryMSClientArrears.First;
+      AmountToLess := qryMSClientArrearsTotaArrears.AsCurrency;
+
+      while not qryMSClientArrears.eof do begin
+
+        qryMSClientArrears.Next;
+        AmountToLess := AmountToLess + qryMSClientArrearsTotaArrears.AsCurrency;
+
+        if AmountToLess<0 then begin
+          qryMSClientArrears.Prior;
+        end else begin
+          //inserting data to tableclientarrears
+          if tblClientArrears.Locate('AccountNo;refcode',VarArrayOf([qryMSClientArrearsAcct_No.AsString,qryMSClientArrearsref_code.AsString]) ,[]) then begin
+            tblClientArrears.Insert;
+          end else begin
+            tblClientArrears.Edit;
+          end;
+          tblClientArrearsAccountNo.AsString := qryMSClientArrearsAcct_No.AsString;
+          tblClientArrearsRefCode.AsString := qryMSClientArrearsref_code.AsString;
+          tblClientArrearsArrearAmount.AsCurrency := AmountToLess;
+          tblClientArrears.post;
+        end;
+        qryMSClientArrears.Next;
+      end;
+
+      tblClients.Next;
     end;
 
 
