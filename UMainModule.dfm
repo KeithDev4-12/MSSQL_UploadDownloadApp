@@ -2075,12 +2075,38 @@ object DMMainModule: TDMMainModule
   object qryMSClientArrears: TFDQuery
     Connection = DMMainConnection.FDConMSSQL
     FetchOptions.AssignedValues = [evMode, evItems, evRowsetSize, evCache, evUnidirectional, evAutoFetchAll]
-    FetchOptions.Unidirectional = True
     FetchOptions.RowsetSize = 100
     FetchOptions.Items = [fiBlobs, fiDetails]
     FetchOptions.Cache = []
     SQL.Strings = (
+      '/****** Script for SelectTopNRows command from SSMS  ******/'
       'SELECT '
+      '   BM.Acct_No,'
+      '   BD.B_Code,'
+      '   BC.[Description],'
+      
+        '  (BD.Receivable - BD.Collected + BD.Adjustment) as TotalNeedToC' +
+        'ollect'
+      '  FROM [BillingCollection].[dbo].[Bill_Details] BD,'
+      '  [BillingCollection].[dbo].[Bill_Master] BM,'
+      '  [BillingCollection].[dbo].[Bill_Codes] BC '
+      '  where  '
+      '      Bm.Acct_No = :AAccountNumber'
+      '  AND BM.Bill_No = BD.Bill_No'
+      '  AND BC.B_Code = BD.B_Code'
+      '  AND (BD.Receivable - BD.Collected + BD.Adjustment) <> 0'
+      '  AND bm.bill_no IN '
+      
+        '    (SELECT TOP 1 bbm.bill_no FROM [BillingCollection].[dbo].[Bi' +
+        'll_Details] BBD,'
+      '     [BillingCollection].[dbo].[Bill_Master] BBM '
+      
+        '     where  BBM.Acct_No = :AAccountNumber AND BBM.B_Status = '#39'02' +
+        #39' GROUP BY bbm.bill_no ORDER BY bbm.bill_no DESC)'
+      '  AND BM.B_Status = '#39'02'#39' '
+      '  ORDER BY bm.bill_no DESC'
+      ''
+      '/****** SELECT '
       'L.[Acct_No],'
       'L.ref_code,'
       'WF.Description,'
@@ -2098,7 +2124,8 @@ object DMMainModule: TDMMainModule
         '1 else 0 end'
       ',ISNULL(SUM(L.[amount]),0) desc'
       '-- ABS(ISNULL(SUM(L.[amount]),0)) Desc'
-      #9#9)
+      #9#9
+      '******/')
     Left = 832
     Top = 24
     ParamData = <
@@ -2112,29 +2139,25 @@ object DMMainModule: TDMMainModule
       FieldName = 'Acct_No'
       Origin = 'Acct_No'
       Required = True
-      Size = 10
+      Size = 12
     end
-    object qryMSClientArrearsref_code: TStringField
-      FieldName = 'ref_code'
-      Origin = 'ref_code'
+    object qryMSClientArrearsB_Code: TStringField
+      FieldName = 'B_Code'
+      Origin = 'B_Code'
       Required = True
       FixedChar = True
       Size = 2
     end
     object qryMSClientArrearsDescription: TStringField
-      AutoGenerateValue = arDefault
       FieldName = 'Description'
       Origin = 'Description'
-      ProviderFlags = []
-      ReadOnly = True
+      Required = True
       FixedChar = True
-      Size = 30
+      Size = 40
     end
-    object qryMSClientArrearsTotaArrears: TCurrencyField
-      AutoGenerateValue = arDefault
-      FieldName = 'TotaArrears'
-      Origin = 'TotaArrears'
-      ProviderFlags = []
+    object qryMSClientArrearsTotalNeedToCollect: TCurrencyField
+      FieldName = 'TotalNeedToCollect'
+      Origin = 'TotalNeedToCollect'
       ReadOnly = True
     end
   end
@@ -2161,12 +2184,15 @@ object DMMainModule: TDMMainModule
       Origin = '_id'
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
-      AutoIncrementSeed = 1
-      AutoIncrementStep = 1
     end
     object tblClientArrearsAccountNo: TWideMemoField
       FieldName = 'AccountNo'
       Origin = 'AccountNo'
+      BlobType = ftWideMemo
+    end
+    object tblClientArrearsDetails: TWideMemoField
+      FieldName = 'Details'
+      Origin = 'Details'
       BlobType = ftWideMemo
     end
     object tblClientArrearsRefCode: TWideMemoField
@@ -2174,9 +2200,38 @@ object DMMainModule: TDMMainModule
       Origin = 'RefCode'
       BlobType = ftWideMemo
     end
-    object tblClientArrearsArrearAmount: TFloatField
-      FieldName = 'ArrearAmount'
-      Origin = 'ArrearAmount'
+    object tblClientArrearsAmount: TFloatField
+      FieldName = 'Amount'
+      Origin = 'Amount'
+    end
+  end
+  object qryClients: TFDQuery
+    Connection = DMMainConnection.FDConSQL
+    SQL.Strings = (
+      'select '
+      'CAST(AccountNo as VarChar) as AccountNumber'
+      'FROM Client')
+    Left = 928
+    Top = 88
+    object qryClientsAccountNumber: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'AccountNumber'
+      Origin = 'AccountNumber'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 32767
+    end
+  end
+  object tblProgressBar: TFDTable
+    IndexFieldNames = '_id'
+    Connection = DMMainConnection.FDConSQLMain
+    UpdateOptions.UpdateTableName = 'ProgressBar'
+    TableName = 'ProgressBar'
+    Left = 56
+    Top = 504
+    object tblProgressBarStatus: TIntegerField
+      FieldName = 'Status'
+      Origin = 'Status'
     end
   end
 end

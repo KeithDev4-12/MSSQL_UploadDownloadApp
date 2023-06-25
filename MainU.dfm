@@ -2706,7 +2706,7 @@ object UMainForm: TUMainForm
                 ParentFont = False
               end
               object lblNarrator: TLabel
-                Left = 619
+                Left = 723
                 Top = 19
                 Width = 24
                 Height = 13
@@ -7725,7 +7725,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010B00F801B00130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010B00F801BC0130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -28610,7 +28610,7 @@ object UMainForm: TUMainForm
     Enabled = False
     Interval = 10000
     OnTimer = NarratorModeTimer
-    Left = 595
-    Top = 50
+    Left = 699
+    Top = 42
   end
 end

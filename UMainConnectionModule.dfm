@@ -29,6 +29,7 @@ object DMMainConnection: TDMMainConnection
         'Database=C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownload' +
         'App\iwd_main.db'
       'ConnectionDef=SQLITE_IWD_MAIN')
+    Connected = True
     Left = 88
     Top = 176
   end

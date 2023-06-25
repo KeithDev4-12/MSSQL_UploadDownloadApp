@@ -14,7 +14,7 @@ uses
   Vcl.OleCtrls, SHDocVw, scWebBrowser, Vcl.DBCtrls, Data.DB, IOUtils, Types,
   VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove,IniFiles,Vcl.Themes,
   Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts,Registry,DateUtils,
-  DemoGuideForm2;
+  DemoGuideForm2,FireDAC.Comp.Client;
 
 
 type
@@ -344,6 +344,13 @@ type
     procedure CopyFolder(const SourceDir, DestDir: string);
     procedure CopyFile(const SourceFile, DestinationPath: string);
     function IsNumericChar(const Key: Char; const ACombobox1:TscGpComboBox): Boolean;
+    function BatchClient():Boolean;
+    function BatchClientArrears():Boolean;
+    function BatchClientWaterRates():Boolean;
+    function BatchClientMeterReaderSchedule():Boolean;
+    function BatchSettings():Boolean;
+    function InsertGeneratedHistory():Boolean;
+    procedure ProgressBarInitialize(AQuery:TFDQuery);
 
     procedure SpeedButton19Click(Sender: TObject);
     procedure SpeedButton20Click(Sender: TObject);
@@ -1705,8 +1712,8 @@ Var
   TitleLength: Integer;
 begin
   LatestKey := CheckRegistryKey('ActivationKey');
-   TitleLength := GetWindowText(Application.Handle,TitleText,Length(TitleText));
-  ShowMessage(intToStr(Length(TitleText)));
+  TitleLength := GetWindowText(Application.Handle,TitleText,Length(TitleText));
+  //ShowMessage(intToStr(Length(TitleText)));
 
   //if activated show pnlActivationStatus
   //if not activated hide pnlActivationStatus
@@ -2027,6 +2034,37 @@ begin
 
 end;
 
+function TUMainForm.InsertGeneratedHistory: Boolean;
+begin
+  with DMMainModule do begin
+    tblGeneratedHistory.Close;
+    tblGeneratedHistory.Open;
+    if tblGeneratedHistory.Locate('DateGenerated;MeterReaderName;BillPeriod',VarArrayOf([FormatDateTime('MM/DD/YYYY',Now()),scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption,Trim(Edit2.text)]),[]) then begin
+      tblGeneratedHistory.Edit;
+      //tblGeneratedHistory_id.AsInteger;
+      tblGeneratedHistoryMRNo.AsInteger := MRNo;
+      tblGeneratedHistoryMeterReaderName.AsString := scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption;
+      tblGeneratedHistoryUploadedStatus.AsInteger := 2;
+      tblGeneratedHistoryBillPeriod.AsString := Trim(Edit2.Text);
+      tblGeneratedHistoryDateGenerated.AsString := FormatDateTime('MM/DD/YYYY',Now());
+      tblGeneratedHistory.Post;
+    end else begin
+      tblGeneratedHistory.Append;
+      //tblGeneratedHistory_id.AsInteger;
+      tblGeneratedHistoryMRNo.AsInteger := MRNo;
+      tblGeneratedHistoryMeterReaderName.AsString := scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption;
+      tblGeneratedHistoryUploadedStatus.AsInteger := 1;
+      tblGeneratedHistoryBillPeriod.AsString := Trim(Edit2.Text);
+      tblGeneratedHistoryDateGenerated.AsString := FormatDateTime('MM/DD/YYYY',Now());
+      tblGeneratedHistory.Post;
+    end;
+
+    Application.ProcessMessages;
+    Label1.Caption := Label1.Caption + #13#10 + 'Finalizing Done,!!';
+    Label1.Caption := Label1.Caption + #13#10 + 'Try to Automatically Push Data To Connected Tablet!!!';
+  end;
+end;
+
 procedure TUMainForm.MaxButtonClick(Sender: TObject);
 begin
   Self.AutoSize := False;
@@ -2089,6 +2127,25 @@ end;
 procedure TUMainForm.Panel36Click(Sender: TObject);
 begin
   scButton6Click(Sender);
+end;
+
+procedure TUMainForm.ProgressBarInitialize(AQuery: TFDQuery);
+Var
+  FDQuery:TFDQuery;
+begin
+  with DMMainModule do begin
+    try
+      FDQuery := TFDQuery.Create(nil);
+      FDQuery.SQL := AQuery.SQL;
+      FDQuery.Open;
+      FDQuery.Last;
+      scGPCircledProgressBar2.Value := 0;
+      scGPCircledProgressBar2.MaxValue := FDQuery.RecordCount;
+    finally
+      FDQuery.Free;
+    end;
+
+  end;
 end;
 
 procedure TUMainForm.pushSQLiteDBToTablet(const LPathTo, LPathFrom, AFileName,
@@ -2635,7 +2692,7 @@ begin
   if Screen.Width >= 1300 then begin
     ImageSize := 24;
     ScalingFactor := Screen.Width / 1960;
-    ScaleBy(Round(ScalingFactor * 130),100);
+    ScaleBy(Round(ScalingFactor * 120),100);
   end;
   if Screen.Width >= 1200 then begin
     ImageSize := 20;
@@ -2648,6 +2705,170 @@ begin
   //;
 
 
+end;
+
+function TUMainForm.BatchClient: Boolean;
+begin
+  with DMMainModule do begin
+    Label1.Caption := '';
+    Label1.Caption := Label1.Caption + #13#10 + 'Generating Records For Clients Table';
+
+    fdMeterReaderSchedule.First;
+    while not fdMeterReaderSchedule.EOF do begin
+      //if I = 0 then begin
+      scGPCircledProgressBar2.Value := 0;
+      qryMSClients.Close;
+      qryMSClients.ParamByName('AZoneCode').AsString :=  fdMeterReaderScheduleZoneCode.AsString;
+      qryMSClients.Open();
+      if not qryMSClients.IsEmpty then begin
+        Application.ProcessMessages;
+        
+        scGPCircledProgressBar2.MaxValue := 5000;
+        BMClients.Execute;
+        Label1.Caption := Label1.Caption + #13#10 + 'Done Clients For Zone '+ #13#10 + fdMeterReaderScheduleZoneCode.AsString + '-' + fdMeterReaderScheduleZoneName.AsString;
+      end;
+      fdMeterReaderSchedule.Next;
+    end;
+  end;
+end;
+
+function TUMainForm.BatchClientArrears: Boolean;
+begin
+  with DMMainModule do begin
+    tblClientArrears.Close;
+    tblClientArrears.Open;
+    tblClientArrears.First;
+    qryClients.Close;
+    qryClients.Open;
+    qryClients.First;
+    scGPCircledProgressBar2.Value := 0;
+    scGPCircledProgressBar2.Value := 5000;
+    while not qryClients.EOF do begin
+    //showmessage((qryClientsAccountNumber.AsString));
+
+      qryMSClientArrears.Close;
+      qryMSClientArrears.ParamByName('AAccountNumber').AsString := qryClientsAccountNumber.AsString;
+      qryMSClientArrears.Open;
+      qryMSClientArrears.First;
+
+      while not qryMSClientArrears.eof do begin
+        //inserting data to tableclientarrears
+        if tblClientArrears.Locate('AccountNo;refcode',VarArrayOf([qryMSClientArrearsAcct_No.AsString,qryMSClientArrearsB_Code.AsString]) ,[]) then begin
+           tblClientArrears.Edit;
+        end else begin
+          tblClientArrears.Append;
+        end;
+        tblClientArrearsAccountNo.AsString := qryMSClientArrearsAcct_No.AsString;
+        tblClientArrearsRefCode.AsString := qryMSClientArrearsB_Code.AsString;
+        tblClientArrearsDetails.AsString := qryMSClientArrearsDescription.AsString;
+        tblClientArrearsAmount.AsCurrency := qryMSClientArrearsTotalNeedToCollect.AsCurrency;
+        tblClientArrears.post;
+        qryMSClientArrears.Next;
+      end;
+      qryClients.Next;
+    end;
+  end;
+end;
+
+function TUMainForm.BatchClientMeterReaderSchedule: Boolean;
+begin
+  with DMMainModule do begin
+    fdMeterReaderSchedule.First;
+    scGPCircledProgressBar2.Value := 0;
+    scGPCircledProgressBar2.Value := 5000;
+    while not fdMeterReaderSchedule.EOF do begin
+      //if I = 0 then begin
+      qryMSMeterReadingSchedule.Close;
+      qryMSMeterReadingSchedule.ParamByName('AZoneCode').AsString :=  fdMeterReaderScheduleZoneCode.AsString;
+      qryMSMeterReadingSchedule.Open();
+      if not qryMSMeterReadingSchedule.IsEmpty then begin
+        Application.ProcessMessages;
+        BMMeterReadingSchedule.Execute;
+        Label1.Caption := Label1.Caption + #13#10 + 'Done Rading Schedule For Zone '+ #13#10 + fdMeterReaderScheduleZoneCode.AsString + '-' + fdMeterReaderScheduleZoneName.AsString;
+      end;
+      fdMeterReaderSchedule.Next;
+    end;
+  end;
+end;
+
+function TUMainForm.BatchClientWaterRates: Boolean;
+begin
+  with DMMainModule do begin
+    qryMSWaterRates.Close;
+    qryMSWaterRates.Open;
+    qryMSWaterRates.First;
+    //Insert The WaterRates
+    BMWaterRates.Execute;
+    Application.ProcessMessages;
+    qryWaterRatesUpdate.Close;
+    qryWaterRatesUpdate.Execute();
+    Application.ProcessMessages;
+    Label1.Caption := Label1.Caption + #13#10 + 'Done Water Rates!!!';
+    Label1.Caption := Label1.Caption + #13#10 + 'Generating Records For Meter Reading Schedule Table';
+  end;
+end;
+
+function TUMainForm.BatchSettings: Boolean;
+begin
+  with DMMainModule do begin
+    tblSettingsDB.Close;
+    tblSettingsDB.Open;
+    tblSettingsDB.First;
+    Application.ProcessMessages;
+    //BMSettingsDB.Execute;
+    fdMeterReader.First;
+    scGPCircledProgressBar2.Value := 0;
+    scGPCircledProgressBar2.Value := 5000;
+    if fdMeterReader.Locate('_id',MRNo,[]) then begin
+      //tblSettingsDB_id.AsInteger := 1;
+      tblSettingsDB.Append;
+      tblSettingsDB_id.AsInteger := 1;
+      tblSettingsDBWaterDistrictName.AsString := tblSettingsWaterDistrictName.AsString;
+      tblSettingsDBIWDAddress.AsString := tblSettingsIWDAddress.AsString;
+      tblSettingsDBContactNo.AsString := tblSettingsContactNo.AsString;
+      tblSettingsDBEmail.AsString := tblSettingsEmail.AsString;
+      tblSettingsDBTIN.AsString := tblSettingsTIN.AsString;
+      tblSettingsDBPrinterModel.AsString := tblSettingsPrinterModel.AsString;
+      tblSettingsDBPaymentDuePeriod.AsString := tblSettingsPaymentDuePeriod.AsString;
+      tblSettingsDBDiscoDuePeriod.AsString := tblSettingsDiscoDuePeriod.AsString;
+      tblSettingsDBPenaltyPercent.AsString := tblSettingsPenaltyPercent.AsString;
+      tblSettingsDBBillPeriod.AsString := Trim(Edit2.Text);
+      tblSettingsDBMREmpId.AsString := fdMeterReaderempid.AsString;
+      tblSettingsDBMRNo.AsString := fdMeterReader_id.AsString;
+      tblSettingsDBMRName.AsString := fdMeterReaderName.AsString;
+      tblSettingsDBPrinterBTAddress.AsString := fdMeterReaderMacAddress.AsString;
+      tblSettingsDBHotlineNo.AsString := fdMeterReaderHotLine.AsString;
+      tblSettingsDB.Post;
+      Application.ProcessMessages;
+    end else begin
+      fdMeterReader.First;
+      while not fdMeterReader.EOF do begin
+        tblSettingsDB.Append;
+        //tblSettingsDB_id.AsInteger := 1;
+        tblSettingsDBWaterDistrictName.AsString := tblSettingsWaterDistrictName.AsString;
+        tblSettingsDBIWDAddress.AsString := tblSettingsIWDAddress.AsString;
+        tblSettingsDBContactNo.AsString := tblSettingsContactNo.AsString;
+        tblSettingsDBEmail.AsString := tblSettingsEmail.AsString;
+        tblSettingsDBTIN.AsString := tblSettingsTIN.AsString;
+        tblSettingsDBPrinterModel.AsString := tblSettingsPrinterModel.AsString;
+        tblSettingsDBPaymentDuePeriod.AsString := tblSettingsPaymentDuePeriod.AsString;
+        tblSettingsDBDiscoDuePeriod.AsString := tblSettingsDiscoDuePeriod.AsString;
+        tblSettingsDBPenaltyPercent.AsString := tblSettingsPenaltyPercent.AsString;
+        tblSettingsDBBillPeriod.AsString := Trim(Edit2.Text);
+        tblSettingsDBMREmpId.AsString := fdMeterReaderempid.AsString;
+        tblSettingsDBMRNo.AsString := fdMeterReader_id.AsString;
+        tblSettingsDBMRName.AsString := fdMeterReaderName.AsString;
+        tblSettingsDBPrinterBTAddress.AsString := fdMeterReaderMacAddress.AsString;
+        tblSettingsDBHotlineNo.AsString := fdMeterReaderHotLine.AsString;
+        tblSettingsDB.Post;
+        fdMeterReader.Next;
+        Application.ProcessMessages;
+      end;
+    end;
+    Application.ProcessMessages;
+    Label1.Caption := Label1.Caption + #13#10 + 'Done Settings!!!';
+    Label1.Caption := Label1.Caption + #13#10 + 'Finalizing Some Data!!';
+  end;
 end;
 
 procedure TUMainForm.BMClientsProgress(ASender: TObject;
@@ -3220,6 +3441,8 @@ begin
         Exit;
       end;
     end;
+
+
     //if scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption.Contains('METERREADER') then begin
     //  MeterReaderFolder := StringReplace(IntToStr(MRNo) + '-' + scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption,' ','_',[rfReplaceAll, rfIgnoreCase]);
     //end else begin
@@ -3237,185 +3460,38 @@ begin
       FDConSQL.Params.Database := NewNameDB;
       FDConSQL.Connected := True;
     end;
+    scGPCircledProgressBar2.Value := 0;
+    scGPCircledProgressBar2.MaxValue := 5000;
 
     //Insert The Clients From MSSQL
-    Label1.Caption := Label1.Caption + #13#10 + 'Generating Records For Clients Table';
-
-    fdMeterReaderSchedule.First;
-    while not fdMeterReaderSchedule.EOF do begin
-      //if I = 0 then begin
-      scGPCircledProgressBar2.Value := 0;
-      qryMSClients.Close;
-      qryMSClients.ParamByName('AZoneCode').AsString :=  fdMeterReaderScheduleZoneCode.AsString;
-      qryMSClients.Open();
-      if not qryMSClients.IsEmpty then begin
-
-        Application.ProcessMessages;
-        scGPCircledProgressBar2.MaxValue := qryMSClients.RecordCount;
-        BMClients.Execute;
-        Label1.Caption := Label1.Caption + #13#10 + 'Done Clients For Zone '+ #13#10 + fdMeterReaderScheduleZoneCode.AsString + '-' + fdMeterReaderScheduleZoneName.AsString;
-      end;
-      fdMeterReaderSchedule.Next;
-    end;
+    Application.ProcessMessages;
+    BatchClient;
 
     //insert here about the Client Arrears
-    tblClientArrears.Close;
-    tblClientArrears.Open;
-    tblClientArrears.First;
-    tblClients.Close;
-    tblClients.Open;
-    tblClients.First;
-    while not tblClients.EOF do begin
-    showmessage(tblClientsAccountNo.AsString);
-      AmountToLess :=0;
-      qryMSClientArrears.Close;
-      qryMSClientArrears.ParamByName('AAccountNumber').AsString := tblClientsAccountNo.AsString;
-      qryMSClientArrears.Open;
-      qryMSClientArrears.First;
-      AmountToLess := qryMSClientArrearsTotaArrears.AsCurrency;
-
-      while not qryMSClientArrears.eof do begin
-
-        qryMSClientArrears.Next;
-        AmountToLess := AmountToLess + qryMSClientArrearsTotaArrears.AsCurrency;
-
-        if AmountToLess<0 then begin
-          qryMSClientArrears.Prior;
-        end else begin
-          //inserting data to tableclientarrears
-          if tblClientArrears.Locate('AccountNo;refcode',VarArrayOf([qryMSClientArrearsAcct_No.AsString,qryMSClientArrearsref_code.AsString]) ,[]) then begin
-            tblClientArrears.Insert;
-          end else begin
-            tblClientArrears.Edit;
-          end;
-          tblClientArrearsAccountNo.AsString := qryMSClientArrearsAcct_No.AsString;
-          tblClientArrearsRefCode.AsString := qryMSClientArrearsref_code.AsString;
-          tblClientArrearsArrearAmount.AsCurrency := AmountToLess;
-          tblClientArrears.post;
-        end;
-        qryMSClientArrears.Next;
-      end;
-
-      tblClients.Next;
-    end;
-
-
-
-    qryMSWaterRates.Close;
-    qryMSWaterRates.Open;
-    qryMSWaterRates.First;
-    //Insert The WaterRates
+    //ProgressBarInitialize(qryMSClients);
     Application.ProcessMessages;
-    scGPCircledProgressBar2.Value := 0;
-    scGPCircledProgressBar2.MaxValue := qryMSWaterRates.RecordCount;
+    BatchClientArrears;
 
-    BMWaterRates.Execute;
+    // insert water rate to the SQLIte File
+    //ProgressBarInitialize(qryMSWaterRates);
     Application.ProcessMessages;
-    qryWaterRatesUpdate.Close;
-    qryWaterRatesUpdate.Execute();
-    Application.ProcessMessages;
-    Label1.Caption := Label1.Caption + #13#10 + 'Done Water Rates!!!';
-    Label1.Caption := Label1.Caption + #13#10 + 'Generating Records For Meter Reading Schedule Table';
+    BatchClientWaterRates;
+
     //Insert The MeterReaderSchedule
+    //ProgressBarInitialize(qryMSMeterReadingSchedule);
     Application.ProcessMessages;
-    fdMeterReaderSchedule.First;
-    while not fdMeterReaderSchedule.EOF do begin
-      //if I = 0 then begin
-      scGPCircledProgressBar2.Value := 0;
-      qryMSMeterReadingSchedule.Close;
-      qryMSMeterReadingSchedule.ParamByName('AZoneCode').AsString :=  fdMeterReaderScheduleZoneCode.AsString;
-      qryMSMeterReadingSchedule.Open();
-      if not qryMSMeterReadingSchedule.IsEmpty then begin
-        Application.ProcessMessages;
-        scGPCircledProgressBar2.MaxValue := qryMSMeterReadingSchedule.RecordCount;
-        BMMeterReadingSchedule.Execute;
-        Label1.Caption := Label1.Caption + #13#10 + 'Done Rading Schedule For Zone '+ #13#10 + fdMeterReaderScheduleZoneCode.AsString + '-' + fdMeterReaderScheduleZoneName.AsString;
-      end;
-      fdMeterReaderSchedule.Next;
-    end;
+    BatchClientMeterReaderSchedule;
+
+    //Insert Settings to the SQLite File
 
     Application.ProcessMessages;
-    tblSettingsDB.Close;
-    tblSettingsDB.Open;
-    tblSettingsDB.First;
-    Application.ProcessMessages;
-    //BMSettingsDB.Execute;
-    fdMeterReader.First;
-    if fdMeterReader.Locate('_id',MRNo,[]) then begin
-      //tblSettingsDB_id.AsInteger := 1;
-      tblSettingsDB.Append;
-      tblSettingsDB_id.AsInteger := 1;
-      tblSettingsDBWaterDistrictName.AsString := tblSettingsWaterDistrictName.AsString;
-      tblSettingsDBIWDAddress.AsString := tblSettingsIWDAddress.AsString;
-      tblSettingsDBContactNo.AsString := tblSettingsContactNo.AsString;
-      tblSettingsDBEmail.AsString := tblSettingsEmail.AsString;
-      tblSettingsDBTIN.AsString := tblSettingsTIN.AsString;
-      tblSettingsDBPrinterModel.AsString := tblSettingsPrinterModel.AsString;
-      tblSettingsDBPaymentDuePeriod.AsString := tblSettingsPaymentDuePeriod.AsString;
-      tblSettingsDBDiscoDuePeriod.AsString := tblSettingsDiscoDuePeriod.AsString;
-      tblSettingsDBPenaltyPercent.AsString := tblSettingsPenaltyPercent.AsString;
-      tblSettingsDBBillPeriod.AsString := Trim(Edit2.Text);
-      tblSettingsDBMREmpId.AsString := fdMeterReaderempid.AsString;
-      tblSettingsDBMRNo.AsString := fdMeterReader_id.AsString;
-      tblSettingsDBMRName.AsString := fdMeterReaderName.AsString;
-      tblSettingsDBPrinterBTAddress.AsString := fdMeterReaderMacAddress.AsString;
-      tblSettingsDBHotlineNo.AsString := fdMeterReaderHotLine.AsString;
-      tblSettingsDB.Post;
-      Application.ProcessMessages;
-    end else begin
-      fdMeterReader.First;
-      while not fdMeterReader.EOF do begin
-        tblSettingsDB.Append;
-        //tblSettingsDB_id.AsInteger := 1;
-        tblSettingsDBWaterDistrictName.AsString := tblSettingsWaterDistrictName.AsString;
-        tblSettingsDBIWDAddress.AsString := tblSettingsIWDAddress.AsString;
-        tblSettingsDBContactNo.AsString := tblSettingsContactNo.AsString;
-        tblSettingsDBEmail.AsString := tblSettingsEmail.AsString;
-        tblSettingsDBTIN.AsString := tblSettingsTIN.AsString;
-        tblSettingsDBPrinterModel.AsString := tblSettingsPrinterModel.AsString;
-        tblSettingsDBPaymentDuePeriod.AsString := tblSettingsPaymentDuePeriod.AsString;
-        tblSettingsDBDiscoDuePeriod.AsString := tblSettingsDiscoDuePeriod.AsString;
-        tblSettingsDBPenaltyPercent.AsString := tblSettingsPenaltyPercent.AsString;
-        tblSettingsDBBillPeriod.AsString := Trim(Edit2.Text);
-        tblSettingsDBMREmpId.AsString := fdMeterReaderempid.AsString;
-        tblSettingsDBMRNo.AsString := fdMeterReader_id.AsString;
-        tblSettingsDBMRName.AsString := fdMeterReaderName.AsString;
-        tblSettingsDBPrinterBTAddress.AsString := fdMeterReaderMacAddress.AsString;
-        tblSettingsDBHotlineNo.AsString := fdMeterReaderHotLine.AsString;
-        tblSettingsDB.Post;
-        fdMeterReader.Next;
-        Application.ProcessMessages;
-      end;
-    end;
-    Application.ProcessMessages;
-    Label1.Caption := Label1.Caption + #13#10 + 'Done Settings!!!';
-    Label1.Caption := Label1.Caption + #13#10 + 'Finalizing Some Data!!';
-    Application.ProcessMessages;
-    tblGeneratedHistory.Close;
-    tblGeneratedHistory.Open;
-    if tblGeneratedHistory.Locate('DateGenerated;MeterReaderName;BillPeriod',VarArrayOf([FormatDateTime('MM/DD/YYYY',Now()),scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption,Trim(Edit2.text)]),[]) then begin
-      tblGeneratedHistory.Edit;
-      //tblGeneratedHistory_id.AsInteger;
-      tblGeneratedHistoryMRNo.AsInteger := MRNo;
-      tblGeneratedHistoryMeterReaderName.AsString := scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption;
-      tblGeneratedHistoryUploadedStatus.AsInteger := 2;
-      tblGeneratedHistoryBillPeriod.AsString := Trim(Edit2.Text);
-      tblGeneratedHistoryDateGenerated.AsString := FormatDateTime('MM/DD/YYYY',Now());
-      tblGeneratedHistory.Post;
-    end else begin
-      tblGeneratedHistory.Append;
-      //tblGeneratedHistory_id.AsInteger;
-      tblGeneratedHistoryMRNo.AsInteger := MRNo;
-      tblGeneratedHistoryMeterReaderName.AsString := scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption;
-      tblGeneratedHistoryUploadedStatus.AsInteger := 1;
-      tblGeneratedHistoryBillPeriod.AsString := Trim(Edit2.Text);
-      tblGeneratedHistoryDateGenerated.AsString := FormatDateTime('MM/DD/YYYY',Now());
-      tblGeneratedHistory.Post;
-    end;
+    BatchSettings;
 
+    //Insert Generated History Record
+    scGPCircledProgressBar2.Value := 0;
+    scGPCircledProgressBar2.MaxValue := fdGeneratedHistory.RecordCount;
     Application.ProcessMessages;
-    Label1.Caption := Label1.Caption + #13#10 + 'Finalizing Done,!!';
-    Label1.Caption := Label1.Caption + #13#10 + 'Try to Automatically Push Data To Connected Tablet!!!';
+    InsertGeneratedHistory;
     Application.ProcessMessages;
     scGPCircledProgressBar2.Value := 0;
     //scGPCircledProgressBar2.Active := False;
