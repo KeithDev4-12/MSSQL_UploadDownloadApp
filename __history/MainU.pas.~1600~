@@ -298,12 +298,7 @@ type
     Timer2: TTimer;
     N2: TMenuItem;
     ContinueTransferringSQLFile1: TMenuItem;
-    scButton7: TscButton;
     scButton8: TscButton;
-    NarratorMode: TTimer;
-    lblNarrator: TLabel;
-    Shape10: TShape;
-    Shape11: TShape;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -443,8 +438,13 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure RefreshConnection1Click(Sender: TObject);
     procedure ContinueTransferringSQLFile1Click(Sender: TObject);
-    procedure scButton7Click(Sender: TObject);
-    procedure NarratorModeTimer(Sender: TObject);
+    procedure scGPRadioButton3Click(Sender: TObject);
+    procedure DBGridEh5DragDrop(Sender, Source: TObject; X, Y: Integer);
+    procedure DBGridEh5DragOver(Sender, Source: TObject; X, Y: Integer;
+      State: TDragState; var Accept: Boolean);
+    procedure DBGridEh6MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure DBGridEh6SelectionChanged(Sender: TObject);
       protected
     procedure WMNCHitTest(var Msg: TWMNCHitTest); message WM_NCHITTEST;
 
@@ -495,7 +495,7 @@ implementation
 {$R *.dfm}
 
 
-Uses UMainModule,UMainConnectionModule,DeviceDialogU, SchedulingDialogU, USplashScreen, UProgressbar;
+Uses UMainModule,UMainConnectionModule,DeviceDialogU, SchedulingDialogU, USplashScreen;
 
 procedure TUMainForm.CaptionLabelMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
@@ -1170,6 +1170,38 @@ begin
   end;
 end;
 
+procedure TUMainForm.DBGridEh5DragDrop(Sender, Source: TObject; X, Y: Integer);
+var
+  DestGrid: TDBGridEh;
+  i: Integer;
+  p:Integer;
+  LForm: TForm;
+  Result : String;
+begin
+  DestGrid := TDBGridEh(Sender);
+  With DMMainModule do begin
+    if DragRows.Count > 0 then begin
+      VTReadingScheduling.First;
+      VTReadingScheduleMain.First;
+      while Not VTReadingScheduling.EOF do begin
+      ShowMessage(VTReadingSchedulingZoneCode.AsString);
+        if VTReadingScheduleMain.Locate('ZoneCode',VTReadingSchedulingZoneCode.AsString,[]) then begin
+          VTReadingScheduleMain.Delete;
+        end;
+        VTReadingScheduling.Next;
+      end;
+    end;
+  end;
+end;
+
+procedure TUMainForm.DBGridEh5DragOver(Sender, Source: TObject; X, Y: Integer;
+  State: TDragState; var Accept: Boolean);
+begin
+  //Accept := (Sender = DBGridEh6) and (Source = DBGridEh5);
+
+  Accept := (Sender = DBGridEh5) and (Source = DBGridEh6) and (DMMainModule.DragRows.Count > 0);
+end;
+
 procedure TUMainForm.DBGridEh5MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 var
@@ -1211,6 +1243,7 @@ Var
   I:Integer;
 begin
   with DMMainModule do begin
+    DBGridEh6.SelectedRows.Clear;
     VTReadingScheduling.Clear;
     for i := 0 to DBGridEh5.SelectedRows.Count-1 do begin
       DBGridEh5.DataSource.DataSet.GotoBookmark(DBGridEh5.SelectedRows.Items[i]);
@@ -1250,21 +1283,6 @@ begin
     end;
   end;
 
-
-  {DMMainModule.VTReadingScheduling.Close;
-  DMMainModule.VTReadingScheduling.Open;
-  DMMainModule.VTReadingScheduling.Clear;
-
-  for i := 0 to DBGridEh5.SelectedRows.Count - 1 do
-  begin
-    DSZoneAddress.DataSet.GotoBookmark(DBGridEh1.SelectedRows.Items[i]);
-    DestGrid.DataSource.DataSet.Insert;
-    DestGrid.DataSource.DataSet.Assign(DBGridEh5.DataSource.DataSet);
-    DestGrid.DataSource.DataSet.Post;
-  end;
-
-
-  DMMainModule.DragRows.Clear;}
 end;
 
 procedure TUMainForm.DBGridEh6DragOver(Sender, Source: TObject; X, Y: Integer;
@@ -1289,6 +1307,68 @@ begin
      end;
      DBGridEh6.Canvas.FillRect(Rect);
      DBGridEh6.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
+end;
+
+procedure TUMainForm.DBGridEh6MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+  Bookmark: TBookmark;
+begin
+  if Button = mbLeft then
+  begin
+
+
+    DMMainModule.DragRows.Clear;
+    Bookmark := DBGridEh6.DataSource.DataSet.GetBookmark;
+    try
+      DBGridEh6.DataSource.DataSet.DisableControls;
+      DBGridEh6.DataSource.DataSet.First;
+      while not DBGridEh6.DataSource.DataSet.Eof do
+      begin
+        if DBGridEh6.SelectedRows.CurrentRowSelected then begin
+          DMMainModule.DragRows.Add(DBGridEh6.DataSource.DataSet.GetBookmark);
+          DMMainModule.DragRows.Add(Pointer(Bookmark));
+        end;
+        DBGridEh6.DataSource.DataSet.Next;
+      end;
+      //DBGridEh5.DataSource.DataSet.GotoBookmark(TBookmark(DMMainModule.DragRows[i]));
+
+    finally
+      DBGridEh6.DataSource.DataSet.GotoBookmark(Bookmark);
+      //DBGridEh5.DataSource.DataSet.FreeBookmark(Bookmark);
+      DBGridEh6.DataSource.DataSet.EnableControls;
+    end;
+
+    DBGridEh6.BeginDrag(False);
+  end;
+
+
+end;
+
+procedure TUMainForm.DBGridEh6SelectionChanged(Sender: TObject);
+Var
+  I:Integer;
+begin
+  with DMMainModule do begin
+    DBGridEh5.SelectedRows.Clear;
+    VTReadingScheduling.Clear;
+    for i := 0 to DBGridEh6.SelectedRows.Count-1 do begin
+      DBGridEh6.DataSource.DataSet.GotoBookmark(DBGridEh6.SelectedRows.Items[i]);
+      if VTReadingScheduleMainisPosted.AsInteger = 0 then begin
+        if not VTReadingScheduling.Locate('ZoneCode',VTReadingScheduleMainZoneCode.AsString,[]) then begin
+          VTReadingScheduling.Insert;
+          VTReadingSchedulingZoneCode.AsString := VTReadingScheduleMainZoneCode.AsString;
+          VTReadingSchedulingZoneName.AsString := VTReadingScheduleMainZoneName.AsString;
+          VTReadingScheduling.Post;
+        end
+      end else begin
+        MessageDlg('This Record Are Already Posted You Cannot Change It!' + #13#10 +'Please Contact the Developer!',mtInformation,[mbClose],0);
+        DBGridEh6.SelectedRows.DeleteItem(i);
+        Exit;
+      end;
+
+    end;
   end;
 end;
 
@@ -1531,13 +1611,14 @@ begin
      if scGPComboEdit1.ItemIndex = -1 then
       Exit;
 
-     if True then
 
 
      if fdMeterReader.Locate('Name',Trim(scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption),[]) then begin
        MRNo := fdMeterReader_id.AsInteger;
+       ID := IntToStr(MRNo);
      end else begin
-       MRNo := -234234;
+       MRNo := 0;
+       ID := IntToStr(MRNo);
      end;
     if (Length(scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption)>0) AND (Length(Edit2.text)=6) then begin
       fdMeterReaderSchedule.Close;
@@ -1557,10 +1638,9 @@ begin
       fdDBPushed.Open();
       fdDBPushed.First;
       if fdMeterReaderSchedule.IsEmpty then begin
+        if MRNo = 0 then Exit;
         MessageDlg('No Record Found Please Make Sure That '+#13#10+
         'This Meter Reader Has Reading Schedule to Continue Reading!',mtError,[mbOK],0);
-      end else begin
-        //fdMeterReaderSchedule.Close;
       end;
     end;
   end;
@@ -1892,7 +1972,7 @@ end;
 procedure TUMainForm.FormShow(Sender: TObject);
 begin
    //Check Activation Key
-   
+   scPageViewer1.ActivePage.PageViewer.PageIndex := 0;
    Application.ProcessMessages;
 end;
 
@@ -2096,22 +2176,6 @@ begin
 end;
 
 
-
-procedure TUMainForm.NarratorModeTimer(Sender: TObject);
-begin
-  if ContainsText(lblNarrator.Caption,'Start') then begin
-    Shape10.Visible := False;
-    Shape11.Visible := True;
-    lblNarrator.Caption := 'MeterReader'
-  end else if ContainsText(lblNarrator.Caption,'MeterReader') then begin
-    Shape11.Visible := False;
-    //Shape11.Visible := True;
-    lblNarrator.Caption := 'ListMeterReader';
-  end;
-
-
-
-end;
 
 procedure TUMainForm.PaintBox1Paint(Sender: TObject);
 var
@@ -2394,42 +2458,6 @@ begin
   end;
 end;
 
-procedure TUMainForm.scButton7Click(Sender: TObject);
-Var
-  isEnabled:Boolean;
-  AppHandle: HWND;
-begin
-
-  scPageViewer1.PageIndex := 3;
-  if scButton7.Down then begin
-    isEnabled := False;
-    CaptionLabel.Caption := 'Irosin Water District | Uploader && Downloader Software [GUIDE MODE {EASE OF ACCESS}]';
-    scButton8.Height := Self.Height - (scButton1.Height*7);
-  end else begin
-    isEnabled := True;
-    CaptionLabel.Caption := 'Irosin Water District | Uploader && Downloader Software';
-    scButton8.Height := Self.Height  - ((scButton1.Height*7) + Panel36.Height);
-  end;
-  scButton1.Enabled := isEnabled;
-  scButton2.Enabled := isEnabled;
-  scButton3.Enabled := isEnabled;
-  scButton4.Enabled := isEnabled;
-  scButton5.Enabled := isEnabled;
-  scButton6.Enabled := isEnabled;
-  scButton8.Enabled := isEnabled;
-  scButton8.Visible := not isEnabled;
-  panel36.Visible := scSplitView1.Opened AND isEnabled;
-  scSplitView1.Opened := False;
-
-  NarratorMode.Enabled :=True;
-
-  Shape10.Visible := True;
-
-
-  //scSplitView1.Enabled := isEnabled;
-
-end;
-
 procedure TUMainForm.scButton9Click(Sender: TObject);
 begin
   ShellExecute(0, 'open', 'http://www.almdev.com', nil, nil, SW_SHOWNORMAL);
@@ -2611,11 +2639,28 @@ begin
       fdDBPushed.Open();
       fdDBPushed.First;
       if fdMeterReaderSchedule.IsEmpty then begin
+        if MRNo = 0 then Exit;
+
         MessageDlg('No Record Found Please Make Sure That '+#13#10+
         'This Meter Reader Has Reading Schedule to Continue Reading!',mtError,[mbOK],0);
-        fdMeterReaderSchedule.Close;
-      end else begin
+        //fdMeterReaderSchedule.Close;
+      end;
+    end;
+  end;
+end;
 
+procedure TUMainForm.scGPRadioButton3Click(Sender: TObject);
+begin
+  with DMMainModule do begin
+    if scGPRadioButton3.Checked then begin
+      fdDBFetched.Filtered := False;
+    end else if scGPRadioButton1.Checked then begin
+      if scGPComboBox2.ItemIndex = 0 then begin
+        fdDBFetched.Filtered := False;
+      end else begin
+        fdDBFetched.Filtered := False;
+        fdDBFetched.Filter := 'MeterReaderName = ' + QuotedStr(scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption);
+        fdDBFetched.Filtered := True;
       end;
     end;
   end;
@@ -3442,7 +3487,6 @@ begin
       end;
     end;
 
-    UProgressbar.Show;
 
     //if scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption.Contains('METERREADER') then begin
     //  MeterReaderFolder := StringReplace(IntToStr(MRNo) + '-' + scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption,' ','_',[rfReplaceAll, rfIgnoreCase]);

@@ -7,6 +7,8 @@ object UMainForm: TUMainForm
   ClientHeight = 652
   ClientWidth = 830
   Color = clBtnFace
+  TransparentColor = True
+  TransparentColorValue = clYellow
   Constraints.MinHeight = 400
   Constraints.MinWidth = 400
   DoubleBuffered = True
@@ -1227,13 +1229,6 @@ object UMainForm: TUMainForm
                 Font.Style = []
                 ParentFont = False
               end
-              object lblNarrator: TLabel
-                Left = 619
-                Top = 19
-                Width = 24
-                Height = 13
-                Caption = 'Start'
-              end
               object Panel8: TPanel
                 AlignWithMargins = True
                 Left = 18
@@ -1884,18 +1879,6 @@ object UMainForm: TUMainForm
                           OnClick = SpeedButton1Click
                           ExplicitLeft = 377
                         end
-                        object Shape10: TShape
-                          Left = 3
-                          Top = 2
-                          Width = 414
-                          Height = 78
-                          Anchors = [akLeft, akTop, akRight, akBottom]
-                          Brush.Style = bsClear
-                          Pen.Color = 9787667
-                          Pen.Width = 3
-                          Visible = False
-                          ExplicitWidth = 427
-                        end
                         object Edit2: TEdit
                           Left = 14
                           Top = 42
@@ -1955,18 +1938,6 @@ object UMainForm: TUMainForm
                           Font.Name = 'Tahoma'
                           Font.Style = []
                           ParentFont = False
-                        end
-                        object Shape11: TShape
-                          Left = 3
-                          Top = 0
-                          Width = 414
-                          Height = 91
-                          Anchors = [akLeft, akTop, akRight, akBottom]
-                          Brush.Style = bsClear
-                          Pen.Color = 9787667
-                          Pen.Width = 3
-                          Visible = False
-                          ExplicitWidth = 427
                         end
                         object scGPComboEdit1: TscGPComboBox
                           Left = 14
@@ -2826,7 +2797,6 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
-                          ExplicitHeight = 275
                           DesignSize = (
                             283
                             235)
@@ -2838,7 +2808,6 @@ object UMainForm: TUMainForm
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             BevelOuter = bvNone
                             TabOrder = 0
-                            ExplicitHeight = 677
                             object Label13: TLabel
                               Left = 0
                               Top = 0
@@ -2866,7 +2835,6 @@ object UMainForm: TUMainForm
                             TabOrder = 1
                             TabStop = False
                             OnChange = scScrollBar1Change
-                            ExplicitHeight = 275
                           end
                         end
                       end
@@ -3842,6 +3810,7 @@ object UMainForm: TUMainForm
                             FluentUIOpaque = False
                             TabOrder = 2
                             TabStop = True
+                            OnClick = scGPRadioButton3Click
                             Animation = True
                             Caption = 'ALL METER READER'#39'S'
                             CanFocused = True
@@ -3940,6 +3909,7 @@ object UMainForm: TUMainForm
                             FluentUIOpaque = False
                             TabOrder = 3
                             TabStop = True
+                            OnClick = scGPRadioButton3Click
                             Animation = True
                             Caption = 'PER METER READER ONLY'
                             CanFocused = True
@@ -4033,7 +4003,7 @@ object UMainForm: TUMainForm
               object DriveComboBox1: TDriveComboBox
                 Left = 444
                 Top = 7
-                Width = 60
+                Width = 317
                 Height = 19
                 TabOrder = 1
                 Visible = False
@@ -7263,7 +7233,7 @@ object UMainForm: TUMainForm
       end
       object Panel36: TPanel
         Left = 0
-        Top = 517
+        Top = 477
         Width = 50
         Height = 93
         Align = alTop
@@ -7271,6 +7241,7 @@ object UMainForm: TUMainForm
         TabOrder = 7
         Visible = False
         OnClick = Panel36Click
+        ExplicitTop = 517
         object Label23: TLabel
           Left = 64
           Top = 16
@@ -7401,104 +7372,9 @@ object UMainForm: TUMainForm
           OnChange = scGPComboBox1Change
         end
       end
-      object scButton7: TscButton
-        Left = 0
-        Top = 170
-        Width = 50
-        Height = 40
-        Align = alTop
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        FluentUIOpaque = False
-        TabOrder = 8
-        OnClick = scButton7Click
-        Animation = True
-        Caption = 'Ease of Access'
-        CanFocused = False
-        CustomDropDown = False
-        Margin = 0
-        Spacing = 10
-        Layout = blGlyphLeft
-        Images = scGPVirtualImageList1
-        ImageIndex = 10
-        ImageMargin = 50
-        TransparentBackground = False
-        ColorOptions.NormalColor = 9787667
-        ColorOptions.HotColor = 7488782
-        ColorOptions.PressedColor = 5912332
-        ColorOptions.FocusedColor = 657930
-        ColorOptions.DisabledColor = 657930
-        ColorOptions.FrameNormalColor = clNone
-        ColorOptions.FrameHotColor = clNone
-        ColorOptions.FramePressedColor = clNone
-        ColorOptions.FrameFocusedColor = clNone
-        ColorOptions.FrameDisabledColor = clBtnShadow
-        ColorOptions.FrameWidth = 0
-        ColorOptions.FontNormalColor = clWhite
-        ColorOptions.FontHotColor = clWhite
-        ColorOptions.FontPressedColor = clWhite
-        ColorOptions.FontFocusedColor = clWhite
-        ColorOptions.FontDisabledColor = clGray
-        ColorOptions.TitleFontNormalColor = clBtnText
-        ColorOptions.TitleFontHotColor = clBtnText
-        ColorOptions.TitleFontPressedColor = clBtnText
-        ColorOptions.TitleFontFocusedColor = clBtnText
-        ColorOptions.TitleFontDisabledColor = clBtnShadow
-        ColorOptions.StyleColors = True
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = [fsBold]
-        ToggleMode = False
-        HotImageIndex = -1
-        FocusedImageIndex = -1
-        PressedImageIndex = -1
-        StyleKind = scbsColorButton
-        UseGalleryMenuImage = False
-        UseGalleryMenuCaption = False
-        CustomImageNormalIndex = -1
-        CustomImageHotIndex = -1
-        CustomImagePressedIndex = -1
-        CustomImageDisabledIndex = -1
-        CustomImageFocusedIndex = -1
-        ScaleMarginAndSpacing = False
-        WidthWithCaption = 0
-        WidthWithoutCaption = 0
-        UseFontColorToStyleColor = False
-        RepeatClick = False
-        RepeatClickInterval = 100
-        GlowEffect.Enabled = False
-        GlowEffect.Color = clHighlight
-        GlowEffect.AlphaValue = 255
-        GlowEffect.GlowSize = 7
-        GlowEffect.Offset = 0
-        GlowEffect.Intensive = True
-        GlowEffect.StyleColors = True
-        GlowEffect.HotColor = clNone
-        GlowEffect.PressedColor = clNone
-        GlowEffect.FocusedColor = clNone
-        GlowEffect.PressedGlowSize = 7
-        GlowEffect.PressedAlphaValue = 255
-        GlowEffect.States = [scsHot, scsPressed, scsFocused]
-        ImageGlow = True
-        ShowGalleryMenuFromTop = False
-        ShowGalleryMenuFromRight = False
-        ShowMenuArrow = True
-        SplitButton = False
-        ShowFocusRect = True
-        Down = False
-        GroupIndex = 1
-        AllowAllUp = True
-        WordWrap = False
-      end
       object scButton8: TscButton
         Left = 0
-        Top = 210
+        Top = 170
         Width = 50
         Height = 307
         Align = alTop
@@ -7509,9 +7385,8 @@ object UMainForm: TUMainForm
         Font.Style = []
         ParentFont = False
         FluentUIOpaque = False
-        TabOrder = 9
+        TabOrder = 8
         Visible = False
-        OnClick = scButton7Click
         Animation = True
         CanFocused = False
         CustomDropDown = False
@@ -7590,6 +7465,7 @@ object UMainForm: TUMainForm
         GroupIndex = 1
         AllowAllUp = True
         WordWrap = False
+        ExplicitTop = 210
       end
     end
   end
@@ -7724,7 +7600,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010B00F801A80130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010B00F801C00130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -28604,12 +28480,5 @@ object UMainForm: TUMainForm
     OnTimer = Timer2Timer
     Left = 756
     Top = 112
-  end
-  object NarratorMode: TTimer
-    Enabled = False
-    Interval = 10000
-    OnTimer = NarratorModeTimer
-    Left = 595
-    Top = 50
   end
 end
