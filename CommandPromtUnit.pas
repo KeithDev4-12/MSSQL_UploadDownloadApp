@@ -123,6 +123,7 @@ begin
    AMemo := TStringList.Create();
   try
    Amemo.Text := GetDosOutput(AVarValue);
+
    Aresult:= Uppercase(Amemo.Strings[0]);
    if Aresult.Contains(UpperCase('more than one device')) then begin
      Result := Aresult;

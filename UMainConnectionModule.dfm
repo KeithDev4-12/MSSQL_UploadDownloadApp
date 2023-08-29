@@ -5,10 +5,9 @@ object DMMainConnection: TDMMainConnection
   object FDConSQL: TFDConnection
     Params.Strings = (
       
-        'Database=C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownload' +
-        'App\iwd_lwua.db'
+        'Database=D:\Irosin Water District\MSSQL_UploadDownloadApp\iwd_lw' +
+        'ua.db'
       'ConnectionDef=SQLITE_IWD_MOBILE')
-    Connected = True
     Left = 96
     Top = 40
   end
@@ -16,7 +15,7 @@ object DMMainConnection: TDMMainConnection
     Params.Strings = (
       'Database=BillingCollection'
       'OSAuthent=Yes'
-      'Server=BITSNBYTES\SQLEXPRESS'
+      'Server=ITS-SORECO1\SQLEXPRESS'
       'User_Name='
       'ConnectionDef=MSSQL_IWD')
     Connected = True
@@ -26,8 +25,8 @@ object DMMainConnection: TDMMainConnection
   object FDConSQLMain: TFDConnection
     Params.Strings = (
       
-        'Database=C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownload' +
-        'App\iwd_main.db'
+        'Database=D:\Irosin Water District\MSSQL_UploadDownloadApp\iwd_ma' +
+        'in.db'
       'ConnectionDef=SQLITE_IWD_MAIN')
     Connected = True
     Left = 88

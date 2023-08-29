@@ -1730,8 +1730,6 @@ begin
     VTReadingScheduleDeleted.First;
     VTReadingScheduleDeleted.Clear;
 
-
-
     ItemIndex := 0;
     fdMeterReader.Close;
     fdMeterReader.Open;
@@ -1928,7 +1926,7 @@ end;
 procedure TUMainForm.FormResize(Sender: TObject);
 begin
   //if not IsMouseButtonDown(VK_LBUTTON) then begin
-
+  Abort;
     BorderPanel.Hide;
 
     Timer2.Enabled := True;
@@ -2751,14 +2749,14 @@ Var
  ScalingFactor:Double;
  ImageSize :Integer;
 begin
-  if Screen.Width >= 1900 then begin
+  if (Screen.Width >= 1900) OR (Screen.Width >= 1500) then begin
     Exit;
-  end;
-  if Screen.Width >= 1300 then begin
+  end else
+  if (Screen.Width >= 1300) AND (Screen.Width <= 1499) then begin
     ImageSize := 24;
     ScalingFactor := Screen.Width / 1960;
     ScaleBy(Round(ScalingFactor * 120),100);
-  end;
+  end else
   if Screen.Width >= 1200 then begin
     ImageSize := 20;
   end;
@@ -2903,6 +2901,8 @@ begin
       tblSettingsDBMRName.AsString := fdMeterReaderName.AsString;
       tblSettingsDBPrinterBTAddress.AsString := fdMeterReaderMacAddress.AsString;
       tblSettingsDBHotlineNo.AsString := fdMeterReaderHotLine.AsString;
+      tblSettingsDBWMPM.AsCurrency := tblSettingsWMPM.AsCurrency;
+      tblSettingsDBSCMinLimit.AsInteger := tblSettingsSCMinLimit.AsInteger;
       tblSettingsDB.Post;
       Application.ProcessMessages;
     end else begin
@@ -2925,6 +2925,8 @@ begin
         tblSettingsDBMRName.AsString := fdMeterReaderName.AsString;
         tblSettingsDBPrinterBTAddress.AsString := fdMeterReaderMacAddress.AsString;
         tblSettingsDBHotlineNo.AsString := fdMeterReaderHotLine.AsString;
+        tblSettingsDBWMPM.AsCurrency := tblSettingsWMPM.AsCurrency;
+        tblSettingsDBSCMinLimit.AsInteger := tblSettingsSCMinLimit.AsInteger;
         tblSettingsDB.Post;
         fdMeterReader.Next;
         Application.ProcessMessages;
@@ -3903,7 +3905,10 @@ Var
  I:Integer;
 begin
   with DMMainModule do begin
-    if tblMeterReader.State IN [dsInsert] then begin
+    if tblMeterReader.State IN [dsBrowse] then begin
+      MessageDlg('Dataset is not in Insert or Update Mode!',mtInformation,[mbOK],0);
+      Abort;
+    end else if tblMeterReader.State IN [dsInsert] then begin
       MessageDlg('Successfully Inserted!',mtInformation,[mbOK],0);
     end else if tblMeterReader.State IN [dsEdit] then begin
       MessageDlg('Successfully Edited!',mtInformation,[mbOK],0);

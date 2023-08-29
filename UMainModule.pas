@@ -309,6 +309,10 @@ type
     tblClientArrearsAmount: TFloatField;
     tblProgressBar: TFDTable;
     tblProgressBarStatus: TIntegerField;
+    tblSettingsDBWMPM: TFloatField;
+    tblSettingsDBSCMinLimit: TIntegerField;
+    tblSettingsWMPM: TFloatField;
+    tblSettingsSCMinLimit: TIntegerField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
