@@ -110,11 +110,6 @@ object DMMainModule: TDMMainModule
       Origin = 'AverageCons'
       Required = True
     end
-    object tblClientsTotalArrears: TFloatField
-      FieldName = 'TotalArrears'
-      Origin = 'TotalArrears'
-      Required = True
-    end
     object tblClientsPenaltyExemp: TIntegerField
       FieldName = 'PenaltyExemp'
       Origin = 'PenaltyExemp'
@@ -124,6 +119,11 @@ object DMMainModule: TDMMainModule
       FieldName = 'ContactNo'
       Origin = 'ContactNo'
       BlobType = ftWideMemo
+    end
+    object tblClientsOtherPayable: TFloatField
+      FieldName = 'OtherPayable'
+      Origin = 'OtherPayable'
+      Required = True
     end
   end
   object qryMSClients: TFDQuery
@@ -163,9 +163,29 @@ object DMMainModule: TDMMainModule
       #9#9#9'  where MR.Acct_No = C.Acct_No and MR.Cur_Consumption > 0'
       #9#9#9#9'order by MR.MR_Date desc ) T1) as AverageCons'
       #9'  -- ,'#39'202303'#39' AS BILLPERIOD'
-      #9'  ,(SELECT ISNULL(SUM(L.[amount]),0)'
+      #9'  ,(SELECT ISNULL(ABS(SUM(L.[amount])-(SELECT '
+      
+        '  SUM(BD.Receivable - BD.Collected + BD.Adjustment) as TotalNeed' +
+        'ToCollect'
+      '  FROM [BillingCollection].[dbo].[Bill_Details] BD,'
+      '  [BillingCollection].[dbo].[Bill_Master] BM,'
+      '  [BillingCollection].[dbo].[Bill_Codes] BC '
+      '  where  '
+      '      Bm.Acct_No = C.[Acct_No]'
+      '  AND BM.Bill_No = BD.Bill_No'
+      '  AND BC.B_Code = BD.B_Code'
+      '  AND (BD.Receivable - BD.Collected + BD.Adjustment) <> 0'
+      '  AND bm.bill_no IN '
+      
+        '    (SELECT TOP 1 bbm.bill_no FROM [BillingCollection].[dbo].[Bi' +
+        'll_Details] BBD,'
+      '     [BillingCollection].[dbo].[Bill_Master] BBM '
+      
+        '     where  BBM.Acct_No = C.[Acct_No] AND BBM.B_Status = '#39'02'#39' GR' +
+        'OUP BY bbm.bill_no ORDER BY bbm.bill_no DESC)'
+      '  AND BM.B_Status = '#39'02'#39')),0)'
       #9#9'FROM [BILLINGCOLLECTION].[dbo].[Ledgers] L'
-      #9#9'WHERE L.[Acct_No] = C.[Acct_No]) AS TotalArrears '
+      #9#9'WHERE L.[Acct_No] = C.[Acct_No]) AS OtherPayable '
       '      ,C.[C_TelNo] AS MobileNo'
       #9'  ,C.[C_PenExempt] AS PenaltyExempt       '
       '  FROM [BillingCollection].[dbo].[Clients] C'
@@ -271,13 +291,6 @@ object DMMainModule: TDMMainModule
       Precision = 38
       Size = 6
     end
-    object qryMSClientsTotalArrears: TCurrencyField
-      AutoGenerateValue = arDefault
-      FieldName = 'TotalArrears'
-      Origin = 'TotalArrears'
-      ProviderFlags = []
-      ReadOnly = True
-    end
     object qryMSClientsMobileNo: TStringField
       FieldName = 'MobileNo'
       Origin = 'C_TelNo'
@@ -294,6 +307,13 @@ object DMMainModule: TDMMainModule
       ProviderFlags = []
       ReadOnly = True
       Size = 30
+    end
+    object qryMSClientsOtherPayable: TCurrencyField
+      AutoGenerateValue = arDefault
+      FieldName = 'OtherPayable'
+      Origin = 'OtherPayable'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
   object tblWaterRates: TFDTable

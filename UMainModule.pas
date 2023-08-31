@@ -28,7 +28,6 @@ type
     tblClientsPrevReading: TIntegerField;
     tblClientsPrevReadingDate: TWideMemoField;
     tblClientsAverageCons: TIntegerField;
-    tblClientsTotalArrears: TFloatField;
     tblClientsPenaltyExemp: TIntegerField;
     tblClientsContactNo: TWideMemoField;
     qryMSClients: TFDQuery;
@@ -44,7 +43,6 @@ type
     qryMSClientsAddress: TStringField;
     qryMSClientsPrevReading: TBCDField;
     qryMSClientsAverageCons: TFMTBCDField;
-    qryMSClientsTotalArrears: TCurrencyField;
     qryMSClientsMobileNo: TStringField;
     qryMSClientsPenaltyExempt: TBooleanField;
     tblWaterRates: TFDTable;
@@ -313,6 +311,8 @@ type
     tblSettingsDBSCMinLimit: TIntegerField;
     tblSettingsWMPM: TFloatField;
     tblSettingsSCMinLimit: TIntegerField;
+    qryMSClientsOtherPayable: TCurrencyField;
+    tblClientsOtherPayable: TFloatField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);

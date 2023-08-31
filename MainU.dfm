@@ -7601,7 +7601,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010B00F801C40130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010B00F801C80130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -11221,8 +11221,8 @@ object UMainForm: TUMainForm
         DestinationFieldName = 'AverageCons'
       end
       item
-        SourceFieldName = 'TotalArrears'
-        DestinationFieldName = 'TotalArrears'
+        SourceFieldName = 'OtherPayable'
+        DestinationFieldName = 'OtherPayable'
       end
       item
         SourceFieldName = 'Acct_No'
