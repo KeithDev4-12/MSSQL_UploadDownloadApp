@@ -250,7 +250,6 @@ type
     qryMeterReadingMR_Sys_no: TStringField;
     qryMeterReadingmidentity: TFDAutoIncField;
     qryPostingMeterReading: TFDQuery;
-    qryMSClientsPrevReadingDate: TStringField;
     tblSQLMeterReadingMR_Sys_No: TStringField;
     tblSQLMeterReadingAcct_No: TStringField;
     tblSQLMeterReadingMtr_No: TStringField;
@@ -313,6 +312,13 @@ type
     tblSettingsSCMinLimit: TIntegerField;
     qryMSClientsOtherPayable: TCurrencyField;
     tblClientsOtherPayable: TFloatField;
+    tblSettingsSCDiscount: TFloatField;
+    tblSettingsDBSCDiscount: TFloatField;
+    tblDBReadingCount: TFDTable;
+    tblDBReadingCount_id: TFDAutoIncField;
+    tblDBReadingCountBillingPeriod: TWideMemoField;
+    tblDBReadingCountReadingCount: TIntegerField;
+    qryMSClientsPrevReadingDate: TStringField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
