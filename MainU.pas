@@ -784,8 +784,10 @@ begin
         qryMeterReadingCheck.ParamByName('AYear').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(4,2);
         qryMeterReadingCheck.Open();
 
-        if tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]) then begin
-          //Update
+        //remove OnActivate Processing of Database for optimization
+        //if tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]) then begin
+        if not qryMeterReadingCheck.IsEmpty then begin
+        //Update
           tblSQLMeterReading.Edit;
           AMR_Sys_No := AMR_Sys_No + 1;
           AMidentity := AMidentity + 1;
@@ -1733,9 +1735,9 @@ begin
     tblDBFetched.First;
 
 
-    tblSQLMeterReading.Close;
-    tblSQLMeterReading.Open;
-    tblSQLMeterReading.First;
+    //tblSQLMeterReading.Close;
+    //tblSQLMeterReading.Open;
+    //tblSQLMeterReading.First;
 
     VTReadingScheduling.Close;
     VTReadingScheduling.Open;
