@@ -2344,4 +2344,140 @@ object DMMainModule: TDMMainModule
       Required = True
     end
   end
+  object qryMeterReadingCheck: TFDQuery
+    Connection = DMMainConnection.FDConMSSQL
+    SQL.Strings = (
+      'SELECT '
+      '  * '
+      'FROM Mtr_Reading '
+      '  WHERE '
+      'acct_no = :AAccountNumber '
+      '  AND'
+      'YEAR(MR_DATE) = :AYear'
+      '  AND'
+      'MONTH(MR_DATE) = :AMonth')
+    Left = 808
+    Top = 184
+    ParamData = <
+      item
+        Name = 'AACCOUNTNUMBER'
+        DataType = ftWideString
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        Name = 'AYEAR'
+        DataType = ftWideString
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        Name = 'AMONTH'
+        DataType = ftWideString
+        ParamType = ptInput
+        Value = '1'
+      end>
+    object qryMeterReadingCheckMR_Sys_No: TStringField
+      FieldName = 'MR_Sys_No'
+      Origin = 'MR_Sys_No'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 18
+    end
+    object qryMeterReadingCheckAcct_No: TStringField
+      FieldName = 'Acct_No'
+      Origin = 'Acct_No'
+      Required = True
+      Size = 12
+    end
+    object qryMeterReadingCheckMtr_No: TStringField
+      FieldName = 'Mtr_No'
+      Origin = 'Mtr_No'
+      Required = True
+      Size = 15
+    end
+    object qryMeterReadingCheckPrevMR_Date: TSQLTimeStampField
+      FieldName = 'PrevMR_Date'
+      Origin = 'PrevMR_Date'
+      Required = True
+    end
+    object qryMeterReadingCheckMR_Date: TSQLTimeStampField
+      FieldName = 'MR_Date'
+      Origin = 'MR_Date'
+      Required = True
+    end
+    object qryMeterReadingCheckPrev_Rdg: TBCDField
+      FieldName = 'Prev_Rdg'
+      Origin = 'Prev_Rdg'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object qryMeterReadingCheckCur_Rdg: TBCDField
+      FieldName = 'Cur_Rdg'
+      Origin = 'Cur_Rdg'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object qryMeterReadingCheckCur_Consumption: TBCDField
+      FieldName = 'Cur_Consumption'
+      Origin = 'Cur_Consumption'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object qryMeterReadingCheckRdg_Adj: TBCDField
+      FieldName = 'Rdg_Adj'
+      Origin = 'Rdg_Adj'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object qryMeterReadingCheckChngdMtr_Adj: TBCDField
+      FieldName = 'ChngdMtr_Adj'
+      Origin = 'ChngdMtr_Adj'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object qryMeterReadingCheckChngdMtr_Cons: TBCDField
+      FieldName = 'ChngdMtr_Cons'
+      Origin = 'ChngdMtr_Cons'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object qryMeterReadingCheckMR_Status: TStringField
+      FieldName = 'MR_Status'
+      Origin = 'MR_Status'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object qryMeterReadingCheckRemarks: TStringField
+      FieldName = 'Remarks'
+      Origin = 'Remarks'
+      Size = 50
+    end
+    object qryMeterReadingCheckEmp_ID: TStringField
+      FieldName = 'Emp_ID'
+      Origin = 'Emp_ID'
+      Size = 7
+    end
+    object qryMeterReadingCheckTime_stamp: TSQLTimeStampField
+      FieldName = 'Time_stamp'
+      Origin = 'Time_stamp'
+    end
+    object qryMeterReadingCheckUser_ID: TStringField
+      FieldName = 'User_ID'
+      Origin = 'User_ID'
+      Size = 7
+    end
+    object qryMeterReadingCheckmidentity: TFDAutoIncField
+      FieldName = 'midentity'
+      Origin = 'midentity'
+      ReadOnly = True
+    end
+  end
 end

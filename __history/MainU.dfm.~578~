@@ -2938,6 +2938,17 @@ object UMainForm: TUMainForm
                               ParentFont = False
                               ExplicitWidth = 3
                             end
+                            object DBGridEh8: TDBGridEh
+                              Left = -106
+                              Top = 18
+                              Width = 300
+                              Height = 120
+                              DataSource = DMMainModule.DataSource1
+                              DynProps = <>
+                              TabOrder = 0
+                              object RowDetailData: TRowDetailPanelControlEh
+                              end
+                            end
                           end
                           object scScrollBar1: TscScrollBar
                             Left = 264
@@ -7601,7 +7612,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010B00F801C40130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010B00F801D80130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -11221,8 +11232,8 @@ object UMainForm: TUMainForm
         DestinationFieldName = 'AverageCons'
       end
       item
-        SourceFieldName = 'TotalArrears'
-        DestinationFieldName = 'TotalArrears'
+        SourceFieldName = 'OtherPayable'
+        DestinationFieldName = 'OtherPayable'
       end
       item
         SourceFieldName = 'Acct_No'
@@ -11384,6 +11395,10 @@ object UMainForm: TUMainForm
       item
         SourceFieldName = 'SCMinLimit'
         DestinationFieldName = 'SCMinLimit'
+      end
+      item
+        SourceFieldName = 'SCDiscount'
+        DestinationFieldName = 'SCDiscount'
       end>
     LogFileName = 'Data.log'
     OnProgress = BMSettingsDBProgress

@@ -299,6 +299,7 @@ type
     N2: TMenuItem;
     ContinueTransferringSQLFile1: TMenuItem;
     scButton8: TscButton;
+    DBGridEh8: TDBGridEh;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -777,7 +778,13 @@ begin
       qryPostingMeterReading.First;
       MR_Sys_No_First := AMR_Sys_No;
       while not qryPostingMeterReading.EOF do begin
-        if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+        //if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+        qryMeterReadingCheck.Close;
+        qryMeterReadingCheck.ParamByName('AAccountNumber').AsString := qryPostingMeterReadingAccountNo.AsString;
+        qryMeterReadingCheck.ParamByName('AMonth').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(0,4);
+        qryMeterReadingCheck.ParamByName('AYear').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(4,2);
+        qryMeterReadingCheck.Open();
+        if tblSQLMeterReading.Locate('Acct_no;MR_Date',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingBillPeriod.AsString]),[]) then begin
           //Update
           tblSQLMeterReading.Edit;
           AMR_Sys_No := AMR_Sys_No + 1;
@@ -1904,10 +1911,6 @@ begin
     DriveList := TStringList.Create;
 
     GetDriveLetters(DriveList);
-    showmessage(intToStr(DriveList.Count));
-    if DriveList.Count<0 then begin
-      Exit;
-    end;
     for i:= 0 to DriveList.Count - 1 do
     begin
       DriveName := DriveList.strings[i];

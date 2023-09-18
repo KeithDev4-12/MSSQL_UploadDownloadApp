@@ -250,7 +250,6 @@ type
     qryMeterReadingMR_Sys_no: TStringField;
     qryMeterReadingmidentity: TFDAutoIncField;
     qryPostingMeterReading: TFDQuery;
-    qryMSClientsPrevReadingDate: TStringField;
     tblSQLMeterReadingMR_Sys_No: TStringField;
     tblSQLMeterReadingAcct_No: TStringField;
     tblSQLMeterReadingMtr_No: TStringField;
@@ -317,12 +316,33 @@ type
     tblSettingsDBSCDiscount: TFloatField;
     tblDBReadingCount: TFDTable;
     tblDBReadingCount_id: TFDAutoIncField;
-    tblDBReadingCountBillingPeriod: TIntegerField;
+    tblDBReadingCountBillingPeriod: TWideMemoField;
     tblDBReadingCountReadingCount: TIntegerField;
+    qryMSClientsPrevReadingDate: TStringField;
+    DataSource1: TDataSource;
+    qryMeterReadingCheck: TFDQuery;
+    qryMeterReadingCheckMR_Sys_No: TStringField;
+    qryMeterReadingCheckAcct_No: TStringField;
+    qryMeterReadingCheckMtr_No: TStringField;
+    qryMeterReadingCheckPrevMR_Date: TSQLTimeStampField;
+    qryMeterReadingCheckMR_Date: TSQLTimeStampField;
+    qryMeterReadingCheckPrev_Rdg: TBCDField;
+    qryMeterReadingCheckCur_Rdg: TBCDField;
+    qryMeterReadingCheckCur_Consumption: TBCDField;
+    qryMeterReadingCheckRdg_Adj: TBCDField;
+    qryMeterReadingCheckChngdMtr_Adj: TBCDField;
+    qryMeterReadingCheckChngdMtr_Cons: TBCDField;
+    qryMeterReadingCheckMR_Status: TStringField;
+    qryMeterReadingCheckRemarks: TStringField;
+    qryMeterReadingCheckEmp_ID: TStringField;
+    qryMeterReadingCheckTime_stamp: TSQLTimeStampField;
+    qryMeterReadingCheckUser_ID: TStringField;
+    qryMeterReadingCheckmidentity: TFDAutoIncField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+    procedure tblSQLMeterReadingCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -378,6 +398,16 @@ begin
   end;
 
 
+end;
+
+procedure TDMMainModule.tblSQLMeterReadingCalcFields(DataSet: TDataSet);
+var
+  BillMonth,
+  BillYear:String;
+begin
+  BillMonth := FormatDateTime('MM',tblSQLMeterReadingMR_Date.AsDateTime);
+  BillYear := FormatDateTime('YYYY',tblSQLMeterReadingMR_Date.AsDateTime);
+  tblSQLMeterReadingBillingPeriod.AsString := BillYear+BillMonth;
 end;
 
 end.

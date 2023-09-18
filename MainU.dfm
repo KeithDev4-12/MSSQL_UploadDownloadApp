@@ -147,7 +147,7 @@ object UMainForm: TUMainForm
           Align = alClient
           FluentUIOpaque = False
           TabOrder = 0
-          PageIndex = 1
+          PageIndex = 0
           Pages = <
             item
               Page = scPVPUploader
@@ -158,7 +158,7 @@ object UMainForm: TUMainForm
             item
               Page = scPVPMeterReadingSchedule
             end>
-          ActivePage = scPVPDownloader
+          ActivePage = scPVPUploader
           object scPVPMeterReadingSchedule: TscPageViewerPage
             Left = 0
             Top = 0
@@ -1169,1372 +1169,6 @@ object UMainForm: TUMainForm
               end
             end
           end
-          object scPVPUploader: TscPageViewerPage
-            Left = 0
-            Top = 0
-            Width = 778
-            Height = 617
-            HorzScrollBar.Tracking = True
-            VertScrollBar.Tracking = True
-            Align = alClient
-            AutoScroll = False
-            BorderStyle = bsNone
-            Color = clWindow
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentColor = False
-            ParentFont = False
-            TabOrder = 0
-            Visible = False
-            WallpaperIndex = -1
-            CustomBackgroundImageIndex = -1
-            FullUpdate = False
-            FluentUIOpaque = False
-            StorePaintBuffer = False
-            MouseWheelSupport = False
-            BackgroundStyle = scsbsFormBackground
-            object Panel1: TPanel
-              Left = 0
-              Top = 0
-              Width = 778
-              Height = 617
-              Align = alClient
-              BevelOuter = bvNone
-              TabOrder = 0
-              object Label3: TLabel
-                Left = 0
-                Top = 7
-                Width = 328
-                Height = 28
-                Caption = '    Generate SQL File && Uploader'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -23
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentFont = False
-              end
-              object Label4: TLabel
-                Left = 0
-                Top = 35
-                Width = 411
-                Height = 13
-                Caption = 
-                  '          Generate SQL Database For Mobile Application && Push S' +
-                  'QL File to Mobile Device'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clGrayText
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentFont = False
-              end
-              object Panel8: TPanel
-                AlignWithMargins = True
-                Left = 18
-                Top = 60
-                Width = 742
-                Height = 539
-                Margins.Left = 18
-                Margins.Top = 60
-                Margins.Right = 18
-                Margins.Bottom = 18
-                Align = alClient
-                BevelOuter = bvNone
-                TabOrder = 0
-                object Panel11: TPanel
-                  Left = 0
-                  Top = 0
-                  Width = 742
-                  Height = 539
-                  Align = alClient
-                  BevelOuter = bvNone
-                  TabOrder = 0
-                  object Panel4: TPanel
-                    Left = 421
-                    Top = 0
-                    Width = 18
-                    Height = 539
-                    Align = alRight
-                    BevelOuter = bvNone
-                    TabOrder = 0
-                  end
-                  object Panel21: TPanel
-                    Left = 439
-                    Top = 0
-                    Width = 303
-                    Height = 539
-                    Align = alRight
-                    BevelOuter = bvNone
-                    TabOrder = 1
-                    object scGPPnlRightTop: TscGPPanel
-                      Left = 0
-                      Top = 0
-                      Width = 303
-                      Height = 359
-                      Align = alClient
-                      Font.Charset = DEFAULT_CHARSET
-                      Font.Color = clWindowText
-                      Font.Height = -11
-                      Font.Name = 'Tahoma'
-                      Font.Style = []
-                      ParentFont = False
-                      FluentUIOpaque = False
-                      TabOrder = 0
-                      BlurBackground = False
-                      BlurBackgroundAmount = 5
-                      BackgroundStyle = gppbsColor
-                      ContentMarginLeft = 0
-                      ContentMarginRight = 0
-                      ContentMarginTop = 0
-                      ContentMarginBottom = 0
-                      CustomImageIndex = -1
-                      DragForm = False
-                      DragTopForm = True
-                      DrawTextMode = scdtmGDI
-                      FillGradientAngle = 255
-                      FillGradientBeginAlpha = 255
-                      FillGradientEndAlpha = 255
-                      FillGradientBeginColorOffset = 25
-                      FillGradientEndColorOffset = 25
-                      FrameWidth = 0
-                      FillColor = clHighlightText
-                      FillColorAlpha = 255
-                      FillColor2 = clNone
-                      FrameColor = clBtnShadow
-                      FrameColorAlpha = 10
-                      FrameRadius = 15
-                      ShowCaption = True
-                      CaptionGlowEffect.Enabled = False
-                      CaptionGlowEffect.Color = clHighlight
-                      CaptionGlowEffect.AlphaValue = 255
-                      CaptionGlowEffect.GlowSize = 7
-                      CaptionGlowEffect.Offset = 0
-                      CaptionGlowEffect.Intensive = True
-                      CaptionGlowEffect.StyleColors = True
-                      Color = clBtnHighlight
-                      TransparentBackground = True
-                      StorePaintBuffer = True
-                      Sizeable = False
-                      WallpaperIndex = -1
-                      WordWrap = False
-                      object Panel3: TPanel
-                        Left = 0
-                        Top = 0
-                        Width = 303
-                        Height = 152
-                        Align = alClient
-                        BevelOuter = bvNone
-                        TabOrder = 0
-                        object scGPCircledProgressBar2: TscGPCircledProgressBar
-                          Left = 79
-                          Top = 10
-                          Width = 136
-                          Height = 136
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -11
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                          ParentShowHint = False
-                          FluentUIOpaque = False
-                          ShowHint = False
-                          TabOrder = 0
-                          AnimationMode = False
-                          AnimationAcceleration = False
-                          AnimationLineAngle = 135
-                          Active = False
-                          ImageCollection = scGPImageCollection1
-                          ImageIndex = 15
-                          Caption = 'Processing....'
-                          DrawTextMode = scdtmGDI
-                          TransparentBackground = True
-                          ProgressFont.Charset = DEFAULT_CHARSET
-                          ProgressFont.Color = clBtnText
-                          ProgressFont.Height = -18
-                          ProgressFont.Name = 'Tahoma'
-                          ProgressFont.Style = [fsBold]
-                          FrameSize = 10
-                          FrameAlpha = 125
-                          ProgressAlpha = 255
-                          FrameColor = clBtnShadow
-                          ProgressColor = clHighlight
-                          MinValue = 0
-                          MaxValue = 100
-                          Value = 0
-                          ShowCaption = True
-                          ShowProgressText = True
-                          ShowImage = True
-                          Color = clHighlight
-                        end
-                      end
-                      object Panel5: TPanel
-                        Left = 0
-                        Top = 152
-                        Width = 303
-                        Height = 207
-                        Align = alBottom
-                        Anchors = [akLeft, akTop, akRight, akBottom]
-                        BevelOuter = bvNone
-                        TabOrder = 1
-                        DesignSize = (
-                          303
-                          207)
-                        object scGPPanel6: TscGPPanel
-                          Left = 10
-                          Top = 0
-                          Width = 283
-                          Height = 198
-                          Anchors = [akLeft, akTop, akRight, akBottom]
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -11
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                          FluentUIOpaque = False
-                          TabOrder = 0
-                          BlurBackground = False
-                          BlurBackgroundAmount = 5
-                          BackgroundStyle = gppbsColor
-                          ContentMarginLeft = 0
-                          ContentMarginRight = 0
-                          ContentMarginTop = 0
-                          ContentMarginBottom = 0
-                          CustomImageIndex = -1
-                          DragForm = False
-                          DragTopForm = True
-                          DrawTextMode = scdtmGDI
-                          FillGradientAngle = 255
-                          FillGradientBeginAlpha = 255
-                          FillGradientEndAlpha = 255
-                          FillGradientBeginColorOffset = 25
-                          FillGradientEndColorOffset = 25
-                          FrameWidth = 0
-                          FillColor = 9787667
-                          FillColorAlpha = 255
-                          FillColor2 = 9787667
-                          FrameColor = clBtnShadow
-                          FrameColorAlpha = 10
-                          FrameRadius = 15
-                          ShowCaption = True
-                          CaptionGlowEffect.Enabled = False
-                          CaptionGlowEffect.Color = clHighlight
-                          CaptionGlowEffect.AlphaValue = 255
-                          CaptionGlowEffect.GlowSize = 7
-                          CaptionGlowEffect.Offset = 0
-                          CaptionGlowEffect.Intensive = True
-                          CaptionGlowEffect.StyleColors = True
-                          Color = clBtnHighlight
-                          TransparentBackground = True
-                          StorePaintBuffer = True
-                          Sizeable = False
-                          WallpaperIndex = -1
-                          WordWrap = False
-                          DesignSize = (
-                            283
-                            198)
-                          object Panel16: TPanel
-                            Left = 16
-                            Top = 11
-                            Width = 250
-                            Height = 600
-                            Anchors = [akLeft, akTop, akRight, akBottom]
-                            BevelOuter = bvNone
-                            TabOrder = 0
-                            object Label1: TLabel
-                              Left = 0
-                              Top = 0
-                              Width = 250
-                              Height = 15
-                              Align = alTop
-                              Font.Charset = DEFAULT_CHARSET
-                              Font.Color = clHighlightText
-                              Font.Height = -12
-                              Font.Name = 'Segoe UI'
-                              Font.Style = [fsBold]
-                              ParentFont = False
-                              ExplicitWidth = 3
-                            end
-                          end
-                          object scScrollBar1: TscScrollBar
-                            Left = 264
-                            Top = 0
-                            Width = 19
-                            Height = 198
-                            Align = alRight
-                            Kind = sbVertical
-                            Max = 600
-                            PageSize = 0
-                            TabOrder = 1
-                            TabStop = False
-                            OnChange = scScrollBar1Change
-                          end
-                        end
-                      end
-                    end
-                    object scGPPnlRightBottom: TscGPPanel
-                      Left = 0
-                      Top = 376
-                      Width = 303
-                      Height = 163
-                      Align = alBottom
-                      Font.Charset = DEFAULT_CHARSET
-                      Font.Color = clWindowText
-                      Font.Height = -11
-                      Font.Name = 'Tahoma'
-                      Font.Style = []
-                      ParentFont = False
-                      FluentUIOpaque = False
-                      TabOrder = 1
-                      BlurBackground = False
-                      BlurBackgroundAmount = 5
-                      BackgroundStyle = gppbsColor
-                      ContentMarginLeft = 0
-                      ContentMarginRight = 0
-                      ContentMarginTop = 0
-                      ContentMarginBottom = 0
-                      CustomImageIndex = -1
-                      DragForm = False
-                      DragTopForm = True
-                      DrawTextMode = scdtmGDI
-                      FillGradientAngle = 255
-                      FillGradientBeginAlpha = 255
-                      FillGradientEndAlpha = 255
-                      FillGradientBeginColorOffset = 25
-                      FillGradientEndColorOffset = 25
-                      FrameWidth = 0
-                      FillColor = clHighlightText
-                      FillColorAlpha = 255
-                      FillColor2 = clNone
-                      FrameColor = clBtnShadow
-                      FrameColorAlpha = 10
-                      FrameRadius = 15
-                      ShowCaption = True
-                      CaptionGlowEffect.Enabled = False
-                      CaptionGlowEffect.Color = clHighlight
-                      CaptionGlowEffect.AlphaValue = 255
-                      CaptionGlowEffect.GlowSize = 7
-                      CaptionGlowEffect.Offset = 0
-                      CaptionGlowEffect.Intensive = True
-                      CaptionGlowEffect.StyleColors = True
-                      Color = clBtnHighlight
-                      TransparentBackground = True
-                      StorePaintBuffer = True
-                      Sizeable = False
-                      WallpaperIndex = -1
-                      WordWrap = False
-                      object Panel27: TPanel
-                        Left = 0
-                        Top = 0
-                        Width = 303
-                        Height = 163
-                        Align = alClient
-                        BevelOuter = bvNone
-                        TabOrder = 0
-                        DesignSize = (
-                          303
-                          163)
-                        object Label8: TLabel
-                          Left = -1
-                          Top = 7
-                          Width = 216
-                          Height = 12
-                          Caption = '    Generated  History For This (Selected) Month'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clGrayText
-                          Font.Height = -10
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object scGPPanel4: TscGPPanel
-                          Left = 10
-                          Top = 30
-                          Width = 283
-                          Height = 124
-                          Anchors = [akLeft, akTop, akRight, akBottom]
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -11
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                          FluentUIOpaque = False
-                          TabOrder = 0
-                          BlurBackground = False
-                          BlurBackgroundAmount = 5
-                          BackgroundStyle = gppbsColor
-                          ContentMarginLeft = 0
-                          ContentMarginRight = 0
-                          ContentMarginTop = 0
-                          ContentMarginBottom = 0
-                          CustomImageIndex = -1
-                          DragForm = False
-                          DragTopForm = True
-                          DrawTextMode = scdtmGDI
-                          FillGradientAngle = 255
-                          FillGradientBeginAlpha = 255
-                          FillGradientEndAlpha = 255
-                          FillGradientBeginColorOffset = 25
-                          FillGradientEndColorOffset = 25
-                          FrameWidth = 0
-                          FillColor = 9787667
-                          FillColorAlpha = 255
-                          FillColor2 = 9787667
-                          FrameColor = clBtnShadow
-                          FrameColorAlpha = 10
-                          FrameRadius = 15
-                          ShowCaption = True
-                          CaptionGlowEffect.Enabled = False
-                          CaptionGlowEffect.Color = clHighlight
-                          CaptionGlowEffect.AlphaValue = 255
-                          CaptionGlowEffect.GlowSize = 7
-                          CaptionGlowEffect.Offset = 0
-                          CaptionGlowEffect.Intensive = True
-                          CaptionGlowEffect.StyleColors = True
-                          Color = clBtnHighlight
-                          TransparentBackground = True
-                          StorePaintBuffer = True
-                          Sizeable = False
-                          WallpaperIndex = -1
-                          WordWrap = False
-                          DesignSize = (
-                            283
-                            124)
-                          object DBGridEh4: TDBGridEh
-                            Left = 9
-                            Top = 9
-                            Width = 265
-                            Height = 105
-                            Anchors = [akLeft, akTop, akRight, akBottom]
-                            DataSource = DSGeneratedHistory
-                            DynProps = <>
-                            Font.Charset = DEFAULT_CHARSET
-                            Font.Color = clWindowText
-                            Font.Height = -12
-                            Font.Name = 'Tahoma'
-                            Font.Style = []
-                            HorzScrollBar.VisibleMode = sbNeverShowEh
-                            ParentFont = False
-                            TabOrder = 0
-                            Columns = <
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = '_id'
-                                Footers = <>
-                                Visible = False
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'MeterReaderName'
-                                Footers = <>
-                                Title.Caption = 'Meter Reader Name'
-                                Width = 120
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'DateGenerated'
-                                Footers = <>
-                                Title.Caption = 'Date'
-                                Width = 105
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'UploadedString'
-                                Footers = <>
-                                Title.Caption = 'Status'
-                                Width = 74
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'UploadedStatus'
-                                Footers = <>
-                                Visible = False
-                                Width = 85
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'BillPeriod'
-                                Footers = <>
-                                Visible = False
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'MRNo'
-                                Footers = <>
-                                Visible = False
-                              end>
-                            object RowDetailData: TRowDetailPanelControlEh
-                            end
-                          end
-                        end
-                        object scGPSwitch2: TscGPSwitch
-                          Left = 247
-                          Top = 5
-                          Width = 42
-                          Height = 20
-                          Anchors = [akTop, akRight]
-                          FluentUIOpaque = False
-                          TabOrder = 1
-                          Animation = True
-                          FrameColor = 9787667
-                          FrameOnColor = 9787667
-                          FramePressedColor = 9787667
-                          ParentColor = True
-                          State = scswOff
-                          StyleKind = scswsStyled
-                          ThumbColor = 9787667
-                          ThumbOnColor = 9787667
-                          ThumbPressedColor = clWhite
-                          FrameColorAlpha = 255
-                          FrameOnColorAlpha = 255
-                          FramePressedColorAlpha = 255
-                          ThumbColorAlpha = 255
-                          ThumbOnColorAlpha = 255
-                          ThumbPressedColorAlpha = 255
-                          ThumbShadow = False
-                          FrameSolid = False
-                          FrameOnSolid = False
-                          FrameInside = False
-                          OnChangeState = scGPSwitch2ChangeState
-                        end
-                      end
-                    end
-                    object Panel24: TPanel
-                      Left = 0
-                      Top = 359
-                      Width = 303
-                      Height = 17
-                      Align = alBottom
-                      BevelOuter = bvNone
-                      TabOrder = 2
-                    end
-                  end
-                  object Panel2: TPanel
-                    Left = 0
-                    Top = 0
-                    Width = 421
-                    Height = 539
-                    Align = alClient
-                    BevelOuter = bvNone
-                    TabOrder = 2
-                    object scGPPanel5: TscGPPanel
-                      Left = 0
-                      Top = 0
-                      Width = 421
-                      Height = 359
-                      Align = alClient
-                      Font.Charset = DEFAULT_CHARSET
-                      Font.Color = clWindowText
-                      Font.Height = -11
-                      Font.Name = 'Tahoma'
-                      Font.Style = []
-                      ParentFont = False
-                      FluentUIOpaque = False
-                      TabOrder = 0
-                      BlurBackground = False
-                      BlurBackgroundAmount = 5
-                      BackgroundStyle = gppbsColor
-                      ContentMarginLeft = 0
-                      ContentMarginRight = 0
-                      ContentMarginTop = 0
-                      ContentMarginBottom = 0
-                      CustomImageIndex = -1
-                      DragForm = False
-                      DragTopForm = True
-                      DrawTextMode = scdtmGDI
-                      FillGradientAngle = 255
-                      FillGradientBeginAlpha = 255
-                      FillGradientEndAlpha = 255
-                      FillGradientBeginColorOffset = 25
-                      FillGradientEndColorOffset = 25
-                      FrameWidth = 0
-                      FillColor = clHighlightText
-                      FillColorAlpha = 255
-                      FillColor2 = clNone
-                      FrameColor = clBtnShadow
-                      FrameColorAlpha = 10
-                      FrameRadius = 15
-                      ShowCaption = True
-                      CaptionGlowEffect.Enabled = False
-                      CaptionGlowEffect.Color = clHighlight
-                      CaptionGlowEffect.AlphaValue = 255
-                      CaptionGlowEffect.GlowSize = 7
-                      CaptionGlowEffect.Offset = 0
-                      CaptionGlowEffect.Intensive = True
-                      CaptionGlowEffect.StyleColors = True
-                      Color = clBtnHighlight
-                      TransparentBackground = True
-                      StorePaintBuffer = True
-                      Sizeable = False
-                      WallpaperIndex = -1
-                      WordWrap = False
-                      DesignSize = (
-                        421
-                        359)
-                      object Panel12: TPanel
-                        Left = 0
-                        Top = 0
-                        Width = 421
-                        Height = 84
-                        Align = alTop
-                        BevelOuter = bvNone
-                        TabOrder = 0
-                        DesignSize = (
-                          421
-                          84)
-                        object Label2: TLabel
-                          Left = 0
-                          Top = 6
-                          Width = 110
-                          Height = 22
-                          Caption = '  BILLMONTH'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -18
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object Label5: TLabel
-                          Left = 0
-                          Top = 27
-                          Width = 103
-                          Height = 13
-                          Caption = '     Input Billing Month'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clGrayText
-                          Font.Height = -11
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object Shape4: TShape
-                          Left = 14
-                          Top = 79
-                          Width = 391
-                          Height = 1
-                          Anchors = [akLeft, akTop, akRight]
-                          Pen.Color = cl3DDkShadow
-                          ExplicitWidth = 393
-                        end
-                        object SpeedButton1: TSpeedButton
-                          Left = 375
-                          Top = 48
-                          Width = 30
-                          Height = 28
-                          Anchors = [akTop, akRight]
-                          Flat = True
-                          Glyph.Data = {
-                            36040000424D3604000000000000360000002800000010000000100000000100
-                            2000000000000004000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000B8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
-                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
-                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
-                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF}
-                          OnClick = SpeedButton1Click
-                          ExplicitLeft = 377
-                        end
-                        object Edit2: TEdit
-                          Left = 14
-                          Top = 42
-                          Width = 355
-                          Height = 31
-                          Alignment = taCenter
-                          Anchors = [akLeft, akTop, akRight]
-                          AutoSize = False
-                          BorderStyle = bsNone
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clInfoText
-                          Font.Height = -19
-                          Font.Name = 'Segoe UI'
-                          Font.Style = [fsBold]
-                          ParentFont = False
-                          ParentShowHint = False
-                          ShowHint = True
-                          TabOrder = 0
-                          TextHint = '(YYYYMM) | BILLMONTH NOW'
-                          OnChange = Edit2Change
-                          OnKeyPress = Edit2KeyPress
-                        end
-                      end
-                      object Panel18: TPanel
-                        Left = 0
-                        Top = 84
-                        Width = 421
-                        Height = 91
-                        Align = alTop
-                        BevelOuter = bvNone
-                        TabOrder = 1
-                        DesignSize = (
-                          421
-                          91)
-                        object Label6: TLabel
-                          Left = 0
-                          Top = 1
-                          Width = 139
-                          Height = 22
-                          Caption = '  METER READER'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -18
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object Label7: TLabel
-                          Left = 0
-                          Top = 22
-                          Width = 255
-                          Height = 13
-                          Caption = '     Select Meter Reader That Already have Schedule!'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clGrayText
-                          Font.Height = -11
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object scGPComboEdit1: TscGPComboBox
-                          Left = 14
-                          Top = 40
-                          Width = 391
-                          Height = 45
-                          Anchors = [akLeft, akTop, akRight]
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -19
-                          Font.Name = 'Segoe UI'
-                          Font.Style = [fsBold]
-                          ParentFont = False
-                          FluentUIOpaque = False
-                          TabOrder = 0
-                          ContentMargin = 0
-                          AutoComplete = True
-                          Animation = True
-                          CheckedListMode = False
-                          CheckedListWrap = True
-                          DetailPosition = scgplbdBottom
-                          DetailWordWrap = False
-                          DrawTextMode = scdtmGDI
-                          Items = <
-                            item
-                              Header = True
-                              Enabled = True
-                              Caption = 'Meter Reader'
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end
-                            item
-                              Header = False
-                              Enabled = True
-                              Caption = 'Meter Reader #1'
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end
-                            item
-                              Header = False
-                              Enabled = True
-                              Caption = 'Meter Reader #2'
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end
-                            item
-                              Header = False
-                              Enabled = True
-                              Caption = 'Meter Reader #3'
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end
-                            item
-                              Header = False
-                              Enabled = True
-                              Caption = 'Meter Reader #4'
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end
-                            item
-                              Header = False
-                              Enabled = True
-                              CustomColor = clNone
-                              CustomColorAlpha = 255
-                              CustomTextColor = clNone
-                              CustomDetailTextColor = clNone
-                              Checked = False
-                            end>
-                          ItemIndex = -1
-                          ItemTextAlignment = taCenter
-                          ItemWordWrap = True
-                          ItemShowEllipsis = False
-                          DropDownCount = 7
-                          Options.NormalColor = clBtnFace
-                          Options.HotColor = clBtnFace
-                          Options.PressedColor = clBtnShadow
-                          Options.FocusedColor = clBtnFace
-                          Options.DisabledColor = clBtnFace
-                          Options.NormalColorAlpha = 255
-                          Options.HotColorAlpha = 255
-                          Options.PressedColorAlpha = 255
-                          Options.FocusedColorAlpha = 255
-                          Options.DisabledColorAlpha = 255
-                          Options.FrameNormalColor = clBtnShadow
-                          Options.FrameHotColor = clHighlight
-                          Options.FramePressedColor = clHighlight
-                          Options.FrameFocusedColor = clHighlight
-                          Options.FrameDisabledColor = clBtnShadow
-                          Options.FrameWidth = 1
-                          Options.FrameNormalColorAlpha = 255
-                          Options.FrameHotColorAlpha = 255
-                          Options.FramePressedColorAlpha = 255
-                          Options.FrameFocusedColorAlpha = 255
-                          Options.FrameDisabledColorAlpha = 255
-                          Options.FontNormalColor = clBtnText
-                          Options.FontHotColor = clBtnText
-                          Options.FontPressedColor = clBtnText
-                          Options.FontFocusedColor = clBtnText
-                          Options.FontDisabledColor = clBtnShadow
-                          Options.ShapeFillGradientAngle = 90
-                          Options.ShapeFillGradientPressedAngle = -90
-                          Options.ShapeCornerRadius = 10
-                          Options.ShapeStyle = scgpcssRect
-                          Options.ScaleFrameWidth = False
-                          Options.ArrowSize = 9
-                          Options.ArrowAreaWidth = 0
-                          Options.StyleColors = True
-                          ShowItemImage = True
-                          ShowItemText = True
-                          ShowItemDetail = False
-                          ListBoxHeaderFont.Charset = DEFAULT_CHARSET
-                          ListBoxHeaderFont.Color = clWindowText
-                          ListBoxHeaderFont.Height = -11
-                          ListBoxHeaderFont.Name = 'Tahoma'
-                          ListBoxHeaderFont.Style = [fsBold]
-                          ListBoxHeaderOptions.Color = clBtnFace
-                          ListBoxHeaderOptions.ColorAlpha = 220
-                          ListBoxHeaderOptions.FillStyle = scgpsfColor
-                          ListBoxHeaderOptions.GradientAngle = 90
-                          ListBoxHeaderOptions.Margin = 5
-                          DetailFont.Charset = DEFAULT_CHARSET
-                          DetailFont.Color = clWindowText
-                          DetailFont.Height = -11
-                          DetailFont.Name = 'Tahoma'
-                          DetailFont.Style = []
-                          ListBoxLineColor = clWindowText
-                          ListBoxWidth = 0
-                          ListBoxHeight = 0
-                          ListBoxShowItemDetails = False
-                          ListBoxShowLines = True
-                          ListBoxItemHeight = 30
-                          ListBoxHeaderHeight = 20
-                          ListBoxItemSpacing = 5
-                          ListBoxItemMargin = 5
-                          ListBoxItemTextAlignment = taLeftJustify
-                          ListBoxIndentMargin = 10
-                          ListBoxScrollBarOptions.BorderWidth = 0
-                          ListBoxScrollBarOptions.FillColor = clBtnFace
-                          ListBoxScrollBarOptions.FillColorAlpha = 100
-                          ListBoxScrollBarOptions.ThumbColor = clWindowText
-                          ListBoxScrollBarOptions.ThumbColorAlpha = 50
-                          ListBoxScrollBarOptions.ThumbColorHotAlpha = 100
-                          ListBoxScrollBarOptions.ThumbColorPressedAlpha = 150
-                          ListBoxScrollBarOptions.ThumbRounded = False
-                          ListBoxScrollBarOptions.Position = scgpsbDefault
-                          ListBoxScrollBarOptions.Size = 11
-                          ListBoxOptions.FillColor = clWindow
-                          ListBoxOptions.FillColor2 = clWindow
-                          ListBoxOptions.FillColorAlpha = 255
-                          ListBoxOptions.FillColor2Alpha = 255
-                          ListBoxOptions.FillGradientAngle = 90
-                          ListBoxOptions.FrameColor = clBtnShadow
-                          ListBoxOptions.FrameColorAlpha = 255
-                          ListBoxOptions.FrameWidth = 2
-                          ListBoxOptions.FrameScaleWidth = False
-                          MouseWheelSupport = True
-                          OnChange = scGPComboEdit1Change
-                        end
-                      end
-                      object Panel20: TPanel
-                        Left = 0
-                        Top = 322
-                        Width = 421
-                        Height = 37
-                        Align = alBottom
-                        BevelOuter = bvNone
-                        Color = clWhite
-                        ParentBackground = False
-                        TabOrder = 2
-                        object SpeedButton2: TSpeedButton
-                          Left = 0
-                          Top = 0
-                          Width = 421
-                          Height = 36
-                          Align = alClient
-                          Caption = 'Generate Reading Data'
-                          Flat = True
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -13
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          Glyph.Data = {
-                            46050000424D4605000000000000360000002800000012000000120000000100
-                            2000000000001005000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0000000000200000003000000010000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0040000000BF000000FF000000FF000000FF000000EF000000BF000000500000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            00000000008F000000FF000000FF000000FF000000FF000000FF000000FF0000
-                            00FF000000FF0000008F00000010000000000000000000000000000000000000
-                            0000000000000000009F000000FF000000FF000000FF000000FF000000FF0000
-                            00FF000000FF000000FF000000FF000000FF0000008F00000000000000000000
-                            0000000000000000000000000030000000FF000000FF000000FF000000FF0000
-                            00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-                            004000000000000000000000000000000000000000AF000000FF000000FF0000
-                            00FF000000FF0000008F00000080000000EF000000FF000000FF000000FF0000
-                            00FF000000FF000000BF00000000000000000000000000000010000000FF0000
-                            00FF000000FF000000FF00000080000000000000000000000060000000EF0000
-                            00FF000000FF000000FF000000FF000000FF0000002000000000000000000000
-                            0010000000FF000000FF000000FF000000AF0000000000000010000000400000
-                            000000000060000000EF000000FF000000FF000000FF000000FF000000200000
-                            00000000000000000020000000FF000000FF000000FF000000AF000000500000
-                            00CF000000EF000000500000000000000060000000EF000000FF000000FF0000
-                            00FF00000030000000000000000000000000000000EF000000FF000000FF0000
-                            00FF000000FF000000FF000000FF000000EF0000005000000000000000800000
-                            00FF000000FF000000FF00000010000000000000000000000000000000AF0000
-                            00FF000000FF000000FF000000FF000000FF000000FF000000FF000000EF0000
-                            0080000000BF000000FF000000FF000000AF0000000000000000000000000000
-                            000000000040000000FF000000FF000000FF000000FF000000FF000000FF0000
-                            00FF000000FF000000FF000000FF000000FF000000FF00000040000000000000
-                            000000000000000000000000000000000080000000FF000000FF000000FF0000
-                            00FF000000FF000000FF000000FF000000FF000000FF000000FF0000009F0000
-                            00000000000000000000000000000000000000000000000000000000008F0000
-                            00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-                            008F000000000000000000000000000000000000000000000000000000000000
-                            00000000000000000040000000BF000000EF000000FF000000FF000000FF0000
-                            00AF000000300000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000010000000200000
-                            0020000000000000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            0000000000000000000000000000000000000000000000000000000000000000
-                            00000000000000000000}
-                          ParentFont = False
-                          OnClick = SpeedButton2Click
-                          ExplicitWidth = 169
-                          ExplicitHeight = 49
-                        end
-                        object Shape2: TShape
-                          Left = 0
-                          Top = 36
-                          Width = 421
-                          Height = 1
-                          Align = alBottom
-                          Pen.Color = cl3DDkShadow
-                          ExplicitLeft = 14
-                          ExplicitTop = 29
-                          ExplicitWidth = 519
-                        end
-                      end
-                      object DBGridEh1: TDBGridEh
-                        Left = 14
-                        Top = 176
-                        Width = 391
-                        Height = 140
-                        Anchors = [akLeft, akTop, akRight, akBottom]
-                        DataSource = DSMeterReaderSchedule
-                        DynProps = <>
-                        Font.Charset = DEFAULT_CHARSET
-                        Font.Color = clWindowText
-                        Font.Height = -12
-                        Font.Name = 'Tahoma'
-                        Font.Style = []
-                        HorzScrollBar.VisibleMode = sbNeverShowEh
-                        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-                        ParentFont = False
-                        TabOrder = 3
-                        VertScrollBar.VisibleMode = sbNeverShowEh
-                        Columns = <
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = '_id'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'ZoneCode'
-                            Footers = <>
-                            Title.Caption = 'Zone Code'
-                            Width = 75
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'ZoneName'
-                            Footers = <>
-                            Title.Caption = 'Zone Name'
-                            Width = 200
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'ReadingStartDate'
-                            Footers = <>
-                            Title.Caption = 'Reading Start Date'
-                            Width = 130
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'TotalReadingDays'
-                            Footers = <>
-                            Title.Caption = 'Total Reading Days'
-                            Width = 100
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'BillPeriod'
-                            Footers = <>
-                            Visible = False
-                          end
-                          item
-                            CellButtons = <>
-                            DynProps = <>
-                            EditButtons = <>
-                            FieldName = 'MRNo'
-                            Footers = <>
-                            Visible = False
-                          end>
-                        object RowDetailData: TRowDetailPanelControlEh
-                        end
-                      end
-                    end
-                    object Panel7: TPanel
-                      Left = 0
-                      Top = 359
-                      Width = 421
-                      Height = 17
-                      Align = alBottom
-                      BevelOuter = bvNone
-                      TabOrder = 1
-                    end
-                    object scGPPanel1: TscGPPanel
-                      Left = 0
-                      Top = 376
-                      Width = 421
-                      Height = 163
-                      Align = alBottom
-                      Font.Charset = DEFAULT_CHARSET
-                      Font.Color = clWindowText
-                      Font.Height = -11
-                      Font.Name = 'Tahoma'
-                      Font.Style = []
-                      ParentFont = False
-                      FluentUIOpaque = False
-                      TabOrder = 2
-                      BlurBackground = False
-                      BlurBackgroundAmount = 5
-                      BackgroundStyle = gppbsColor
-                      ContentMarginLeft = 0
-                      ContentMarginRight = 0
-                      ContentMarginTop = 0
-                      ContentMarginBottom = 0
-                      CustomImageIndex = -1
-                      DragForm = False
-                      DragTopForm = True
-                      DrawTextMode = scdtmGDI
-                      FillGradientAngle = 255
-                      FillGradientBeginAlpha = 255
-                      FillGradientEndAlpha = 255
-                      FillGradientBeginColorOffset = 25
-                      FillGradientEndColorOffset = 25
-                      FrameWidth = 0
-                      FillColor = clHighlightText
-                      FillColorAlpha = 255
-                      FillColor2 = clNone
-                      FrameColor = clBtnShadow
-                      FrameColorAlpha = 10
-                      FrameRadius = 15
-                      ShowCaption = True
-                      CaptionGlowEffect.Enabled = False
-                      CaptionGlowEffect.Color = clHighlight
-                      CaptionGlowEffect.AlphaValue = 255
-                      CaptionGlowEffect.GlowSize = 7
-                      CaptionGlowEffect.Offset = 0
-                      CaptionGlowEffect.Intensive = True
-                      CaptionGlowEffect.StyleColors = True
-                      Color = clBtnHighlight
-                      TransparentBackground = True
-                      StorePaintBuffer = True
-                      Sizeable = False
-                      WallpaperIndex = -1
-                      WordWrap = False
-                      object Panel6: TPanel
-                        AlignWithMargins = True
-                        Left = 0
-                        Top = 0
-                        Width = 421
-                        Height = 156
-                        Margins.Left = 0
-                        Margins.Top = 0
-                        Margins.Right = 0
-                        Margins.Bottom = 7
-                        Align = alClient
-                        BevelOuter = bvNone
-                        TabOrder = 0
-                        DesignSize = (
-                          421
-                          156)
-                        object Label9: TLabel
-                          Left = -1
-                          Top = 7
-                          Width = 261
-                          Height = 12
-                          Caption = '    Push Generated SQL File to Selected Connection (ADB)'
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clGrayText
-                          Font.Height = -10
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                        end
-                        object scGPPanel3: TscGPPanel
-                          Left = 10
-                          Top = 30
-                          Width = 400
-                          Height = 124
-                          Anchors = [akLeft, akTop, akRight, akBottom]
-                          Font.Charset = DEFAULT_CHARSET
-                          Font.Color = clWindowText
-                          Font.Height = -11
-                          Font.Name = 'Tahoma'
-                          Font.Style = []
-                          ParentFont = False
-                          FluentUIOpaque = False
-                          TabOrder = 0
-                          BlurBackground = False
-                          BlurBackgroundAmount = 5
-                          BackgroundStyle = gppbsColor
-                          ContentMarginLeft = 0
-                          ContentMarginRight = 0
-                          ContentMarginTop = 0
-                          ContentMarginBottom = 0
-                          CustomImageIndex = -1
-                          DragForm = False
-                          DragTopForm = True
-                          DrawTextMode = scdtmGDI
-                          FillGradientAngle = 255
-                          FillGradientBeginAlpha = 255
-                          FillGradientEndAlpha = 255
-                          FillGradientBeginColorOffset = 25
-                          FillGradientEndColorOffset = 25
-                          FrameWidth = 0
-                          FillColor = 9787667
-                          FillColorAlpha = 255
-                          FillColor2 = 9787667
-                          FrameColor = clBtnShadow
-                          FrameColorAlpha = 10
-                          FrameRadius = 15
-                          ShowCaption = True
-                          CaptionGlowEffect.Enabled = False
-                          CaptionGlowEffect.Color = clHighlight
-                          CaptionGlowEffect.AlphaValue = 255
-                          CaptionGlowEffect.GlowSize = 7
-                          CaptionGlowEffect.Offset = 0
-                          CaptionGlowEffect.Intensive = True
-                          CaptionGlowEffect.StyleColors = True
-                          Color = clBtnHighlight
-                          TransparentBackground = True
-                          StorePaintBuffer = True
-                          Sizeable = False
-                          WallpaperIndex = -1
-                          WordWrap = False
-                          DesignSize = (
-                            400
-                            124)
-                          object DBGridEh2: TDBGridEh
-                            Left = 9
-                            Top = 9
-                            Width = 382
-                            Height = 105
-                            Anchors = [akLeft, akTop, akRight, akBottom]
-                            DataSource = DSDBPushed
-                            DynProps = <>
-                            Font.Charset = DEFAULT_CHARSET
-                            Font.Color = clWindowText
-                            Font.Height = -12
-                            Font.Name = 'Tahoma'
-                            Font.Style = []
-                            HorzScrollBar.VisibleMode = sbNeverShowEh
-                            ParentFont = False
-                            PopupMenu = PMVirtualADB
-                            TabOrder = 0
-                            Columns = <
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = '_id'
-                                Footers = <>
-                                Visible = False
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'Device'
-                                Footers = <>
-                                Width = 86
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'MeterReaderName'
-                                Footers = <>
-                                Title.Caption = 'Meter Reader Name'
-                                Width = 120
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'Status'
-                                Footers = <>
-                                Width = 44
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'DatePushed'
-                                Footers = <>
-                                Title.Caption = 'Date'
-                                Width = 74
-                              end
-                              item
-                                CellButtons = <>
-                                DynProps = <>
-                                EditButtons = <>
-                                FieldName = 'BillPeriod'
-                                Footers = <>
-                                Visible = False
-                                Width = 55
-                              end>
-                            object RowDetailData: TRowDetailPanelControlEh
-                            end
-                          end
-                        end
-                        object scGPSwitch6: TscGPSwitch
-                          Left = 364
-                          Top = 4
-                          Width = 42
-                          Height = 20
-                          Anchors = [akTop, akRight]
-                          FluentUIOpaque = False
-                          TabOrder = 1
-                          Animation = True
-                          FrameColor = 9787667
-                          FrameOnColor = 9787667
-                          FramePressedColor = 9787667
-                          ParentColor = True
-                          State = scswOff
-                          StyleKind = scswsStyled
-                          ThumbColor = 9787667
-                          ThumbOnColor = 9787667
-                          ThumbPressedColor = clWhite
-                          FrameColorAlpha = 255
-                          FrameOnColorAlpha = 255
-                          FramePressedColorAlpha = 255
-                          ThumbColorAlpha = 255
-                          ThumbOnColorAlpha = 255
-                          ThumbPressedColorAlpha = 255
-                          ThumbShadow = False
-                          FrameSolid = False
-                          FrameOnSolid = False
-                          FrameInside = False
-                          OnChangeState = scGPSwitch6ChangeState
-                        end
-                      end
-                    end
-                  end
-                end
-              end
-            end
-          end
           object scPVPDownloader: TscPageViewerPage
             Left = 0
             Top = 0
@@ -2554,6 +1188,7 @@ object UMainForm: TUMainForm
             ParentColor = False
             ParentFont = False
             TabOrder = 1
+            Visible = False
             WallpaperIndex = -1
             CustomBackgroundImageIndex = -1
             FullUpdate = False
@@ -4010,6 +2645,1371 @@ object UMainForm: TUMainForm
                 Height = 19
                 TabOrder = 1
                 Visible = False
+              end
+            end
+          end
+          object scPVPUploader: TscPageViewerPage
+            Left = 0
+            Top = 0
+            Width = 778
+            Height = 617
+            HorzScrollBar.Tracking = True
+            VertScrollBar.Tracking = True
+            Align = alClient
+            AutoScroll = False
+            BorderStyle = bsNone
+            Color = clWindow
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 0
+            WallpaperIndex = -1
+            CustomBackgroundImageIndex = -1
+            FullUpdate = False
+            FluentUIOpaque = False
+            StorePaintBuffer = False
+            MouseWheelSupport = False
+            BackgroundStyle = scsbsFormBackground
+            object Panel1: TPanel
+              Left = 0
+              Top = 0
+              Width = 778
+              Height = 617
+              Align = alClient
+              BevelOuter = bvNone
+              TabOrder = 0
+              object Label3: TLabel
+                Left = 0
+                Top = 7
+                Width = 328
+                Height = 28
+                Caption = '    Generate SQL File && Uploader'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -23
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+              end
+              object Label4: TLabel
+                Left = 0
+                Top = 35
+                Width = 411
+                Height = 13
+                Caption = 
+                  '          Generate SQL Database For Mobile Application && Push S' +
+                  'QL File to Mobile Device'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clGrayText
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+              end
+              object Panel8: TPanel
+                AlignWithMargins = True
+                Left = 18
+                Top = 60
+                Width = 742
+                Height = 539
+                Margins.Left = 18
+                Margins.Top = 60
+                Margins.Right = 18
+                Margins.Bottom = 18
+                Align = alClient
+                BevelOuter = bvNone
+                TabOrder = 0
+                object Panel11: TPanel
+                  Left = 0
+                  Top = 0
+                  Width = 742
+                  Height = 539
+                  Align = alClient
+                  BevelOuter = bvNone
+                  TabOrder = 0
+                  object Panel4: TPanel
+                    Left = 421
+                    Top = 0
+                    Width = 18
+                    Height = 539
+                    Align = alRight
+                    BevelOuter = bvNone
+                    TabOrder = 0
+                  end
+                  object Panel21: TPanel
+                    Left = 439
+                    Top = 0
+                    Width = 303
+                    Height = 539
+                    Align = alRight
+                    BevelOuter = bvNone
+                    TabOrder = 1
+                    object scGPPnlRightTop: TscGPPanel
+                      Left = 0
+                      Top = 0
+                      Width = 303
+                      Height = 359
+                      Align = alClient
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clWindowText
+                      Font.Height = -11
+                      Font.Name = 'Tahoma'
+                      Font.Style = []
+                      ParentFont = False
+                      FluentUIOpaque = False
+                      TabOrder = 0
+                      BlurBackground = False
+                      BlurBackgroundAmount = 5
+                      BackgroundStyle = gppbsColor
+                      ContentMarginLeft = 0
+                      ContentMarginRight = 0
+                      ContentMarginTop = 0
+                      ContentMarginBottom = 0
+                      CustomImageIndex = -1
+                      DragForm = False
+                      DragTopForm = True
+                      DrawTextMode = scdtmGDI
+                      FillGradientAngle = 255
+                      FillGradientBeginAlpha = 255
+                      FillGradientEndAlpha = 255
+                      FillGradientBeginColorOffset = 25
+                      FillGradientEndColorOffset = 25
+                      FrameWidth = 0
+                      FillColor = clHighlightText
+                      FillColorAlpha = 255
+                      FillColor2 = clNone
+                      FrameColor = clBtnShadow
+                      FrameColorAlpha = 10
+                      FrameRadius = 15
+                      ShowCaption = True
+                      CaptionGlowEffect.Enabled = False
+                      CaptionGlowEffect.Color = clHighlight
+                      CaptionGlowEffect.AlphaValue = 255
+                      CaptionGlowEffect.GlowSize = 7
+                      CaptionGlowEffect.Offset = 0
+                      CaptionGlowEffect.Intensive = True
+                      CaptionGlowEffect.StyleColors = True
+                      Color = clBtnHighlight
+                      TransparentBackground = True
+                      StorePaintBuffer = True
+                      Sizeable = False
+                      WallpaperIndex = -1
+                      WordWrap = False
+                      object Panel3: TPanel
+                        Left = 0
+                        Top = 0
+                        Width = 303
+                        Height = 152
+                        Align = alClient
+                        BevelOuter = bvNone
+                        TabOrder = 0
+                        object scGPCircledProgressBar2: TscGPCircledProgressBar
+                          Left = 79
+                          Top = 10
+                          Width = 136
+                          Height = 136
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -11
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          ParentFont = False
+                          ParentShowHint = False
+                          FluentUIOpaque = False
+                          ShowHint = False
+                          TabOrder = 0
+                          AnimationMode = False
+                          AnimationAcceleration = False
+                          AnimationLineAngle = 135
+                          Active = False
+                          ImageCollection = scGPImageCollection1
+                          ImageIndex = 15
+                          Caption = 'Processing....'
+                          DrawTextMode = scdtmGDI
+                          TransparentBackground = True
+                          ProgressFont.Charset = DEFAULT_CHARSET
+                          ProgressFont.Color = clBtnText
+                          ProgressFont.Height = -18
+                          ProgressFont.Name = 'Tahoma'
+                          ProgressFont.Style = [fsBold]
+                          FrameSize = 10
+                          FrameAlpha = 125
+                          ProgressAlpha = 255
+                          FrameColor = clBtnShadow
+                          ProgressColor = clHighlight
+                          MinValue = 0
+                          MaxValue = 100
+                          Value = 0
+                          ShowCaption = True
+                          ShowProgressText = True
+                          ShowImage = True
+                          Color = clHighlight
+                        end
+                      end
+                      object Panel5: TPanel
+                        Left = 0
+                        Top = 152
+                        Width = 303
+                        Height = 207
+                        Align = alBottom
+                        Anchors = [akLeft, akTop, akRight, akBottom]
+                        BevelOuter = bvNone
+                        TabOrder = 1
+                        DesignSize = (
+                          303
+                          207)
+                        object scGPPanel6: TscGPPanel
+                          Left = 10
+                          Top = 0
+                          Width = 283
+                          Height = 198
+                          Anchors = [akLeft, akTop, akRight, akBottom]
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -11
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          ParentFont = False
+                          FluentUIOpaque = False
+                          TabOrder = 0
+                          BlurBackground = False
+                          BlurBackgroundAmount = 5
+                          BackgroundStyle = gppbsColor
+                          ContentMarginLeft = 0
+                          ContentMarginRight = 0
+                          ContentMarginTop = 0
+                          ContentMarginBottom = 0
+                          CustomImageIndex = -1
+                          DragForm = False
+                          DragTopForm = True
+                          DrawTextMode = scdtmGDI
+                          FillGradientAngle = 255
+                          FillGradientBeginAlpha = 255
+                          FillGradientEndAlpha = 255
+                          FillGradientBeginColorOffset = 25
+                          FillGradientEndColorOffset = 25
+                          FrameWidth = 0
+                          FillColor = 9787667
+                          FillColorAlpha = 255
+                          FillColor2 = 9787667
+                          FrameColor = clBtnShadow
+                          FrameColorAlpha = 10
+                          FrameRadius = 15
+                          ShowCaption = True
+                          CaptionGlowEffect.Enabled = False
+                          CaptionGlowEffect.Color = clHighlight
+                          CaptionGlowEffect.AlphaValue = 255
+                          CaptionGlowEffect.GlowSize = 7
+                          CaptionGlowEffect.Offset = 0
+                          CaptionGlowEffect.Intensive = True
+                          CaptionGlowEffect.StyleColors = True
+                          Color = clBtnHighlight
+                          TransparentBackground = True
+                          StorePaintBuffer = True
+                          Sizeable = False
+                          WallpaperIndex = -1
+                          WordWrap = False
+                          DesignSize = (
+                            283
+                            198)
+                          object Panel16: TPanel
+                            Left = 16
+                            Top = 11
+                            Width = 250
+                            Height = 600
+                            Anchors = [akLeft, akTop, akRight, akBottom]
+                            BevelOuter = bvNone
+                            TabOrder = 0
+                            object Label1: TLabel
+                              Left = 0
+                              Top = 0
+                              Width = 250
+                              Height = 15
+                              Align = alTop
+                              Font.Charset = DEFAULT_CHARSET
+                              Font.Color = clHighlightText
+                              Font.Height = -12
+                              Font.Name = 'Segoe UI'
+                              Font.Style = [fsBold]
+                              ParentFont = False
+                              ExplicitWidth = 3
+                            end
+                          end
+                          object scScrollBar1: TscScrollBar
+                            Left = 264
+                            Top = 0
+                            Width = 19
+                            Height = 198
+                            Align = alRight
+                            Kind = sbVertical
+                            Max = 600
+                            PageSize = 0
+                            TabOrder = 1
+                            TabStop = False
+                            OnChange = scScrollBar1Change
+                          end
+                        end
+                      end
+                    end
+                    object scGPPnlRightBottom: TscGPPanel
+                      Left = 0
+                      Top = 376
+                      Width = 303
+                      Height = 163
+                      Align = alBottom
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clWindowText
+                      Font.Height = -11
+                      Font.Name = 'Tahoma'
+                      Font.Style = []
+                      ParentFont = False
+                      FluentUIOpaque = False
+                      TabOrder = 1
+                      BlurBackground = False
+                      BlurBackgroundAmount = 5
+                      BackgroundStyle = gppbsColor
+                      ContentMarginLeft = 0
+                      ContentMarginRight = 0
+                      ContentMarginTop = 0
+                      ContentMarginBottom = 0
+                      CustomImageIndex = -1
+                      DragForm = False
+                      DragTopForm = True
+                      DrawTextMode = scdtmGDI
+                      FillGradientAngle = 255
+                      FillGradientBeginAlpha = 255
+                      FillGradientEndAlpha = 255
+                      FillGradientBeginColorOffset = 25
+                      FillGradientEndColorOffset = 25
+                      FrameWidth = 0
+                      FillColor = clHighlightText
+                      FillColorAlpha = 255
+                      FillColor2 = clNone
+                      FrameColor = clBtnShadow
+                      FrameColorAlpha = 10
+                      FrameRadius = 15
+                      ShowCaption = True
+                      CaptionGlowEffect.Enabled = False
+                      CaptionGlowEffect.Color = clHighlight
+                      CaptionGlowEffect.AlphaValue = 255
+                      CaptionGlowEffect.GlowSize = 7
+                      CaptionGlowEffect.Offset = 0
+                      CaptionGlowEffect.Intensive = True
+                      CaptionGlowEffect.StyleColors = True
+                      Color = clBtnHighlight
+                      TransparentBackground = True
+                      StorePaintBuffer = True
+                      Sizeable = False
+                      WallpaperIndex = -1
+                      WordWrap = False
+                      object Panel27: TPanel
+                        Left = 0
+                        Top = 0
+                        Width = 303
+                        Height = 163
+                        Align = alClient
+                        BevelOuter = bvNone
+                        TabOrder = 0
+                        DesignSize = (
+                          303
+                          163)
+                        object Label8: TLabel
+                          Left = -1
+                          Top = 7
+                          Width = 216
+                          Height = 12
+                          Caption = '    Generated  History For This (Selected) Month'
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clGrayText
+                          Font.Height = -10
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          ParentFont = False
+                        end
+                        object scGPPanel4: TscGPPanel
+                          Left = 10
+                          Top = 30
+                          Width = 283
+                          Height = 124
+                          Anchors = [akLeft, akTop, akRight, akBottom]
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -11
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          ParentFont = False
+                          FluentUIOpaque = False
+                          TabOrder = 0
+                          BlurBackground = False
+                          BlurBackgroundAmount = 5
+                          BackgroundStyle = gppbsColor
+                          ContentMarginLeft = 0
+                          ContentMarginRight = 0
+                          ContentMarginTop = 0
+                          ContentMarginBottom = 0
+                          CustomImageIndex = -1
+                          DragForm = False
+                          DragTopForm = True
+                          DrawTextMode = scdtmGDI
+                          FillGradientAngle = 255
+                          FillGradientBeginAlpha = 255
+                          FillGradientEndAlpha = 255
+                          FillGradientBeginColorOffset = 25
+                          FillGradientEndColorOffset = 25
+                          FrameWidth = 0
+                          FillColor = 9787667
+                          FillColorAlpha = 255
+                          FillColor2 = 9787667
+                          FrameColor = clBtnShadow
+                          FrameColorAlpha = 10
+                          FrameRadius = 15
+                          ShowCaption = True
+                          CaptionGlowEffect.Enabled = False
+                          CaptionGlowEffect.Color = clHighlight
+                          CaptionGlowEffect.AlphaValue = 255
+                          CaptionGlowEffect.GlowSize = 7
+                          CaptionGlowEffect.Offset = 0
+                          CaptionGlowEffect.Intensive = True
+                          CaptionGlowEffect.StyleColors = True
+                          Color = clBtnHighlight
+                          TransparentBackground = True
+                          StorePaintBuffer = True
+                          Sizeable = False
+                          WallpaperIndex = -1
+                          WordWrap = False
+                          DesignSize = (
+                            283
+                            124)
+                          object DBGridEh4: TDBGridEh
+                            Left = 9
+                            Top = 9
+                            Width = 265
+                            Height = 105
+                            Anchors = [akLeft, akTop, akRight, akBottom]
+                            DataSource = DSGeneratedHistory
+                            DynProps = <>
+                            Font.Charset = DEFAULT_CHARSET
+                            Font.Color = clWindowText
+                            Font.Height = -12
+                            Font.Name = 'Tahoma'
+                            Font.Style = []
+                            HorzScrollBar.VisibleMode = sbNeverShowEh
+                            ParentFont = False
+                            TabOrder = 0
+                            Columns = <
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = '_id'
+                                Footers = <>
+                                Visible = False
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'MeterReaderName'
+                                Footers = <>
+                                Title.Caption = 'Meter Reader Name'
+                                Width = 120
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'DateGenerated'
+                                Footers = <>
+                                Title.Caption = 'Date'
+                                Width = 105
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'UploadedString'
+                                Footers = <>
+                                Title.Caption = 'Status'
+                                Width = 74
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'UploadedStatus'
+                                Footers = <>
+                                Visible = False
+                                Width = 85
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'BillPeriod'
+                                Footers = <>
+                                Visible = False
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'MRNo'
+                                Footers = <>
+                                Visible = False
+                              end>
+                            object RowDetailData: TRowDetailPanelControlEh
+                            end
+                          end
+                        end
+                        object scGPSwitch2: TscGPSwitch
+                          Left = 247
+                          Top = 5
+                          Width = 42
+                          Height = 20
+                          Anchors = [akTop, akRight]
+                          FluentUIOpaque = False
+                          TabOrder = 1
+                          Animation = True
+                          FrameColor = 9787667
+                          FrameOnColor = 9787667
+                          FramePressedColor = 9787667
+                          ParentColor = True
+                          State = scswOff
+                          StyleKind = scswsStyled
+                          ThumbColor = 9787667
+                          ThumbOnColor = 9787667
+                          ThumbPressedColor = clWhite
+                          FrameColorAlpha = 255
+                          FrameOnColorAlpha = 255
+                          FramePressedColorAlpha = 255
+                          ThumbColorAlpha = 255
+                          ThumbOnColorAlpha = 255
+                          ThumbPressedColorAlpha = 255
+                          ThumbShadow = False
+                          FrameSolid = False
+                          FrameOnSolid = False
+                          FrameInside = False
+                          OnChangeState = scGPSwitch2ChangeState
+                        end
+                      end
+                    end
+                    object Panel24: TPanel
+                      Left = 0
+                      Top = 359
+                      Width = 303
+                      Height = 17
+                      Align = alBottom
+                      BevelOuter = bvNone
+                      TabOrder = 2
+                    end
+                  end
+                  object Panel2: TPanel
+                    Left = 0
+                    Top = 0
+                    Width = 421
+                    Height = 539
+                    Align = alClient
+                    BevelOuter = bvNone
+                    TabOrder = 2
+                    object scGPPanel5: TscGPPanel
+                      Left = 0
+                      Top = 0
+                      Width = 421
+                      Height = 359
+                      Align = alClient
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clWindowText
+                      Font.Height = -11
+                      Font.Name = 'Tahoma'
+                      Font.Style = []
+                      ParentFont = False
+                      FluentUIOpaque = False
+                      TabOrder = 0
+                      BlurBackground = False
+                      BlurBackgroundAmount = 5
+                      BackgroundStyle = gppbsColor
+                      ContentMarginLeft = 0
+                      ContentMarginRight = 0
+                      ContentMarginTop = 0
+                      ContentMarginBottom = 0
+                      CustomImageIndex = -1
+                      DragForm = False
+                      DragTopForm = True
+                      DrawTextMode = scdtmGDI
+                      FillGradientAngle = 255
+                      FillGradientBeginAlpha = 255
+                      FillGradientEndAlpha = 255
+                      FillGradientBeginColorOffset = 25
+                      FillGradientEndColorOffset = 25
+                      FrameWidth = 0
+                      FillColor = clHighlightText
+                      FillColorAlpha = 255
+                      FillColor2 = clNone
+                      FrameColor = clBtnShadow
+                      FrameColorAlpha = 10
+                      FrameRadius = 15
+                      ShowCaption = True
+                      CaptionGlowEffect.Enabled = False
+                      CaptionGlowEffect.Color = clHighlight
+                      CaptionGlowEffect.AlphaValue = 255
+                      CaptionGlowEffect.GlowSize = 7
+                      CaptionGlowEffect.Offset = 0
+                      CaptionGlowEffect.Intensive = True
+                      CaptionGlowEffect.StyleColors = True
+                      Color = clBtnHighlight
+                      TransparentBackground = True
+                      StorePaintBuffer = True
+                      Sizeable = False
+                      WallpaperIndex = -1
+                      WordWrap = False
+                      DesignSize = (
+                        421
+                        359)
+                      object Panel12: TPanel
+                        Left = 0
+                        Top = 0
+                        Width = 421
+                        Height = 84
+                        Align = alTop
+                        BevelOuter = bvNone
+                        TabOrder = 0
+                        DesignSize = (
+                          421
+                          84)
+                        object Label2: TLabel
+                          Left = 0
+                          Top = 6
+                          Width = 110
+                          Height = 22
+                          Caption = '  BILLMONTH'
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -18
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          ParentFont = False
+                        end
+                        object Label5: TLabel
+                          Left = 0
+                          Top = 27
+                          Width = 103
+                          Height = 13
+                          Caption = '     Input Billing Month'
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clGrayText
+                          Font.Height = -11
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          ParentFont = False
+                        end
+                        object Shape4: TShape
+                          Left = 14
+                          Top = 79
+                          Width = 391
+                          Height = 1
+                          Anchors = [akLeft, akTop, akRight]
+                          Pen.Color = cl3DDkShadow
+                          ExplicitWidth = 393
+                        end
+                        object SpeedButton1: TSpeedButton
+                          Left = 375
+                          Top = 48
+                          Width = 30
+                          Height = 28
+                          Anchors = [akTop, akRight]
+                          Flat = True
+                          Glyph.Data = {
+                            36040000424D3604000000000000360000002800000010000000100000000100
+                            2000000000000004000000000000000000000000000000000000000000000000
+                            0000000000000000000000000000000000000000000000000000000000000000
+                            0000000000000000000000000000000000000000000000000000B8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
+                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
+                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
+                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
+                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
+                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
+                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF0000
+                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFF0000
+                            000000000000B8824DFF0000000000000000B8824DFF0000000000000000B882
+                            4DFF0000000000000000B8824DFF0000000000000000B8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB882
+                            4DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFFB8824DFF}
+                          OnClick = SpeedButton1Click
+                          ExplicitLeft = 377
+                        end
+                        object Edit2: TEdit
+                          Left = 14
+                          Top = 42
+                          Width = 355
+                          Height = 31
+                          Alignment = taCenter
+                          Anchors = [akLeft, akTop, akRight]
+                          AutoSize = False
+                          BorderStyle = bsNone
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clInfoText
+                          Font.Height = -19
+                          Font.Name = 'Segoe UI'
+                          Font.Style = [fsBold]
+                          ParentFont = False
+                          ParentShowHint = False
+                          ShowHint = True
+                          TabOrder = 0
+                          TextHint = '(YYYYMM) | BILLMONTH NOW'
+                          OnChange = Edit2Change
+                          OnKeyPress = Edit2KeyPress
+                        end
+                      end
+                      object Panel18: TPanel
+                        Left = 0
+                        Top = 84
+                        Width = 421
+                        Height = 91
+                        Align = alTop
+                        BevelOuter = bvNone
+                        TabOrder = 1
+                        DesignSize = (
+                          421
+                          91)
+                        object Label6: TLabel
+                          Left = 0
+                          Top = 1
+                          Width = 139
+                          Height = 22
+                          Caption = '  METER READER'
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -18
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          ParentFont = False
+                        end
+                        object Label7: TLabel
+                          Left = 0
+                          Top = 22
+                          Width = 255
+                          Height = 13
+                          Caption = '     Select Meter Reader That Already have Schedule!'
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clGrayText
+                          Font.Height = -11
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          ParentFont = False
+                        end
+                        object scGPComboEdit1: TscGPComboBox
+                          Left = 14
+                          Top = 40
+                          Width = 391
+                          Height = 45
+                          Anchors = [akLeft, akTop, akRight]
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -19
+                          Font.Name = 'Segoe UI'
+                          Font.Style = [fsBold]
+                          ParentFont = False
+                          FluentUIOpaque = False
+                          TabOrder = 0
+                          ContentMargin = 0
+                          AutoComplete = True
+                          Animation = True
+                          CheckedListMode = False
+                          CheckedListWrap = True
+                          DetailPosition = scgplbdBottom
+                          DetailWordWrap = False
+                          DrawTextMode = scdtmGDI
+                          Items = <
+                            item
+                              Header = True
+                              Enabled = True
+                              Caption = 'Meter Reader'
+                              CustomColor = clNone
+                              CustomColorAlpha = 255
+                              CustomTextColor = clNone
+                              CustomDetailTextColor = clNone
+                              Checked = False
+                            end
+                            item
+                              Header = False
+                              Enabled = True
+                              Caption = 'Meter Reader #1'
+                              CustomColor = clNone
+                              CustomColorAlpha = 255
+                              CustomTextColor = clNone
+                              CustomDetailTextColor = clNone
+                              Checked = False
+                            end
+                            item
+                              Header = False
+                              Enabled = True
+                              Caption = 'Meter Reader #2'
+                              CustomColor = clNone
+                              CustomColorAlpha = 255
+                              CustomTextColor = clNone
+                              CustomDetailTextColor = clNone
+                              Checked = False
+                            end
+                            item
+                              Header = False
+                              Enabled = True
+                              Caption = 'Meter Reader #3'
+                              CustomColor = clNone
+                              CustomColorAlpha = 255
+                              CustomTextColor = clNone
+                              CustomDetailTextColor = clNone
+                              Checked = False
+                            end
+                            item
+                              Header = False
+                              Enabled = True
+                              Caption = 'Meter Reader #4'
+                              CustomColor = clNone
+                              CustomColorAlpha = 255
+                              CustomTextColor = clNone
+                              CustomDetailTextColor = clNone
+                              Checked = False
+                            end
+                            item
+                              Header = False
+                              Enabled = True
+                              CustomColor = clNone
+                              CustomColorAlpha = 255
+                              CustomTextColor = clNone
+                              CustomDetailTextColor = clNone
+                              Checked = False
+                            end>
+                          ItemIndex = -1
+                          ItemTextAlignment = taCenter
+                          ItemWordWrap = True
+                          ItemShowEllipsis = False
+                          DropDownCount = 7
+                          Options.NormalColor = clBtnFace
+                          Options.HotColor = clBtnFace
+                          Options.PressedColor = clBtnShadow
+                          Options.FocusedColor = clBtnFace
+                          Options.DisabledColor = clBtnFace
+                          Options.NormalColorAlpha = 255
+                          Options.HotColorAlpha = 255
+                          Options.PressedColorAlpha = 255
+                          Options.FocusedColorAlpha = 255
+                          Options.DisabledColorAlpha = 255
+                          Options.FrameNormalColor = clBtnShadow
+                          Options.FrameHotColor = clHighlight
+                          Options.FramePressedColor = clHighlight
+                          Options.FrameFocusedColor = clHighlight
+                          Options.FrameDisabledColor = clBtnShadow
+                          Options.FrameWidth = 1
+                          Options.FrameNormalColorAlpha = 255
+                          Options.FrameHotColorAlpha = 255
+                          Options.FramePressedColorAlpha = 255
+                          Options.FrameFocusedColorAlpha = 255
+                          Options.FrameDisabledColorAlpha = 255
+                          Options.FontNormalColor = clBtnText
+                          Options.FontHotColor = clBtnText
+                          Options.FontPressedColor = clBtnText
+                          Options.FontFocusedColor = clBtnText
+                          Options.FontDisabledColor = clBtnShadow
+                          Options.ShapeFillGradientAngle = 90
+                          Options.ShapeFillGradientPressedAngle = -90
+                          Options.ShapeCornerRadius = 10
+                          Options.ShapeStyle = scgpcssRect
+                          Options.ScaleFrameWidth = False
+                          Options.ArrowSize = 9
+                          Options.ArrowAreaWidth = 0
+                          Options.StyleColors = True
+                          ShowItemImage = True
+                          ShowItemText = True
+                          ShowItemDetail = False
+                          ListBoxHeaderFont.Charset = DEFAULT_CHARSET
+                          ListBoxHeaderFont.Color = clWindowText
+                          ListBoxHeaderFont.Height = -11
+                          ListBoxHeaderFont.Name = 'Tahoma'
+                          ListBoxHeaderFont.Style = [fsBold]
+                          ListBoxHeaderOptions.Color = clBtnFace
+                          ListBoxHeaderOptions.ColorAlpha = 220
+                          ListBoxHeaderOptions.FillStyle = scgpsfColor
+                          ListBoxHeaderOptions.GradientAngle = 90
+                          ListBoxHeaderOptions.Margin = 5
+                          DetailFont.Charset = DEFAULT_CHARSET
+                          DetailFont.Color = clWindowText
+                          DetailFont.Height = -11
+                          DetailFont.Name = 'Tahoma'
+                          DetailFont.Style = []
+                          ListBoxLineColor = clWindowText
+                          ListBoxWidth = 0
+                          ListBoxHeight = 0
+                          ListBoxShowItemDetails = False
+                          ListBoxShowLines = True
+                          ListBoxItemHeight = 30
+                          ListBoxHeaderHeight = 20
+                          ListBoxItemSpacing = 5
+                          ListBoxItemMargin = 5
+                          ListBoxItemTextAlignment = taLeftJustify
+                          ListBoxIndentMargin = 10
+                          ListBoxScrollBarOptions.BorderWidth = 0
+                          ListBoxScrollBarOptions.FillColor = clBtnFace
+                          ListBoxScrollBarOptions.FillColorAlpha = 100
+                          ListBoxScrollBarOptions.ThumbColor = clWindowText
+                          ListBoxScrollBarOptions.ThumbColorAlpha = 50
+                          ListBoxScrollBarOptions.ThumbColorHotAlpha = 100
+                          ListBoxScrollBarOptions.ThumbColorPressedAlpha = 150
+                          ListBoxScrollBarOptions.ThumbRounded = False
+                          ListBoxScrollBarOptions.Position = scgpsbDefault
+                          ListBoxScrollBarOptions.Size = 11
+                          ListBoxOptions.FillColor = clWindow
+                          ListBoxOptions.FillColor2 = clWindow
+                          ListBoxOptions.FillColorAlpha = 255
+                          ListBoxOptions.FillColor2Alpha = 255
+                          ListBoxOptions.FillGradientAngle = 90
+                          ListBoxOptions.FrameColor = clBtnShadow
+                          ListBoxOptions.FrameColorAlpha = 255
+                          ListBoxOptions.FrameWidth = 2
+                          ListBoxOptions.FrameScaleWidth = False
+                          MouseWheelSupport = True
+                          OnChange = scGPComboEdit1Change
+                        end
+                      end
+                      object Panel20: TPanel
+                        Left = 0
+                        Top = 322
+                        Width = 421
+                        Height = 37
+                        Align = alBottom
+                        BevelOuter = bvNone
+                        Color = clWhite
+                        ParentBackground = False
+                        TabOrder = 2
+                        object SpeedButton2: TSpeedButton
+                          Left = 0
+                          Top = 0
+                          Width = 421
+                          Height = 36
+                          Align = alClient
+                          Caption = 'Generate Reading Data'
+                          Flat = True
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -13
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          Glyph.Data = {
+                            46050000424D4605000000000000360000002800000012000000120000000100
+                            2000000000001005000000000000000000000000000000000000000000000000
+                            0000000000000000000000000000000000000000000000000000000000000000
+                            0000000000000000000000000000000000000000000000000000000000000000
+                            0000000000000000000000000000000000000000000000000000000000000000
+                            0000000000200000003000000010000000000000000000000000000000000000
+                            0000000000000000000000000000000000000000000000000000000000000000
+                            0040000000BF000000FF000000FF000000FF000000EF000000BF000000500000
+                            0000000000000000000000000000000000000000000000000000000000000000
+                            00000000008F000000FF000000FF000000FF000000FF000000FF000000FF0000
+                            00FF000000FF0000008F00000010000000000000000000000000000000000000
+                            0000000000000000009F000000FF000000FF000000FF000000FF000000FF0000
+                            00FF000000FF000000FF000000FF000000FF0000008F00000000000000000000
+                            0000000000000000000000000030000000FF000000FF000000FF000000FF0000
+                            00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                            004000000000000000000000000000000000000000AF000000FF000000FF0000
+                            00FF000000FF0000008F00000080000000EF000000FF000000FF000000FF0000
+                            00FF000000FF000000BF00000000000000000000000000000010000000FF0000
+                            00FF000000FF000000FF00000080000000000000000000000060000000EF0000
+                            00FF000000FF000000FF000000FF000000FF0000002000000000000000000000
+                            0010000000FF000000FF000000FF000000AF0000000000000010000000400000
+                            000000000060000000EF000000FF000000FF000000FF000000FF000000200000
+                            00000000000000000020000000FF000000FF000000FF000000AF000000500000
+                            00CF000000EF000000500000000000000060000000EF000000FF000000FF0000
+                            00FF00000030000000000000000000000000000000EF000000FF000000FF0000
+                            00FF000000FF000000FF000000FF000000EF0000005000000000000000800000
+                            00FF000000FF000000FF00000010000000000000000000000000000000AF0000
+                            00FF000000FF000000FF000000FF000000FF000000FF000000FF000000EF0000
+                            0080000000BF000000FF000000FF000000AF0000000000000000000000000000
+                            000000000040000000FF000000FF000000FF000000FF000000FF000000FF0000
+                            00FF000000FF000000FF000000FF000000FF000000FF00000040000000000000
+                            000000000000000000000000000000000080000000FF000000FF000000FF0000
+                            00FF000000FF000000FF000000FF000000FF000000FF000000FF0000009F0000
+                            00000000000000000000000000000000000000000000000000000000008F0000
+                            00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                            008F000000000000000000000000000000000000000000000000000000000000
+                            00000000000000000040000000BF000000EF000000FF000000FF000000FF0000
+                            00AF000000300000000000000000000000000000000000000000000000000000
+                            0000000000000000000000000000000000000000000000000010000000200000
+                            0020000000000000000000000000000000000000000000000000000000000000
+                            0000000000000000000000000000000000000000000000000000000000000000
+                            0000000000000000000000000000000000000000000000000000000000000000
+                            00000000000000000000}
+                          ParentFont = False
+                          OnClick = SpeedButton2Click
+                          ExplicitWidth = 169
+                          ExplicitHeight = 49
+                        end
+                        object Shape2: TShape
+                          Left = 0
+                          Top = 36
+                          Width = 421
+                          Height = 1
+                          Align = alBottom
+                          Pen.Color = cl3DDkShadow
+                          ExplicitLeft = 14
+                          ExplicitTop = 29
+                          ExplicitWidth = 519
+                        end
+                      end
+                      object DBGridEh1: TDBGridEh
+                        Left = 14
+                        Top = 176
+                        Width = 391
+                        Height = 140
+                        Anchors = [akLeft, akTop, akRight, akBottom]
+                        DataSource = DSMeterReaderSchedule
+                        DynProps = <>
+                        Font.Charset = DEFAULT_CHARSET
+                        Font.Color = clWindowText
+                        Font.Height = -12
+                        Font.Name = 'Tahoma'
+                        Font.Style = []
+                        HorzScrollBar.VisibleMode = sbNeverShowEh
+                        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+                        ParentFont = False
+                        TabOrder = 3
+                        VertScrollBar.VisibleMode = sbNeverShowEh
+                        Columns = <
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = '_id'
+                            Footers = <>
+                            Visible = False
+                          end
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = 'ZoneCode'
+                            Footers = <>
+                            Title.Caption = 'Zone Code'
+                            Width = 75
+                          end
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = 'ZoneName'
+                            Footers = <>
+                            Title.Caption = 'Zone Name'
+                            Width = 200
+                          end
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = 'ReadingStartDate'
+                            Footers = <>
+                            Title.Caption = 'Reading Start Date'
+                            Width = 130
+                          end
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = 'TotalReadingDays'
+                            Footers = <>
+                            Title.Caption = 'Total Reading Days'
+                            Width = 100
+                          end
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = 'BillPeriod'
+                            Footers = <>
+                            Visible = False
+                          end
+                          item
+                            CellButtons = <>
+                            DynProps = <>
+                            EditButtons = <>
+                            FieldName = 'MRNo'
+                            Footers = <>
+                            Visible = False
+                          end>
+                        object RowDetailData: TRowDetailPanelControlEh
+                        end
+                      end
+                    end
+                    object Panel7: TPanel
+                      Left = 0
+                      Top = 359
+                      Width = 421
+                      Height = 17
+                      Align = alBottom
+                      BevelOuter = bvNone
+                      TabOrder = 1
+                    end
+                    object scGPPanel1: TscGPPanel
+                      Left = 0
+                      Top = 376
+                      Width = 421
+                      Height = 163
+                      Align = alBottom
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = clWindowText
+                      Font.Height = -11
+                      Font.Name = 'Tahoma'
+                      Font.Style = []
+                      ParentFont = False
+                      FluentUIOpaque = False
+                      TabOrder = 2
+                      BlurBackground = False
+                      BlurBackgroundAmount = 5
+                      BackgroundStyle = gppbsColor
+                      ContentMarginLeft = 0
+                      ContentMarginRight = 0
+                      ContentMarginTop = 0
+                      ContentMarginBottom = 0
+                      CustomImageIndex = -1
+                      DragForm = False
+                      DragTopForm = True
+                      DrawTextMode = scdtmGDI
+                      FillGradientAngle = 255
+                      FillGradientBeginAlpha = 255
+                      FillGradientEndAlpha = 255
+                      FillGradientBeginColorOffset = 25
+                      FillGradientEndColorOffset = 25
+                      FrameWidth = 0
+                      FillColor = clHighlightText
+                      FillColorAlpha = 255
+                      FillColor2 = clNone
+                      FrameColor = clBtnShadow
+                      FrameColorAlpha = 10
+                      FrameRadius = 15
+                      ShowCaption = True
+                      CaptionGlowEffect.Enabled = False
+                      CaptionGlowEffect.Color = clHighlight
+                      CaptionGlowEffect.AlphaValue = 255
+                      CaptionGlowEffect.GlowSize = 7
+                      CaptionGlowEffect.Offset = 0
+                      CaptionGlowEffect.Intensive = True
+                      CaptionGlowEffect.StyleColors = True
+                      Color = clBtnHighlight
+                      TransparentBackground = True
+                      StorePaintBuffer = True
+                      Sizeable = False
+                      WallpaperIndex = -1
+                      WordWrap = False
+                      object Panel6: TPanel
+                        AlignWithMargins = True
+                        Left = 0
+                        Top = 0
+                        Width = 421
+                        Height = 156
+                        Margins.Left = 0
+                        Margins.Top = 0
+                        Margins.Right = 0
+                        Margins.Bottom = 7
+                        Align = alClient
+                        BevelOuter = bvNone
+                        TabOrder = 0
+                        DesignSize = (
+                          421
+                          156)
+                        object Label9: TLabel
+                          Left = -1
+                          Top = 7
+                          Width = 261
+                          Height = 12
+                          Caption = '    Push Generated SQL File to Selected Connection (ADB)'
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clGrayText
+                          Font.Height = -10
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          ParentFont = False
+                        end
+                        object scGPPanel3: TscGPPanel
+                          Left = 10
+                          Top = 30
+                          Width = 400
+                          Height = 124
+                          Anchors = [akLeft, akTop, akRight, akBottom]
+                          Font.Charset = DEFAULT_CHARSET
+                          Font.Color = clWindowText
+                          Font.Height = -11
+                          Font.Name = 'Tahoma'
+                          Font.Style = []
+                          ParentFont = False
+                          FluentUIOpaque = False
+                          TabOrder = 0
+                          BlurBackground = False
+                          BlurBackgroundAmount = 5
+                          BackgroundStyle = gppbsColor
+                          ContentMarginLeft = 0
+                          ContentMarginRight = 0
+                          ContentMarginTop = 0
+                          ContentMarginBottom = 0
+                          CustomImageIndex = -1
+                          DragForm = False
+                          DragTopForm = True
+                          DrawTextMode = scdtmGDI
+                          FillGradientAngle = 255
+                          FillGradientBeginAlpha = 255
+                          FillGradientEndAlpha = 255
+                          FillGradientBeginColorOffset = 25
+                          FillGradientEndColorOffset = 25
+                          FrameWidth = 0
+                          FillColor = 9787667
+                          FillColorAlpha = 255
+                          FillColor2 = 9787667
+                          FrameColor = clBtnShadow
+                          FrameColorAlpha = 10
+                          FrameRadius = 15
+                          ShowCaption = True
+                          CaptionGlowEffect.Enabled = False
+                          CaptionGlowEffect.Color = clHighlight
+                          CaptionGlowEffect.AlphaValue = 255
+                          CaptionGlowEffect.GlowSize = 7
+                          CaptionGlowEffect.Offset = 0
+                          CaptionGlowEffect.Intensive = True
+                          CaptionGlowEffect.StyleColors = True
+                          Color = clBtnHighlight
+                          TransparentBackground = True
+                          StorePaintBuffer = True
+                          Sizeable = False
+                          WallpaperIndex = -1
+                          WordWrap = False
+                          DesignSize = (
+                            400
+                            124)
+                          object DBGridEh2: TDBGridEh
+                            Left = 9
+                            Top = 9
+                            Width = 382
+                            Height = 105
+                            Anchors = [akLeft, akTop, akRight, akBottom]
+                            DataSource = DSDBPushed
+                            DynProps = <>
+                            Font.Charset = DEFAULT_CHARSET
+                            Font.Color = clWindowText
+                            Font.Height = -12
+                            Font.Name = 'Tahoma'
+                            Font.Style = []
+                            HorzScrollBar.VisibleMode = sbNeverShowEh
+                            ParentFont = False
+                            PopupMenu = PMVirtualADB
+                            TabOrder = 0
+                            Columns = <
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = '_id'
+                                Footers = <>
+                                Visible = False
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'Device'
+                                Footers = <>
+                                Width = 86
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'MeterReaderName'
+                                Footers = <>
+                                Title.Caption = 'Meter Reader Name'
+                                Width = 120
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'Status'
+                                Footers = <>
+                                Width = 44
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'DatePushed'
+                                Footers = <>
+                                Title.Caption = 'Date'
+                                Width = 74
+                              end
+                              item
+                                CellButtons = <>
+                                DynProps = <>
+                                EditButtons = <>
+                                FieldName = 'BillPeriod'
+                                Footers = <>
+                                Visible = False
+                                Width = 55
+                              end>
+                            object RowDetailData: TRowDetailPanelControlEh
+                            end
+                          end
+                        end
+                        object scGPSwitch6: TscGPSwitch
+                          Left = 364
+                          Top = 4
+                          Width = 42
+                          Height = 20
+                          Anchors = [akTop, akRight]
+                          FluentUIOpaque = False
+                          TabOrder = 1
+                          Animation = True
+                          FrameColor = 9787667
+                          FrameOnColor = 9787667
+                          FramePressedColor = 9787667
+                          ParentColor = True
+                          State = scswOff
+                          StyleKind = scswsStyled
+                          ThumbColor = 9787667
+                          ThumbOnColor = 9787667
+                          ThumbPressedColor = clWhite
+                          FrameColorAlpha = 255
+                          FrameOnColorAlpha = 255
+                          FramePressedColorAlpha = 255
+                          ThumbColorAlpha = 255
+                          ThumbOnColorAlpha = 255
+                          ThumbPressedColorAlpha = 255
+                          ThumbShadow = False
+                          FrameSolid = False
+                          FrameOnSolid = False
+                          FrameInside = False
+                          OnChangeState = scGPSwitch6ChangeState
+                        end
+                      end
+                    end
+                  end
+                end
               end
             end
           end
@@ -7601,7 +7601,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010B00F801D40130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010B00F801D80130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

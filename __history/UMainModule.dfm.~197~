@@ -17,8 +17,9 @@ object DMMainModule: TDMMainModule
   object tblClients: TFDTable
     IndexFieldNames = '_id'
     Connection = DMMainConnection.FDConSQL
-    FetchOptions.AssignedValues = [evMode, evItems, evUnidirectional, evAutoFetchAll]
+    FetchOptions.AssignedValues = [evMode, evItems, evRowsetSize, evUnidirectional, evAutoFetchAll]
     FetchOptions.Mode = fmAll
+    FetchOptions.RowsetSize = 5000
     FetchOptions.Items = [fiMeta]
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
     UpdateOptions.UpdateChangedFields = False
@@ -128,7 +129,9 @@ object DMMainModule: TDMMainModule
   end
   object qryMSClients: TFDQuery
     Connection = DMMainConnection.FDConMSSQL
-    FetchOptions.AssignedValues = [evAutoFetchAll]
+    FetchOptions.AssignedValues = [evMode, evRowsetSize, evAutoFetchAll]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RowsetSize = 5000
     SQL.Strings = (
       'SELECT -- TOP 100'
       #9'   C.[Acct_No]'
@@ -330,8 +333,9 @@ object DMMainModule: TDMMainModule
   object tblWaterRates: TFDTable
     IndexFieldNames = '_id'
     Connection = DMMainConnection.FDConSQL
-    FetchOptions.AssignedValues = [evMode, evItems, evAutoFetchAll]
+    FetchOptions.AssignedValues = [evMode, evItems, evRowsetSize, evAutoFetchAll]
     FetchOptions.Mode = fmAll
+    FetchOptions.RowsetSize = 5000
     FetchOptions.Items = [fiMeta]
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
     UpdateOptions.UpdateChangedFields = False
@@ -458,8 +462,9 @@ object DMMainModule: TDMMainModule
   object tblMeterReadingSchedule: TFDTable
     IndexFieldNames = '_id'
     Connection = DMMainConnection.FDConSQL
-    FetchOptions.AssignedValues = [evMode, evItems, evAutoFetchAll]
+    FetchOptions.AssignedValues = [evMode, evItems, evRowsetSize, evAutoFetchAll]
     FetchOptions.Mode = fmAll
+    FetchOptions.RowsetSize = 5000
     FetchOptions.Items = [fiMeta]
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
     UpdateOptions.UpdateChangedFields = False
@@ -546,7 +551,6 @@ object DMMainModule: TDMMainModule
   object fdMeterReader: TFDQuery
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
     SQL.Strings = (
       'select '
       '_id,'
@@ -606,7 +610,6 @@ object DMMainModule: TDMMainModule
     IndexFieldNames = '_id'
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
     UpdateOptions.UpdateTableName = 'MeterReader'
     TableName = 'MeterReader'
     Left = 64
@@ -644,7 +647,6 @@ object DMMainModule: TDMMainModule
   object fdSettings: TFDQuery
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
     SQL.Strings = (
       'select '
       '_id,'
@@ -921,7 +923,6 @@ object DMMainModule: TDMMainModule
   object fdMeterReaderSchedule: TFDQuery
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
     SQL.Strings = (
       'select '
       '_id,'
@@ -988,7 +989,6 @@ object DMMainModule: TDMMainModule
   object fdDBPushed: TFDQuery
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
     SQL.Strings = (
       'select '
       '_id,'
@@ -1057,7 +1057,6 @@ object DMMainModule: TDMMainModule
     OnCalcFields = fdGeneratedHistoryCalcFields
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
     SQL.Strings = (
       'select '
       '_id,'
@@ -1128,8 +1127,9 @@ object DMMainModule: TDMMainModule
   object tblSettingsDB: TFDTable
     IndexFieldNames = '_id'
     Connection = DMMainConnection.FDConSQL
-    FetchOptions.AssignedValues = [evMode, evItems, evAutoFetchAll]
+    FetchOptions.AssignedValues = [evMode, evItems, evRowsetSize, evAutoFetchAll]
     FetchOptions.Mode = fmAll
+    FetchOptions.RowsetSize = 5000
     FetchOptions.Items = [fiMeta]
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
     UpdateOptions.UpdateChangedFields = False
@@ -1262,7 +1262,6 @@ object DMMainModule: TDMMainModule
     IndexFieldNames = '_id'
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
     UpdateOptions.UpdateTableName = 'GeneratedHistory'
     TableName = 'GeneratedHistory'
     Left = 480
@@ -1301,7 +1300,6 @@ object DMMainModule: TDMMainModule
   object fdDBFetched: TFDQuery
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
     SQL.Strings = (
       'select '
       '_id,'
@@ -1381,7 +1379,6 @@ object DMMainModule: TDMMainModule
     IndexFieldNames = '_id'
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
     UpdateOptions.UpdateTableName = 'DBPushHistory'
     TableName = 'DBPushHistory'
     Left = 368
@@ -1422,7 +1419,6 @@ object DMMainModule: TDMMainModule
     IndexFieldNames = '_id'
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
     UpdateOptions.UpdateTableName = 'DBFetchHistory'
     TableName = 'DBFetchHistory'
     Left = 584
@@ -1773,7 +1769,7 @@ object DMMainModule: TDMMainModule
     IndexFieldNames = '_id'
     Connection = DMMainConnection.FDConSQLMain
     FetchOptions.AssignedValues = [evMode, evItems, evAutoFetchAll]
-    FetchOptions.Mode = fmAll
+    FetchOptions.Mode = fmManual
     FetchOptions.Items = [fiMeta]
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
     UpdateOptions.UpdateChangedFields = False
@@ -1945,6 +1941,12 @@ object DMMainModule: TDMMainModule
       FieldName = 'midentity'
       Origin = 'midentity'
       ReadOnly = True
+    end
+    object tblSQLMeterReadingBillingPeriod: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'BillingPeriod'
+      Size = 6
+      Calculated = True
     end
   end
   object qryMeterReading: TFDQuery
@@ -2250,8 +2252,9 @@ object DMMainModule: TDMMainModule
   object tblClientArrears: TFDTable
     IndexFieldNames = '_id'
     Connection = DMMainConnection.FDConSQL
-    FetchOptions.AssignedValues = [evMode, evItems, evAutoFetchAll]
+    FetchOptions.AssignedValues = [evMode, evItems, evRowsetSize, evAutoFetchAll]
     FetchOptions.Mode = fmManual
+    FetchOptions.RowsetSize = 5000
     FetchOptions.Items = [fiMeta]
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
     UpdateOptions.UpdateChangedFields = False

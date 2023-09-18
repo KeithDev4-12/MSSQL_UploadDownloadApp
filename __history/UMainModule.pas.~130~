@@ -250,7 +250,6 @@ type
     qryMeterReadingMR_Sys_no: TStringField;
     qryMeterReadingmidentity: TFDAutoIncField;
     qryPostingMeterReading: TFDQuery;
-    qryMSClientsPrevReadingDate: TStringField;
     tblSQLMeterReadingMR_Sys_No: TStringField;
     tblSQLMeterReadingAcct_No: TStringField;
     tblSQLMeterReadingMtr_No: TStringField;
@@ -319,14 +318,11 @@ type
     tblDBReadingCount_id: TFDAutoIncField;
     tblDBReadingCountBillingPeriod: TWideMemoField;
     tblDBReadingCountReadingCount: TIntegerField;
-    qryMSClientsPrevReadingDateCalc: TStringField;
-    qryMSClientPrevDate: TFDQuery;
-    qryMSClientPrevDatePrevDate: TStringField;
+    qryMSClientsPrevReadingDate: TStringField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
-    procedure qryMSClientsCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -382,11 +378,6 @@ begin
   end;
 
 
-end;
-
-procedure TDMMainModule.qryMSClientsCalcFields(DataSet: TDataSet);
-begin
-   qryMSClientsPrevReadingDateCalc.AsString :=
 end;
 
 end.

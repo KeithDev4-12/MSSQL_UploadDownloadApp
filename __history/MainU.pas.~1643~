@@ -299,6 +299,7 @@ type
     N2: TMenuItem;
     ContinueTransferringSQLFile1: TMenuItem;
     scButton8: TscButton;
+    DBGridEh8: TDBGridEh;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -777,7 +778,14 @@ begin
       qryPostingMeterReading.First;
       MR_Sys_No_First := AMR_Sys_No;
       while not qryPostingMeterReading.EOF do begin
-        if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+        //if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+        qryMeterReadingCheck.Close;
+        qryMeterReadingCheck.ParamByName('AAccountNumber').AsString := qryPostingMeterReadingAccountNo.AsString;
+        qryMeterReadingCheck.ParamByName('AMonth').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(0,4);
+        qryMeterReadingCheck.ParamByName('AYear').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(4,2);
+        qryMeterReadingCheck.Open();
+
+        if tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]) then begin
           //Update
           tblSQLMeterReading.Edit;
           AMR_Sys_No := AMR_Sys_No + 1;
@@ -1900,23 +1908,26 @@ var
   i: integer;
 begin
   UsbArrivalTimer.Enabled := false;
+  try
+    DriveList := TStringList.Create;
 
-  DriveList := TStringList.Create;
-
-  GetDriveLetters(DriveList);
-  for i:= 0 to DriveList.Count - 1 do
-  begin
-    DriveName := DriveList.strings[i];
-    RefreshDriveComboBox(DriveName[1]); //DriveName[1] to convert string to char and get the first character
-    //scLabel15.Caption := '<USB IS CONNECTED> ('+ UPPERCASE(DriveName[1]) +')';
-    //scLabel15.Caption := UPPERCASE(DriveName[1]) +':/sdcard/Android/data/com.alltechsystems.iwd/files/iwd_lwua/reading/';
-    DriveFromCombobox := DriveName[1];
-    FlashDriveEnum := 2;
-    break;
+    GetDriveLetters(DriveList);
+    for i:= 0 to DriveList.Count - 1 do
+    begin
+      DriveName := DriveList.strings[i];
+      RefreshDriveComboBox(DriveName[1]); //DriveName[1] to convert string to char and get the first character
+      //scLabel15.Caption := '<USB IS CONNECTED> ('+ UPPERCASE(DriveName[1]) +')';
+      //scLabel15.Caption := UPPERCASE(DriveName[1]) +':/sdcard/Android/data/com.alltechsystems.iwd/files/iwd_lwua/reading/';
+      DriveFromCombobox := DriveName[1];
+      FlashDriveEnum := 2;
+      break;
+    end;
+    //ShowMessage('USB ARRIVED');
+    ADeviceFound := getAvaialbeDevice;
+  finally
+    DriveList.Free;
   end;
-  //ShowMessage('USB ARRIVED');
-  ADeviceFound := getAvaialbeDevice;
-  DriveList.Free;
+
 
 end;
 

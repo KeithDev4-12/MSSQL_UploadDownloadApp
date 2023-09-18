@@ -299,6 +299,7 @@ type
     N2: TMenuItem;
     ContinueTransferringSQLFile1: TMenuItem;
     scButton8: TscButton;
+    DBGridEh8: TDBGridEh;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -777,7 +778,9 @@ begin
       qryPostingMeterReading.First;
       MR_Sys_No_First := AMR_Sys_No;
       while not qryPostingMeterReading.EOF do begin
-        if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+        //if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+
+        if tblSQLMeterReading.Locate('Acct_no;BillingPeriod',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingBillPeriod.AsString]),[]) then begin
           //Update
           tblSQLMeterReading.Edit;
           AMR_Sys_No := AMR_Sys_No + 1;
@@ -1904,8 +1907,6 @@ begin
     DriveList := TStringList.Create;
 
     GetDriveLetters(DriveList);
-
-
     for i:= 0 to DriveList.Count - 1 do
     begin
       DriveName := DriveList.strings[i];
@@ -1934,21 +1935,14 @@ procedure TUMainForm.UsbRemovalTimerTimer(Sender: TObject);
 var DriveLetter:String;
 begin
   UsbRemovalTimer.Enabled := False;
-
-   showmessage('b1');
   DriveLetter := ExtractFileDrive(Application.ExeName);
-
-   showmessage('b2');
   RefreshDriveComboBox(DriveLetter[1]);
-
-   showmessage('b3');
   //scLabel15.Caption := '<USB IS DISCONNECTED>';
   //scLabel15.Caption := 'NO CONNECTED DEVICE';
-  showmessage('b4');
+
   DriveFromCombobox := DriveLetter[1];
-  showmessage('b5');
+
   ADeviceFound := getAvaialbeDevice();
-  showmessage('b6');
 
   FlashDriveEnum := 3;
 end;
@@ -2148,24 +2142,14 @@ begin
   try
 	// clear the list from possible leftover from prior operations
 	AList.Clear;
-   showmessage('s1');
 	vDrivesSize := GetLogicalDriveStrings(SizeOf(vDrives), vDrives);
+	if vDrivesSize=0 then Exit; // no drive found, no further processing needed
 
-   showmessage('s2');
-  if vDrivesSize=0 then Exit; // no drive found, no further processing needed
-
-   showmessage('s3');
 	vDrive := vDrives;
-
-   showmessage('s4');
 	while vDrive^ <> #0 do
 	begin
-
-   showmessage('s5');
     vDriveType := GetDriveType(PChar(vDrive));
-
-   showmessage('s6');
-   if vDriveType = DRIVE_REMOVABLE then
+    if vDriveType = DRIVE_REMOVABLE then
 	    AList.Add(StrPas(vDrive));
 	  Inc(vDrive, SizeOf(vDrive));
   end;

@@ -777,7 +777,9 @@ begin
       qryPostingMeterReading.First;
       MR_Sys_No_First := AMR_Sys_No;
       while not qryPostingMeterReading.EOF do begin
-        if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+        //if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+
+        if tblSQLMeterReading.Locate('Acct_no;MR_Date',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingBillPeriod.AsString]),[]) then begin
           //Update
           tblSQLMeterReading.Edit;
           AMR_Sys_No := AMR_Sys_No + 1;
@@ -1904,9 +1906,6 @@ begin
     DriveList := TStringList.Create;
 
     GetDriveLetters(DriveList);
-    if DriveList.Count<0 then begin
-      Exit;
-    end;
     for i:= 0 to DriveList.Count - 1 do
     begin
       DriveName := DriveList.strings[i];

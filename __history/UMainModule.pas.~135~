@@ -318,14 +318,13 @@ type
     tblDBReadingCount_id: TFDAutoIncField;
     tblDBReadingCountBillingPeriod: TWideMemoField;
     tblDBReadingCountReadingCount: TIntegerField;
-    qryMSClientsPrevReadingDateCalc: TStringField;
-    qryMSClientPrevDate: TFDQuery;
-    qryMSClientPrevDatePrevDate: TStringField;
+    qryMSClientsPrevReadingDate: TStringField;
+    tblSQLMeterReadingBillingPeriod: TStringField;
     procedure dsMeterReaderDataChange(Sender: TObject; Field: TField);
     procedure fdGeneratedHistoryCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
-    procedure qryMSClientsCalcFields(DataSet: TDataSet);
+    procedure tblSQLMeterReadingCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -383,14 +382,14 @@ begin
 
 end;
 
-procedure TDMMainModule.qryMSClientsCalcFields(DataSet: TDataSet);
+procedure TDMMainModule.tblSQLMeterReadingCalcFields(DataSet: TDataSet);
+var
+  BillMonth,
+  BillYear:String;
 begin
-   qryMSClientPrevDate.Close;
-   qryMSClientPrevDate.ParamByName('AAccountNumber').AsString := qryMSClientsAcct_No.AsString;
-   qryMSClientPrevDate.Open();
-   qryMSClients.Edit;
-   qryMSClientsPrevReadingDateCalc.AsString := qryMSClientPrevDatePrevDate.AsString;
-   qryMSClients.Post;
+  BillMonth := FormatDateTime('MM',tblSQLMeterReadingMR_Date.AsDateTime);
+  BillYear := FormatDateTime('YYYY',tblSQLMeterReadingMR_Date.AsDateTime);
+  tblSQLMeterReadingBillingPeriod.AsString := BillYear+BillMonth;
 end;
 
 end.

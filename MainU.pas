@@ -777,7 +777,14 @@ begin
       qryPostingMeterReading.First;
       MR_Sys_No_First := AMR_Sys_No;
       while not qryPostingMeterReading.EOF do begin
-        if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+        //if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+        qryMeterReadingCheck.Close;
+        qryMeterReadingCheck.ParamByName('AAccountNumber').AsString := qryPostingMeterReadingAccountNo.AsString;
+        qryMeterReadingCheck.ParamByName('AMonth').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(0,4);
+        qryMeterReadingCheck.ParamByName('AYear').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(4,2);
+        qryMeterReadingCheck.Open();
+
+        if tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]) then begin
           //Update
           tblSQLMeterReading.Edit;
           AMR_Sys_No := AMR_Sys_No + 1;
@@ -1709,9 +1716,10 @@ end;
 procedure TUMainForm.FormActivate(Sender: TObject);
 Var
   I:Integer;
-
+  BillingMonth:String;
 begin
-
+  //BillingMonth := '202309';
+  //ShowMessage(BillingMonth.Substring(0,4) + ' - ' + BillingMonth.Substring(4,2));
   lblProductVersion.Caption := 'Product Activated Version : 1.4.23.2';
   lblExpireDate.Caption := 'Product will Expire In : [06/12/2***]';
 
