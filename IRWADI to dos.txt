@@ -1,0 +1,20 @@
+Before be begin:
+#Install SSMS (SQL Server Management Studio)
+Follow this configuration
+{
+Server Type: Database Engine
+Server name: SERVER-PC
+Authentication: SQL Server Authentication
+	Login : alltech
+	Password: ++alltech or alltech
+or
+	Login : server or sa
+	Password : 
+}
+Step 1: Make sure that the server are accessible to all computer pc.
+	Try to connect the application (IRWADI SOFTWARE) using the windows 11
+	IF it fail's for the IRWADI Software then another solution is to Let it  
+	be any try to Fix the Virtual Box accessible to Each panel using the Mouse.
+Step 2: Test the Application to run and generate data.
+	In Prgression of Testing for each person that they will use.
+Step 3: Demo for MeterReader's and Demo for the Application User's

@@ -10,7 +10,6 @@ object DMMainConnection: TDMMainConnection
   end
   object FDConMSSQL: TFDConnection
     Params.Strings = (
-      'OSAuthent=Yes'
       'ConnectionDef=MSSQL_IWD')
     Left = 96
     Top = 96

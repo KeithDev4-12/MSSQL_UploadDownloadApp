@@ -16,7 +16,8 @@ uses
   UploadDownloadUnit in 'UploadDownloadUnit.pas',
   UMainConnectionModule in 'UMainConnectionModule.pas' {DMMainConnection: TDataModule},
   DeviceDialogU in 'DeviceDialogU.pas' {UDeviceDialog},
-  SchedulingDialogU in 'SchedulingDialogU.pas' {USchedulingDialog};
+  SchedulingDialogU in 'SchedulingDialogU.pas' {USchedulingDialog},
+  MyThreadUnit in 'MyThreadUnit.pas';
 
 {$R *.res}
 

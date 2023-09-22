@@ -24,6 +24,7 @@ object UMainForm: TUMainForm
   StyleElements = [seFont]
   OnActivate = FormActivate
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnMouseDown = FormMouseDown
   OnMouseUp = FormMouseUp
   OnResize = FormResize
@@ -4834,7 +4835,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel1: TscListGroupPanel
               Left = 0
               Top = 0
-              Width = 487
+              Width = 485
               Height = 260
               Align = alTop
               FluentUIOpaque = False
@@ -4857,12 +4858,12 @@ object UMainForm: TUMainForm
               HeaderAutoColor = True
               TransparentBackground = False
               DesignSize = (
-                487
+                485
                 260)
               object scGPPanel10: TscGPPanel
                 Left = 219
                 Top = 37
-                Width = 255
+                Width = 253
                 Height = 215
                 Anchors = [akLeft, akTop, akRight]
                 Font.Charset = DEFAULT_CHARSET
@@ -4911,12 +4912,12 @@ object UMainForm: TUMainForm
                 WallpaperIndex = -1
                 WordWrap = False
                 DesignSize = (
-                  255
+                  253
                   215)
                 object DBGridEh3: TDBGridEh
                   Left = 17
                   Top = 20
-                  Width = 232
+                  Width = 230
                   Height = 163
                   Anchors = [akLeft, akTop, akRight]
                   DataSource = DMMainModule.dsMeterReader
@@ -5001,7 +5002,7 @@ object UMainForm: TUMainForm
                 object Panel39: TPanel
                   Left = 0
                   Top = 189
-                  Width = 255
+                  Width = 253
                   Height = 26
                   Align = alBottom
                   BevelOuter = bvNone
@@ -5009,7 +5010,7 @@ object UMainForm: TUMainForm
                   object SpeedButton10: TSpeedButton
                     Left = 0
                     Top = 0
-                    Width = 255
+                    Width = 253
                     Height = 26
                     Align = alClient
                     Caption = 'Edit Meter Reader'
@@ -5332,7 +5333,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel3: TscListGroupPanel
               Left = 0
               Top = 260
-              Width = 487
+              Width = 485
               Height = 278
               Align = alTop
               FluentUIOpaque = False
@@ -5355,10 +5356,10 @@ object UMainForm: TUMainForm
               HeaderAutoColor = True
               TransparentBackground = False
               DesignSize = (
-                487
+                485
                 278)
               object SpeedButton11: TSpeedButton
-                Left = 404
+                Left = 402
                 Top = 33
                 Width = 70
                 Height = 26
@@ -5404,7 +5405,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 421
               end
               object SpeedButton12: TSpeedButton
-                Left = 404
+                Left = 402
                 Top = 64
                 Width = 70
                 Height = 26
@@ -5450,7 +5451,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 421
               end
               object SpeedButton13: TSpeedButton
-                Left = 404
+                Left = 402
                 Top = 95
                 Width = 70
                 Height = 26
@@ -5496,7 +5497,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 421
               end
               object SpeedButton14: TSpeedButton
-                Left = 404
+                Left = 402
                 Top = 125
                 Width = 70
                 Height = 26
@@ -5542,7 +5543,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 421
               end
               object SpeedButton15: TSpeedButton
-                Left = 404
+                Left = 402
                 Top = 156
                 Width = 70
                 Height = 26
@@ -5588,7 +5589,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 421
               end
               object SpeedButton16: TSpeedButton
-                Left = 404
+                Left = 402
                 Top = 188
                 Width = 70
                 Height = 26
@@ -5634,7 +5635,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 421
               end
               object SpeedButton17: TSpeedButton
-                Left = 404
+                Left = 402
                 Top = 218
                 Width = 70
                 Height = 26
@@ -5680,7 +5681,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 421
               end
               object SpeedButton18: TSpeedButton
-                Left = 404
+                Left = 402
                 Top = 250
                 Width = 70
                 Height = 26
@@ -5726,7 +5727,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 421
               end
               object SpeedButton19: TSpeedButton
-                Left = 380
+                Left = 378
                 Top = 33
                 Width = 23
                 Height = 26
@@ -5771,7 +5772,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 397
               end
               object SpeedButton20: TSpeedButton
-                Left = 380
+                Left = 378
                 Top = 64
                 Width = 23
                 Height = 26
@@ -5816,7 +5817,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 397
               end
               object SpeedButton21: TSpeedButton
-                Left = 380
+                Left = 378
                 Top = 95
                 Width = 23
                 Height = 26
@@ -5861,7 +5862,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 397
               end
               object SpeedButton22: TSpeedButton
-                Left = 380
+                Left = 378
                 Top = 125
                 Width = 23
                 Height = 26
@@ -5906,7 +5907,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 397
               end
               object SpeedButton23: TSpeedButton
-                Left = 380
+                Left = 378
                 Top = 156
                 Width = 23
                 Height = 26
@@ -5951,7 +5952,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 397
               end
               object SpeedButton24: TSpeedButton
-                Left = 380
+                Left = 378
                 Top = 188
                 Width = 23
                 Height = 26
@@ -5996,7 +5997,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 397
               end
               object SpeedButton25: TSpeedButton
-                Left = 380
+                Left = 378
                 Top = 218
                 Width = 23
                 Height = 26
@@ -6041,7 +6042,7 @@ object UMainForm: TUMainForm
                 ExplicitLeft = 397
               end
               object SpeedButton26: TSpeedButton
-                Left = 380
+                Left = 378
                 Top = 250
                 Width = 23
                 Height = 26
@@ -6248,7 +6249,7 @@ object UMainForm: TUMainForm
               object Edit7: TEdit
                 Left = 147
                 Top = 35
-                Width = 224
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6266,7 +6267,7 @@ object UMainForm: TUMainForm
               object Edit8: TEdit
                 Left = 147
                 Top = 66
-                Width = 224
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6284,7 +6285,7 @@ object UMainForm: TUMainForm
               object Edit9: TEdit
                 Left = 147
                 Top = 97
-                Width = 224
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6302,7 +6303,7 @@ object UMainForm: TUMainForm
               object Edit10: TEdit
                 Left = 147
                 Top = 128
-                Width = 224
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6320,7 +6321,7 @@ object UMainForm: TUMainForm
               object Edit11: TEdit
                 Left = 147
                 Top = 159
-                Width = 224
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6338,7 +6339,7 @@ object UMainForm: TUMainForm
               object Edit12: TEdit
                 Left = 147
                 Top = 190
-                Width = 224
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6356,7 +6357,7 @@ object UMainForm: TUMainForm
               object Edit13: TEdit
                 Left = 147
                 Top = 221
-                Width = 224
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6374,7 +6375,7 @@ object UMainForm: TUMainForm
               object Edit14: TEdit
                 Left = 147
                 Top = 251
-                Width = 224
+                Width = 222
                 Height = 22
                 Anchors = [akLeft, akTop, akRight]
                 Enabled = False
@@ -6393,7 +6394,7 @@ object UMainForm: TUMainForm
             object scListGroupPanel2: TscListGroupPanel
               Left = 0
               Top = 538
-              Width = 487
+              Width = 485
               Height = 62
               Align = alBottom
               FluentUIOpaque = False
@@ -6416,10 +6417,10 @@ object UMainForm: TUMainForm
               HeaderAutoColor = True
               TransparentBackground = False
               DesignSize = (
-                487
+                485
                 62)
               object SpeedButton7: TSpeedButton
-                Left = 316
+                Left = 314
                 Top = 22
                 Width = 168
                 Height = 39
@@ -7601,7 +7602,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010B00F801DC0130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010B00F801E80130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

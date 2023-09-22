@@ -14,8 +14,7 @@ uses
   Vcl.OleCtrls, SHDocVw, scWebBrowser, Vcl.DBCtrls, Data.DB, IOUtils, Types,
   VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove,IniFiles,Vcl.Themes,
   Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts,Registry,DateUtils,
-  DemoGuideForm2,FireDAC.Comp.Client;
-
+  DemoGuideForm2,FireDAC.Comp.Client,MyThreadUnit;
 
 type
   TUMainForm = class(TForm)
@@ -380,7 +379,7 @@ type
       var AAction: TFDBatchMoveAction);
     procedure BMSettingsDBWriteValue(ASender: TObject;
       AItem: TFDBatchMoveMappingItem; var AValue: Variant);
-    function ReadIniFiles(AFileName:String):String;
+    procedure ReadIniFiles(AFileName:String);
     function WriteIniFile(AFileName:String):String;
     procedure FormCreate(Sender: TObject);
     procedure scGPComboBox1Change(Sender: TObject);
@@ -445,6 +444,7 @@ type
     procedure DBGridEh6MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure DBGridEh6SelectionChanged(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
       protected
     procedure WMNCHitTest(var Msg: TWMNCHitTest); message WM_NCHITTEST;
 
@@ -453,11 +453,15 @@ type
     Private
       FPanelRegion:HRGN;
       FCompUSB: TComponentUSB;
+      MyThread: TMyThread;
+
        procedure USBArrival(Sender: TObject);
        procedure USBRemoval(Sender: TObject);
        procedure GetDriveLetters(AList: TStrings);
        procedure RefreshDriveComboBox(const aDriveName: char);
        function IsMouseButtonDown(Button: Word): Boolean;
+
+
     Public
       procedure CheckAndroid(AFilterOut:String);
       function isAvailableDevice():Boolean;
@@ -466,11 +470,21 @@ type
       function isADBPushFileToTablet():Boolean;
       function GetDosOutput(CommandLine: string; Work: string = 'C:\Platform-tools\'): String;
 
+
   end;
 
 
 
 var
+  {FileSystemPath}
+  FStyleFormat: String;
+  FADBPath : String;
+  FSQL_DB_MOBILE : String;
+  FSQL_DB_MAIN : String;
+  FMainFolder : String;
+  FDownload : String;
+  FUpload : String;
+  FDriveLetter :String ;
 
   TargetForm: TForm;
   UMainForm: TUMainForm;
@@ -586,7 +600,7 @@ begin
     //Label8.Caption := TCMDPromtUtil.GetResultQuery(CommandPromtUnit.QUERY_ADB_SHELL+CommandPromtUnit.QUERY_ADB_GETPROPERTIES+CommandPromtUnit.QUERY_ADB_DEVICE_NAME);
     //Label10.Caption := TCMDPromtUtil.GetResultQuery(CommandPromtUnit.QUERY_ADB_SHELL+CommandPromtUnit.QUERY_ADB_GETPROPERTIES+CommandPromtUnit.QUERY_ADB_SERIAL);;
 
-    Memo2.Text := GetDosOutput('adb shell ls sdcard/Android/data/com.systems.alltech.jws/files');
+    Memo2.Text := GetDosOutput('adb shell ls sdcard/Android/data/com.systems.alltech.jws/files',FADBPath);
     //ListBox1.Items.Clear;
     //VirtualTable1.Clear;
     //VirtualTable1.Close();
@@ -691,7 +705,7 @@ begin
   //MeterReaderFolder := StringReplace(IntToStr(MRNo) + '-' + StringReplace(StringReplace(scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption,'<','',[]),'>','',[]),' ','_',[rfReplaceAll, rfIgnoreCase]);
 
   MeterReaderFolderName := StringReplace(IntToStr(MRNo) + '-' + StringReplace(StringReplace(scGPComboEdit1.Items[scGPComboEdit1.ItemIndex].Caption,'<','',[]),'>','',[]),' ','_',[rfReplaceAll, rfIgnoreCase]);
-  SourceDBFile := 'D:\IWD_READ_AND_BILL\lwua_upload\'+Trim(Edit2.Text)+'\'+MeterReaderFolderName + '\' + SQLITE_FILE_NAME;
+  SourceDBFile := FDriveLetter+ ':\IWD_READ_AND_BILL\lwua_upload\'+Trim(Edit2.Text)+'\'+MeterReaderFolderName + '\' + SQLITE_FILE_NAME;
   if not TFile.Exists(SourceDBFile) then begin
     MessageDlg('File Cannot be Found Please generate Again!',mtInformation,[mbClose],0);
     Exit;
@@ -764,7 +778,7 @@ end;
 
 function TUMainForm.isPostedToMSSQL(AMR_Sys_No, AMidentity: Integer): Boolean;
 Var
-  MR_Sys_No_First:Integer;
+  MR_Sys_No_First,MR_Sys_No_Second:Integer;
   ADateTimeNew:String;
   RecordCount:Integer;
 begin
@@ -776,26 +790,30 @@ begin
       qryPostingMeterReading.Open;
       qryPostingMeterReading.First;
       MR_Sys_No_First := AMR_Sys_No;
+      MR_Sys_No_Second := AMR_Sys_No;
       while not qryPostingMeterReading.EOF do begin
         //if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
         qryMeterReadingCheck.Close;
         qryMeterReadingCheck.ParamByName('AAccountNumber').AsString := qryPostingMeterReadingAccountNo.AsString;
-        qryMeterReadingCheck.ParamByName('AMonth').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(0,4);
-        qryMeterReadingCheck.ParamByName('AYear').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(4,2);
+        qryMeterReadingCheck.ParamByName('AYear').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(0,4);
+        qryMeterReadingCheck.ParamByName('AMonth').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(4,2);
         qryMeterReadingCheck.Open();
+        qryMeterReadingCheck.First;
+        //ShowMessage(qryMeterReadingCheckAcct_No.AsString  );
 
         //remove OnActivate Processing of Database for optimization
         //if tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]) then begin
         if not qryMeterReadingCheck.IsEmpty then begin
         //Update
+          tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]);
+          MR_Sys_No_Second := MR_Sys_No_Second + 1;
           tblSQLMeterReading.Edit;
-          AMR_Sys_No := AMR_Sys_No + 1;
-          AMidentity := AMidentity + 1;
           tblSQLMeterReadingMR_Sys_No.AsString := tblSQLMeterReadingMR_Sys_No.AsString;
           tblSQLMeterReadingmidentity.AsInteger := tblSQLMeterReadingmidentity.AsInteger ;
         end else begin
           //insert
           tblSQLMeterReading.Append;
+          MR_Sys_No_Second := MR_Sys_No_Second + 1;
           AMR_Sys_No := AMR_Sys_No + 1;
           AMidentity := AMidentity + 1;
           tblSQLMeterReadingMR_Sys_No.AsInteger := AMR_Sys_No ;
@@ -834,16 +852,16 @@ begin
         qryPostingMeterReading.Next;
       end;
 
-      if MR_Sys_No_First = (AMR_Sys_No-qryPostingMeterReading.RecordCount) then begin
+      if MR_Sys_No_First = (MR_Sys_No_Second-qryPostingMeterReading.RecordCount) then begin
         if (RecordCount<>0) then begin
           //Update Record or Insert Record
-          if tblDBReadingCount.Locate('BillingPeriod',tblSettingsBillPeriod.AsString,[]) then begin
+          if tblDBReadingCount.Locate('BillingPeriod',Edit1.Text,[]) then begin
             RecordCount := RecordCount + tblDBReadingCountReadingCount.AsInteger;
             tblDBReadingCount.Edit;
             tblDBReadingCountReadingCount.AsInteger := RecordCount;
           end else begin
             tblDBReadingCount.Append;
-            tblDBReadingCountBillingPeriod.AsString := tblSettingsBillPeriod.AsString;
+            tblDBReadingCountBillingPeriod.AsString := Edit1.Text;
             tblDBReadingCountReadingCount.AsInteger := RecordCount;
           end;
           tblDBReadingCount.Post;
@@ -1722,22 +1740,28 @@ Var
 begin
   //BillingMonth := '202309';
   //ShowMessage(BillingMonth.Substring(0,4) + ' - ' + BillingMonth.Substring(4,2));
+
   lblProductVersion.Caption := 'Product Activated Version : 1.4.23.2';
   lblExpireDate.Caption := 'Product will Expire In : [06/12/2***]';
 
   DoubleBuffered := True;
 
-  AdjustScaling();
+  //ShowMessage(IntToStr(Screen.Width) + 'X' + IntToStr(Screen.Height));
+  //MyThread := TMyThread.Create;
+
 
   with DMMainModule do begin
     tblDBFetched.Close;
     tblDBFetched.Open;
     tblDBFetched.First;
 
+    //tblSQLMeterReading___.Close;
+    //tblSQLMeterReading___.Open;
+    //tblSQLMeterReading___.First;
 
-    //tblSQLMeterReading.Close;
-    //tblSQLMeterReading.Open;
-    //tblSQLMeterReading.First;
+    tblSQLMeterReading.Close;
+    tblSQLMeterReading.Open;
+    tblSQLMeterReading.First;
 
     VTReadingScheduling.Close;
     VTReadingScheduling.Open;
@@ -1831,7 +1855,6 @@ end;
 procedure TUMainForm.FormCreate(Sender: TObject);
 Var
   X : Integer;
-  IniDataValue:String;
   Item: TscGPListBoxItem;
   LatestKey:String;
   TitleText: array[0..255] of Char;
@@ -1839,6 +1862,9 @@ Var
 begin
   LatestKey := CheckRegistryKey('ActivationKey');
   TitleLength := GetWindowText(Application.Handle,TitleText,Length(TitleText));
+
+  ReadIniFiles(ExtractFileDir(ParamStr(0))+'\'+StringReplace(TPath.GetFileName(ExtractFileName(ParamStr(0))),'.exe','.ini',[rfReplaceAll, rfIgnoreCase]));
+
   //ShowMessage(intToStr(Length(TitleText)));
 
   //if activated show pnlActivationStatus
@@ -1849,8 +1875,7 @@ begin
   SpeedButton28.Top := 8;
   // if activated
   SpeedButton28.Top := -30;
-  IniDataValue := ReadIniFiles(ExtractFileDir(ParamStr(0))+'\'+StringReplace(TPath.GetFileName(ExtractFileName(ParamStr(0))),'.exe','.ini',[rfReplaceAll, rfIgnoreCase]));
-
+  
 
   for X := Low(TStyleManager.StyleNames) to High(TStyleManager.StyleNames) do
   begin
@@ -1859,7 +1884,7 @@ begin
   end;
   scGPComboBox1.Sort;
   //scGPComboBox1.InitItemIndex(scGPComboBox1.IndexOfCaption(TStyleManager.ActiveStyle.Name));
-  scGPComboBox1.InitItemIndex(scGPComboBox1.IndexOfCaption(IniDataValue));
+  scGPComboBox1.InitItemIndex(scGPComboBox1.IndexOfCaption(FStyleFormat));
   TStyleManager.SetStyle(scGPComboBox1.Items[scGPComboBox1.ItemIndex].Caption);
   //Change And Save to INI File;
   //TStyleManager.SetStyle(scGPComboBox4.Items[scGPComboBox4.ItemIndex].Caption);
@@ -1874,6 +1899,12 @@ begin
 
 
 
+end;
+
+procedure TUMainForm.FormDestroy(Sender: TObject);
+begin
+  MyThread.Free;
+  Application.FreeOnRelease;
 end;
 
 procedure TUMainForm.FormMouseDown(Sender: TObject; Button: TMouseButton;
@@ -1957,7 +1988,7 @@ end;
 procedure TUMainForm.FormResize(Sender: TObject);
 begin
   //if not IsMouseButtonDown(VK_LBUTTON) then begin
-  Abort;
+    //Abort;
     BorderPanel.Hide;
 
     Timer2.Enabled := True;
@@ -1965,7 +1996,7 @@ begin
 
     if (Self.Width >= (Screen.Width-100)) AND (Self.Height >= (Screen.Height-100)) then begin
       scSplitView1.Animation := False;
-      scSplitView1.Open;
+      //scSplitView1.Open;
       scSplitView1.DisplayMode := scsvmDocked;
       Panel19.Width := Round(Self.Width*0.40);
       Panel48.Width := Round(Self.Width*0.40);
@@ -2023,6 +2054,9 @@ begin
    //Check Activation Key
    scPageViewer1.ActivePage.PageViewer.PageIndex := 0;
    Application.ProcessMessages;
+   //Self.WindowState := wsMaximized;
+   //sleep(200);
+   //Self.WindowState := wsNormal;
 end;
 
 function TUMainForm.getAvaialbeDevice: String;
@@ -2304,7 +2338,7 @@ begin
    end;
 end;
 
-function TUMainForm.ReadIniFiles(AFileName:string) :String;
+procedure TUMainForm.ReadIniFiles(AFileName:string);
 begin
   if not FileExists(AFileName) then
   begin
@@ -2313,6 +2347,13 @@ begin
     try
       // Optionally, you can initialize the file with default values
       IniFile.WriteString('StyleManager', 'FormStyle', 'Windows');
+      IniFile.WriteString('FileSystem', 'ADBPath', 'C:\platform-tools');
+      IniFile.WriteString('FileSystem', 'SQL_DB_MOBILE_PATH', 'C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownloadApp\iwd_lwua.db');
+      IniFile.WriteString('FileSystem', 'SQL_DB_MAIN_PATH', 'C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownloadApp\iwd_main.db');
+      IniFile.WriteString('FileSystem', 'MainFolderPath', 'D:\IWD_READ_AND_BILL');
+      IniFile.WriteString('FileSystem', 'Download', 'lwua_download');
+      IniFile.WriteString('FileSystem', 'Upload', 'lwua_upload');
+      IniFile.WriteString('FileSystem', 'DriveLetter', 'D');
     finally
       IniFile.Free;
     end;
@@ -2322,7 +2363,15 @@ begin
   try
     // Read the value from the specified key in the specified section
     // You can read additional values using the same pattern
-    Result := IniFile.ReadString('StyleManager', 'FormStyle', 'Windows');
+    FStyleFormat := IniFile.ReadString('StyleManager', 'FormStyle', 'Windows');
+    
+    FADBPath := IniFile.ReadString('FileSystem', 'ADBPath', 'C:\platform-tools');
+    FSQL_DB_MOBILE := IniFile.ReadString('FileSystem', 'SQL_DB_MOBILE_PATH', 'C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownloadApp\iwd_lwua.db');
+    FSQL_DB_MAIN := IniFile.ReadString('FileSystem', 'SQL_DB_MAIN_PATH', 'C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownloadApp\iwd_main.db');
+    FMainFolder := IniFile.ReadString('FileSystem', 'MainFolderPath', 'D:\IWD_READ_AND_BILL');
+    FDownload := IniFile.ReadString('FileSystem', 'Download', 'lwua_download');
+    FUpload := IniFile.ReadString('FileSystem', 'Upload', 'lwua_upload');
+    FDriveLetter := IniFile.ReadString('FileSystem', 'DriveLetter', 'D');
   finally
     IniFile.Free;
   end;
@@ -2791,9 +2840,16 @@ begin
     ImageSize := 24;
     ScalingFactor := Screen.Width / 1960;
     ScaleBy(Round(ScalingFactor * 120),100);
-  end else
-  if Screen.Width >= 1200 then begin
+  end else if Screen.Width >= 1200 then begin
     ImageSize := 20;
+  end else if Screen.Width >= 1000 then begin
+    ImageSize := 20;
+    ScalingFactor := Screen.Width / 1000;
+    ScaleBy(Round(ScalingFactor * 100),100);
+  end else begin
+    ImageSize := 20;
+    ScalingFactor := Screen.Width / 800;
+    ScaleBy(Round(ScalingFactor * 80),100);
   end;
 
   scGPVirtualImageList1.DefaultWidth := ImageSize;
@@ -2801,6 +2857,7 @@ begin
   scGPVirtualImageList1.Height := ImageSize;
   scGPVirtualImageList1.Width := ImageSize;
   //;
+
 
 
 end;
@@ -3555,7 +3612,7 @@ begin
 
     // Set the source file path and destination directory
     SourceFile :=  ExtractFileDir(ParamStr(0)) + '\iwd_lwua.db';
-    DestinationPath := 'D:\IWD_READ_AND_BILL\lwua_upload\' + Trim(Edit2.Text) + '\' + MeterReaderFolder;
+    DestinationPath := FDriveLetter+':\IWD_READ_AND_BILL\lwua_upload\' + Trim(Edit2.Text) + '\' + MeterReaderFolder;
     NewNameDB := DestinationPath +  '\iwd_lwua.db';
     // Call the function to copy the file
     CopyFile(SourceFile, DestinationPath);
@@ -3741,7 +3798,7 @@ begin
     Exit;
   end;
 
-  TEMP_FOLDER := 'D:\IWD_READ_AND_BILL\lwua_download\';
+  TEMP_FOLDER := FDriveLetter + ':\IWD_READ_AND_BILL\lwua_download\';
   //TEMP_FOLDER := //TPath.GetTempPath();
   MeterReaderName := scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption;
   if Length(MeterReaderName) = 0 then begin
@@ -4042,6 +4099,13 @@ begin
   try
     NewValue :=  scGPComboBox1.Items[scGPComboBox1.ItemIndex].Caption;
     IniFile.WriteString('StyleManager', 'FormStyle', NewValue);
+
+    IniFile.WriteString('FileSystem', 'ADBPath', 'C:\platform-tools');
+    IniFile.WriteString('FileSystem', 'SQL_DB_MOBILE_PATH', 'C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownloadApp\iwd_lwua.db');
+    IniFile.WriteString('FileSystem', 'SQL_DB_MAIN_PATH', 'C:\Users\CIKGMata\Documents\GitHub\MSSQL_UploadDownloadApp\iwd_main.db');
+    IniFile.WriteString('FileSystem', 'MainFolderPath', 'D:\IWD_READ_AND_BILL');
+    IniFile.WriteString('FileSystem', 'Download', 'lwua_download');
+    IniFile.WriteString('FileSystem', 'Upload', 'lwua_upload');
     // You can write additional key-value pairs in different sections as needed
   finally
     IniFile.Free;
@@ -4059,5 +4123,8 @@ procedure TUMainForm.SpeedButton3Click(Sender: TObject);
 begin
   GetBillMonthNow(Edit15,scGPComboBox3);
 end;
+
+
+
 
 end.

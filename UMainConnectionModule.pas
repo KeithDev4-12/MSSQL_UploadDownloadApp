@@ -14,14 +14,17 @@ type
     FDConSQL: TFDConnection;
     FDConMSSQL: TFDConnection;
     FDConSQLMain: TFDConnection;
+
   private
     { Private declarations }
   public
     { Public declarations }
+    
   end;
 
 var
   DMMainConnection: TDMMainConnection;
+
 
 implementation
 
