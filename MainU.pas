@@ -805,11 +805,11 @@ begin
         //if tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]) then begin
         if not qryMeterReadingCheck.IsEmpty then begin
         //Update
-          tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]);
-          MR_Sys_No_Second := MR_Sys_No_Second + 1;
-          tblSQLMeterReading.Edit;
-          tblSQLMeterReadingMR_Sys_No.AsString := tblSQLMeterReadingMR_Sys_No.AsString;
-          tblSQLMeterReadingmidentity.AsInteger := tblSQLMeterReadingmidentity.AsInteger ;
+          //tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]);
+          //MR_Sys_No_Second := MR_Sys_No_Second + 1;
+          //tblSQLMeterReading.Edit;
+          //tblSQLMeterReadingMR_Sys_No.AsString := tblSQLMeterReadingMR_Sys_No.AsString;
+          //tblSQLMeterReadingmidentity.AsInteger := tblSQLMeterReadingmidentity.AsInteger ;
         end else begin
           //insert
           tblSQLMeterReading.Append;
@@ -819,36 +819,38 @@ begin
           tblSQLMeterReadingMR_Sys_No.AsInteger := AMR_Sys_No ;
           tblSQLMeterReadingmidentity.AsInteger := AMidentity ;
           RecordCount := RecordCount + 1;
-        end;
-        tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
-        tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
-        //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
-        //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
 
-        //tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
-        //tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
+          tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
+          tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
+          //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
+          //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
 
-        tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
-        tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
-        //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
-        tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
-        tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
-        tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
-        tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
-        tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
-        tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
-        tblSQLMeterReadingMR_Status.AsString := '1' ;
-        tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
-        tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
-        tblSQLMeterReadingTime_stamp.AsDateTime := Now();
-        //ShowMessage(DateTimeToStr(Now()));
-        //tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
-        if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
-          tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
-        end else begin
-          tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+          //tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+          //tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
+
+          tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
+          tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+          //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+          tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
+          tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
+          tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
+          tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
+          tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
+          tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
+          tblSQLMeterReadingMR_Status.AsString := '1' ;
+          tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
+          tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
+          tblSQLMeterReadingTime_stamp.AsDateTime := Now();
+          //ShowMessage(DateTimeToStr(Now()));
+          //tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
+          if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
+            tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+          end else begin
+            tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+          end;
+          tblSQLMeterReading.Post;
         end;
-        tblSQLMeterReading.Post;
+
         qryPostingMeterReading.Next;
       end;
 

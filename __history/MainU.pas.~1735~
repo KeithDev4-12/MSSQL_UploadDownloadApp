@@ -14,15 +14,8 @@ uses
   Vcl.OleCtrls, SHDocVw, scWebBrowser, Vcl.DBCtrls, Data.DB, IOUtils, Types,
   VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove,IniFiles,Vcl.Themes,
   Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts,Registry,DateUtils,
-  DemoGuideForm2,FireDAC.Comp.Client;
+  DemoGuideForm2,FireDAC.Comp.Client,MyThreadUnit;
 
-type
-  TMyThread = class(TThread)
-  protected
-    procedure Execute; override;
-  public
-    constructor Create;
-  end;
 type
   TUMainForm = class(TForm)
     scStyleManager1: TscStyleManager;
@@ -451,6 +444,7 @@ type
     procedure DBGridEh6MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure DBGridEh6SelectionChanged(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
       protected
     procedure WMNCHitTest(var Msg: TWMNCHitTest); message WM_NCHITTEST;
 
@@ -459,11 +453,15 @@ type
     Private
       FPanelRegion:HRGN;
       FCompUSB: TComponentUSB;
+      MyThread: TMyThread;
+
        procedure USBArrival(Sender: TObject);
        procedure USBRemoval(Sender: TObject);
        procedure GetDriveLetters(AList: TStrings);
        procedure RefreshDriveComboBox(const aDriveName: char);
        function IsMouseButtonDown(Button: Word): Boolean;
+
+
     Public
       procedure CheckAndroid(AFilterOut:String);
       function isAvailableDevice():Boolean;
@@ -821,36 +819,38 @@ begin
           tblSQLMeterReadingMR_Sys_No.AsInteger := AMR_Sys_No ;
           tblSQLMeterReadingmidentity.AsInteger := AMidentity ;
           RecordCount := RecordCount + 1;
-        end;
-        tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
-        tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
-        //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
-        //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
 
-        //tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
-        //tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
+          tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
+          tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
+          //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
+          //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
 
-        tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
-        tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
-        //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
-        tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
-        tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
-        tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
-        tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
-        tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
-        tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
-        tblSQLMeterReadingMR_Status.AsString := '1' ;
-        tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
-        tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
-        tblSQLMeterReadingTime_stamp.AsDateTime := Now();
-        //ShowMessage(DateTimeToStr(Now()));
-        //tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
-        if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
-          tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
-        end else begin
-          tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+          //tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+          //tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
+
+          tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
+          tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+          //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+          tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
+          tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
+          tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
+          tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
+          tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
+          tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
+          tblSQLMeterReadingMR_Status.AsString := '1' ;
+          tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
+          tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
+          tblSQLMeterReadingTime_stamp.AsDateTime := Now();
+          //ShowMessage(DateTimeToStr(Now()));
+          //tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
+          if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
+            tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+          end else begin
+            tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+          end;
+          tblSQLMeterReading.Post;
         end;
-        tblSQLMeterReading.Post;
+
         qryPostingMeterReading.Next;
       end;
 
@@ -1749,7 +1749,7 @@ begin
   DoubleBuffered := True;
 
   //ShowMessage(IntToStr(Screen.Width) + 'X' + IntToStr(Screen.Height));
-  AdjustScaling();
+  //MyThread := TMyThread.Create;
 
 
   with DMMainModule do begin
@@ -1903,6 +1903,12 @@ begin
 
 end;
 
+procedure TUMainForm.FormDestroy(Sender: TObject);
+begin
+  MyThread.Free;
+  Application.FreeOnRelease;
+end;
+
 procedure TUMainForm.FormMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -2050,9 +2056,9 @@ begin
    //Check Activation Key
    scPageViewer1.ActivePage.PageViewer.PageIndex := 0;
    Application.ProcessMessages;
-   Self.WindowState := wsMaximized;
-   sleep(200);
-   Self.WindowState := wsNormal;
+   //Self.WindowState := wsMaximized;
+   //sleep(200);
+   //Self.WindowState := wsNormal;
 end;
 
 function TUMainForm.getAvaialbeDevice: String;
@@ -4120,17 +4126,7 @@ begin
   GetBillMonthNow(Edit15,scGPComboBox3);
 end;
 
-{ TMyThread }
 
-constructor TMyThread.Create;
-begin
 
-end;
-
-procedure TMyThread.Execute;
-begin
-  inherited Create(False); // Create the thread in suspended mode
-
-end;
 
 end.
