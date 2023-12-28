@@ -805,11 +805,11 @@ begin
         //if tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]) then begin
         if not qryMeterReadingCheck.IsEmpty then begin
         //Update
-          //tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]);
-          //MR_Sys_No_Second := MR_Sys_No_Second + 1;
-          //tblSQLMeterReading.Edit;
-          //tblSQLMeterReadingMR_Sys_No.AsString := tblSQLMeterReadingMR_Sys_No.AsString;
-          //tblSQLMeterReadingmidentity.AsInteger := tblSQLMeterReadingmidentity.AsInteger ;
+          tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]);
+          MR_Sys_No_Second := MR_Sys_No_Second + 1;
+          tblSQLMeterReading.Edit;
+          tblSQLMeterReadingMR_Sys_No.AsString := tblSQLMeterReadingMR_Sys_No.AsString;
+          tblSQLMeterReadingmidentity.AsInteger := tblSQLMeterReadingmidentity.AsInteger ;
         end else begin
           //insert
           tblSQLMeterReading.Append;
@@ -819,6 +819,9 @@ begin
           tblSQLMeterReadingMR_Sys_No.AsInteger := AMR_Sys_No ;
           tblSQLMeterReadingmidentity.AsInteger := AMidentity ;
           RecordCount := RecordCount + 1;
+        end;
+
+        if DaysBetween(qryPostingMeterReadingFirstReadingDate.AsDateTime,Now()) < 1 then begin
 
           tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
           tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
@@ -3956,6 +3959,7 @@ begin
 
 
       end;
+       MessageDlg('Successfully Uploaded Data!',mtInformation,[mbOK],0);
     end;
 
   end;
