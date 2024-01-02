@@ -4,8 +4,8 @@ object UMainForm: TUMainForm
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'UploadDownloadSoftware'
-  ClientHeight = 652
-  ClientWidth = 830
+  ClientHeight = 615
+  ClientWidth = 735
   Color = clBtnFace
   TransparentColor = True
   TransparentColorValue = clYellow
@@ -34,8 +34,8 @@ object UMainForm: TUMainForm
   object BorderPanel: TscGPPanel
     Left = 0
     Top = 0
-    Width = 830
-    Height = 652
+    Width = 735
+    Height = 615
     Align = alClient
     FluentUIOpaque = False
     TabOrder = 0
@@ -78,14 +78,16 @@ object UMainForm: TUMainForm
     Sizeable = True
     WallpaperIndex = -1
     WordWrap = False
+    ExplicitWidth = 830
+    ExplicitHeight = 652
     DesignSize = (
-      830
-      652)
+      735
+      615)
     object BackgroundPanel: TscPanel
       Left = 51
       Top = 1
-      Width = 778
-      Height = 650
+      Width = 683
+      Height = 613
       Align = alClient
       FluentUIOpaque = False
       TabOrder = 2
@@ -109,14 +111,16 @@ object UMainForm: TUMainForm
       Caption = 'BackgroundPanel'
       StorePaintBuffer = False
       WordWrap = False
+      ExplicitWidth = 778
+      ExplicitHeight = 650
       DesignSize = (
-        778
-        650)
+        683
+        613)
       object ClientPanel: TscPanel
         Left = 0
         Top = 0
-        Width = 778
-        Height = 650
+        Width = 683
+        Height = 613
         Align = alClient
         FluentUIOpaque = False
         TabOrder = 0
@@ -140,11 +144,13 @@ object UMainForm: TUMainForm
         Caption = 'ClientPanel'
         StorePaintBuffer = False
         WordWrap = False
+        ExplicitWidth = 778
+        ExplicitHeight = 650
         object scPageViewer1: TscPageViewer
           Left = 0
           Top = 33
-          Width = 778
-          Height = 617
+          Width = 683
+          Height = 580
           Align = alClient
           FluentUIOpaque = False
           TabOrder = 0
@@ -160,11 +166,13 @@ object UMainForm: TUMainForm
               Page = scPVPMeterReadingSchedule
             end>
           ActivePage = scPVPDownloader
+          ExplicitWidth = 778
+          ExplicitHeight = 617
           object scPVPMeterReadingSchedule: TscPageViewerPage
             Left = 0
             Top = 0
-            Width = 778
-            Height = 617
+            Width = 683
+            Height = 580
             HorzScrollBar.Tracking = True
             VertScrollBar.Tracking = True
             Align = alClient
@@ -186,14 +194,18 @@ object UMainForm: TUMainForm
             StorePaintBuffer = False
             MouseWheelSupport = False
             BackgroundStyle = scsbsFormBackground
+            ExplicitWidth = 778
+            ExplicitHeight = 617
             object Panel9: TPanel
               Left = 0
               Top = 0
-              Width = 778
-              Height = 617
+              Width = 683
+              Height = 580
               Align = alClient
               BevelOuter = bvNone
               TabOrder = 0
+              ExplicitWidth = 778
+              ExplicitHeight = 617
               object Label26: TLabel
                 Left = 0
                 Top = 7
@@ -226,8 +238,8 @@ object UMainForm: TUMainForm
                 AlignWithMargins = True
                 Left = 18
                 Top = 60
-                Width = 742
-                Height = 539
+                Width = 647
+                Height = 502
                 Margins.Left = 18
                 Margins.Top = 60
                 Margins.Right = 18
@@ -235,37 +247,44 @@ object UMainForm: TUMainForm
                 Align = alClient
                 BevelOuter = bvNone
                 TabOrder = 0
+                ExplicitWidth = 742
+                ExplicitHeight = 539
                 object Panel46: TPanel
-                  Left = 421
+                  Left = 326
                   Top = 0
                   Width = 18
-                  Height = 539
+                  Height = 502
                   Align = alRight
                   BevelOuter = bvNone
                   TabOrder = 0
+                  ExplicitLeft = 421
+                  ExplicitHeight = 539
                   object Panel47: TPanel
                     Left = 0
                     Top = 0
                     Width = 18
-                    Height = 539
+                    Height = 502
                     Align = alRight
                     BevelOuter = bvNone
                     TabOrder = 0
+                    ExplicitHeight = 539
                   end
                 end
                 object Panel48: TPanel
-                  Left = 439
+                  Left = 344
                   Top = 0
                   Width = 303
-                  Height = 539
+                  Height = 502
                   Align = alRight
                   BevelOuter = bvNone
                   TabOrder = 1
+                  ExplicitLeft = 439
+                  ExplicitHeight = 539
                   object scGPPanel16: TscGPPanel
                     Left = 0
                     Top = 0
                     Width = 303
-                    Height = 539
+                    Height = 502
                     Align = alClient
                     Font.Charset = DEFAULT_CHARSET
                     Font.Color = clWindowText
@@ -312,22 +331,24 @@ object UMainForm: TUMainForm
                     Sizeable = False
                     WallpaperIndex = -1
                     WordWrap = False
+                    ExplicitHeight = 539
                     object Panel50: TPanel
                       Left = 0
                       Top = 55
                       Width = 303
-                      Height = 484
+                      Height = 447
                       Align = alClient
                       BevelOuter = bvNone
                       TabOrder = 0
+                      ExplicitHeight = 484
                       DesignSize = (
                         303
-                        484)
+                        447)
                       object scGPPanel17: TscGPPanel
                         Left = 10
                         Top = 0
                         Width = 283
-                        Height = 475
+                        Height = 438
                         Anchors = [akLeft, akTop, akRight, akBottom]
                         Font.Charset = DEFAULT_CHARSET
                         Font.Color = clWindowText
@@ -374,12 +395,13 @@ object UMainForm: TUMainForm
                         Sizeable = False
                         WallpaperIndex = -1
                         WordWrap = False
+                        ExplicitHeight = 475
                         object DBGridEh5: TDBGridEh
                           AlignWithMargins = True
                           Left = 8
                           Top = 8
                           Width = 267
-                          Height = 459
+                          Height = 422
                           Margins.Left = 8
                           Margins.Top = 8
                           Margins.Right = 8
@@ -494,16 +516,18 @@ object UMainForm: TUMainForm
                 object Panel54: TPanel
                   Left = 0
                   Top = 0
-                  Width = 421
-                  Height = 539
+                  Width = 326
+                  Height = 502
                   Align = alClient
                   BevelOuter = bvNone
                   TabOrder = 2
+                  ExplicitWidth = 421
+                  ExplicitHeight = 539
                   object scGPPanel20: TscGPPanel
                     Left = 0
                     Top = 0
-                    Width = 421
-                    Height = 470
+                    Width = 326
+                    Height = 433
                     Align = alClient
                     Font.Charset = DEFAULT_CHARSET
                     Font.Color = clWindowText
@@ -550,19 +574,22 @@ object UMainForm: TUMainForm
                     Sizeable = False
                     WallpaperIndex = -1
                     WordWrap = False
+                    ExplicitWidth = 421
+                    ExplicitHeight = 470
                     DesignSize = (
-                      421
-                      470)
+                      326
+                      433)
                     object Panel55: TPanel
                       Left = 0
                       Top = 0
-                      Width = 421
+                      Width = 326
                       Height = 84
                       Align = alTop
                       BevelOuter = bvNone
                       TabOrder = 0
+                      ExplicitWidth = 421
                       DesignSize = (
-                        421
+                        326
                         84)
                       object Label30: TLabel
                         Left = 0
@@ -593,14 +620,14 @@ object UMainForm: TUMainForm
                       object Shape3: TShape
                         Left = 14
                         Top = 79
-                        Width = 391
+                        Width = 296
                         Height = 1
                         Anchors = [akLeft, akTop, akRight]
                         Pen.Color = cl3DDkShadow
                         ExplicitWidth = 393
                       end
                       object SpeedButton3: TSpeedButton
-                        Left = 375
+                        Left = 280
                         Top = 48
                         Width = 30
                         Height = 28
@@ -647,7 +674,7 @@ object UMainForm: TUMainForm
                       object Edit15: TEdit
                         Left = 14
                         Top = 42
-                        Width = 355
+                        Width = 260
                         Height = 31
                         Alignment = taCenter
                         Anchors = [akLeft, akTop, akRight]
@@ -665,18 +692,20 @@ object UMainForm: TUMainForm
                         TextHint = '(YYYYMM) | BILLMONTH NOW'
                         OnChange = Edit15Change
                         OnKeyPress = Edit15KeyPress
+                        ExplicitWidth = 355
                       end
                     end
                     object Panel56: TPanel
                       Left = 0
                       Top = 84
-                      Width = 421
+                      Width = 326
                       Height = 91
                       Align = alTop
                       BevelOuter = bvNone
                       TabOrder = 1
+                      ExplicitWidth = 421
                       DesignSize = (
-                        421
+                        326
                         91)
                       object Label32: TLabel
                         Left = 0
@@ -707,7 +736,7 @@ object UMainForm: TUMainForm
                       object scGPComboBox3: TscGPComboBox
                         Left = 14
                         Top = 40
-                        Width = 391
+                        Width = 296
                         Height = 45
                         Anchors = [akLeft, akTop, akRight]
                         Font.Charset = DEFAULT_CHARSET
@@ -875,22 +904,25 @@ object UMainForm: TUMainForm
                         ListBoxOptions.FrameScaleWidth = False
                         MouseWheelSupport = True
                         OnChange = scGPComboBox3Change
+                        ExplicitWidth = 391
                       end
                     end
                     object Panel57: TPanel
                       Left = 0
-                      Top = 433
-                      Width = 421
+                      Top = 396
+                      Width = 326
                       Height = 37
                       Align = alBottom
                       BevelOuter = bvNone
                       Color = clWhite
                       ParentBackground = False
                       TabOrder = 2
+                      ExplicitTop = 433
+                      ExplicitWidth = 421
                       object SpeedButton27: TSpeedButton
                         Left = 0
                         Top = 0
-                        Width = 421
+                        Width = 326
                         Height = 36
                         Align = alClient
                         Caption = 'Save Reading Schedule'
@@ -952,7 +984,7 @@ object UMainForm: TUMainForm
                       object Shape7: TShape
                         Left = 0
                         Top = 36
-                        Width = 421
+                        Width = 326
                         Height = 1
                         Align = alBottom
                         Pen.Color = cl3DDkShadow
@@ -964,8 +996,8 @@ object UMainForm: TUMainForm
                     object DBGridEh6: TDBGridEh
                       Left = 14
                       Top = 176
-                      Width = 391
-                      Height = 252
+                      Width = 296
+                      Height = 215
                       Anchors = [akLeft, akTop, akRight, akBottom]
                       DataSource = DSVTReadingSchedule
                       DynProps = <>
@@ -1059,17 +1091,19 @@ object UMainForm: TUMainForm
                   end
                   object Panel58: TPanel
                     Left = 0
-                    Top = 470
-                    Width = 421
+                    Top = 433
+                    Width = 326
                     Height = 17
                     Align = alBottom
                     BevelOuter = bvNone
                     TabOrder = 1
+                    ExplicitTop = 470
+                    ExplicitWidth = 421
                   end
                   object scGPPanel21: TscGPPanel
                     Left = 0
-                    Top = 487
-                    Width = 421
+                    Top = 450
+                    Width = 326
                     Height = 52
                     Align = alBottom
                     Font.Charset = DEFAULT_CHARSET
@@ -1117,6 +1151,8 @@ object UMainForm: TUMainForm
                     Sizeable = False
                     WallpaperIndex = -1
                     WordWrap = False
+                    ExplicitTop = 487
+                    ExplicitWidth = 421
                     object Label34: TLabel
                       Left = 0
                       Top = 0
@@ -1134,7 +1170,7 @@ object UMainForm: TUMainForm
                       AlignWithMargins = True
                       Left = 7
                       Top = 15
-                      Width = 407
+                      Width = 312
                       Height = 30
                       Margins.Left = 7
                       Margins.Top = 15
@@ -1143,6 +1179,7 @@ object UMainForm: TUMainForm
                       Align = alClient
                       BevelOuter = bvNone
                       TabOrder = 0
+                      ExplicitWidth = 407
                       object Label36: TLabel
                         Left = 9
                         Top = 1
@@ -1173,8 +1210,8 @@ object UMainForm: TUMainForm
           object scPVPUploader: TscPageViewerPage
             Left = 0
             Top = 0
-            Width = 778
-            Height = 617
+            Width = 683
+            Height = 580
             HorzScrollBar.Tracking = True
             VertScrollBar.Tracking = True
             Align = alClient
@@ -1197,14 +1234,18 @@ object UMainForm: TUMainForm
             StorePaintBuffer = False
             MouseWheelSupport = False
             BackgroundStyle = scsbsFormBackground
+            ExplicitWidth = 778
+            ExplicitHeight = 617
             object Panel1: TPanel
               Left = 0
               Top = 0
-              Width = 778
-              Height = 617
+              Width = 683
+              Height = 580
               Align = alClient
               BevelOuter = bvNone
               TabOrder = 0
+              ExplicitWidth = 778
+              ExplicitHeight = 617
               object Label3: TLabel
                 Left = 0
                 Top = 7
@@ -1237,8 +1278,8 @@ object UMainForm: TUMainForm
                 AlignWithMargins = True
                 Left = 18
                 Top = 60
-                Width = 742
-                Height = 539
+                Width = 647
+                Height = 502
                 Margins.Left = 18
                 Margins.Top = 60
                 Margins.Right = 18
@@ -1246,36 +1287,44 @@ object UMainForm: TUMainForm
                 Align = alClient
                 BevelOuter = bvNone
                 TabOrder = 0
+                ExplicitWidth = 742
+                ExplicitHeight = 539
                 object Panel11: TPanel
                   Left = 0
                   Top = 0
-                  Width = 742
-                  Height = 539
+                  Width = 647
+                  Height = 502
                   Align = alClient
                   BevelOuter = bvNone
                   TabOrder = 0
+                  ExplicitWidth = 742
+                  ExplicitHeight = 539
                   object Panel4: TPanel
-                    Left = 421
+                    Left = 326
                     Top = 0
                     Width = 18
-                    Height = 539
+                    Height = 502
                     Align = alRight
                     BevelOuter = bvNone
                     TabOrder = 0
+                    ExplicitLeft = 421
+                    ExplicitHeight = 539
                   end
                   object Panel21: TPanel
-                    Left = 439
+                    Left = 344
                     Top = 0
                     Width = 303
-                    Height = 539
+                    Height = 502
                     Align = alRight
                     BevelOuter = bvNone
                     TabOrder = 1
+                    ExplicitLeft = 439
+                    ExplicitHeight = 539
                     object scGPPnlRightTop: TscGPPanel
                       Left = 0
                       Top = 0
                       Width = 303
-                      Height = 359
+                      Height = 322
                       Align = alClient
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clWindowText
@@ -1322,6 +1371,7 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
+                      ExplicitHeight = 359
                       object Panel3: TPanel
                         Left = 0
                         Top = 0
@@ -1377,19 +1427,20 @@ object UMainForm: TUMainForm
                         Left = 0
                         Top = 152
                         Width = 303
-                        Height = 207
+                        Height = 170
                         Align = alBottom
                         Anchors = [akLeft, akTop, akRight, akBottom]
                         BevelOuter = bvNone
                         TabOrder = 1
+                        ExplicitHeight = 207
                         DesignSize = (
                           303
-                          207)
+                          170)
                         object scGPPanel6: TscGPPanel
                           Left = 10
                           Top = 0
                           Width = 283
-                          Height = 198
+                          Height = 161
                           Anchors = [akLeft, akTop, akRight, akBottom]
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clWindowText
@@ -1436,17 +1487,19 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
+                          ExplicitHeight = 198
                           DesignSize = (
                             283
-                            198)
+                            161)
                           object Panel16: TPanel
                             Left = 16
                             Top = 11
                             Width = 250
-                            Height = 600
+                            Height = 563
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             BevelOuter = bvNone
                             TabOrder = 0
+                            ExplicitHeight = 600
                             object Label1: TLabel
                               Left = 0
                               Top = 0
@@ -1466,7 +1519,7 @@ object UMainForm: TUMainForm
                             Left = 264
                             Top = 0
                             Width = 19
-                            Height = 198
+                            Height = 161
                             Align = alRight
                             Kind = sbVertical
                             Max = 600
@@ -1474,13 +1527,14 @@ object UMainForm: TUMainForm
                             TabOrder = 1
                             TabStop = False
                             OnChange = scScrollBar1Change
+                            ExplicitHeight = 198
                           end
                         end
                       end
                     end
                     object scGPPnlRightBottom: TscGPPanel
                       Left = 0
-                      Top = 376
+                      Top = 339
                       Width = 303
                       Height = 163
                       Align = alBottom
@@ -1529,6 +1583,7 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
+                      ExplicitTop = 376
                       object Panel27: TPanel
                         Left = 0
                         Top = 0
@@ -1722,27 +1777,30 @@ object UMainForm: TUMainForm
                     end
                     object Panel24: TPanel
                       Left = 0
-                      Top = 359
+                      Top = 322
                       Width = 303
                       Height = 17
                       Align = alBottom
                       BevelOuter = bvNone
                       TabOrder = 2
+                      ExplicitTop = 359
                     end
                   end
                   object Panel2: TPanel
                     Left = 0
                     Top = 0
-                    Width = 421
-                    Height = 539
+                    Width = 326
+                    Height = 502
                     Align = alClient
                     BevelOuter = bvNone
                     TabOrder = 2
+                    ExplicitWidth = 421
+                    ExplicitHeight = 539
                     object scGPPanel5: TscGPPanel
                       Left = 0
                       Top = 0
-                      Width = 421
-                      Height = 359
+                      Width = 326
+                      Height = 322
                       Align = alClient
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clWindowText
@@ -1789,19 +1847,22 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
+                      ExplicitWidth = 421
+                      ExplicitHeight = 359
                       DesignSize = (
-                        421
-                        359)
+                        326
+                        322)
                       object Panel12: TPanel
                         Left = 0
                         Top = 0
-                        Width = 421
+                        Width = 326
                         Height = 84
                         Align = alTop
                         BevelOuter = bvNone
                         TabOrder = 0
+                        ExplicitWidth = 421
                         DesignSize = (
-                          421
+                          326
                           84)
                         object Label2: TLabel
                           Left = 0
@@ -1832,14 +1893,14 @@ object UMainForm: TUMainForm
                         object Shape4: TShape
                           Left = 14
                           Top = 79
-                          Width = 391
+                          Width = 296
                           Height = 1
                           Anchors = [akLeft, akTop, akRight]
                           Pen.Color = cl3DDkShadow
                           ExplicitWidth = 393
                         end
                         object SpeedButton1: TSpeedButton
-                          Left = 375
+                          Left = 280
                           Top = 48
                           Width = 30
                           Height = 28
@@ -1886,7 +1947,7 @@ object UMainForm: TUMainForm
                         object Edit2: TEdit
                           Left = 14
                           Top = 42
-                          Width = 355
+                          Width = 260
                           Height = 31
                           Alignment = taCenter
                           Anchors = [akLeft, akTop, akRight]
@@ -1904,18 +1965,20 @@ object UMainForm: TUMainForm
                           TextHint = '(YYYYMM) | BILLMONTH NOW'
                           OnChange = Edit2Change
                           OnKeyPress = Edit2KeyPress
+                          ExplicitWidth = 355
                         end
                       end
                       object Panel18: TPanel
                         Left = 0
                         Top = 84
-                        Width = 421
+                        Width = 326
                         Height = 91
                         Align = alTop
                         BevelOuter = bvNone
                         TabOrder = 1
+                        ExplicitWidth = 421
                         DesignSize = (
-                          421
+                          326
                           91)
                         object Label6: TLabel
                           Left = 0
@@ -1946,7 +2009,7 @@ object UMainForm: TUMainForm
                         object scGPComboEdit1: TscGPComboBox
                           Left = 14
                           Top = 40
-                          Width = 391
+                          Width = 296
                           Height = 45
                           Anchors = [akLeft, akTop, akRight]
                           Font.Charset = DEFAULT_CHARSET
@@ -2114,22 +2177,25 @@ object UMainForm: TUMainForm
                           ListBoxOptions.FrameScaleWidth = False
                           MouseWheelSupport = True
                           OnChange = scGPComboEdit1Change
+                          ExplicitWidth = 391
                         end
                       end
                       object Panel20: TPanel
                         Left = 0
-                        Top = 322
-                        Width = 421
+                        Top = 285
+                        Width = 326
                         Height = 37
                         Align = alBottom
                         BevelOuter = bvNone
                         Color = clWhite
                         ParentBackground = False
                         TabOrder = 2
+                        ExplicitTop = 322
+                        ExplicitWidth = 421
                         object SpeedButton2: TSpeedButton
                           Left = 0
                           Top = 0
-                          Width = 421
+                          Width = 326
                           Height = 36
                           Align = alClient
                           Caption = 'Generate Reading Data'
@@ -2191,7 +2257,7 @@ object UMainForm: TUMainForm
                         object Shape2: TShape
                           Left = 0
                           Top = 36
-                          Width = 421
+                          Width = 326
                           Height = 1
                           Align = alBottom
                           Pen.Color = cl3DDkShadow
@@ -2203,8 +2269,8 @@ object UMainForm: TUMainForm
                       object DBGridEh1: TDBGridEh
                         Left = 14
                         Top = 176
-                        Width = 391
-                        Height = 140
+                        Width = 296
+                        Height = 103
                         Anchors = [akLeft, akTop, akRight, akBottom]
                         DataSource = DSMeterReaderSchedule
                         DynProps = <>
@@ -2285,17 +2351,19 @@ object UMainForm: TUMainForm
                     end
                     object Panel7: TPanel
                       Left = 0
-                      Top = 359
-                      Width = 421
+                      Top = 322
+                      Width = 326
                       Height = 17
                       Align = alBottom
                       BevelOuter = bvNone
                       TabOrder = 1
+                      ExplicitTop = 359
+                      ExplicitWidth = 421
                     end
                     object scGPPanel1: TscGPPanel
                       Left = 0
-                      Top = 376
-                      Width = 421
+                      Top = 339
+                      Width = 326
                       Height = 163
                       Align = alBottom
                       Font.Charset = DEFAULT_CHARSET
@@ -2343,11 +2411,13 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
+                      ExplicitTop = 376
+                      ExplicitWidth = 421
                       object Panel6: TPanel
                         AlignWithMargins = True
                         Left = 0
                         Top = 0
-                        Width = 421
+                        Width = 326
                         Height = 156
                         Margins.Left = 0
                         Margins.Top = 0
@@ -2356,8 +2426,9 @@ object UMainForm: TUMainForm
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
+                        ExplicitWidth = 421
                         DesignSize = (
-                          421
+                          326
                           156)
                         object Label9: TLabel
                           Left = -1
@@ -2375,7 +2446,7 @@ object UMainForm: TUMainForm
                         object scGPPanel3: TscGPPanel
                           Left = 10
                           Top = 30
-                          Width = 400
+                          Width = 305
                           Height = 124
                           Anchors = [akLeft, akTop, akRight, akBottom]
                           Font.Charset = DEFAULT_CHARSET
@@ -2423,13 +2494,14 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
+                          ExplicitWidth = 400
                           DesignSize = (
-                            400
+                            305
                             124)
                           object DBGridEh2: TDBGridEh
                             Left = 9
                             Top = 9
-                            Width = 382
+                            Width = 287
                             Height = 105
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             DataSource = DSDBPushed
@@ -2500,7 +2572,7 @@ object UMainForm: TUMainForm
                           end
                         end
                         object scGPSwitch6: TscGPSwitch
-                          Left = 364
+                          Left = 269
                           Top = 4
                           Width = 42
                           Height = 20
@@ -2528,6 +2600,7 @@ object UMainForm: TUMainForm
                           FrameOnSolid = False
                           FrameInside = False
                           OnChangeState = scGPSwitch6ChangeState
+                          ExplicitLeft = 364
                         end
                       end
                     end
@@ -2539,8 +2612,8 @@ object UMainForm: TUMainForm
           object scPVPDownloader: TscPageViewerPage
             Left = 0
             Top = 0
-            Width = 778
-            Height = 617
+            Width = 683
+            Height = 580
             HorzScrollBar.Tracking = True
             VertScrollBar.Tracking = True
             Align = alClient
@@ -2562,14 +2635,18 @@ object UMainForm: TUMainForm
             StorePaintBuffer = False
             MouseWheelSupport = False
             BackgroundStyle = scsbsFormBackground
+            ExplicitWidth = 778
+            ExplicitHeight = 617
             object Panel10: TPanel
               Left = 0
               Top = 0
-              Width = 778
-              Height = 617
+              Width = 683
+              Height = 580
               Align = alClient
               BevelOuter = bvNone
               TabOrder = 0
+              ExplicitWidth = 778
+              ExplicitHeight = 617
               object Label11: TLabel
                 Left = 0
                 Top = 7
@@ -2602,8 +2679,8 @@ object UMainForm: TUMainForm
                 AlignWithMargins = True
                 Left = 18
                 Top = 60
-                Width = 742
-                Height = 539
+                Width = 647
+                Height = 502
                 Margins.Left = 18
                 Margins.Top = 60
                 Margins.Right = 18
@@ -2611,36 +2688,44 @@ object UMainForm: TUMainForm
                 Align = alClient
                 BevelOuter = bvNone
                 TabOrder = 0
+                ExplicitWidth = 742
+                ExplicitHeight = 539
                 object Panel14: TPanel
                   Left = 0
                   Top = 0
-                  Width = 742
-                  Height = 539
+                  Width = 647
+                  Height = 502
                   Align = alClient
                   BevelOuter = bvNone
                   TabOrder = 0
+                  ExplicitWidth = 742
+                  ExplicitHeight = 539
                   object Panel15: TPanel
-                    Left = 421
+                    Left = 326
                     Top = 0
                     Width = 18
-                    Height = 539
+                    Height = 502
                     Align = alRight
                     BevelOuter = bvNone
                     TabOrder = 0
+                    ExplicitLeft = 421
+                    ExplicitHeight = 539
                   end
                   object Panel19: TPanel
-                    Left = 439
+                    Left = 344
                     Top = 0
                     Width = 303
-                    Height = 539
+                    Height = 502
                     Align = alRight
                     BevelOuter = bvNone
                     TabOrder = 1
+                    ExplicitLeft = 439
+                    ExplicitHeight = 539
                     object scGPPanel7: TscGPPanel
                       Left = 0
                       Top = 0
                       Width = 303
-                      Height = 396
+                      Height = 408
                       Align = alClient
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clWindowText
@@ -2687,6 +2772,7 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
+                      ExplicitHeight = 396
                       object Panel23: TPanel
                         Left = 0
                         Top = 0
@@ -2742,19 +2828,20 @@ object UMainForm: TUMainForm
                         Left = 0
                         Top = 152
                         Width = 303
-                        Height = 244
+                        Height = 256
                         Align = alBottom
                         Anchors = [akLeft, akTop, akRight, akBottom]
                         BevelOuter = bvNone
                         TabOrder = 1
+                        ExplicitHeight = 244
                         DesignSize = (
                           303
-                          244)
+                          256)
                         object scGPPanel8: TscGPPanel
                           Left = 10
                           Top = 0
                           Width = 283
-                          Height = 235
+                          Height = 247
                           Anchors = [akLeft, akTop, akRight, akBottom]
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clWindowText
@@ -2801,17 +2888,19 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
+                          ExplicitHeight = 235
                           DesignSize = (
                             283
-                            235)
+                            247)
                           object Panel26: TPanel
                             Left = 16
                             Top = 11
                             Width = 250
-                            Height = 637
+                            Height = 649
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             BevelOuter = bvNone
                             TabOrder = 0
+                            ExplicitHeight = 637
                             object Label13: TLabel
                               Left = 0
                               Top = 0
@@ -2831,7 +2920,7 @@ object UMainForm: TUMainForm
                             Left = 264
                             Top = 0
                             Width = 19
-                            Height = 235
+                            Height = 247
                             Align = alRight
                             Kind = sbVertical
                             Max = 600
@@ -2839,15 +2928,16 @@ object UMainForm: TUMainForm
                             TabOrder = 1
                             TabStop = False
                             OnChange = scScrollBar1Change
+                            ExplicitHeight = 235
                           end
                         end
                       end
                     end
                     object scGPPanel9: TscGPPanel
                       Left = 0
-                      Top = 413
+                      Top = 425
                       Width = 303
-                      Height = 126
+                      Height = 77
                       Align = alBottom
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clWindowText
@@ -2894,11 +2984,12 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
+                      ExplicitTop = 424
                       object Panel28: TPanel
                         Left = 0
                         Top = 0
                         Width = 303
-                        Height = 126
+                        Height = 77
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
@@ -2917,42 +3008,42 @@ object UMainForm: TUMainForm
                         end
                         object Label25: TLabel
                           Left = 22
-                          Top = 76
-                          Width = 58
+                          Top = 52
+                          Width = 63
                           Height = 24
                           Alignment = taCenter
-                          Caption = 'DEVICE NOT'#13'FOUND!!!'
+                          Caption = 'DEVICE '#13'NOT FOUND!!!'
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clWindowText
-                          Font.Height = -10
+                          Font.Height = -9
                           Font.Name = 'Segoe UI'
                           Font.Style = [fsBold]
                           ParentFont = False
                         end
                         object Label37: TLabel
-                          Left = 213
-                          Top = 71
-                          Width = 76
+                          Left = 216
+                          Top = 53
+                          Width = 71
                           Height = 24
                           Alignment = taCenter
-                          Caption = 'CONNECTED '#13'TO THIS DEVICE'
+                          Caption = 'CONNECTED TO '#13'THIS DEVICE'
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clWindowText
-                          Font.Height = -10
+                          Font.Height = -9
                           Font.Name = 'Segoe UI'
                           Font.Style = [fsBold]
                           ParentFont = False
                         end
                         object Label40: TLabel
-                          Left = 101
-                          Top = 76
-                          Width = 99
-                          Height = 36
+                          Left = 105
+                          Top = 53
+                          Width = 92
+                          Height = 25
                           Alignment = taCenter
-                          Caption = 'FETCHED '#13'YESTERDAY '#13'{LESS THAN 2 DAYS}'
+                          Caption = 'FETCHED YESTERDAY '#13'{LESS THAN 2 DAYS}'
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clWindowText
-                          Font.Height = -10
+                          Font.Height = -9
                           Font.Name = 'Segoe UI'
                           Font.Style = [fsBold]
                           ParentFont = False
@@ -2973,9 +3064,9 @@ object UMainForm: TUMainForm
                         end
                         object Panel40: TPanel
                           Left = 36
-                          Top = 39
-                          Width = 30
-                          Height = 30
+                          Top = 26
+                          Width = 25
+                          Height = 25
                           BevelKind = bkFlat
                           BevelOuter = bvNone
                           Color = clWhite
@@ -2983,10 +3074,10 @@ object UMainForm: TUMainForm
                           TabOrder = 0
                         end
                         object Panel42: TPanel
-                          Left = 235
-                          Top = 39
-                          Width = 30
-                          Height = 30
+                          Left = 239
+                          Top = 26
+                          Width = 25
+                          Height = 25
                           BevelKind = bkFlat
                           BevelOuter = bvNone
                           Color = 7855479
@@ -3004,10 +3095,10 @@ object UMainForm: TUMainForm
                           TabOrder = 2
                         end
                         object Panel51: TPanel
-                          Left = 136
-                          Top = 39
-                          Width = 30
-                          Height = 30
+                          Left = 137
+                          Top = 26
+                          Width = 25
+                          Height = 25
                           BevelKind = bkFlat
                           BevelOuter = bvNone
                           Color = clHighlight
@@ -3018,27 +3109,30 @@ object UMainForm: TUMainForm
                     end
                     object Panel29: TPanel
                       Left = 0
-                      Top = 396
+                      Top = 408
                       Width = 303
                       Height = 17
                       Align = alBottom
                       BevelOuter = bvNone
                       TabOrder = 2
+                      ExplicitTop = 396
                     end
                   end
                   object Panel30: TPanel
                     Left = 0
                     Top = 0
-                    Width = 421
-                    Height = 539
+                    Width = 326
+                    Height = 502
                     Align = alClient
                     BevelOuter = bvNone
                     TabOrder = 2
+                    ExplicitWidth = 421
+                    ExplicitHeight = 539
                     object scGPPanel12: TscGPPanel
                       Left = 0
                       Top = 0
-                      Width = 421
-                      Height = 225
+                      Width = 326
+                      Height = 218
                       Align = alClient
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clWindowText
@@ -3085,16 +3179,19 @@ object UMainForm: TUMainForm
                       Sizeable = False
                       WallpaperIndex = -1
                       WordWrap = False
+                      ExplicitHeight = 239
                       object Panel31: TPanel
                         Left = 0
                         Top = 0
-                        Width = 421
+                        Width = 326
                         Height = 84
                         Align = alTop
                         BevelOuter = bvNone
                         TabOrder = 0
+                        ExplicitLeft = -6
+                        ExplicitTop = -5
                         DesignSize = (
-                          421
+                          326
                           84)
                         object Label15: TLabel
                           Left = 0
@@ -3125,14 +3222,14 @@ object UMainForm: TUMainForm
                         object Shape1: TShape
                           Left = 14
                           Top = 79
-                          Width = 391
+                          Width = 296
                           Height = 1
                           Anchors = [akLeft, akTop, akRight]
                           Pen.Color = cl3DDkShadow
                           ExplicitWidth = 393
                         end
                         object SpeedButton4: TSpeedButton
-                          Left = 375
+                          Left = 280
                           Top = 48
                           Width = 30
                           Height = 28
@@ -3179,7 +3276,7 @@ object UMainForm: TUMainForm
                         object Edit1: TEdit
                           Left = 14
                           Top = 42
-                          Width = 355
+                          Width = 260
                           Height = 31
                           Alignment = taCenter
                           Anchors = [akLeft, akTop, akRight]
@@ -3197,18 +3294,20 @@ object UMainForm: TUMainForm
                           TextHint = '(YYYYMM) | BILLMONTH NOW'
                           OnChange = Edit1Change
                           OnKeyPress = Edit1KeyPress
+                          ExplicitWidth = 355
                         end
                       end
                       object Panel32: TPanel
                         Left = 0
                         Top = 84
-                        Width = 421
+                        Width = 326
                         Height = 91
                         Align = alTop
                         BevelOuter = bvNone
                         TabOrder = 1
+                        ExplicitWidth = 421
                         DesignSize = (
-                          421
+                          326
                           91)
                         object Label17: TLabel
                           Left = 0
@@ -3239,7 +3338,7 @@ object UMainForm: TUMainForm
                         object scGPComboBox2: TscGPComboBox
                           Left = 14
                           Top = 40
-                          Width = 391
+                          Width = 296
                           Height = 45
                           Anchors = [akLeft, akTop, akRight]
                           Font.Charset = DEFAULT_CHARSET
@@ -3407,22 +3506,25 @@ object UMainForm: TUMainForm
                           ListBoxOptions.FrameScaleWidth = False
                           MouseWheelSupport = True
                           OnChange = scGPComboBox2Change
+                          ExplicitWidth = 391
                         end
                       end
                       object Panel33: TPanel
                         Left = 0
-                        Top = 188
-                        Width = 421
+                        Top = 181
+                        Width = 326
                         Height = 37
                         Align = alBottom
                         BevelOuter = bvNone
                         Color = clWhite
                         ParentBackground = False
                         TabOrder = 2
+                        ExplicitTop = 188
+                        ExplicitWidth = 421
                         object SpeedButton5: TSpeedButton
                           Left = 0
                           Top = 0
-                          Width = 421
+                          Width = 326
                           Height = 36
                           Align = alClient
                           Caption = 'Download Reading / Fetch Data'
@@ -3485,7 +3587,7 @@ object UMainForm: TUMainForm
                         object Shape5: TShape
                           Left = 0
                           Top = 36
-                          Width = 421
+                          Width = 326
                           Height = 1
                           Align = alBottom
                           Pen.Color = cl3DDkShadow
@@ -3497,18 +3599,20 @@ object UMainForm: TUMainForm
                     end
                     object Panel34: TPanel
                       Left = 0
-                      Top = 225
-                      Width = 421
+                      Top = 218
+                      Width = 326
                       Height = 17
                       Align = alBottom
                       BevelOuter = bvNone
                       TabOrder = 1
+                      ExplicitTop = 225
+                      ExplicitWidth = 421
                     end
                     object scGPPanel14: TscGPPanel
                       Left = 0
-                      Top = 242
-                      Width = 421
-                      Height = 297
+                      Top = 235
+                      Width = 326
+                      Height = 267
                       Align = alBottom
                       Font.Charset = DEFAULT_CHARSET
                       Font.Color = clWindowText
@@ -3558,14 +3662,16 @@ object UMainForm: TUMainForm
                       object Panel35: TPanel
                         Left = 0
                         Top = 0
-                        Width = 421
-                        Height = 297
+                        Width = 326
+                        Height = 267
                         Align = alClient
                         BevelOuter = bvNone
                         TabOrder = 0
+                        ExplicitTop = 76
+                        ExplicitHeight = 221
                         DesignSize = (
-                          421
-                          297)
+                          326
+                          267)
                         object Label24: TLabel
                           Left = -1
                           Top = 7
@@ -3582,10 +3688,10 @@ object UMainForm: TUMainForm
                           ParentFont = False
                         end
                         object scGPPanel15: TscGPPanel
-                          Left = 10
-                          Top = 30
-                          Width = 400
-                          Height = 264
+                          Left = 15
+                          Top = 25
+                          Width = 304
+                          Height = 233
                           Anchors = [akLeft, akTop, akRight, akBottom]
                           Font.Charset = DEFAULT_CHARSET
                           Font.Color = clWindowText
@@ -3632,14 +3738,15 @@ object UMainForm: TUMainForm
                           Sizeable = False
                           WallpaperIndex = -1
                           WordWrap = False
+                          ExplicitHeight = 212
                           DesignSize = (
-                            400
-                            264)
+                            304
+                            233)
                           object DBGridEh7: TDBGridEh
                             Left = 9
                             Top = 24
-                            Width = 382
-                            Height = 202
+                            Width = 286
+                            Height = 171
                             Anchors = [akLeft, akTop, akRight, akBottom]
                             DataSource = DSVirtualFetch
                             DynProps = <>
@@ -3720,18 +3827,20 @@ object UMainForm: TUMainForm
                           end
                           object Panel37: TPanel
                             Left = 0
-                            Top = 234
-                            Width = 400
+                            Top = 203
+                            Width = 304
                             Height = 30
                             Align = alBottom
                             BevelOuter = bvNone
                             Color = clWhite
                             ParentBackground = False
                             TabOrder = 1
+                            ExplicitTop = 234
+                            ExplicitWidth = 400
                             object Shape6: TShape
                               Left = 0
                               Top = 29
-                              Width = 400
+                              Width = 304
                               Height = 1
                               Align = alBottom
                               Pen.Color = cl3DDkShadow
@@ -3741,7 +3850,7 @@ object UMainForm: TUMainForm
                             object SpeedButton6: TSpeedButton
                               Left = 0
                               Top = 0
-                              Width = 400
+                              Width = 304
                               Height = 29
                               Align = alClient
                               Caption = 'Refresh Record'
@@ -4018,7 +4127,7 @@ object UMainForm: TUMainForm
         object scGPPanel2: TscGPPanel
           Left = 0
           Top = 0
-          Width = 778
+          Width = 683
           Height = 33
           Align = alTop
           FluentUIOpaque = False
@@ -4061,9 +4170,10 @@ object UMainForm: TUMainForm
           Sizeable = False
           WallpaperIndex = -1
           WordWrap = False
+          ExplicitWidth = 778
           object CloseButton: TscGPGlyphButton
             AlignWithMargins = True
-            Left = 733
+            Left = 638
             Top = 0
             Width = 45
             Height = 29
@@ -4179,10 +4289,11 @@ object UMainForm: TUMainForm
             GroupIndex = 0
             AllowAllUp = False
             ToggleMode = False
+            ExplicitLeft = 733
           end
           object MinButton: TscGPGlyphButton
             AlignWithMargins = True
-            Left = 643
+            Left = 548
             Top = 0
             Width = 45
             Height = 29
@@ -4298,11 +4409,12 @@ object UMainForm: TUMainForm
             GroupIndex = 0
             AllowAllUp = False
             ToggleMode = False
+            ExplicitLeft = 643
           end
           object CaptionLabel: TscLabel
             Left = 0
             Top = 0
-            Width = 643
+            Width = 548
             Height = 33
             Margins.Left = 0
             Margins.Top = 0
@@ -4336,10 +4448,11 @@ object UMainForm: TUMainForm
             ShowEllipsis = True
             UseFontColorToStyleColor = True
             Caption = 'Irosin Water District | Uploader && Downloader Software'
+            ExplicitWidth = 643
           end
           object MaxButton: TscGPGlyphButton
             AlignWithMargins = True
-            Left = 688
+            Left = 593
             Top = 0
             Width = 45
             Height = 29
@@ -4455,6 +4568,7 @@ object UMainForm: TUMainForm
             GroupIndex = 0
             AllowAllUp = False
             ToggleMode = False
+            ExplicitLeft = 688
           end
         end
       end
@@ -4462,7 +4576,7 @@ object UMainForm: TUMainForm
         Left = 0
         Top = 0
         Width = 0
-        Height = 650
+        Height = 613
         Anchors = [akLeft, akTop, akBottom]
         Enabled = False
         FluentUIOpaque = False
@@ -4505,11 +4619,12 @@ object UMainForm: TUMainForm
         HideControls = False
         Animation = True
         DisplayMode = scsvmOverlay
+        ExplicitHeight = 650
         object scPanel2: TscPanel
           Left = -250
           Top = 0
           Width = 250
-          Height = 650
+          Height = 613
           Align = alRight
           FluentUIOpaque = False
           TabOrder = 0
@@ -4533,6 +4648,7 @@ object UMainForm: TUMainForm
           Caption = 'scPanel2'
           StorePaintBuffer = False
           WordWrap = False
+          ExplicitHeight = 650
           object scLabel7: TscLabel
             Left = 38
             Top = 38
@@ -4744,7 +4860,7 @@ object UMainForm: TUMainForm
         Left = 0
         Top = 0
         Width = 0
-        Height = 650
+        Height = 613
         Anchors = [akLeft, akTop, akBottom]
         Enabled = False
         FluentUIOpaque = False
@@ -4787,11 +4903,12 @@ object UMainForm: TUMainForm
         HideControls = False
         Animation = True
         DisplayMode = scsvmOverlay
+        ExplicitHeight = 650
         object scPanel3: TscPanel
           Left = 0
           Top = 0
           Width = 504
-          Height = 650
+          Height = 613
           Align = alClient
           FluentUIOpaque = False
           TabOrder = 0
@@ -4815,11 +4932,12 @@ object UMainForm: TUMainForm
           Caption = 'scPanel3'
           StorePaintBuffer = False
           WordWrap = False
+          ExplicitHeight = 650
           object scScrollBox1: TscScrollBox
             Left = 0
             Top = 51
             Width = 504
-            Height = 599
+            Height = 562
             HorzScrollBar.Tracking = True
             VertScrollBar.Tracking = True
             Align = alClient
@@ -4832,6 +4950,7 @@ object UMainForm: TUMainForm
             StorePaintBuffer = False
             MouseWheelSupport = False
             BackgroundStyle = scsbsPanel
+            ExplicitHeight = 599
             object scListGroupPanel1: TscListGroupPanel
               Left = 0
               Top = 0
@@ -6575,7 +6694,7 @@ object UMainForm: TUMainForm
       Left = 1
       Top = 1
       Width = 50
-      Height = 650
+      Height = 613
       Anchors = [akLeft, akTop, akBottom]
       DockSite = True
       FluentUIOpaque = False
@@ -6621,6 +6740,7 @@ object UMainForm: TUMainForm
       HideControls = False
       Animation = True
       DisplayMode = scsvmOverlay
+      ExplicitHeight = 650
       object Label10: TLabel
         Left = 120
         Top = 202
@@ -6922,7 +7042,7 @@ object UMainForm: TUMainForm
       end
       object scButton1: TscButton
         Left = 0
-        Top = 610
+        Top = 573
         Width = 50
         Height = 40
         Align = alBottom
@@ -7014,6 +7134,7 @@ object UMainForm: TUMainForm
         GroupIndex = 0
         AllowAllUp = False
         WordWrap = False
+        ExplicitTop = 610
       end
       object scGPSwitch1: TscGPSwitch
         Left = 57
@@ -7047,7 +7168,7 @@ object UMainForm: TUMainForm
       end
       object scButton4: TscButton
         Left = 0
-        Top = 570
+        Top = 533
         Width = 50
         Height = 40
         Align = alBottom
@@ -7139,6 +7260,7 @@ object UMainForm: TUMainForm
         GroupIndex = 0
         AllowAllUp = False
         WordWrap = False
+        ExplicitTop = 570
       end
       object scButton5: TscButton
         Left = 0
@@ -7502,8 +7624,8 @@ object UMainForm: TUMainForm
     StylesMenuSorted = False
     ShowStylesMenu = False
     StylesMenuCaption = 'Styles'
-    ClientWidth = 830
-    ClientHeight = 652
+    ClientWidth = 735
+    ClientHeight = 615
     ShowHints = True
     Buttons = <
       item
@@ -7602,7 +7724,7 @@ object UMainForm: TUMainForm
     Left = 8
     Top = 334
     Bitmap = {
-      494C01010B00F801EC0130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C01010B00F801F00130003000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C000000090000000010020000000000000B0
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
