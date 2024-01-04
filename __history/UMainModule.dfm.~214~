@@ -1822,10 +1822,10 @@ object DMMainModule: TDMMainModule
       Origin = 'MRNo'
     end
   end
-  object tblSQLMeterReading: TFDTable
+  object tblSQLMeterReading___: TFDTable
     IndexFieldNames = 'MR_Sys_No'
     Connection = DMMainConnection.FDConMSSQL
-    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.AssignedValues = [evMode, evItems, evDetailCascade]
     FetchOptions.Mode = fmAll
     FetchOptions.Items = [fiMeta]
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
@@ -1839,105 +1839,105 @@ object DMMainModule: TDMMainModule
     UpdateOptions.UpdateTableName = 'Mtr_Reading'
     TableName = 'Mtr_Reading'
     Left = 928
-    Top = 184
-    object tblSQLMeterReadingMR_Sys_No: TStringField
+    Top = 152
+    object tblSQLMeterReading___MR_Sys_No: TStringField
       FieldName = 'MR_Sys_No'
       Origin = 'MR_Sys_No'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 18
     end
-    object tblSQLMeterReadingAcct_No: TStringField
+    object tblSQLMeterReading___Acct_No: TStringField
       FieldName = 'Acct_No'
       Origin = 'Acct_No'
       Required = True
       Size = 12
     end
-    object tblSQLMeterReadingMtr_No: TStringField
+    object tblSQLMeterReading___Mtr_No: TStringField
       FieldName = 'Mtr_No'
       Origin = 'Mtr_No'
       Required = True
       Size = 15
     end
-    object tblSQLMeterReadingPrevMR_Date: TSQLTimeStampField
+    object tblSQLMeterReading___PrevMR_Date: TSQLTimeStampField
       FieldName = 'PrevMR_Date'
       Origin = 'PrevMR_Date'
       Required = True
     end
-    object tblSQLMeterReadingMR_Date: TSQLTimeStampField
+    object tblSQLMeterReading___MR_Date: TSQLTimeStampField
       FieldName = 'MR_Date'
       Origin = 'MR_Date'
       Required = True
     end
-    object tblSQLMeterReadingPrev_Rdg: TBCDField
+    object tblSQLMeterReading___Prev_Rdg: TBCDField
       FieldName = 'Prev_Rdg'
       Origin = 'Prev_Rdg'
       Required = True
       Precision = 18
       Size = 0
     end
-    object tblSQLMeterReadingCur_Rdg: TBCDField
+    object tblSQLMeterReading___Cur_Rdg: TBCDField
       FieldName = 'Cur_Rdg'
       Origin = 'Cur_Rdg'
       Required = True
       Precision = 18
       Size = 0
     end
-    object tblSQLMeterReadingCur_Consumption: TBCDField
+    object tblSQLMeterReading___Cur_Consumption: TBCDField
       FieldName = 'Cur_Consumption'
       Origin = 'Cur_Consumption'
       Required = True
       Precision = 18
       Size = 0
     end
-    object tblSQLMeterReadingRdg_Adj: TBCDField
+    object tblSQLMeterReading___Rdg_Adj: TBCDField
       FieldName = 'Rdg_Adj'
       Origin = 'Rdg_Adj'
       Required = True
       Precision = 18
       Size = 0
     end
-    object tblSQLMeterReadingChngdMtr_Adj: TBCDField
+    object tblSQLMeterReading___ChngdMtr_Adj: TBCDField
       FieldName = 'ChngdMtr_Adj'
       Origin = 'ChngdMtr_Adj'
       Required = True
       Precision = 18
       Size = 0
     end
-    object tblSQLMeterReadingChngdMtr_Cons: TBCDField
+    object tblSQLMeterReading___ChngdMtr_Cons: TBCDField
       FieldName = 'ChngdMtr_Cons'
       Origin = 'ChngdMtr_Cons'
       Required = True
       Precision = 18
       Size = 0
     end
-    object tblSQLMeterReadingMR_Status: TStringField
+    object tblSQLMeterReading___MR_Status: TStringField
       FieldName = 'MR_Status'
       Origin = 'MR_Status'
       Required = True
       FixedChar = True
       Size = 1
     end
-    object tblSQLMeterReadingRemarks: TStringField
+    object tblSQLMeterReading___Remarks: TStringField
       FieldName = 'Remarks'
       Origin = 'Remarks'
       Size = 50
     end
-    object tblSQLMeterReadingEmp_ID: TStringField
+    object tblSQLMeterReading___Emp_ID: TStringField
       FieldName = 'Emp_ID'
       Origin = 'Emp_ID'
       Size = 7
     end
-    object tblSQLMeterReadingTime_stamp: TSQLTimeStampField
+    object tblSQLMeterReading___Time_stamp: TSQLTimeStampField
       FieldName = 'Time_stamp'
       Origin = 'Time_stamp'
     end
-    object tblSQLMeterReadingUser_ID: TStringField
+    object tblSQLMeterReading___User_ID: TStringField
       FieldName = 'User_ID'
       Origin = 'User_ID'
       Size = 7
     end
-    object tblSQLMeterReadingmidentity: TFDAutoIncField
+    object tblSQLMeterReading___midentity: TFDAutoIncField
       FieldName = 'midentity'
       Origin = 'midentity'
       ReadOnly = True
@@ -2346,6 +2346,9 @@ object DMMainModule: TDMMainModule
   end
   object qryMeterReadingCheck: TFDQuery
     Connection = DMMainConnection.FDConMSSQL
+    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.Mode = fmAll
+    FetchOptions.Items = [fiMeta]
     SQL.Strings = (
       'SELECT '
       '  * '
@@ -2363,19 +2366,19 @@ object DMMainModule: TDMMainModule
         Name = 'AACCOUNTNUMBER'
         DataType = ftWideString
         ParamType = ptInput
-        Value = '1'
+        Value = '2011204551'
       end
       item
         Name = 'AYEAR'
         DataType = ftWideString
         ParamType = ptInput
-        Value = '1'
+        Value = '2023'
       end
       item
         Name = 'AMONTH'
         DataType = ftWideString
         ParamType = ptInput
-        Value = '1'
+        Value = '09'
       end>
     object qryMeterReadingCheckMR_Sys_No: TStringField
       FieldName = 'MR_Sys_No'
@@ -2475,6 +2478,135 @@ object DMMainModule: TDMMainModule
       Size = 7
     end
     object qryMeterReadingCheckmidentity: TFDAutoIncField
+      FieldName = 'midentity'
+      Origin = 'midentity'
+      ReadOnly = True
+    end
+  end
+  object tblSQLMeterReading: TFDQuery
+    IndexesActive = False
+    IndexFieldNames = 'MR_Sys_No'
+    Connection = DMMainConnection.FDConMSSQL
+    FetchOptions.AssignedValues = [evMode, evItems, evDetailCascade]
+    FetchOptions.Mode = fmAll
+    FetchOptions.Items = [fiMeta]
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.UpdateChangedFields = False
+    UpdateOptions.LockWait = True
+    UpdateOptions.RefreshMode = rmManual
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    UpdateOptions.UpdateTableName = 'Mtr_Reading'
+    SQL.Strings = (
+      'SELECT '
+      '  * '
+      'FROM '
+      '  Mtr_Reading '
+      '-- WHERE '
+      '--  YEAR(MR_Date) = YEAR(GETDATE()) '
+      '-- ORDER BY midentity')
+    Left = 920
+    Top = 216
+    object tblSQLMeterReadingMR_Sys_No: TStringField
+      FieldName = 'MR_Sys_No'
+      Origin = 'MR_Sys_No'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 18
+    end
+    object tblSQLMeterReadingAcct_No: TStringField
+      FieldName = 'Acct_No'
+      Origin = 'Acct_No'
+      Required = True
+      Size = 12
+    end
+    object tblSQLMeterReadingMtr_No: TStringField
+      FieldName = 'Mtr_No'
+      Origin = 'Mtr_No'
+      Required = True
+      Size = 15
+    end
+    object tblSQLMeterReadingPrevMR_Date: TSQLTimeStampField
+      FieldName = 'PrevMR_Date'
+      Origin = 'PrevMR_Date'
+      Required = True
+    end
+    object tblSQLMeterReadingMR_Date: TSQLTimeStampField
+      FieldName = 'MR_Date'
+      Origin = 'MR_Date'
+      Required = True
+    end
+    object tblSQLMeterReadingPrev_Rdg: TBCDField
+      FieldName = 'Prev_Rdg'
+      Origin = 'Prev_Rdg'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object tblSQLMeterReadingCur_Rdg: TBCDField
+      FieldName = 'Cur_Rdg'
+      Origin = 'Cur_Rdg'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object tblSQLMeterReadingCur_Consumption: TBCDField
+      FieldName = 'Cur_Consumption'
+      Origin = 'Cur_Consumption'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object tblSQLMeterReadingRdg_Adj: TBCDField
+      FieldName = 'Rdg_Adj'
+      Origin = 'Rdg_Adj'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object tblSQLMeterReadingChngdMtr_Adj: TBCDField
+      FieldName = 'ChngdMtr_Adj'
+      Origin = 'ChngdMtr_Adj'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object tblSQLMeterReadingChngdMtr_Cons: TBCDField
+      FieldName = 'ChngdMtr_Cons'
+      Origin = 'ChngdMtr_Cons'
+      Required = True
+      Precision = 18
+      Size = 0
+    end
+    object tblSQLMeterReadingMR_Status: TStringField
+      FieldName = 'MR_Status'
+      Origin = 'MR_Status'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object tblSQLMeterReadingRemarks: TStringField
+      FieldName = 'Remarks'
+      Origin = 'Remarks'
+      Size = 50
+    end
+    object tblSQLMeterReadingEmp_ID: TStringField
+      FieldName = 'Emp_ID'
+      Origin = 'Emp_ID'
+      Size = 7
+    end
+    object tblSQLMeterReadingTime_stamp: TSQLTimeStampField
+      FieldName = 'Time_stamp'
+      Origin = 'Time_stamp'
+    end
+    object tblSQLMeterReadingUser_ID: TStringField
+      FieldName = 'User_ID'
+      Origin = 'User_ID'
+      Size = 7
+    end
+    object tblSQLMeterReadingmidentity: TFDAutoIncField
       FieldName = 'midentity'
       Origin = 'midentity'
       ReadOnly = True

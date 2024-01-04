@@ -14,7 +14,7 @@ uses
   Vcl.OleCtrls, SHDocVw, scWebBrowser, Vcl.DBCtrls, Data.DB, IOUtils, Types,
   VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove,IniFiles,Vcl.Themes,
   Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts,Registry,DateUtils,
-  DemoGuideForm2,FireDAC.Comp.Client,MyThreadUnit, DateUtils;
+  DemoGuideForm2,FireDAC.Comp.Client,MyThreadUnit;
 
 type
   TUMainForm = class(TForm)
@@ -417,9 +417,10 @@ type
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
     procedure DeleteMeterReader1Click(Sender: TObject);
     procedure RefreshRecords1Click(Sender: TObject);
-       function isLessThan2Days(AVal:TDateTime):Boolean;
-       function isPostedToMSSQL(AMR_Sys_No,AMidentity:Integer):Boolean;
-       function GetDateTimeFromSQLite(AVal:String):String;
+    function isLessThan2Days(AVal:TDateTime):Boolean;
+    function isPostedToMSSQL(AMR_Sys_No,AMidentity:Integer):Boolean;
+    function isPostedToMSSQL_V2(AMR_Sys_No,AMidentity:Integer):Boolean;
+    function GetDateTimeFromSQLite(AVal:String):String;
     procedure Edit15KeyPress(Sender: TObject; var Key: Char);
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
     procedure Edit2KeyPress(Sender: TObject; var Key: Char);
@@ -820,38 +821,40 @@ begin
           tblSQLMeterReadingmidentity.AsInteger := AMidentity ;
           RecordCount := RecordCount + 1;
         end;
-                   DaysDiff := DaysBetween(Date2.Date, Date1.Date);
-        if (DaysBetween(qryPostingMeterReadingFirstReadingDate.AsDateTime,Now()) then
 
-        tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
-        tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
-        //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
-        //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+        if DaysBetween(qryPostingMeterReadingFirstReadingDate.AsDateTime,Now()) < 1 then begin
 
-        //tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
-        //tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
+          tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
+          tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
+          //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
+          //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
 
-        tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
-        tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
-        //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
-        tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
-        tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
-        tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
-        tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
-        tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
-        tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
-        tblSQLMeterReadingMR_Status.AsString := '1' ;
-        tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
-        tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
-        tblSQLMeterReadingTime_stamp.AsDateTime := Now();
-        //ShowMessage(DateTimeToStr(Now()));
-        //tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
-        if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
-          tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
-        end else begin
-          tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+          //tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+          //tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
+
+          tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
+          tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+          //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+          tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
+          tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
+          tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
+          tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
+          tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
+          tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
+          tblSQLMeterReadingMR_Status.AsString := '1' ;
+          tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
+          tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
+          tblSQLMeterReadingTime_stamp.AsDateTime := Now();
+          //ShowMessage(DateTimeToStr(Now()));
+          //tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
+          if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
+            tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+          end else begin
+            tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+          end;
+          tblSQLMeterReading.Post;
         end;
-        tblSQLMeterReading.Post;
+
         qryPostingMeterReading.Next;
       end;
 
@@ -876,6 +879,113 @@ begin
     finally
       tblSQLMeterReading.Cancel;
 
+    end;
+  end;
+end;
+
+function TUMainForm.isPostedToMSSQL_V2(AMR_Sys_No,
+  AMidentity: Integer): Boolean;
+Var
+  MR_Sys_No_First,MR_Sys_No_Second:Integer;
+  ADateTimeNew:String;
+  RecordCount:Integer;
+begin
+  with DMMainModule do begin
+    try
+      ADateTimeNew := '';
+      RecordCount := 0;
+      qryPostingMeterReading.Close;
+      qryPostingMeterReading.Open;
+      qryPostingMeterReading.First;
+      MR_Sys_No_First := AMR_Sys_No;
+      MR_Sys_No_Second := AMR_Sys_No;
+      while not qryPostingMeterReading.EOF do begin
+        //if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
+        qryMeterReadingCheck.Close;
+        qryMeterReadingCheck.ParamByName('AAccountNumber').AsString := qryPostingMeterReadingAccountNo.AsString;
+        qryMeterReadingCheck.ParamByName('AYear').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(0,4);
+        qryMeterReadingCheck.ParamByName('AMonth').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(4,2);
+        qryMeterReadingCheck.Open();
+        qryMeterReadingCheck.First;
+        //ShowMessage(qryMeterReadingCheckAcct_No.AsString  );
+
+        //remove OnActivate Processing of Database for optimization
+        //if tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]) then begin
+          if DaysBetween(qryPostingMeterReadingFirstReadingDate.AsDateTime,Now()) <= 1 then begin
+
+            if not qryMeterReadingCheck.IsEmpty then begin
+            //Update
+              tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]);
+              MR_Sys_No_Second := MR_Sys_No_Second + 1;
+              tblSQLMeterReading.Edit;
+              tblSQLMeterReadingMR_Sys_No.AsString := tblSQLMeterReadingMR_Sys_No.AsString;
+              tblSQLMeterReadingmidentity.AsInteger := tblSQLMeterReadingmidentity.AsInteger ;
+            end else begin
+              //insert
+              tblSQLMeterReading.Append;
+              MR_Sys_No_Second := MR_Sys_No_Second + 1;
+              AMR_Sys_No := AMR_Sys_No + 1;
+              AMidentity := AMidentity + 1;
+              tblSQLMeterReadingMR_Sys_No.AsInteger := AMR_Sys_No ;
+              tblSQLMeterReadingmidentity.AsInteger := AMidentity ;
+              RecordCount := RecordCount + 1;
+            end;
+
+
+            tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
+            tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
+            //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
+            //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+
+            //tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+            //tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
+
+            tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
+            tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+            //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+            tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
+            tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
+            tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
+            tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
+            tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
+            tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
+            tblSQLMeterReadingMR_Status.AsString := '1' ;
+            tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
+            tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
+            tblSQLMeterReadingTime_stamp.AsDateTime := Now();
+            //ShowMessage(DateTimeToStr(Now()));
+            //tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
+            if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
+              tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+            end else begin
+              tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+            end;
+            tblSQLMeterReading.Post;
+          end;
+
+        qryPostingMeterReading.Next;
+      end;
+
+      if MR_Sys_No_First = (MR_Sys_No_Second-qryPostingMeterReading.RecordCount) then begin
+        if (RecordCount<>0) then begin
+          //Update Record or Insert Record
+          if tblDBReadingCount.Locate('BillingPeriod',Edit1.Text,[]) then begin
+            RecordCount := RecordCount + tblDBReadingCountReadingCount.AsInteger;
+            tblDBReadingCount.Edit;
+            tblDBReadingCountReadingCount.AsInteger := RecordCount;
+          end else begin
+            tblDBReadingCount.Append;
+            tblDBReadingCountBillingPeriod.AsString := Edit1.Text;
+            tblDBReadingCountReadingCount.AsInteger := RecordCount;
+          end;
+          tblDBReadingCount.Post;
+        end;
+        result := true;
+      end else begin
+        result := false;
+      end;
+    finally
+      tblSQLMeterReading.Cancel;
     end;
   end;
 end;
@@ -2004,7 +2114,7 @@ begin
       Panel19.Width := Round(Self.Width*0.40);
       Panel48.Width := Round(Self.Width*0.40);
       Panel21.Width := Round(Self.Width*0.40);
-      scGPPanel14.Height := Round(Self.Height*0.55);
+      scGPPanel14.Height := Round(Self.Height*0.45);
       scSplitViewSettings.OpenedWidth := Round(Self.Width*0.50);
     end else begin
       scSplitView1.Close;
@@ -2013,7 +2123,7 @@ begin
       Panel19.Width := Round(Self.Width*0.40); //303;
       Panel48.Width := Round(Self.Width*0.40); //303;
       Panel21.Width := Round(Self.Width*0.40); //303;
-      scGPPanel14.Height := Round(Self.Height*0.50); //297;
+      scGPPanel14.Height := Round(Self.Height*0.45); //297 267;
       scSplitViewSettings.OpenedWidth := Round(Self.Width*0.80);
     end;
 
@@ -2089,7 +2199,7 @@ begin
     ABillMonth := SplitString( ADateString,'-')[0];
   end else begin
     if StrToInt(AMonth) = 1 then begin
-      ABillMonth := SplitString( ADateString,'-')[0].Substring(0,4)+'12' ;
+      ABillMonth := IntToStr(Inc(StrToInt(SplitString(ADateString,'-')[0].Substring(0,4)),-1)) + '12' ;
     end else begin
       if StrToInt(AMonth)-1 >= 10 then begin
         ABillMonth := SplitString( ADateString,'-')[0].Substring(0,4)+IntToStr(StrToInt(AMonth)-1) ;
@@ -3901,7 +4011,7 @@ begin
       if UpperCase(scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption).Contains(UpperCase(qryDetailsMeterReadingMeterReadername.AsString)) then begin
         // process the posting of data if selected and tablet are compatible
         // save to dbfetched
-        if isPostedToMSSQL(MR_Sys_No,midentity) then begin
+        if isPostedToMSSQL_V2(MR_Sys_No,midentity) then begin
            // post dbfetched!!!
            if tblDBFetched.Locate('BillPeriod;DateFetched;MeterReaderName',VarArrayOf([trim(Edit1.Text),FormatDateTime('MM/DD/YYYY',Now()),scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption]),[]) then begin
               tblDBFetched.Edit;
@@ -3928,7 +4038,7 @@ begin
         #13#10 + '{Note: Overriding Will be getting the DB File and Post it!}',mtWarning,[mbOK,mbCancel],0) = mrOk then begin
           // get the data and post it to mssql
           // save to dbfetched
-          if isPostedToMSSQL(MR_Sys_No,midentity) then begin
+          if isPostedToMSSQL_V2(MR_Sys_No,midentity) then begin
             // post dbfetched!!!
              if tblDBFetched.Locate('BillPeriod;DateFetched;MeterReaderName',VarArrayOf([trim(Edit1.Text),FormatDateTime('MM/DD/YYYY',Now()),scGPComboBox2.Items[scGPComboBox2.ItemIndex].Caption]),[]) then begin
                 tblDBFetched.Edit;
@@ -3957,6 +4067,7 @@ begin
 
 
       end;
+       MessageDlg('Successfully Uploaded Data!',mtInformation,[mbOK],0);
     end;
 
   end;
