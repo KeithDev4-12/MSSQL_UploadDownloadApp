@@ -206,8 +206,8 @@ object DMMainModule: TDMMainModule
       ''
       
         '(SELECT isNULL(SUM(Amount),0) from [BILLINGCOLLECTION].[dbo].[Le' +
-        'dgers] L where L.[Acct_No] = C.[Acct_No] and'
-      ' Ref_Code  in (09)) AS OtherPayable '
+        'dgers] L where L.[Acct_No] = C.[Acct_No]) AS OtherPayable -- Oth' +
+        'er Payable should be only for Other Payables'
       '      ,C.[C_TelNo] AS MobileNo'
       #9'  ,C.[C_PenExempt] AS PenaltyExempt       '
       '  FROM [BillingCollection].[dbo].[Clients] C'
@@ -216,6 +216,7 @@ object DMMainModule: TDMMainModule
         'No'
       ' WHERE '
       'Zone_No = :AZoneCode'
+      'and Acct_no = '#39'0711200851'#39
       '')
     Left = 80
     Top = 8
@@ -224,7 +225,7 @@ object DMMainModule: TDMMainModule
         Name = 'AZONECODE'
         DataType = ftWideString
         ParamType = ptInput
-        Value = '051'
+        Value = '071'
       end>
     object qryMSClientsAcct_No: TStringField
       FieldName = 'Acct_No'
