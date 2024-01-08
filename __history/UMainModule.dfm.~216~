@@ -1574,8 +1574,8 @@ object DMMainModule: TDMMainModule
       '  FROM [BillingCollection].[dbo].[Clients] c '
       'WHERE c.Zone_no = z.ZoneID) <> 0'
       'ORDER BY ZoneCode,Count Desc')
-    Left = 736
-    Top = 504
+    Left = 744
+    Top = 464
     object qryMSZoneCodeZoneCode: TStringField
       FieldName = 'ZoneCode'
       Origin = 'ZoneID'
@@ -1825,7 +1825,7 @@ object DMMainModule: TDMMainModule
   object tblSQLMeterReading___: TFDTable
     IndexFieldNames = 'MR_Sys_No'
     Connection = DMMainConnection.FDConMSSQL
-    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.AssignedValues = [evMode, evItems, evDetailCascade]
     FetchOptions.Mode = fmAll
     FetchOptions.Items = [fiMeta]
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
@@ -1997,7 +1997,9 @@ object DMMainModule: TDMMainModule
       'CAST(FirstReadingDate as VarChar) As FirstReadingDate, '
       'SeniorDiscountAmount'
       ' FROM MeterReading'
-      ' ')
+      
+        ' where UploadedDate = replace(ltrim(strftime('#39'%m/%d/%Y'#39','#39'now'#39', '#39 +
+        'localtime'#39'),'#39'0'#39'),'#39'/0'#39','#39'/'#39') ')
     Left = 904
     Top = 488
     object qryPostingMeterReading_id: TFDAutoIncField
@@ -2346,6 +2348,9 @@ object DMMainModule: TDMMainModule
   end
   object qryMeterReadingCheck: TFDQuery
     Connection = DMMainConnection.FDConMSSQL
+    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.Mode = fmAll
+    FetchOptions.Items = [fiMeta]
     SQL.Strings = (
       'SELECT '
       '  * '
@@ -2363,19 +2368,19 @@ object DMMainModule: TDMMainModule
         Name = 'AACCOUNTNUMBER'
         DataType = ftWideString
         ParamType = ptInput
-        Value = '1'
+        Value = '2011204551'
       end
       item
         Name = 'AYEAR'
         DataType = ftWideString
         ParamType = ptInput
-        Value = '1'
+        Value = '2023'
       end
       item
         Name = 'AMONTH'
         DataType = ftWideString
         ParamType = ptInput
-        Value = '1'
+        Value = '09'
       end>
     object qryMeterReadingCheckMR_Sys_No: TStringField
       FieldName = 'MR_Sys_No'
@@ -2481,11 +2486,21 @@ object DMMainModule: TDMMainModule
     end
   end
   object tblSQLMeterReading: TFDQuery
+    IndexesActive = False
     IndexFieldNames = 'MR_Sys_No'
     Connection = DMMainConnection.FDConMSSQL
-    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.AssignedValues = [evMode, evItems, evDetailCascade]
     FetchOptions.Mode = fmAll
     FetchOptions.Items = [fiMeta]
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.UpdateChangedFields = False
+    UpdateOptions.LockWait = True
+    UpdateOptions.RefreshMode = rmManual
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    UpdateOptions.UpdateTableName = 'Mtr_Reading'
     SQL.Strings = (
       'SELECT '
       '  * '
@@ -2494,7 +2509,7 @@ object DMMainModule: TDMMainModule
       '-- WHERE '
       '--  YEAR(MR_Date) = YEAR(GETDATE()) '
       '-- ORDER BY midentity')
-    Left = 928
+    Left = 920
     Top = 216
     object tblSQLMeterReadingMR_Sys_No: TStringField
       FieldName = 'MR_Sys_No'

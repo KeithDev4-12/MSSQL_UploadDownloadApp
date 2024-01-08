@@ -14,7 +14,7 @@ uses
   Vcl.OleCtrls, SHDocVw, scWebBrowser, Vcl.DBCtrls, Data.DB, IOUtils, Types,
   VirtualTable, MemDS, FireDAC.Stan.Intf, FireDAC.Comp.BatchMove,IniFiles,Vcl.Themes,
   Vcl.Menus,StrUtils,CommandPromtUnit,U_Usb, Vcl.FileCtrl, Vcl.AppEvnts,Registry,DateUtils,
-  DemoGuideForm2,FireDAC.Comp.Client,MyThreadUnit,DateUtils;
+  DemoGuideForm2,FireDAC.Comp.Client,MyThreadUnit;
 
 type
   TUMainForm = class(TForm)
@@ -298,6 +298,20 @@ type
     N2: TMenuItem;
     ContinueTransferringSQLFile1: TMenuItem;
     scButton8: TscButton;
+    Panel17: TPanel;
+    Label38: TLabel;
+    Label39: TLabel;
+    scGPComboBox4: TscGPComboBox;
+    SpeedButton29: TSpeedButton;
+    DBGridEh8: TDBGridEh;
+    vtRouteSelected: TVirtualTable;
+    vtRouteSelected_id: TAutoIncField;
+    vtRouteSelectedZoneCode: TWideStringField;
+    vtRouteSelectedZoneName: TWideStringField;
+    vtRouteSelectedReadingStartDate: TWideStringField;
+    vtRouteSelectedTotalReadingDays: TWideStringField;
+    vtRouteSelectedBillPeriod: TWideStringField;
+    vtRouteSelectedMRNo: TIntegerField;
     procedure scButton5Click(Sender: TObject);
     procedure scButton9Click(Sender: TObject);
     procedure scButton10Click(Sender: TObject);
@@ -446,6 +460,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure DBGridEh6SelectionChanged(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure SpeedButton29Click(Sender: TObject);
       protected
     procedure WMNCHitTest(var Msg: TWMNCHitTest); message WM_NCHITTEST;
 
@@ -903,23 +918,24 @@ begin
         //if tblSQLMeterReading.Locate('Acct_no;Prev_Rdg',VarArrayOf([qryPostingMeterReadingAccountNo.AsString,qryPostingMeterReadingPreviousReading.AsString]),[]) then begin
         qryMeterReadingCheck.Close;
         qryMeterReadingCheck.ParamByName('AAccountNumber').AsString := qryPostingMeterReadingAccountNo.AsString;
-        qryMeterReadingCheck.ParamByName('AYear').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(0,4);
-        qryMeterReadingCheck.ParamByName('AMonth').AsString := qryPostingMeterReadingBillPeriod.AsString.Substring(4,2);
+        qryMeterReadingCheck.ParamByName('APrevReading').AsString := qryPostingMeterReadingPreviousReading.AsString;
+        qryMeterReadingCheck.ParamByName('ACurReading').AsString := qryPostingMeterReadingPresentReading.AsString;
         qryMeterReadingCheck.Open();
         qryMeterReadingCheck.First;
         //ShowMessage(qryMeterReadingCheckAcct_No.AsString  );
 
         //remove OnActivate Processing of Database for optimization
         //if tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]) then begin
-          if DaysBetween(qryPostingMeterReadingFirstReadingDate.AsDateTime,Now()) <= 1 then begin
+        if DaysBetween(qryPostingMeterReadingFirstReadingDate.AsDateTime,Now()) <= 1 then begin
+          //if qryMeterReadingCheck.IsEmpty then begin
 
             if not qryMeterReadingCheck.IsEmpty then begin
             //Update
-              tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]);
+              {tblSQLMeterReading.Locate('MR_Sys_no',qryMeterReadingCheckMR_Sys_no.AsString,[]);
               MR_Sys_No_Second := MR_Sys_No_Second + 1;
               tblSQLMeterReading.Edit;
               tblSQLMeterReadingMR_Sys_No.AsString := tblSQLMeterReadingMR_Sys_No.AsString;
-              tblSQLMeterReadingmidentity.AsInteger := tblSQLMeterReadingmidentity.AsInteger ;
+              tblSQLMeterReadingmidentity.AsInteger := tblSQLMeterReadingmidentity.AsInteger ;  }
             end else begin
               //insert
               tblSQLMeterReading.Append;
@@ -929,38 +945,40 @@ begin
               tblSQLMeterReadingMR_Sys_No.AsInteger := AMR_Sys_No ;
               tblSQLMeterReadingmidentity.AsInteger := AMidentity ;
               RecordCount := RecordCount + 1;
+
+
+              tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
+              tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
+              //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
+              //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+
+              //tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
+              //tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
+
+              tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
+              tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+              //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
+              tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
+              tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
+              tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
+              tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
+              tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
+              tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
+              tblSQLMeterReadingMR_Status.AsString := '1' ;
+              tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
+              tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
+              tblSQLMeterReadingTime_stamp.AsDateTime := Now();
+              //ShowMessage(DateTimeToStr(Now()));
+              //tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
+              if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
+                tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+              end else begin
+                tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
+              end;
+              tblSQLMeterReading.Post;
             end;
 
 
-            tblSQLMeterReadingAcct_No.AsString := qryPostingMeterReadingAccountNo.AsString;
-            tblSQLMeterReadingMtr_No.AsString := qryPostingMeterReadingMeterSerial.AsString;
-            //showmessage(qryPostingMeterReadingPreviousReadingDate.AsString);
-            //ShowMessage((GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
-
-            //tblSQLMeterReadingPrevMR_Date.AsDateTime :=(StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPreviousReadingDate.AsString)));
-            //tblSQLMeterReadingMR_Date.AsDateTime := (StrToDateTime(GetDateTimeFromSQLite(qryPostingMeterReadingPresentReadingDate.AsString)));
-
-            tblSQLMeterReadingPrevMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPreviousReadingDate.AsString);
-            tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
-            //tblSQLMeterReadingMR_Date.AsDateTime := StrToDateTime(qryPostingMeterReadingPresentReadingDate.AsString);
-            tblSQLMeterReadingPrev_Rdg.AsCurrency := qryPostingMeterReadingPreviousReading.AsCurrency;
-            tblSQLMeterReadingCur_Rdg.AsCurrency := qryPostingMeterReadingPresentReading.AsCurrency;
-            tblSQLMeterReadingCur_Consumption.AsCurrency := qryPostingMeterReadingConsumption.AsCurrency;
-            tblSQLMeterReadingRdg_Adj.AsCurrency := 0 ;
-            tblSQLMeterReadingChngdMtr_Adj.AsCurrency := 0 ;
-            tblSQLMeterReadingChngdMtr_Cons.AsCurrency := 0 ;
-            tblSQLMeterReadingMR_Status.AsString := '1' ;
-            tblSQLMeterReadingRemarks.AsString := qryPostingMeterReadingReadingRemarks.AsString;
-            tblSQLMeterReadingEmp_ID.AsString := qryPostingMeterReadingMRNo.AsString ;
-            tblSQLMeterReadingTime_stamp.AsDateTime := Now();
-            //ShowMessage(DateTimeToStr(Now()));
-            //tblSQLMeterReadingTime_stamp .AsDateTime := StrToDateTime(qryPostingMeterReadingFirstReadingDate.AsString + ' ' +qryPostingMeterReadingPresentReadingTime.AsString);
-            if tblMeterReader.Locate('_id',qryPostingMeterReadingMRNo.AsString,[]) then begin
-              tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
-            end else begin
-              tblSQLMeterReadingUser_ID.AsString := tblMeterReaderName.AsString;
-            end;
-            tblSQLMeterReading.Post;
           end;
 
         qryPostingMeterReading.Next;
@@ -1853,6 +1871,8 @@ Var
 begin
   //BillingMonth := '202309';
   //ShowMessage(BillingMonth.Substring(0,4) + ' - ' + BillingMonth.Substring(4,2));
+  vtRouteSelected.Close;
+  vtRouteSelected.Open;
 
   lblProductVersion.Caption := 'Product Activated Version : 1.4.23.2';
   lblExpireDate.Caption := 'Product will Expire In : [06/12/2***]';
@@ -1941,7 +1961,13 @@ begin
     scGPComboBox3.Items.Add;
     scGPComboBox3.Items.Items[I].Header := True;
     scGPComboBox3.Items.Items[I].Caption := 'Meter Reader';
+
+    scGPComboBox4.Items.Clear;
+    scGPComboBox4.Items.Add;
+    scGPComboBox4.Items.Items[I].Header := True;
+    scGPComboBox4.Items.Items[I].Caption := 'Route Address';
     I := I + 1;
+
 
     scGPComboEdit1.Items.Add;
     scGPComboEdit1.Items.Items[I].Caption := '<ALL METERREADER>';
@@ -1960,6 +1986,19 @@ begin
       scGPComboBox3.Items.Items[I].Caption := tblMeterReaderName.AsString;
       tblMeterReader.Next;
     end;
+
+    I := 1;
+    qryMSZoneCode.Close;
+    qryMSZoneCode.Open;
+    qryMSZoneCode.First;
+    while not qryMSZoneCode.EOF do begin
+      scGPComboBox4.Items.Add;
+      scGPComboBox4.Items.Items[I].Caption := qryMSZoneCodeZoneCode.AsString + '-' + qryMSZoneCodeZoneName.AsString;
+      qryMSZoneCode.Next;
+      I := I + 1;
+    end;
+
+
 
 
   end;
@@ -2199,7 +2238,8 @@ begin
     ABillMonth := SplitString( ADateString,'-')[0];
   end else begin
     if StrToInt(AMonth) = 1 then begin
-      ABillMonth := IncYear(StrToInt(SplitString( ADateString,'-')[0].Substring(0,4)),-1) + '12' ;
+      AYear := SplitString(ADateString,'-')[0].Substring(0,4);
+      ABillMonth := IntToStr(StrToInt(AYear)-1) + '12';
     end else begin
       if StrToInt(AMonth)-1 >= 10 then begin
         ABillMonth := SplitString( ADateString,'-')[0].Substring(0,4)+IntToStr(StrToInt(AMonth)-1) ;
@@ -3044,15 +3084,16 @@ begin
     fdMeterReaderSchedule.First;
     scGPCircledProgressBar2.Value := 0;
     scGPCircledProgressBar2.Value := 5000;
-    while not fdMeterReaderSchedule.EOF do begin
+    //fdMeterReaderSchedule
+    while not vtRouteSelected.EOF do begin
       //if I = 0 then begin
       qryMSMeterReadingSchedule.Close;
-      qryMSMeterReadingSchedule.ParamByName('AZoneCode').AsString :=  fdMeterReaderScheduleZoneCode.AsString;
+      qryMSMeterReadingSchedule.ParamByName('AZoneCode').AsString :=  vtRouteSelectedZoneCode.AsString; //fdMeterReaderScheduleZoneCode.AsString;
       qryMSMeterReadingSchedule.Open();
       if not qryMSMeterReadingSchedule.IsEmpty then begin
         Application.ProcessMessages;
         BMMeterReadingSchedule.Execute;
-        Label1.Caption := Label1.Caption + #13#10 + 'Done Rading Schedule For Zone '+ #13#10 + fdMeterReaderScheduleZoneCode.AsString + '-' + fdMeterReaderScheduleZoneName.AsString;
+        Label1.Caption := Label1.Caption + #13#10 + 'Done Rading Schedule For Zone '+ #13#10 + vtRouteSelectedZoneCode.AsString + '-' + fdMeterReaderScheduleZoneName.AsString;
       end;
       fdMeterReaderSchedule.Next;
     end;
@@ -3672,6 +3713,26 @@ begin
   end;
 end;
 
+procedure TUMainForm.SpeedButton29Click(Sender: TObject);
+Var
+  ZoneCode,ZOneName : String;
+begin
+  ZoneCode := SplitString(scGPComboBox4.Items[scGPComboBox4.ItemIndex].Caption,'-')[0];
+  ZoneName := SplitString(scGPComboBox4.Items[scGPComboBox4.ItemIndex].Caption,'-')[1];
+  if not vtRouteSelected.Locate('ZoneCode',ZoneCode,[]) then begin
+    vtRouteSelected.Insert;
+    vtRouteSelectedZoneCode.AsString := ZoneCOde;
+    vtRouteSelectedZoneName.AsString := ZoneName;
+    vtRouteSelectedReadingStartDate.AsString := DateTimeToStr(Now());
+    vtRouteSelectedTotalReadingDays.AsString := '1';
+    vtRouteSelectedBillPeriod.AsString := Edit2.Text;
+    vtRouteSelectedMRNo.AsString :=  '00000';
+
+    vtRouteSelected.Post;
+  end;
+
+end;
+
 procedure TUMainForm.SpeedButton2Click(Sender: TObject);
 var
   SourceFile, DestinationPath, NewNameDB: string;
@@ -4027,8 +4088,9 @@ begin
            tblDBFetched.Post;
         end else begin
            // Not Posted!
-           MessageDlg('Downloading Data to MSSQL Interrupted!!  ' + #13#10 +
+           MessageDlg('No Available Data, Downloading Data to MSSQL Interrupted!!  ' + #13#10 +
            'Please Continue it Again Later!',mtError,[mbOK],0);
+           Exit;
         end;
       end else begin
         // if not compatible selection and tablet ask the user if he or she wants to override the process
@@ -4053,8 +4115,9 @@ begin
              tblDBFetchedRecordCount.AsString := RightStr(ZoneCount,Length(ZoneCount)-1);
              tblDBFetched.Post;
           end else begin
-            MessageDlg('Downloading Data to MSSQL Interrupted!!  ' + #13#10 +
+            MessageDlg('No Available Data, Downloading Data to MSSQL Interrupted!!  ' + #13#10 +
            'Please Continue it Again Later!',mtError,[mbOK],0);
+           Exit;
           end;
         end else begin
           //Disconnect First Before Deleting the File

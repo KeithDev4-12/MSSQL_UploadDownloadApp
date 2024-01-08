@@ -177,7 +177,10 @@ object DMMainModule: TDMMainModule
       #9#9#9'  where MR.Acct_No = C.Acct_No and MR.Cur_Consumption > 0'
       #9#9#9#9'order by MR.MR_Date desc ) T1) as AverageCons'
       #9'  -- ,'#39'202303'#39' AS BILLPERIOD'
-      #9'  ,(SELECT ISNULL(ABS(SUM(L.[amount])-(SELECT '
+      #9'  ,'
+      
+        '/****** OLD QUERY FOR OTHERPAYABLE (SELECT ISNULL(ABS(SUM(L.[amo' +
+        'unt])-(SELECT '
       
         '  SUM(BD.Receivable - BD.Collected + BD.Adjustment) as TotalNeed' +
         'ToCollect'
@@ -199,7 +202,12 @@ object DMMainModule: TDMMainModule
         'OUP BY bbm.bill_no ORDER BY bbm.bill_no DESC)'
       '  AND BM.B_Status = '#39'02'#39')),0)'
       #9#9'FROM [BILLINGCOLLECTION].[dbo].[Ledgers] L'
-      #9#9'WHERE L.[Acct_No] = C.[Acct_No]) AS OtherPayable '
+      #9#9'WHERE L.[Acct_No] = C.[Acct_No])******/'
+      ''
+      
+        '(SELECT isNULL(SUM(Amount),0) from [BILLINGCOLLECTION].[dbo].[Le' +
+        'dgers] L where L.[Acct_No] = C.[Acct_No] and'
+      ' Ref_Code  in (09)) AS OtherPayable '
       '      ,C.[C_TelNo] AS MobileNo'
       #9'  ,C.[C_PenExempt] AS PenaltyExempt       '
       '  FROM [BillingCollection].[dbo].[Clients] C'
@@ -1493,7 +1501,7 @@ object DMMainModule: TDMMainModule
   object VTDeviceListAvailable: TVirtualTable
     Left = 624
     Top = 472
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTDeviceListAvailableDeviceName: TStringField
       FieldName = 'DeviceName'
       Size = 45
@@ -1605,7 +1613,7 @@ object DMMainModule: TDMMainModule
   object VTReadingScheduling: TVirtualTable
     Left = 896
     Top = 280
-    Data = {04000000000000000000}
+    Data = {03000000000000000000}
     object VTReadingSchedulingZoneCode: TStringField
       FieldName = 'ZoneCode'
       Size = 45
@@ -1657,7 +1665,7 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 336
     Data = {
-      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
@@ -1730,7 +1738,7 @@ object DMMainModule: TDMMainModule
     Left = 891
     Top = 400
     Data = {
-      0400070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
+      0300070003005F69640E0000000000000008005A6F6E65436F64651800FF7F00
       00000008005A6F6E654E616D651800FF7F00000000100052656164696E675374
       617274446174651800FF7F000000001000546F74616C52656164696E67446179
       731800FF7F000000000A0042696C6C506572696F641800FF7F0000000004004D
@@ -1997,7 +2005,9 @@ object DMMainModule: TDMMainModule
       'CAST(FirstReadingDate as VarChar) As FirstReadingDate, '
       'SeniorDiscountAmount'
       ' FROM MeterReading'
-      ' ')
+      
+        ' -- where UploadedDate = replace(ltrim(strftime('#39'%m/%d/%Y'#39','#39'now'#39 +
+        ', '#39'localtime'#39'),'#39'0'#39'),'#39'/0'#39','#39'/'#39') ')
     Left = 904
     Top = 488
     object qryPostingMeterReading_id: TFDAutoIncField
@@ -2356,9 +2366,10 @@ object DMMainModule: TDMMainModule
       '  WHERE '
       'acct_no = :AAccountNumber '
       '  AND'
-      'YEAR(MR_DATE) = :AYear'
+      'Prev_Rdg = :APrevReading'
       '  AND'
-      'MONTH(MR_DATE) = :AMonth')
+      'Cur_Rdg = :ACurReading'
+      '')
     Left = 808
     Top = 184
     ParamData = <
@@ -2366,19 +2377,15 @@ object DMMainModule: TDMMainModule
         Name = 'AACCOUNTNUMBER'
         DataType = ftWideString
         ParamType = ptInput
-        Value = '2011204551'
+        Value = '0111200011'
       end
       item
-        Name = 'AYEAR'
-        DataType = ftWideString
+        Name = 'APREVREADING'
         ParamType = ptInput
-        Value = '2023'
       end
       item
-        Name = 'AMONTH'
-        DataType = ftWideString
+        Name = 'ACURREADING'
         ParamType = ptInput
-        Value = '09'
       end>
     object qryMeterReadingCheckMR_Sys_No: TStringField
       FieldName = 'MR_Sys_No'

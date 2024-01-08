@@ -177,7 +177,10 @@ object DMMainModule: TDMMainModule
       #9#9#9'  where MR.Acct_No = C.Acct_No and MR.Cur_Consumption > 0'
       #9#9#9#9'order by MR.MR_Date desc ) T1) as AverageCons'
       #9'  -- ,'#39'202303'#39' AS BILLPERIOD'
-      #9'  ,(SELECT ISNULL(ABS(SUM(L.[amount])-(SELECT '
+      #9'  ,'
+      
+        '/****** OLD QUERY FOR OTHERPAYABLE (SELECT ISNULL(ABS(SUM(L.[amo' +
+        'unt])-(SELECT '
       
         '  SUM(BD.Receivable - BD.Collected + BD.Adjustment) as TotalNeed' +
         'ToCollect'
@@ -199,7 +202,12 @@ object DMMainModule: TDMMainModule
         'OUP BY bbm.bill_no ORDER BY bbm.bill_no DESC)'
       '  AND BM.B_Status = '#39'02'#39')),0)'
       #9#9'FROM [BILLINGCOLLECTION].[dbo].[Ledgers] L'
-      #9#9'WHERE L.[Acct_No] = C.[Acct_No]) AS OtherPayable '
+      #9#9'WHERE L.[Acct_No] = C.[Acct_No])******/'
+      ''
+      
+        '(SELECT isNULL(SUM(Amount),0) from [BILLINGCOLLECTION].[dbo].[Le' +
+        'dgers] L where L.[Acct_No] = C.[Acct_No] and'
+      ' Ref_Code  in (09)) AS OtherPayable '
       '      ,C.[C_TelNo] AS MobileNo'
       #9'  ,C.[C_PenExempt] AS PenaltyExempt       '
       '  FROM [BillingCollection].[dbo].[Clients] C'
@@ -1574,8 +1582,8 @@ object DMMainModule: TDMMainModule
       '  FROM [BillingCollection].[dbo].[Clients] c '
       'WHERE c.Zone_no = z.ZoneID) <> 0'
       'ORDER BY ZoneCode,Count Desc')
-    Left = 736
-    Top = 504
+    Left = 744
+    Top = 464
     object qryMSZoneCodeZoneCode: TStringField
       FieldName = 'ZoneCode'
       Origin = 'ZoneID'
@@ -1825,7 +1833,7 @@ object DMMainModule: TDMMainModule
   object tblSQLMeterReading___: TFDTable
     IndexFieldNames = 'MR_Sys_No'
     Connection = DMMainConnection.FDConMSSQL
-    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.AssignedValues = [evMode, evItems, evDetailCascade]
     FetchOptions.Mode = fmAll
     FetchOptions.Items = [fiMeta]
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
@@ -1997,7 +2005,9 @@ object DMMainModule: TDMMainModule
       'CAST(FirstReadingDate as VarChar) As FirstReadingDate, '
       'SeniorDiscountAmount'
       ' FROM MeterReading'
-      ' ')
+      
+        ' -- where UploadedDate = replace(ltrim(strftime('#39'%m/%d/%Y'#39','#39'now'#39 +
+        ', '#39'localtime'#39'),'#39'0'#39'),'#39'/0'#39','#39'/'#39') ')
     Left = 904
     Top = 488
     object qryPostingMeterReading_id: TFDAutoIncField
@@ -2346,6 +2356,9 @@ object DMMainModule: TDMMainModule
   end
   object qryMeterReadingCheck: TFDQuery
     Connection = DMMainConnection.FDConMSSQL
+    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.Mode = fmAll
+    FetchOptions.Items = [fiMeta]
     SQL.Strings = (
       'SELECT '
       '  * '
@@ -2353,9 +2366,10 @@ object DMMainModule: TDMMainModule
       '  WHERE '
       'acct_no = :AAccountNumber '
       '  AND'
-      'YEAR(MR_DATE) = :AYear'
+      'Prev_Rdg = :APrevReading'
       '  AND'
-      'MONTH(MR_DATE) = :AMonth')
+      'Cur_Rdg = :ACurReading'
+      '')
     Left = 808
     Top = 184
     ParamData = <
@@ -2363,19 +2377,15 @@ object DMMainModule: TDMMainModule
         Name = 'AACCOUNTNUMBER'
         DataType = ftWideString
         ParamType = ptInput
-        Value = '1'
+        Value = '0111200011'
       end
       item
-        Name = 'AYEAR'
-        DataType = ftWideString
+        Name = 'APREVREADING'
         ParamType = ptInput
-        Value = '1'
       end
       item
-        Name = 'AMONTH'
-        DataType = ftWideString
+        Name = 'ACURREADING'
         ParamType = ptInput
-        Value = '1'
       end>
     object qryMeterReadingCheckMR_Sys_No: TStringField
       FieldName = 'MR_Sys_No'
@@ -2481,11 +2491,21 @@ object DMMainModule: TDMMainModule
     end
   end
   object tblSQLMeterReading: TFDQuery
+    IndexesActive = False
     IndexFieldNames = 'MR_Sys_No'
     Connection = DMMainConnection.FDConMSSQL
-    FetchOptions.AssignedValues = [evMode, evItems]
+    FetchOptions.AssignedValues = [evMode, evItems, evDetailCascade]
     FetchOptions.Mode = fmAll
     FetchOptions.Items = [fiMeta]
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.UpdateChangedFields = False
+    UpdateOptions.LockWait = True
+    UpdateOptions.RefreshMode = rmManual
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    UpdateOptions.UpdateTableName = 'Mtr_Reading'
     SQL.Strings = (
       'SELECT '
       '  * '
@@ -2494,7 +2514,7 @@ object DMMainModule: TDMMainModule
       '-- WHERE '
       '--  YEAR(MR_Date) = YEAR(GETDATE()) '
       '-- ORDER BY midentity')
-    Left = 928
+    Left = 920
     Top = 216
     object tblSQLMeterReadingMR_Sys_No: TStringField
       FieldName = 'MR_Sys_No'

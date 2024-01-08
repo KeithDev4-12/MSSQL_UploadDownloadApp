@@ -4,16 +4,14 @@ object DMMainConnection: TDMMainConnection
   Width = 225
   object FDConSQL: TFDConnection
     Params.Strings = (
+      'Database=D:\iwd_lwua-reading-01-06-2024.db'
       'ConnectionDef=SQLITE_IWD_MOBILE')
+    Connected = True
     Left = 96
     Top = 40
   end
   object FDConMSSQL: TFDConnection
     Params.Strings = (
-      'Database='
-      'OSAuthent=Yes'
-      'Server='
-      'User_Name='
       'ConnectionDef=MSSQL_IWD')
     Left = 96
     Top = 96
